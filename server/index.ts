@@ -1,40 +1,20 @@
 // server/index.ts
+import express from 'express';
+import getPort from 'get-port';
 
-import express from "express";
-import next from "next";
+const defaultPort = 3006;
 
-// "get-port@6" は ESM専用 → dynamic import + port配列を指定
-async function main() {
-  const dev = process.env.NODE_ENV !== "production";
-  const app = next({ dev });
-  const handle = app.getRequestHandler();
+(async () => {
+  const port = await getPort({ port: defaultPort });
 
-  await app.prepare();
+  const app = express();
+  app.use(express.json());
 
-  // ESM only の get-port を dynamic import
-  const { default: getPort } = await import("get-port");
-
-  // 3006 ~ 3016 辺りで空きを探す
-  const portCandidates = [];
-  for (let p = 3006; p <= 3016; p++) {
-    portCandidates.push(p);
-  }
-  const port = await getPort({ port: portCandidates });
-  console.log("Chosen port is:", port);
-
-  // Express
-  const server = express();
-
-  server.all("*", (req, res) => {
-    return handle(req, res);
+  app.get('/', (req, res) => {
+    res.send(`> Custom server is running on port ${port}`);
   });
 
-  server.listen(port, () => {
+  app.listen(port, () => {
     console.log(`> Custom server ready on http://localhost:${port}`);
   });
-}
-
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+})();

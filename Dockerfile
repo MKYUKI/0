@@ -1,33 +1,32 @@
-# Dockerfile
+# ---- Dockerfile ----
+    FROM node:18-alpine AS base
 
-FROM node:18-alpine
-
-# optional: next-auth / prisma などでSSL通信するなら openssl があると便利
-RUN apk update && apk add --no-cache openssl
-
-WORKDIR /app
-
-# lockファイルが無い想定なら package.json のみコピー
-COPY package.json ./
-
-# pnpmをグローバル導入
-RUN npm install -g pnpm
-
-# ここで hoisted or shamefully-hoist を使うことも可能
-RUN pnpm install
-
-# 残りのソース一式をコピー
-COPY . .
-
-# prisma コマンドが使えるようになっている想定
-RUN pnpm prisma db push
-RUN pnpm prisma generate
-
-# Next.js + サーバサイドのビルド
-RUN pnpm run build:custom
-
-# 3000: Next.js, 3006: get-portで空きがあれば
-EXPOSE 3000
-EXPOSE 3006
-
-CMD ["pnpm", "run", "start:custom"]
+    # システム更新 & pnpm install
+    RUN apk update && apk add --no-cache openssl
+    RUN npm install -g pnpm
+    
+    WORKDIR /app
+    
+    # 1) package.json だけ先にコピー
+    COPY package.json ./
+    
+    # 2) pnpm install (lockfileなしの場合)
+    RUN pnpm install
+    
+    # 3) ソースコードコピー
+    COPY . ./
+    
+    # 4) prisma db push & prisma generate (本番でDBを同期させたい場合)
+    #    ただしMongoが外部なら事前に接続可能にする or skip
+    RUN pnpm prisma:db:push
+    RUN pnpm prisma:generate
+    
+    # 5) Next.js build & tsc server build
+    RUN pnpm build:custom
+    
+    # 6) Expose + Start
+    EXPOSE 3000
+    EXPOSE 3006
+    
+    CMD ["pnpm", "start:custom"]
+    

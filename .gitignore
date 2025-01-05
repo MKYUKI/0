@@ -1,1 +1,8 @@
+# ---- .gitignore ----
+node_modules
+dist
+.next
+pnpm-lock.yaml
 .env
+Dockerfile
+docker-compose.yml

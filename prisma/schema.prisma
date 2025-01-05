@@ -9,10 +9,12 @@ datasource db {
   url      = env("MONGODB_URI")
 }
 
-// -------------------------
-//        USER
-// -------------------------
+// ======================
+//  User
+// ======================
 model User {
+  // NextAuthが要求するフィールドも含めて拡張する例。
+  // MongoDBなので ObjectId で @id + @default(auto()) + @map("_id")
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
   email          String   @unique
@@ -23,27 +25,26 @@ model User {
 
   username String? @unique
 
-  tweets  Tweet[]
-  likes   Like[]
-  replies Reply[]
-
-  following Follow[] @relation("FollowingRelation")
-  followers Follow[] @relation("FollowerRelation")
-
-  // DM / ChatRoom
-  roomParticipants RoomParticipant[] @relation("UserRoomParticipants")
-  messages         DirectMessage[]   @relation("UserMessages")
-
-  // Retweets / QuoteRetweets
-  retweets      Retweet[]      @relation("UserRetweets")
+  tweets       Tweet[]
+  likes        Like[]
+  replies      Reply[]
+  following    Follow[]        @relation("FollowingRelation")
+  followers    Follow[]        @relation("FollowerRelation")
+  roomMessages DirectMessage[] @relation("UserMessages")     // DM送信履歴
+  retweets     Retweet[]       @relation("UserRetweets")
   quoteRetweets QuoteRetweet[] @relation("UserQuotes")
-
   notifications Notification[] @relation("UserNotifications")
+
+  // RoomParticipant: userRoom
+  roomParticipants RoomParticipant[] @relation("UserRoomParticipants")
+
+  // (NextAuth Integration) => If you want to store sessions etc in Mongo
+  //   -> We'll define them below or skip if using Credentials only
 }
 
-// -------------------------
-//        TWEET
-// -------------------------
+// ======================
+//  Tweet
+// ======================
 model Tweet {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   content   String
@@ -57,15 +58,13 @@ model Tweet {
   likes   Like[]
   replies Reply[]
 
-  // Retweets
   retweets      Retweet[]      @relation("TweetRetweets")
-  // QuoteRetweets
   quoteRetweets QuoteRetweet[] @relation("TweetQuotes")
 }
 
-// -------------------------
-//        LIKE
-// -------------------------
+// ======================
+//  Like
+// ======================
 model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
@@ -77,9 +76,9 @@ model Like {
   user   User   @relation(fields: [userId], references: [id])
 }
 
-// -------------------------
-//        REPLY
-// -------------------------
+// ======================
+//  Reply
+// ======================
 model Reply {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   content   String
@@ -92,9 +91,9 @@ model Reply {
   user   User   @relation(fields: [userId], references: [id])
 }
 
-// -------------------------
-//       FOLLOW
-// -------------------------
+// ======================
+//  Follow
+// ======================
 model Follow {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
@@ -106,9 +105,9 @@ model Follow {
   following User @relation("FollowingRelation", fields: [followingId], references: [id])
 }
 
-// -------------------------
-//       CHAT ROOM
-// -------------------------
+// ======================
+//  ChatRoom, DM
+// ======================
 model ChatRoom {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
@@ -128,7 +127,6 @@ model RoomParticipant {
   user User     @relation("UserRoomParticipants", fields: [userId], references: [id])
 }
 
-// DM messages
 model DirectMessage {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   content   String
@@ -141,9 +139,9 @@ model DirectMessage {
   sender User     @relation("UserMessages", fields: [senderId], references: [id])
 }
 
-// -------------------------
-//     Retweet / QuoteRT
-// -------------------------
+// ======================
+//  Retweet / QuoteRT
+// ======================
 model Retweet {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
@@ -169,9 +167,9 @@ model QuoteRetweet {
   tweet   Tweet?  @relation("TweetQuotes", fields: [tweetId], references: [id])
 }
 
-// -------------------------
-//     NOTIFICATION
-// -------------------------
+// ======================
+//  Notification
+// ======================
 model Notification {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   message   String
@@ -184,9 +182,9 @@ model Notification {
   user   User   @relation("UserNotifications", fields: [userId], references: [id])
 }
 
-// -------------------------
-//         TRENDS
-// -------------------------
+// ======================
+//  Trend
+// ======================
 model TrendItem {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   tag       String

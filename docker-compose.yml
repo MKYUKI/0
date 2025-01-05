@@ -1,20 +1,21 @@
-# docker-compose.yml
-# version: '3' 等は削除推奨 (最近はversion省略が推奨)
-
+version: "3.9"
 services:
   db:
-    image: postgres:15-alpine
+    image: mongo:6
+    container_name: mongo
+    restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: myDatabase
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
     ports:
-      - "5432:5432"
+      - "27017:27017"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - mongo-data:/data/db
 
   redis:
     image: redis:7.2-alpine
+    container_name: redis
+    restart: always
     ports:
       - "6379:6379"
 
@@ -22,12 +23,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: x-clone
     ports:
-      - "3000:3000"   # Next.js
-      - "3006:3006"   # Express custom server port (ただし get-port が3006以外を取ると外部からアクセス不可)
+      - "3000:3000"
+      - "3006:3006"
+    environment:
+      MONGODB_URI: "mongodb://root:secret@db:27017/myDatabase?authSource=admin"
     depends_on:
       - db
       - redis
 
 volumes:
-  postgres-data:
+  mongo-data:
