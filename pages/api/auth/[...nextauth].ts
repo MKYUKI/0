@@ -1,45 +1,42 @@
-import NextAuth from "next-auth";
-import type { NextAuthOptions } from "next-auth";
+// pages/api/auth/[...nextauth].ts
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcryptjs";
+import prisma from "../../../lib/prisma";
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    // 例: GoogleProvider
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
+    // 例: credentials
     CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password are required");
-        }
-
+      async authorize(creds) {
+        if(!creds?.email || !creds?.password) return null;
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email: creds.email }
         });
-        if (!user) {
-          throw new Error("No user found with that email");
-        }
-        // ここで bcrypt 等でパスワード照合するのが本来
-        // 例: const isValid = await bcrypt.compare(credentials.password, user.hashedPassword)
-        // if (!isValid) throw new Error('Incorrect password')
+        if(!user) return null;
 
-        // OKならユーザオブジェクトを返す
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name
-        };
+        // bcrypt check
+        const valid = await bcrypt.compare(creds.password, user.hashedPassword || "");
+        if(!valid) return null;
+
+        return { id: user.id, email: user.email, name: user.name };
       }
     })
   ],
-  pages: {
-    signIn: "/api/auth/signin" // NextAuthのデフォルト画面でもOK
-  }
+  // 例: Session
+  session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET || "secretkey",
 };
 
 export default NextAuth(authOptions);

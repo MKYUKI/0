@@ -1,37 +1,18 @@
-version: "3.9"
+# docker-compose.yml
 services:
-  db:
-    image: mongo:6
-    container_name: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: secret
+  web:
+    build: .
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "mongodb+srv://<username>:<pass>@<cluster>.mongodb.net/db?retryWrites=true&w=majority"
+      OPENAI_API_KEY: "sk-XXXX"
+      REDIS_URL: "redis://redis:6379"
+    depends_on:
+      - redis
+    #  - db (MongoはAtlas利用なら不要)
 
   redis:
     image: redis:7.2-alpine
-    container_name: redis
-    restart: always
     ports:
       - "6379:6379"
-
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: x-clone
-    ports:
-      - "3000:3000"
-      - "3006:3006"
-    environment:
-      MONGODB_URI: "mongodb://root:secret@db:27017/myDatabase?authSource=admin"
-    depends_on:
-      - db
-      - redis
-
-volumes:
-  mongo-data:

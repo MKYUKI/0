@@ -1,36 +1,35 @@
 // components/ReplyForm.tsx
 import React, { useState } from "react";
 import axios from "axios";
-import { useSWRConfig } from "swr"; // swr がインストールされていればエラーにならない
+import { useSWRConfig } from "swr";
 
 type Props = {
   tweetId: string;
 };
 
-export function ReplyForm({ tweetId }: Props) {
+export default function ReplyForm({ tweetId }: Props) {
   const { mutate } = useSWRConfig();
-  const [text, setText] = useState("");
+  const [content, setContent] = useState("");
 
-  // 送信ロジックなど
-  // ...
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await axios.post(`/api/tweets/${tweetId}/replies`, { content });
+      setContent("");
+      mutate(`/api/tweets/${tweetId}/replies`); // revalidate
+    } catch (err) {
+      console.error("Reply post error:", err);
+    }
+  };
 
   return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        try {
-          await axios.post("/api/tweets/reply", { tweetId, text });
-          mutate(`/api/tweets/${tweetId}`); // 再検証
-          setText("");
-        } catch (err) {
-          console.error(err);
-        }
-      }}
-    >
-      <textarea value={text} onChange={(e) => setText(e.target.value)} />
+    <form onSubmit={handleSubmit}>
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Add a reply..."
+      />
       <button type="submit">Reply</button>
     </form>
   );
 }
-
-export default ReplyForm;

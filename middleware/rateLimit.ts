@@ -1,30 +1,20 @@
 // middleware/rateLimit.ts
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
-import redisClient from "../lib/redis";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { redisClient } from "../lib/redis";
 
 const WINDOW = parseInt(process.env.RATE_LIMIT_WINDOW || "60", 10);
 const MAX = parseInt(process.env.RATE_LIMIT_MAX || "100", 10);
 
-export function rateLimit(handler: NextApiHandler) {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
-    const identifier =
-      (req.headers["x-forwarded-for"] as string) ||
-      req.socket.remoteAddress ||
-      "unknown_ip";
+export default async function rateLimit(req: NextApiRequest, res: NextApiResponse) {
+  const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown").toString();
+  const key = `rate-limit:${ip}`;
 
-    const key = `rate_limit_${identifier}`;
-    const currentCount = await redisClient.incr(key);
-
-    if (currentCount === 1) {
-      await redisClient.expire(key, WINDOW);
-    }
-
-    if (currentCount > MAX) {
-      return res.status(429).json({
-        message: `Rate limit exceeded. Max ${MAX} requests per ${WINDOW} seconds.`
-      });
-    }
-
-    return handler(req, res);
-  };
+  const usage = await redisClient.incr(key);
+  if (usage === 1) {
+    await redisClient.expire(key, WINDOW);
+  }
+  if (usage > MAX) {
+    return res.status(429).json({ error: "Too many requests" });
+  }
+  // pass
 }

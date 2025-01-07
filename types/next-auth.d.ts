@@ -1,20 +1,15 @@
-// types/next-auth.d.ts
-import { DefaultSession, DefaultUser } from "next-auth";
+// /types/next-auth.d.ts
+import { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
-  // 1) User に id を加える (string)
-  interface User extends DefaultUser {
-    id: string;
+  // next-auth v4.22〜: AuthOptions
+  interface User {
+    id: string; // Credentialで返すid
   }
 
-  // 2) Session にカスタム User を持たせる
   interface Session {
-    user: User;
-  }
-
-  // 3) token にも型を付ける
-  interface JWT {
-    // "unknown" ではなく string | undefined にしたい
-    id?: string;  
+    user: {
+      id: string;
+    } & DefaultSession["user"];
   }
 }
