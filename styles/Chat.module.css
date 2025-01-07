@@ -1,73 +1,127 @@
-/* styles/Chat.module.css */
-.chatContainer {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(135deg, #000066 0%, #330033 50%, #88002b 100%);
-    display: flex; flex-direction: column;
-    align-items: center; 
-    justify-content: flex-start;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-  
-  .chatTitle {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 1rem;
-    text-shadow: 1px 1px 3px #000;
-  }
-  
-  .chatBox {
-    width: 100%;
-    max-width: 600px;
-    flex: 1;
-    background-color: rgba(255,255,255,0.1);
-    backdrop-filter: blur(5px);
-    border-radius: 8px;
-    padding: 1rem;
-    overflow-y: auto;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    height: 60vh;
-  }
-  
-  .userMessage {
-    background-color: rgba(0,0,0,0.4);
-    color: #fff;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin: 0.3rem 0;
-  }
-  .assistantMessage {
-    background-color: rgba(255,255,255,0.5);
-    color: #000;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin: 0.3rem 0;
-  }
-  
-  .inputArea {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    gap: 0.5rem;
-  }
-  .input {
-    flex: 1;
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-  }
-  .sendButton {
-    background-color: #000;
-    color: #fff;
-    border: none; border-radius: 4px;
-    padding: 0 1rem;
-    cursor: pointer;
-  }
-  .sendButton:hover {
-    background-color: #444;
-  }
-  
+/* ---- 全画面レイアウト ---- */
+.godlyMain {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000; /* 漆黒 */
+  overflow: hidden;
+}
+
+/* SVGコンテナ */
+.godlySvgContainer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* SVG全体を拡大 */
+.godlySvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 大円アニメ */
+.godlyCircle1 {
+  animation: swirlGodA 20s linear infinite;
+  transform-origin: 250px 250px;
+}
+@keyframes swirlGodA {
+  0%   { transform: rotate(0deg) scale(1);}
+  25%  { transform: rotate(90deg) scale(1.5);}
+  50%  { transform: rotate(180deg) scale(0.7);}
+  75%  { transform: rotate(270deg) scale(1.6);}
+  100% { transform: rotate(360deg) scale(1);}
+}
+
+/* リングアニメ */
+.godlyCircle2 {
+  animation: swirlGodB 14s ease-in-out infinite;
+  transform-origin: 250px 250px;
+}
+@keyframes swirlGodB {
+  0%   { transform: rotate(0deg) scale(1);}
+  50%  { transform: rotate(180deg) scale(1.8);}
+  100% { transform: rotate(360deg) scale(1);}
+}
+.godlyCircle3 {
+  animation: swirlGodC 10s linear infinite;
+  transform-origin: 250px 250px;
+}
+@keyframes swirlGodC {
+  0%   { transform: rotate(0deg) scale(1);}
+  33%  { transform: rotate(120deg) scale(2);}
+  66%  { transform: rotate(240deg) scale(0.8);}
+  100% { transform: rotate(360deg) scale(1);}
+}
+
+/* pathアニメ */
+.godlyPath1 {
+  animation: swirlGodD 16s ease-in-out infinite;
+  transform-origin: 250px 250px;
+}
+@keyframes swirlGodD {
+  0%   { transform: rotate(0deg) scale(1);}
+  25%  { transform: rotate(90deg) scale(1.4);}
+  50%  { transform: rotate(180deg) scale(0.6);}
+  75%  { transform: rotate(270deg) scale(1.6);}
+  100% { transform: rotate(360deg) scale(1);}
+}
+.godlyPath2 {
+  animation: swirlGodE 14s linear infinite;
+  transform-origin: 250px 250px;
+}
+@keyframes swirlGodE {
+  0%   { transform: rotate(0deg) scale(1);}
+  50%  { transform: rotate(180deg) scale(1.5);}
+  100% { transform: rotate(360deg) scale(1);}
+}
+
+/* 点アニメ */
+.godlyDot1, .godlyDot2, .godlyDot3 {
+  animation: swirlGodDot 10s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  transform-origin: center;
+}
+@keyframes swirlGodDot {
+  0%   { transform: rotate(0deg) translate(0,0);}
+  50%  { transform: rotate(180deg) translate(-15px, 15px);}
+  100% { transform: rotate(360deg) translate(0,0);}
+}
+
+/* 前景UI */
+.godlyContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.3); /* さらに暗い */
+  backdrop-filter: blur(6px);
+  text-align: center;
+  color: #fff;
+  padding: 2rem;
+}
+.godlyTitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.godlySubtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.godlyBackButton {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: #fff;
+  color: #000;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+.godlyBackButton:hover {
+  background-color: #ccc;
+}

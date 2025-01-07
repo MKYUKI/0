@@ -1,0 +1,140 @@
+/* styles/Animation.module.css */
+
+/* 全画面 */
+.megaMain {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #000; /* 背景は更に黒寄り */
+    overflow: hidden;
+  }
+  
+  /* SVG Container */
+  .megaSvgContainer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+  
+  /* SVGを全画面拡大 */
+  .megaSvg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  /* 大円アニメ */
+  .megaCircle1 {
+    animation: swirlA 20s linear infinite;
+    transform-origin: 200px 200px;
+  }
+  @keyframes swirlA {
+    0%   { transform: rotate(0deg) scale(1);}
+    50%  { transform: rotate(180deg) scale(1.2);}
+    100% { transform: rotate(360deg) scale(1);}
+  }
+  
+  /* リング円アニメ1 */
+  .megaCircle2 {
+    animation: swirlB 12s linear infinite;
+    transform-origin: 200px 200px;
+  }
+  @keyframes swirlB {
+    0%   { transform: rotate(0deg) scale(1);}
+    25%  { transform: rotate(90deg) scale(0.8);}
+    75%  { transform: rotate(270deg) scale(1.5);}
+    100% { transform: rotate(360deg) scale(1);}
+  }
+  
+  /* リング円アニメ2 */
+  .megaCircle3 {
+    animation: swirlC 18s linear infinite;
+    transform-origin: 200px 200px;
+  }
+  @keyframes swirlC {
+    0%   { transform: rotate(0deg) scale(1);}
+    33%  { transform: rotate(120deg) scale(1.4);}
+    66%  { transform: rotate(240deg) scale(0.9);}
+    100% { transform: rotate(360deg) scale(1);}
+  }
+  
+  /* pathアニメ1 */
+  .megaPath1 {
+    animation: swirlD 16s ease-in-out infinite;
+    transform-origin: 200px 200px;
+  }
+  @keyframes swirlD {
+    0%   { transform: rotate(0deg) scale(1);}
+    50%  { transform: rotate(180deg) scale(1.3);}
+    100% { transform: rotate(360deg) scale(1);}
+  }
+  
+  /* pathアニメ2 */
+  .megaPath2 {
+    animation: swirlE 14s ease-in-out infinite;
+    transform-origin: 200px 200px;
+  }
+  @keyframes swirlE {
+    0%   { transform: rotate(0deg) scale(1);}
+    50%  { transform: rotate(180deg) scale(1.6);}
+    100% { transform: rotate(360deg) scale(1);}
+  }
+  
+  /* 散りばめた小円たち */
+  .megaDot1,
+  .megaDot2,
+  .megaDot3 {
+    animation: swirlDot 10s linear infinite;
+  }
+  @keyframes swirlDot {
+    0%   { transform: rotate(0deg) translate(0,0);}
+    50%  { transform: rotate(180deg) translate(10px, -10px);}
+    100% { transform: rotate(360deg) translate(0,0);}
+  }
+  
+  /* 前景UI */
+  .megaContainer {
+    position: relative;
+    z-index: 2;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, 0.3); /* 黒寄り */
+    backdrop-filter: blur(5px);
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2rem;
+    color: #fff; /* 白文字 */
+  }
+  
+  /* タイトルなど */
+  .megaTitle {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  .megaSubtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  /* 戻るボタン */
+  .backButton {
+    display: inline-block;
+    padding: 0.8rem 1.4rem;
+    font-size: 1rem;
+    background-color: #fff; /* 白地 */
+    color: #000;           /* 黒文字 */
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    margin-top: 0.5rem;
+  }
+  .backButton:hover {
+    background-color: #ccc;
+  }
+  
