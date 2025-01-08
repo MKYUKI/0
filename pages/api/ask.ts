@@ -1,31 +1,32 @@
 // pages/api/ask.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import { OpenAI } from "openai";
+// ❌ こうではなく   import { Configuration, OpenAIApi } from "openai";
+// ✅ 新しい openai の v4 では
+import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "",
+  apiKey: process.env.OPENAI_API_KEY || "", 
+  // (必要に応じて other options: e.g. baseURL)
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if(req.method !== "POST"){
-    return res.status(405).json({ error: "Only POST allowed" });
-  }
-
-  const { prompt } = req.body;
-  if(!prompt) {
-    return res.status(400).json({ error: "Missing prompt" });
-  }
-
   try {
-    // ChatCompletion
-    const chatResp = await openai.chat.completions.create({
+    // 例として、ユーザの prompt を POSTデータから受け取る
+    if (req.method !== "POST") {
+      return res.status(405).json({ error: "Method not allowed" });
+    }
+    const userPrompt = req.body?.prompt || "Hello from openai v4 library!";
+
+    // chat.completions.create(...) が新しい呼び出し方
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [ { role: "user", content: prompt } ]
+      messages: [{ role: "user", content: userPrompt }],
     });
-    const content = chatResp.choices[0]?.message?.content || "(no response)";
-    return res.status(200).json({ content });
-  } catch(err:any){
+
+    // completion は { id, object, created, model, choices, usage... } など
+    return res.status(200).json({ data: completion });
+  } catch (err: any) {
     console.error("OpenAI error:", err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message || "Something went wrong" });
   }
 }

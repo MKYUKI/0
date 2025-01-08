@@ -1,127 +1,100 @@
-/* ---- 全画面レイアウト ---- */
-.godlyMain {
+/* styles/Chat.module.css */
+
+/* 大枠 */
+.chatPage {
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #000; /* 漆黒 */
+  background: #000;
   overflow: hidden;
 }
 
-/* SVGコンテナ */
-.godlySvgContainer {
+/* 背景Three.jsコンテナ */
+.bgContainer {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* SVG全体を拡大 */
-.godlySvg {
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  display: block;
+  z-index: 1;
 }
 
-/* 大円アニメ */
-.godlyCircle1 {
-  animation: swirlGodA 20s linear infinite;
-  transform-origin: 250px 250px;
+/* 上部ナビ */
+.topNav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 0.5rem;
 }
-@keyframes swirlGodA {
-  0%   { transform: rotate(0deg) scale(1);}
-  25%  { transform: rotate(90deg) scale(1.5);}
-  50%  { transform: rotate(180deg) scale(0.7);}
-  75%  { transform: rotate(270deg) scale(1.6);}
-  100% { transform: rotate(360deg) scale(1);}
-}
-
-/* リングアニメ */
-.godlyCircle2 {
-  animation: swirlGodB 14s ease-in-out infinite;
-  transform-origin: 250px 250px;
-}
-@keyframes swirlGodB {
-  0%   { transform: rotate(0deg) scale(1);}
-  50%  { transform: rotate(180deg) scale(1.8);}
-  100% { transform: rotate(360deg) scale(1);}
-}
-.godlyCircle3 {
-  animation: swirlGodC 10s linear infinite;
-  transform-origin: 250px 250px;
-}
-@keyframes swirlGodC {
-  0%   { transform: rotate(0deg) scale(1);}
-  33%  { transform: rotate(120deg) scale(2);}
-  66%  { transform: rotate(240deg) scale(0.8);}
-  100% { transform: rotate(360deg) scale(1);}
-}
-
-/* pathアニメ */
-.godlyPath1 {
-  animation: swirlGodD 16s ease-in-out infinite;
-  transform-origin: 250px 250px;
-}
-@keyframes swirlGodD {
-  0%   { transform: rotate(0deg) scale(1);}
-  25%  { transform: rotate(90deg) scale(1.4);}
-  50%  { transform: rotate(180deg) scale(0.6);}
-  75%  { transform: rotate(270deg) scale(1.6);}
-  100% { transform: rotate(360deg) scale(1);}
-}
-.godlyPath2 {
-  animation: swirlGodE 14s linear infinite;
-  transform-origin: 250px 250px;
-}
-@keyframes swirlGodE {
-  0%   { transform: rotate(0deg) scale(1);}
-  50%  { transform: rotate(180deg) scale(1.5);}
-  100% { transform: rotate(360deg) scale(1);}
-}
-
-/* 点アニメ */
-.godlyDot1, .godlyDot2, .godlyDot3 {
-  animation: swirlGodDot 10s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-  transform-origin: center;
-}
-@keyframes swirlGodDot {
-  0%   { transform: rotate(0deg) translate(0,0);}
-  50%  { transform: rotate(180deg) translate(-15px, 15px);}
-  100% { transform: rotate(360deg) translate(0,0);}
-}
-
-/* 前景UI */
-.godlyContainer {
-  position: relative;
-  z-index: 2;
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: rgba(0,0,0,0.3); /* さらに暗い */
-  backdrop-filter: blur(6px);
-  text-align: center;
+.topNav button {
+  background: #444;
   color: #fff;
-  padding: 2rem;
-}
-.godlyTitle {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-.godlySubtitle {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-.godlyBackButton {
-  display: inline-block;
-  padding: 0.8rem 1.4rem;
-  font-size: 1rem;
-  text-decoration: none;
-  background-color: #fff;
-  color: #000;
+  border: none;
   border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
 }
-.godlyBackButton:hover {
-  background-color: #ccc;
+.topNav button:hover {
+  background: #666;
+}
+
+/* チャットログ */
+.chatLog {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  bottom: 5rem; /* 入力欄の高さを確保 */
+  padding: 1rem;
+  overflow-y: auto;
+  z-index: 2;
+  color: #fff;
+}
+.chatMessage {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  border-bottom: 1px dashed #555;
+  padding-bottom: 0.3rem;
+}
+
+/* 入力欄 */
+.inputArea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.fileInput {
+  flex-shrink: 0;
+}
+.textInput {
+  flex: 1;
+  min-height: 2.2rem;
+  max-height: 8rem;
+  resize: vertical;
+  border-radius: 4px;
+  border: 1px solid #777;
+  padding: 0.5rem;
+  color: #000;
+}
+.sendButton {
+  background: #555;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.sendButton:hover {
+  background: #777;
 }

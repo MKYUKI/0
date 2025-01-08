@@ -1,140 +1,176 @@
-/* styles/Animation.module.css */
+styles/Animation.module.css
 
-/* 全画面 */
-.megaMain {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-color: #000; /* 背景は更に黒寄り */
-    overflow: hidden;
-  }
-  
-  /* SVG Container */
-  .megaSvgContainer {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-  }
-  
-  /* SVGを全画面拡大 */
-  .megaSvg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  
-  /* 大円アニメ */
-  .megaCircle1 {
-    animation: swirlA 20s linear infinite;
-    transform-origin: 200px 200px;
-  }
-  @keyframes swirlA {
-    0%   { transform: rotate(0deg) scale(1);}
-    50%  { transform: rotate(180deg) scale(1.2);}
-    100% { transform: rotate(360deg) scale(1);}
-  }
-  
-  /* リング円アニメ1 */
-  .megaCircle2 {
-    animation: swirlB 12s linear infinite;
-    transform-origin: 200px 200px;
-  }
-  @keyframes swirlB {
-    0%   { transform: rotate(0deg) scale(1);}
-    25%  { transform: rotate(90deg) scale(0.8);}
-    75%  { transform: rotate(270deg) scale(1.5);}
-    100% { transform: rotate(360deg) scale(1);}
-  }
-  
-  /* リング円アニメ2 */
-  .megaCircle3 {
-    animation: swirlC 18s linear infinite;
-    transform-origin: 200px 200px;
-  }
-  @keyframes swirlC {
-    0%   { transform: rotate(0deg) scale(1);}
-    33%  { transform: rotate(120deg) scale(1.4);}
-    66%  { transform: rotate(240deg) scale(0.9);}
-    100% { transform: rotate(360deg) scale(1);}
-  }
-  
-  /* pathアニメ1 */
-  .megaPath1 {
-    animation: swirlD 16s ease-in-out infinite;
-    transform-origin: 200px 200px;
-  }
-  @keyframes swirlD {
-    0%   { transform: rotate(0deg) scale(1);}
-    50%  { transform: rotate(180deg) scale(1.3);}
-    100% { transform: rotate(360deg) scale(1);}
-  }
-  
-  /* pathアニメ2 */
-  .megaPath2 {
-    animation: swirlE 14s ease-in-out infinite;
-    transform-origin: 200px 200px;
-  }
-  @keyframes swirlE {
-    0%   { transform: rotate(0deg) scale(1);}
-    50%  { transform: rotate(180deg) scale(1.6);}
-    100% { transform: rotate(360deg) scale(1);}
-  }
-  
-  /* 散りばめた小円たち */
-  .megaDot1,
-  .megaDot2,
-  .megaDot3 {
-    animation: swirlDot 10s linear infinite;
-  }
-  @keyframes swirlDot {
-    0%   { transform: rotate(0deg) translate(0,0);}
-    50%  { transform: rotate(180deg) translate(10px, -10px);}
-    100% { transform: rotate(360deg) translate(0,0);}
-  }
-  
-  /* 前景UI */
-  .megaContainer {
-    position: relative;
-    z-index: 2;
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    background: rgba(0, 0, 0, 0.3); /* 黒寄り */
-    backdrop-filter: blur(5px);
-    text-align: center;
-    box-sizing: border-box;
-    padding: 2rem;
-    color: #fff; /* 白文字 */
-  }
-  
-  /* タイトルなど */
-  .megaTitle {
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  .megaSubtitle {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-  
-  /* 戻るボタン */
-  .backButton {
-    display: inline-block;
-    padding: 0.8rem 1.4rem;
-    font-size: 1rem;
-    background-color: #fff; /* 白地 */
-    color: #000;           /* 黒文字 */
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-    margin-top: 0.5rem;
-  }
-  .backButton:hover {
-    background-color: #ccc;
-  }
-  
+/* 画面全体 */
+.main {
+ position: relative;
+ width: 100%;
+ height: 100vh;
+ margin: 0;
+ padding: 0;
+ overflow: hidden;
+ background-color: #ffffff; /* 薄い背景 */
+}
+
+
+/* SVG コンテナ */
+.svgContainer {
+ position: absolute;
+ top: 0; left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 1;
+ overflow: hidden;
+}
+.kaleidoSvg {
+ width: 100%;
+ height: 100%;
+ display: block;
+}
+
+
+/* =============== アニメーション対象たち ============== */
+
+
+/* 大円(メイン) */
+.circleMain {
+ animation: swirlMain 8s cubic-bezier(0.75,0.15,0.25,0.85) infinite;
+ transform-origin: 100px 100px;
+}
+@keyframes swirlMain {
+ 0%   { transform: rotate(0deg)   scale(1)   skewX(0deg); }
+ 25%  { transform: rotate(90deg)  scale(1.4) skewX(10deg);}
+ 50%  { transform: rotate(180deg) scale(0.7) skewX(-10deg);}
+ 75%  { transform: rotate(270deg) scale(1.3) skewX(20deg);}
+ 100% { transform: rotate(360deg) scale(1)   skewX(0deg); }
+}
+
+
+/* ring1 */
+.ring1 {
+ animation: swirlRing1 6s linear infinite;
+ transform-origin: 100px 100px;
+}
+@keyframes swirlRing1 {
+ 0%   { transform: rotate(0deg) scale(1); }
+ 33%  { transform: rotate(120deg) scale(1.8); }
+ 66%  { transform: rotate(240deg) scale(0.8); }
+ 100% { transform: rotate(360deg) scale(1);  }
+}
+
+
+/* ring2 */
+.ring2 {
+ animation: swirlRing2 10s ease-in-out infinite;
+ transform-origin: 100px 100px;
+}
+@keyframes swirlRing2 {
+ 0%   { transform: rotate(0deg) scale(1) translate(0,0); }
+ 50%  { transform: rotate(180deg) scale(2) translate(-5px,5px); }
+ 100% { transform: rotate(360deg) scale(1) translate(0,0); }
+}
+
+
+/* path1 */
+.path1 {
+ animation: swirlPath1 9s ease-in-out infinite;
+ transform-origin: 100px 100px;
+}
+@keyframes swirlPath1 {
+ 0%   { transform: rotate(0deg) scale(1);   }
+ 25%  { transform: rotate(90deg) scale(1.5);}
+ 50%  { transform: rotate(180deg) scale(0.8);}
+ 75%  { transform: rotate(270deg) scale(1.6);}
+ 100% { transform: rotate(360deg) scale(1); }
+}
+
+
+/* path2 */
+.path2 {
+ animation: swirlPath2 12s cubic-bezier(0.25,0.46,0.45,0.94) infinite;
+ transform-origin: 100px 100px;
+}
+@keyframes swirlPath2 {
+ 0%   { transform: rotate(0deg) scale(1); }
+ 33%  { transform: rotate(120deg) scale(1.8); }
+ 66%  { transform: rotate(240deg) scale(0.7); }
+ 100% { transform: rotate(360deg) scale(1);   }
+}
+
+
+/* ドット達 */
+.dot1 {
+ animation: swirlDot1 5s linear infinite;
+ transform-origin: 140px 60px;
+}
+@keyframes swirlDot1 {
+ 0%   { transform: rotate(0deg) scale(1);}
+ 50%  { transform: rotate(180deg) scale(2);}
+ 100% { transform: rotate(360deg) scale(1);}
+}
+.dot2 {
+ animation: swirlDot2 7s ease-in-out infinite;
+ transform-origin: 60px 140px;
+}
+@keyframes swirlDot2 {
+ 0%   { transform: rotate(0deg) scale(1);}
+ 50%  { transform: rotate(180deg) scale(1.5);}
+ 100% { transform: rotate(360deg) scale(1);}
+}
+.dot3 {
+ animation: swirlDot3 6s linear infinite;
+ transform-origin: 120px 30px;
+}
+@keyframes swirlDot3 {
+ 0%   { transform: rotate(0deg) scale(1);}
+ 50%  { transform: rotate(180deg) scale(2);}
+ 100% { transform: rotate(360deg) scale(1);}
+}
+
+
+/* ===============================
+  前景UI
+=============================== */
+.container {
+ position: relative;
+ z-index: 2;
+ width: 100%;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ background: rgba(255,255,255,0.2);
+ backdrop-filter: blur(4px);
+ text-align: center;
+ color: #000;
+ padding: 2rem;
+}
+
+
+.title {
+ font-size: 2rem;
+ font-weight: bold;
+ margin-bottom: 1rem;
+}
+.subtitle {
+ font-size: 1.1rem;
+ margin-bottom: 1.5rem;
+ line-height: 1.6;
+}
+
+
+/* ボタン */
+.loginButton, .logoutButton {
+ padding: 0.7rem 1.2rem;
+ font-size: 1rem;
+ background-color: #000;
+ color: #fff;
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
+ margin: 0.4rem;
+ transition: background-color 0.2s;
+}
+.loginButton:hover, .logoutButton:hover {
+ background-color: #444;
+}

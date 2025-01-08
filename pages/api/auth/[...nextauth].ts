@@ -1,42 +1,58 @@
 // pages/api/auth/[...nextauth].ts
-import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-import bcrypt from "bcryptjs";
-import prisma from "../../../lib/prisma";
+import NextAuth, { AuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET, // 必須(適当なランダム文字列)
+
+  // ダミーの Credentials Provider
   providers: [
-    // 例: GoogleProvider
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
-    // 例: credentials
     CredentialsProvider({
-      name: "Credentials",
+      name: 'DummyLogin',
       credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email', placeholder: 'email@example.com' },
+        password: { label: 'Password', type: 'password' }
       },
-      async authorize(creds) {
-        if(!creds?.email || !creds?.password) return null;
-        const user = await prisma.user.findUnique({
-          where: { email: creds.email }
-        });
-        if(!user) return null;
+      async authorize(credentials, req) {
+        // ---------- ここがダミー認証部分 ----------
+        // 1) 何もチェックせず、必ず「ログイン成功」とする
+        // あるいは最低限: email/password が空でなければOKなど
+        if (!credentials?.email || !credentials?.password) {
+          // ここでnullを返すと失敗になる
+          // 例: "empty fields"
+          return null;
+        }
 
-        // bcrypt check
-        const valid = await bcrypt.compare(creds.password, user.hashedPassword || "");
-        if(!valid) return null;
-
-        return { id: user.id, email: user.email, name: user.name };
+        // 2) ダミー情報を返す
+        // これが session.user に格納される
+        return {
+          id: 'dummyUser',
+          name: 'DummyUser',
+          email: credentials.email,
+          // roles: ['admin', 'user'] など自由
+        };
       }
     })
   ],
-  // 例: Session
-  session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET || "secretkey",
+
+  // 下記はオプション： リダイレクト先などをコントロール
+  pages: {
+    signIn: '/login'  // カスタムログインページを使うなら
+  },
+
+  // 必要に応じてコールバックを設定
+  callbacks: {
+    // sessionコールバックで user をsessionに格納
+    async session({ session, user }) {
+      // userオブジェクトは authorize()の戻り値
+      if (user && session.user) {
+        session.user.id = user.id;
+        session.user.name = user.name;
+        session.user.email = user.email;
+      }
+      return session;
+    }
+  }
 };
 
 export default NextAuth(authOptions);

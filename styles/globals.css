@@ -1,5 +1,32 @@
-html, body {
+/* styles/globals.css */
+
+/* リセット系 */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
   font-family: sans-serif;
+  background: #fafafa;
+  color: #333;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+#__next {
+  height: 100%;
+}
+
+/* スクロールバー等 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #777;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
 }

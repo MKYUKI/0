@@ -1,20 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es2021",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true, // bcryptjs型エラーを強引に回避
+    "target": "ES2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2020"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
+    "skipLibCheck": true, // ← 不要ならfalseでもOK
+    "esModuleInterop": true, // Next.js で推奨
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "noEmit": true,
+    "incremental": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "noEmit": true
+    "jsx": "preserve"
+    // ...
   },
-  "include": ["./"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

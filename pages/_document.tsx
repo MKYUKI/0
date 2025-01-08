@@ -1,37 +1,18 @@
 // pages/_document.tsx
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from "next/document";
 
-class MyDocument extends Document {
-  render() {
-    return (
-      <Html>
-        <Head>
-          {/* 
-            Dev中の next.js で 'eval' 系が発生する場合があるため、
-            'unsafe-eval' を許可して CSPエラーを回避。
-            本番では非推奨。
-          */}
-          <meta
-            httpEquiv="Content-Security-Policy"
-            content="
-              default-src 'self';
-              script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:;
-              style-src 'self' 'unsafe-inline' https:;
-              img-src 'self' data: https:;
-              connect-src 'self' https:;
-              font-src 'self' https:;
-              object-src 'none';
-              base-uri 'none';
-            "
-          />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+export default function Document() {
+  return (
+    <Html lang="ja">
+      <Head>
+        {/* 例えば Google Fonts や 各種メタタグをここに追加できる */}
+        <meta name="description" content="神を超越した世界最高峰のウェブサイト" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
-
-export default MyDocument;

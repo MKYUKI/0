@@ -1,0 +1,66 @@
+// pages/api/auth/[...nextauth].ts
+import NextAuth, { AuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
+
+/**
+ * Authオプションを定義
+ */
+export const authOptions: AuthOptions = {
+  // `NEXTAUTH_SECRET` は .env or Vercel/DigitalOceanなどの環境変数に設定
+  secret: process.env.NEXTAUTH_SECRET,
+
+  providers: [
+    /**
+     * Googleログイン
+     */
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    }),
+    /**
+     * Credentialsログイン (メール+パスワードで仮ログインする例)
+     */
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials, req) {
+        // ここでDB確認など
+        if (credentials?.email === 'test@example.com' && credentials.password === 'testpass') {
+          // ユーザ情報を返す
+          return { id: '1', name: 'TestUser', email: 'test@example.com' };
+        }
+        // 認証失敗 → null
+        return null;
+      },
+    }),
+  ],
+
+  // ログイン後のリダイレクト先
+  pages: {
+    signIn: '/auth/signin', // カスタムのサインインページにしたいなら指定
+    // error: '/auth/error', // エラー時のページ
+  },
+
+  // コールバック系の設定(省略可)
+  callbacks: {
+    // JWTに含めるデータなど
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token?.user) {
+        session.user = token.user as any;
+      }
+      return session;
+    },
+  },
+};
+
+export default NextAuth(authOptions);

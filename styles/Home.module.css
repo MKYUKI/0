@@ -1,20 +1,17 @@
-/* 画面全体 */
 .main {
   position: relative;
   width: 100%;
   height: 100vh;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   overflow: hidden;
-  background-color: #ffffff; /* 薄い背景 */
+  background-color: #ffffff; /* 背景は白 */
 }
 
-/* SVG コンテナ */
+/* SVG Container */
 .svgContainer {
   position: absolute;
   top: 0; left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   z-index: 1;
   overflow: hidden;
 }
@@ -24,11 +21,9 @@
   display: block;
 }
 
-/* =============== アニメーション対象たち ============== */
-
-/* 大円(メイン) */
+/* =============== Animate Items =============== */
 .circleMain {
-  animation: swirlMain 8s cubic-bezier(0.75,0.15,0.25,0.85) infinite;
+  animation: swirlMain 8s cubic-bezier(0.75, 0.15, 0.25, 0.85) infinite;
   transform-origin: 100px 100px;
 }
 @keyframes swirlMain {
@@ -45,10 +40,10 @@
   transform-origin: 100px 100px;
 }
 @keyframes swirlRing1 {
-  0%   { transform: rotate(0deg) scale(1); }
-  33%  { transform: rotate(120deg) scale(1.8); }
-  66%  { transform: rotate(240deg) scale(0.8); }
-  100% { transform: rotate(360deg) scale(1);  }
+  0%   { transform: rotate(0deg)   scale(1); }
+  33%  { transform: rotate(120deg) scale(1.8);}
+  66%  { transform: rotate(240deg) scale(0.8);}
+  100% { transform: rotate(360deg) scale(1); }
 }
 
 /* ring2 */
@@ -57,9 +52,9 @@
   transform-origin: 100px 100px;
 }
 @keyframes swirlRing2 {
-  0%   { transform: rotate(0deg) scale(1) translate(0,0); }
-  50%  { transform: rotate(180deg) scale(2) translate(-5px,5px); }
-  100% { transform: rotate(360deg) scale(1) translate(0,0); }
+  0%   { transform: rotate(0deg) scale(1)   translate(0,0);}
+  50%  { transform: rotate(180deg) scale(2) translate(-5px,5px);}
+  100% { transform: rotate(360deg) scale(1) translate(0,0);}
 }
 
 /* path1 */
@@ -68,11 +63,11 @@
   transform-origin: 100px 100px;
 }
 @keyframes swirlPath1 {
-  0%   { transform: rotate(0deg) scale(1);   }
-  25%  { transform: rotate(90deg) scale(1.5);}
+  0%   { transform: rotate(0deg)   scale(1);}
+  25%  { transform: rotate(90deg)  scale(1.5);}
   50%  { transform: rotate(180deg) scale(0.8);}
   75%  { transform: rotate(270deg) scale(1.6);}
-  100% { transform: rotate(360deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1);}
 }
 
 /* path2 */
@@ -82,12 +77,12 @@
 }
 @keyframes swirlPath2 {
   0%   { transform: rotate(0deg) scale(1); }
-  33%  { transform: rotate(120deg) scale(1.8); }
-  66%  { transform: rotate(240deg) scale(0.7); }
-  100% { transform: rotate(360deg) scale(1);   }
+  33%  { transform: rotate(120deg) scale(1.8);}
+  66%  { transform: rotate(240deg) scale(0.7);}
+  100% { transform: rotate(360deg) scale(1); }
 }
 
-/* ドット達 */
+/* dot1, dot2, dot3 */
 .dot1 {
   animation: swirlDot1 5s linear infinite;
   transform-origin: 140px 60px;
@@ -116,48 +111,38 @@
   100% { transform: rotate(360deg) scale(1);}
 }
 
-/* ===============================
-   前景UI
-=============================== */
+/* 前景UI */
 .container {
   position: relative;
   z-index: 2;
-  width: 100%; 
-  height: 100%;
-  display: flex; 
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   background: rgba(255,255,255,0.2);
   backdrop-filter: blur(4px);
   text-align: center;
-  color: #000;
   padding: 2rem;
+  color: #000;
 }
-
 .title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 .subtitle {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 1.5rem;
-  line-height: 1.6;
+  line-height: 1.5;
 }
-
-/* ボタン */
-.loginButton, .logoutButton {
-  padding: 0.7rem 1.2rem;
+.loginButton {
+  padding: 0.8rem 1.4rem;
   font-size: 1rem;
   background-color: #000;
   color: #fff;
-  border: none; 
-  border-radius: 4px;
+  border: none; border-radius: 4px;
   cursor: pointer;
-  margin: 0.4rem;
   transition: background-color 0.2s;
 }
-.loginButton:hover, .logoutButton:hover {
+.loginButton:hover {
   background-color: #444;
 }

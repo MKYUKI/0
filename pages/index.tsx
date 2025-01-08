@@ -1,22 +1,26 @@
 // pages/index.tsx
-import React from 'react';
-import type { NextPage } from 'next';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import styles from '../styles/Home.module.css';
+import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+/**
+ * (1) ログイン前: SVGアニメ背景 + 中央にログインボタン
+ *     ログイン後: 他ページ(2~5)へのリンク表示
+ */
+export default function HomePage() {
   const { data: session, status } = useSession();
 
-  // セッション読み込み中
-  if (status === 'loading') {
-    return <div>Loading session...</div>;
+  if (status === "loading") {
+    return <div style={{ padding: "2rem" }}>Loading session...</div>;
   }
 
-  // ▼ 未ログイン: 「異次元」アニメーション
+  // ===========================
+  // 未ログイン時
+  // ===========================
   if (!session) {
     return (
       <div className={styles.main}>
-        {/* メインSVGアニメContainer */}
+        {/* SVGアニメ背景 */}
         <div className={styles.svgContainer}>
           <svg
             className={styles.kaleidoSvg}
@@ -24,10 +28,6 @@ const Home: NextPage = () => {
             preserveAspectRatio="xMidYMid slice"
           >
             <defs>
-              {/*
-                濃い青(#000080相当)～濃紫(#330066)～深ラズベリー(#88002b)
-                さらに色を区切り増やして激しく
-              */}
               <radialGradient id="infiniteGrad" cx="50%" cy="50%" r="85%">
                 <stop offset="0%" stopColor="#000080" />
                 <stop offset="30%" stopColor="#330066" />
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
               fill="none"
               stroke="#330066"
               strokeWidth="8"
-              style={{ mixBlendMode: 'screen' }}
+              style={{ mixBlendMode: "screen" }}
               className={styles.ring1}
             />
             {/* リング2 */}
@@ -65,29 +65,33 @@ const Home: NextPage = () => {
               fill="none"
               stroke="#88002b"
               strokeWidth="5"
-              style={{ mixBlendMode: 'screen' }}
+              style={{ mixBlendMode: "screen" }}
               className={styles.ring2}
             />
 
-            {/* path1: 複雑形 */}
+            {/* path1 */}
             <path
-              d="M100,10 C140,30 180,90 150,130 120,170 70,160 60,110 50,70 80,40 100,20Z"
+              d="M100,10 C140,30 180,90 150,130
+                 120,170 70,160 60,110
+                 50,70 80,40 100,20Z"
               fill="#000080"
               fillOpacity="0.8"
-              style={{ mixBlendMode: 'screen' }}
+              style={{ mixBlendMode: "screen" }}
               className={styles.path1}
             />
             {/* path2 */}
             <path
-              d="M30,180 C70,130 160,130 190,90 200,70 160,50 120,30 
-                90,20 60,30 30,60 10,90 10,140 20,160Z"
+              d="M30,180 C70,130 160,130 190,90
+                 200,70 160,50 120,30
+                 90,20 60,30 30,60
+                 10,90 10,140 20,160Z"
               fill="#88002b"
               fillOpacity="0.7"
-              style={{ mixBlendMode: 'screen' }}
+              style={{ mixBlendMode: "screen" }}
               className={styles.path2}
             />
 
-            {/* ドット複数 */}
+            {/* ドット */}
             <circle
               cx="140"
               cy="60"
@@ -115,14 +119,10 @@ const Home: NextPage = () => {
           </svg>
         </div>
 
-        {/* 前景UI */}
+        {/* 中央UI */}
         <div className={styles.container}>
-          <h1 className={styles.title}>0 へようこそ</h1>
-          <p className={styles.subtitle}>
-            <br />
-            
-          </p>
-          {/* ボタンでログイン (NextAuth) */}
+          <h1 className={styles.title}>0プラットフォーム (メイン)</h1>
+          <p className={styles.subtitle}>ログインボタンが中央</p>
           <button className={styles.loginButton} onClick={() => signIn()}>
             ログイン
           </button>
@@ -131,30 +131,48 @@ const Home: NextPage = () => {
     );
   }
 
-  // ▼ ログイン済み: アニメOFF → Chat or 超越ページへ
+  // ===========================
+  // ログイン済み時
+  // ===========================
   return (
     <div className={styles.main}>
       <div className={styles.container}>
-        <h1 className={styles.title}>ログイン済み: </h1>
-        <p className={styles.subtitle}>ユーザ: {session.user?.email}</p>
-        <button className={styles.logoutButton} onClick={() => signOut()}>
+        <h1 className={styles.title}>ログイン済み: {session.user?.email}</h1>
+        <p className={styles.subtitle}>ここから他ページへ移動</p>
+
+        <button
+          className={styles.logoutButton}
+          onClick={() => signOut()}
+          style={{ margin: "0.4rem" }}
+        >
           ログアウト
         </button>
+
         <button
           className={styles.loginButton}
-          onClick={() => (window.location.href = '/chat')}
+          onClick={() => (window.location.href = "/chat")}
         >
-          ChatGPTページ
+          (2) ChatGPTページ
         </button>
         <button
           className={styles.loginButton}
-          onClick={() => (window.location.href = '/mega')}
+          onClick={() => (window.location.href = "/mega")}
         >
-          世界最大アニメへ
+          (3) 世界最大アニメ
+        </button>
+        <button
+          className={styles.loginButton}
+          onClick={() => (window.location.href = "/portfolio")}
+        >
+          (4) 日下真旗ポートフォリオ
+        </button>
+        <button
+          className={styles.loginButton}
+          onClick={() => (window.location.href = "/supermega")}
+        >
+          (5) 神アニメ
         </button>
       </div>
     </div>
   );
-};
-
-export default Home;
+}
