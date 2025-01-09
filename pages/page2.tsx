@@ -1,16 +1,16 @@
-// pages/page2.tsx
-import React from 'react';
 import Head from 'next/head';
 
 export default function Page2() {
   return (
     <>
       <Head>
-        <title>Legendary Website - Page2</title>
+        <title>Page2</title>
+        <link rel="stylesheet" href="/css/kaleido2.css" />
+        <script src="/js/page2Logic.js" defer />
       </Head>
-      <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1>Page2</h1>
-        <p>Content of Page2 with waveAnim or starsAnim if needed.</p>
+      <main>
+        <h1>Page2 Title</h1>
+        <p>Content from old HTML, now in TSX.</p>
       </main>
     </>
   );

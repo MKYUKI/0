@@ -1,16 +1,18 @@
-// pages/index.tsx (Home / Page1)
-import React from 'react';
 import Head from 'next/head';
 
-export default function Page1() {
+export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Legendary Website - Page1 (Home)</title>
+        <title>Page1 (Home)</title>
+        {/* CSS読み込み */}
+        <link rel="stylesheet" href="/css/kaleido1.css" />
+        {/* JS (必要なら)
+        <script src="/js/page1Logic.js" defer /> */}
       </Head>
-      <main style={{ textAlign: 'center', padding: '2rem' }}>
+      <main>
         <h1>Page1 (Home)</h1>
-        <p>This is the home page. Animations are loaded from /js/*.js</p>
+        <p>This is the home page.</p>
       </main>
     </>
   );

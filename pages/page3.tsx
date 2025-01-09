@@ -1,15 +1,17 @@
-import React from 'react';
 import Head from 'next/head';
 
 export default function Page3() {
   return (
     <>
       <Head>
-        <title>Legendary Website - Page3</title>
+        <title>Page3</title>
+        <link rel="stylesheet" href="/css/kaleido3.css" />
+        {/* JSもしあれば */}
+        {/* <script src="/js/page3Logic.js" defer /> */}
       </Head>
-      <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1>Page3</h1>
-        <p>Content of Page3. Possibly referencing page4Logic, page5Logic, etc.</p>
+      <main>
+        <h1>Page3 Title</h1>
+        <div>Content from old page3.html here</div>
       </main>
     </>
   );
