@@ -1,32 +1,21 @@
-/* styles/globals.css */
+/* ========== globals.css ========== */
 
-/* リセット系 */
-* {
+/* リセット・全体 */
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  font-family: sans-serif;
-  background: #fafafa;
-  color: #333;
-  height: 100%;
   width: 100%;
-  overflow-x: hidden;
-}
-#__next {
   height: 100%;
+  font-family: sans-serif;
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
-/* スクロールバー等 */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background: #777;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #444;
+/* ほか全体的なスタイルやクラス (例: .globalContainer) */
+
+.globalContainer {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  background: #fafafa;
 }

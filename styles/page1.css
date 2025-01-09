@@ -1,0 +1,74 @@
+/* page1.css */
+
+/* 全体 */
+html, body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+  
+  /* 背景に波を複数重ねる */
+  .wave-bg {
+    position: absolute;
+    width: 100%; height: 100%;
+    background: linear-gradient(#cceeff, #eef8ff);
+    overflow: hidden;
+  }
+  
+  /* 波のスタイル */
+  .wave {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 200%; height: 200px;
+    background: radial-gradient(#fff, #99ddff);
+    opacity: 0.3;
+    animation: waveFlow 6s infinite ease-in-out;
+  }
+  .wave1 { animation-duration: 7s; }
+  .wave2 { animation-duration: 9s; opacity: 0.2; }
+  .wave3 { animation-duration: 11s; opacity: 0.15; }
+  
+  @keyframes waveFlow {
+    0%   { transform: translateX(0) translateY(0) rotate(0deg); }
+    50%  { transform: translateX(-25%) translateY(-10px) rotate(0deg); }
+    100% { transform: translateX(0) translateY(0) rotate(0deg); }
+  }
+  
+  /* 城っぽいオーバーレイ(シンプルに四角形 + alpha) */
+  .castleOverlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url("https://via.placeholder.com/600x400?text=Fantasy+Castle") no-repeat center/cover;
+    opacity: 0.25;
+    mix-blend-mode: screen;
+  }
+  
+  /* コンテンツ */
+  .content {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    color: #003;
+    backdrop-filter: blur(4px);
+  }
+  .content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .content p {
+    margin-bottom: 1.5rem;
+  }
+  button {
+    padding: 0.8rem 1.2rem;
+    background: #333; color: #fff;
+    border: none; border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #666;
+  }
+  

@@ -1,0 +1,61 @@
+/* kaleido2.css */
+
+.svgWrap2 {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+  .kaleido2Svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  
+  /* アニメーション */
+  .circSpinA {
+    animation: circSpinA 7s ease-in-out infinite;
+    transform-origin: 100px 100px;
+  }
+  @keyframes circSpinA {
+    0% { transform: rotate(0deg) scale(1); }
+    50%{ transform: rotate(180deg) scale(1.2);}
+    100%{ transform: rotate(360deg) scale(1);}
+  }
+  .circSpinB {
+    animation: circSpinB 6s linear infinite;
+    transform-origin: 100px 100px;
+  }
+  @keyframes circSpinB {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .pathSpin2 {
+    animation: pathSpin2 5s linear infinite;
+    transform-origin: 100px 120px;
+  }
+  @keyframes pathSpin2 {
+    0%{ transform: rotate(0deg);}
+    50%{ transform: rotate(180deg);}
+    100%{ transform: rotate(360deg);}
+  }
+  
+  /* 前景 */
+  .frontContent2 {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(240,255,255,0.6);
+    backdrop-filter: blur(3px);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .frontContent2 h2 {
+    margin-bottom: 1rem;
+  }
+  .frontContent2 p {
+    margin-bottom: 1rem;
+  }
+  .frontContent2 nav a {
+    font-weight: bold;
+  }
+  

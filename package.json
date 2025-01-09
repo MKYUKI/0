@@ -1,31 +1,29 @@
 {
-  "name": "my-project",
+  "name": "legendary-website",
   "version": "1.0.0",
+  "description": "World's most legendary website with Next.js + Prisma + SWR + etc.",
   "scripts": {
-    "dev": "next dev -p 3002",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 3002",
-    "prisma:dbpush": "prisma db push",
-    "prisma:gen": "prisma generate"
+    "start": "next start"
   },
   "dependencies": {
-    "@prisma/client": "6.2.0",
+    "@prisma/client": "^6.2.1",
     "axios": "^1.4.0",
     "next": "13.4.19",
     "next-auth": "^4.24.11",
-    "openai": "^4.77.3",
+    "openai": "^4.77.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "redis": "^4.7.0",
-    "swr": "^2.3.0",
-    "three": "^0.172.0"
+    "swr": "2.2.0"
   },
   "devDependencies": {
-    "@types/node": "^18.16.19",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.7",
-    "@types/three": "^0.172.0",
-    "prisma": "6.2.0",
-    "typescript": "^5.7.2"
+    "@types/node": "20.4.2",
+    "@types/react": "18.2.12",
+    "@types/react-dom": "18.2.5",
+    "@types/redis": "^4.0.11",
+    "prisma": "^6.2.1",
+    "typescript": "5.1.6"
   }
 }

@@ -1,24 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
-      "es2020"
+      "esnext"
     ],
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
-    "skipLibCheck": true, // ← 不要ならfalseでもOK
-    "esModuleInterop": true, // Next.js で推奨
     "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "incremental": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
-    // ...
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

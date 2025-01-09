@@ -1,49 +1,36 @@
 // pages/profile/[userid].tsx
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+/*
+// もし next-auth を使っていたならコメントアウト
 import { useSession } from "next-auth/react";
+*/
+import { useRouter } from "next/router";
 
-export default function UserProfilePage() {
-  const router = useRouter();
-  const { userid } = router.query as { userid?: string };
-  const { data: session } = useSession();
-  const [profile, setProfile] = useState<any>(null);
+export default function UserProfilePage(){
+  const router= useRouter();
+  // const { data: session, status } = useSession(); // ← コメントアウト
 
-  useEffect(() => {
-    if (!userid) return;
-    // GET /api/users/[userid] などで取得
-    fetch(`/api/users/${userid}`)
-      .then((res) => res.json())
-      .then(setProfile)
-      .catch(console.error);
-  }, [userid]);
+  // SSR/プリレンダリングでエラーを防ぐには session関連を削除 or dynamic route
+  // ここでは単に UIだけ表示
 
-  async function handleFollow() {
-    if (!userid) return;
-    const res = await fetch("/api/users/follow", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ targetUserId: userid }),
-    });
-    if (res.ok) {
-      alert("Followed!");
-    } else {
-      alert("Follow error");
-    }
-  }
+  useEffect(()=>{
+    // 何かユーザー情報取得処理
+  },[]);
 
-  if (!profile) return <div>Loading...</div>;
+  const back=()=> window.history.back();
+  const forward=()=> window.history.forward();
 
-  return (
-    <div style={{ padding: 20 }}>
-      <h1>ユーザプロフィール</h1>
-      <p>ID: {profile.id}</p>
-      <p>Name: {profile.name}</p>
-      <p>Username: {profile.username}</p>
+  // if(status==="loading") return <div>Loading...</div>;
+  // if(!session) return <div>未ログイン</div>;
 
-      {session?.user?.id !== profile.id && (
-        <button onClick={handleFollow}>Follow</button>
-      )}
+  const { userid }= router.query;
+
+  return(
+    <div style={{ padding:"2rem" }}>
+      <button onClick={back} style={{ marginRight:"1rem" }}>← 戻る</button>
+      <button onClick={forward}>進む →</button>
+      <h1>ユーザープロファイルページ: {userid}</h1>
+      <p>ここにユーザー情報が表示される想定 (sessionはコメントアウト)</p>
     </div>
   );
 }
