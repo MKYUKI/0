@@ -5,9 +5,11 @@ const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    // 他に必要なパスがあれば追記
+    // 必要に応じて追加
   ],
-  theme: { extend: {} },
+  theme: {
+    extend: {},
+  },
   plugins: [],
 };
 
