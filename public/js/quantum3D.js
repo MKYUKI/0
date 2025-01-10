@@ -1,16 +1,12 @@
 // public/js/quantum3D.js
-// Minimal Three.js 3D scene to show a spinning black TorusKnot.
+// Minimal 3D scene with a black TorusKnot rotation.
 
-// For references to advanced Transformer-based 3D AI avatars, see e.g.:
-// - https://arxiv.org/abs/1706.03762
-// - https://github.com/CompVis/latent-diffusion
-// - https://github.com/facebookresearch/AnimatedDraw
-(() => {
+(function(){
     const container = document.getElementById('quantum3DContainer');
-    if (!container) return; // no container, skip
+    if(!container) return;
   
-    // 1) Set up three.js
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    // 1) Three.js setup
+    const renderer = new THREE.WebGLRenderer({antialias:true});
     renderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(renderer.domElement);
   
@@ -23,43 +19,40 @@
       0.1,
       2000
     );
-    camera.position.set(0, 0, 60);
+    camera.position.set(0,0,60);
     scene.add(camera);
   
     // Light
-    const ambient = new THREE.AmbientLight(0xffffff, 1.0);
+    const ambient = new THREE.AmbientLight(0xffffff,1);
     scene.add(ambient);
   
     // 2) Object geometry
-    const geometry = new THREE.TorusKnotGeometry(10, 3, 140, 24);
+    const geometry = new THREE.TorusKnotGeometry(10,3,140,24);
     const material = new THREE.MeshPhongMaterial({
-      color: 0x000000,
-      emissive: 0x222222,
-      shininess: 100,
-      wireframe: false,
+      color:0x000000,
+      emissive:0x222222,
+      shininess:100,
+      wireframe:false
     });
     const knot = new THREE.Mesh(geometry, material);
     scene.add(knot);
   
-    // 3) Animate
     let startTime = performance.now();
-  
-    function animate() {
+    function animate(){
       requestAnimationFrame(animate);
-      let dt = performance.now() - startTime;
-      let t = dt * 0.0004; // spin speed
+      const dt = performance.now() - startTime;
+      const t = dt*0.0004;
   
-      // Spin with some "quantum" style
-      knot.rotation.x = t * 0.6;
-      knot.rotation.y = t * 0.45;
-      knot.rotation.z = t * 0.1;
+      knot.rotation.x = t*0.6;
+      knot.rotation.y = t*0.45;
+      knot.rotation.z = t*0.1;
   
       renderer.render(scene, camera);
     }
     animate();
   
-    // 4) Handle window resizing
-    window.addEventListener('resize', () => {
+    // 3) Resize
+    window.addEventListener('resize', ()=>{
       renderer.setSize(container.clientWidth, container.clientHeight);
       camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();

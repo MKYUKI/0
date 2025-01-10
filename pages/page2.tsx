@@ -1,19 +1,22 @@
+// pages/page2.tsx
 import Head from 'next/head';
 
-export default function Page2() {
+export default function Page2(){
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" />
-        <title>Page2 - Quantum Water</title>
+        <meta charSet="UTF-8"/>
+        <title>Page2 (Quantum Water)</title>
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido2.css" />
-        <script src="/js/page2Logic.js" defer></script>
+        {/* JS for animation */}
+        <script src="/js/page2Logic.js" defer />
       </Head>
 
       <main className="kaleidoMain">
         <div className="svgWrap2">
           <svg viewBox="0 0 200 200" className="kaleido2Svg" preserveAspectRatio="xMidYMid slice">
+            {/* ...radialGradient e.g. grad2... */}
             <defs>
               <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#e0ffff" />
@@ -33,7 +36,7 @@ export default function Page2() {
 
         <section className="frontContent2">
           <h2>静かな水色空間</h2>
-          <p>穏やかな波紋 + 量子的黒線</p>
+          <p>穏やかな波紋と量子線の世界</p>
           <nav>
             <a href="/page3">⇒ 3ページ目へ</a>
           </nav>
