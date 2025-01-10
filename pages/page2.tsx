@@ -5,25 +5,18 @@ export default function Page2() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>【2】淡い水色万華鏡</title>
+        <title>【2】淡い水色万華鏡 × Quantum Lines</title>
+        {/* kaleidoBase.css + kaleido2.css */}
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido2.css" />
 
-        {/* JS: page2Logic.js を読み込む */}
+        {/* 旧 page2Logic.js があれば読み込み */}
         <script src="/js/page2Logic.js" defer />
       </Head>
 
-      <header className="globalHeader">
-        <h1>第2ページ：水色の静寂な万華鏡</h1>
-      </header>
-
       <main className="kaleidoMain">
         <div className="svgWrap2">
-          <svg
-            viewBox="0 0 200 200"
-            className="kaleido2Svg"
-            preserveAspectRatio="xMidYMid slice"
-          >
+          <svg viewBox="0 0 200 200" className="kaleido2Svg" preserveAspectRatio="xMidYMid slice">
             <defs>
               <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#e0ffff" />
@@ -43,19 +36,12 @@ export default function Page2() {
 
         <section className="frontContent2">
           <h2>静かな水色空間</h2>
-          <p>穏やかな波紋を感じてください</p>
+          <p>穏やかな波紋と量子的黒線のコラボレーション</p>
           <nav>
             <a href="/page3">⇒ 3ページ目へ</a>
           </nav>
         </section>
       </main>
-
-      <footer className="globalFooter">
-        <p>
-          <a href="/">← 戻る</a>
-        </p>
-        <p>©2023 Legendary Website</p>
-      </footer>
     </>
   );
 }

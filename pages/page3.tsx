@@ -5,15 +5,11 @@ export default function Page3() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>【3】紫電の速いアニメ</title>
+        <title>【3】紫電の高速アニメ × Quantum Storm</title>
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido3.css" />
-        {/* JSがあれば <script src="/js/page3Logic.js" defer /> など */}
+        {/* <script src="/js/page3Logic.js" defer /> (必要なら) */}
       </Head>
-
-      <header className="globalHeader">
-        <h1>第3ページ：紫電一閃の躍動</h1>
-      </header>
 
       <main className="kaleidoMain">
         <div className="svgWrap3">
@@ -46,19 +42,12 @@ export default function Page3() {
 
         <section className="frontContent3">
           <h2>疾走する紫のエネルギー</h2>
-          <p>スピーディーに回転し、闇を切り裂く！</p>
+          <p>スピーディーに回転し、量子の闇を切り裂く！</p>
           <nav>
             <a href="/page4">⇒ 4ページ目へ</a>
           </nav>
         </section>
       </main>
-
-      <footer className="globalFooter">
-        <p>
-          <a href="/page2">← 戻る</a>
-        </p>
-        <p>©2023 Legendary Website</p>
-      </footer>
     </>
   );
 }

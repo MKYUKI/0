@@ -1,0 +1,58 @@
+/* public/css/globalQuantum.css */
+/* 全体背景は白、黒い幾何学アニメを2枚重ねして量子的に振る舞う */
+
+.quantumGeometryBG {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff; /* 背景白 */
+    overflow: hidden;
+  }
+  
+  .quantumGeometryBG::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.15) 0px,
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 50px
+    );
+    animation: quantumLines 10s linear infinite;
+    pointer-events: none;
+  }
+  
+  .quantumGeometryBG::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.15) 0px,
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 50px
+    );
+    animation: quantumLines2 12s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: multiply; /* 幾何学線の重ね合わせ */
+  }
+  
+  @keyframes quantumLines {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(-50px,0); }
+  }
+  @keyframes quantumLines2 {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(0,-50px); }
+  }
+  
+  .globalContainerWrap {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    /* optional: background: rgba(255,255,255,0.85); */
+  }
+  
