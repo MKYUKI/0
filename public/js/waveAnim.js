@@ -7,7 +7,7 @@ window.addEventListener('load', ()=>{
     function onResize(){
       canvas.width = canvas.clientWidth;
       canvas.height= canvas.clientHeight;
-    }
+    }https://huggingface.co/microsoft/phi-4#phi-4-model-card
     onResize();
     window.addEventListener('resize', onResize);
   

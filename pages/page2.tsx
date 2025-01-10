@@ -5,13 +5,10 @@ export default function Page2() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>【2】淡い水色万華鏡 × Quantum Lines</title>
-        {/* kaleidoBase.css + kaleido2.css */}
+        <title>Page2 - Quantum Water</title>
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido2.css" />
-
-        {/* 旧 page2Logic.js があれば読み込み */}
-        <script src="/js/page2Logic.js" defer />
+        <script src="/js/page2Logic.js" defer></script>
       </Head>
 
       <main className="kaleidoMain">
@@ -36,7 +33,7 @@ export default function Page2() {
 
         <section className="frontContent2">
           <h2>静かな水色空間</h2>
-          <p>穏やかな波紋と量子的黒線のコラボレーション</p>
+          <p>穏やかな波紋 + 量子的黒線</p>
           <nav>
             <a href="/page3">⇒ 3ページ目へ</a>
           </nav>

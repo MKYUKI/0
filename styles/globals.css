@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Basic resets or your additional styling can go here. */
 
-
-/* リセット・全体 */
 html, body {
   margin: 0;
   padding: 0;
@@ -12,14 +11,5 @@ html, body {
   height: 100%;
   font-family: sans-serif;
   background-color: #ffffff;
-  overflow: hidden;
-}
-
-/* ほか全体的なスタイルやクラス (例: .globalContainer) */
-
-.globalContainer {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100vh;
-  background: #fafafa;
+  overflow: hidden; /* optional, if you want to lock the page. */
 }

@@ -1,4 +1,3 @@
-// pages/index.tsx
 import Head from 'next/head';
 
 export default function HomePage() {
@@ -6,15 +5,13 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Page1 (Quantum Home + ChatGPT)</title>
-        {/* kaleidoBase.css & kaleido1.css など */}
+        <title>Page1 - Quantum Home + ChatGPT</title>
+        {/* kaleido base + kaleido1 for the swirling pink svg */}
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido1.css" />
-        {/* 必要なら page1Logic.js があれば <script src="/js/page1Logic.js" defer /> */}
       </Head>
 
       <main className="kaleidoMain">
-        {/* 万華鏡SVG */}
         <div className="svgWrap1">
           <svg
             viewBox="0 0 200 200"
