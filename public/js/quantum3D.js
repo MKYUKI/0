@@ -1,49 +1,56 @@
 // public/js/quantum3D.js
-// Minimal example: spinning TorusKnot with Three.js
+// Minimal 3D TorusKnot, color changed or param changed for fresh look
+// (参考: Three.js docs: https://threejs.org/)
+
 (() => {
-    const container = document.getElementById('quantum3DContainer');
-    if (!container) return;
+    const container = document.getElementById('quantum3DContainer')
+    if (!container) return
   
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    container.appendChild(renderer.domElement)
   
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
+    const scene = new THREE.Scene()
+    scene.background = new THREE.Color(0xffffff)
   
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 2000);
-    camera.position.set(0, 0, 60);
-    scene.add(camera);
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 2000)
+    camera.position.set(0, 0, 60)
+    scene.add(camera)
   
-    const ambient = new THREE.AmbientLight(0xffffff, 1.0);
-    scene.add(ambient);
+    const ambient = new THREE.AmbientLight(0xffffff, 1)
+    scene.add(ambient)
   
-    const geometry = new THREE.TorusKnotGeometry(10, 3, 140, 24);
+    // Purple-ish TorusKnot
+    const geometry = new THREE.TorusKnotGeometry(10, 3, 150, 24)
     const material = new THREE.MeshPhongMaterial({
-      color: 0x000000,
-      emissive: 0x222222,
-      shininess: 100,
+      color: 0x9900ff,
+      emissive: 0x220022,
+      shininess: 120,
       wireframe: false,
-    });
-    const knot = new THREE.Mesh(geometry, material);
-    scene.add(knot);
+    })
+    const knot = new THREE.Mesh(geometry, material)
+    scene.add(knot)
   
-    let start = performance.now();
+    let startTime = performance.now()
+  
     function animate() {
-      requestAnimationFrame(animate);
-      const dt = performance.now() - start;
-      const t = dt * 0.0004;
-      knot.rotation.x = t * 0.6;
-      knot.rotation.y = t * 0.45;
-      knot.rotation.z = t * 0.1;
-      renderer.render(scene, camera);
+      requestAnimationFrame(animate)
+      const dt = performance.now() - startTime
+      const t = dt * 0.0003
+  
+      // Spin, scale
+      knot.rotation.x = t * 0.7
+      knot.rotation.y = t * 0.6
+      knot.rotation.z = t * 0.2
+  
+      renderer.render(scene, camera)
     }
-    animate();
+    animate()
   
     window.addEventListener('resize', () => {
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-    });
-  })();
+      renderer.setSize(container.clientWidth, container.clientHeight)
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+    })
+  })()
   

@@ -15,8 +15,13 @@ export default function Page6() {
       <main className="kaleidoMain">
         <div className="rainbowOverlay"></div>
         <section className="frontContent6">
-          <h2>Finale: Rainbow Blessing + Ultra-Transformer</h2>
-          <p>All breakthroughs converge: Attentional leaps, MoE, NeRF, Diffusion—historical apex.</p>
+          <h2>Finale: Rainbow Blessing & Ultra-Transformer</h2>
+          <p>
+            Page6: Merging quantum geometry with 
+            <a href="https://arxiv.org/abs/2106.01345" target="_blank" rel="noreferrer">
+              advanced Transformer scaling
+            </a>, reaching the apex of civilization.
+          </p>
           <nav>
             <a href="/">Return Home</a>
           </nav>

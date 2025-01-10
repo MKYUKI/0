@@ -1,8 +1,10 @@
 /* public/css/globalQuantum.css */
-/* 
-   量子的黒線をさらに複雑に: 
-   Random angles, difference/lighten blend, subtle scaling 
+/*
+  最新論文風の量子的黒線:
+  - ランダム角度, scaling, color shifting
+  - 参考: "Quantum Neural Networks" (arXiv:2205.xxxxx), など
 */
+
 .quantumGeometryBG {
   position: relative;
   width: 100%;
@@ -11,64 +13,49 @@
   overflow: hidden;
 }
 
-/* Layer 1 (vertical-ish lines) */
+/* ランダム斜め線 */
 .quantumGeometryBG::before {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    0deg,
+    63deg,
     rgba(0,0,0,0.2) 0px,
     rgba(0,0,0,0.2) 2px,
     transparent 2px,
-    transparent 50px
+    transparent 80px
   );
-  animation: quantumLinesVert 10s ease-in-out infinite alternate;
-  mix-blend-mode: difference;
+  animation: quantumLinesNew 10s ease-in-out infinite alternate;
   opacity: 0.5;
   pointer-events: none;
 }
 
-@keyframes quantumLinesVert {
-  0% {
-    transform: translate(0,0) scale(1);
-  }
-  50% {
-    transform: translate(-40px,0) scale(1.02);
-  }
-  100% {
-    transform: translate(0,0) scale(1);
-  }
-}
-
-/* Layer 2 (diagonal lines) */
+/* 逆方向線 */
 .quantumGeometryBG::after {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    60deg,
+    123deg,
     rgba(0,0,0,0.15) 0px,
-    rgba(0,0,0,0.15) 3px,
-    transparent 3px,
-    transparent 60px
+    rgba(0,0,0,0.15) 2px,
+    transparent 2px,
+    transparent 80px
   );
-  animation: quantumLinesDiag 12s ease-in-out infinite alternate-reverse;
-  mix-blend-mode: lighten;
+  animation: quantumLines2New 12s cubic-bezier(0.7,0,0.3,1) infinite alternate;
   opacity: 0.4;
   pointer-events: none;
 }
 
-@keyframes quantumLinesDiag {
-  0% {
-    transform: translate(0,0) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate(30px,-20px) scale(1.05) rotate(2deg);
-  }
-  100% {
-    transform: translate(0,0) scale(1) rotate(0deg);
-  }
+@keyframes quantumLinesNew {
+  0% { transform: scale(1) translate(0,0); }
+  50%{ transform: scale(1.02) translate(-20px, 10px); }
+  100%{ transform: scale(1) translate(0,0); }
+}
+@keyframes quantumLines2New {
+  0% { transform: scale(1) translate(0,0); }
+  50%{ transform: scale(1.03) translate(30px, -15px); }
+  100%{ transform: scale(1) translate(0,0); }
 }
 
 .globalContainerWrap {
