@@ -1,43 +1,52 @@
 /* kaleido6.css */
 
-/* 虹色フィルターを重ねるだけ */
+/* 虹色フィルターを重ねる */
 .rainbowOverlay {
-    position: absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: linear-gradient(45deg,
-      rgba(255,0,0,0.3) 0%,
-      rgba(255,165,0,0.3) 15%,
-      rgba(255,255,0,0.3) 30%,
-      rgba(0,255,0,0.3)   45%,
-      rgba(0,255,255,0.3) 60%,
-      rgba(0,0,255,0.3)   75%,
-      rgba(255,0,255,0.3) 90%
-    );
-    animation: rainbowMove 8s linear infinite;
-    background-size: 200% 200%;
-  }
-  @keyframes rainbowMove {
-    0% { background-position: 0% 50%; }
-    100%{ background-position: 100% 50%;}
-  }
-  
-  /* 前景 */
-  .frontContent6 {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    background: rgba(255,255,255,0.3);
-    backdrop-filter: blur(6px);
-    padding: 2rem;
-    text-align: center;
-    color:#000;
-    border-radius:8px;
-  }
-  .frontContent6 h2 {
-    margin-bottom:1rem;
-  }
-  .frontContent6 nav a {
-    font-weight: bold;
-  }
-  
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: linear-gradient(45deg,
+    rgba(255,0,0,0.3) 0%,
+    rgba(255,165,0,0.3) 15%,
+    rgba(255,255,0,0.3) 30%,
+    rgba(0,255,0,0.3)   45%,
+    rgba(0,255,255,0.3) 60%,
+    rgba(0,0,255,0.3)   75%,
+    rgba(255,0,255,0.3) 90%
+  );
+  background-size: 200% 200%;
+  animation: rainbowMoveNew 10s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes rainbowMoveNew {
+  0% { background-position: 0% 50%; transform: scale(1); }
+  50%{ background-position: 100% 50%; transform: scale(1.05); }
+  100%{ background-position: 0% 50%; transform: scale(1); }
+}
+
+/* 前景 */
+.frontContent6 {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(6px);
+  padding: 2rem;
+  text-align: center;
+  color:#000;
+  border-radius:8px;
+  animation: frontContent6Final 6s ease-in-out infinite alternate;
+}
+@keyframes frontContent6Final {
+  0%   { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
+  50%  { transform: translate(-50%,-55%) scale(1.1) rotate(3deg); }
+  100% { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
+}
+
+.frontContent6 h2 {
+  margin-bottom:1rem;
+}
+.frontContent6 nav a {
+  font-weight: bold;
+}

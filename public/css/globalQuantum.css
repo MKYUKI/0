@@ -1,59 +1,88 @@
 /* public/css/globalQuantum.css */
 
-/* White background overall, black lines that shift over time. */
+/* 
+  新しい量子的黒線アニメ:
+  - ランダムな角度でラインを2枚以上重ねる
+  - ゆっくり反転したり、scale(1.05)→scale(0.95)を繰り返す
+  - blend-mode: difference や lighten 等も検討
+*/
 .quantumGeometryBG {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: #ffffff; /* 背景は白 */
   overflow: hidden;
 }
 
-/* Vertical lines */
+/* 垂直方向の線を複数レイヤーで */
 .quantumGeometryBG::before {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0,0,0,0.1) 0px,
-    rgba(0,0,0,0.1) 1px,
-    transparent 1px,
-    transparent 50px
+    rgba(0,0,0,0.2) 0px,
+    rgba(0,0,0,0.2) 2px,
+    transparent 2px,
+    transparent 60px
   );
-  animation: quantumLines 10s linear infinite;
+  animation: quantumLinesNew 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   pointer-events: none;
+  mix-blend-mode: difference;
+  opacity: 0.6;
 }
 
-/* Horizontal lines */
+/* 水平方向の線(アングルつき) */
 .quantumGeometryBG::after {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    90deg,
-    rgba(0,0,0,0.1) 0px,
-    rgba(0,0,0,0.1) 1px,
-    transparent 1px,
+    45deg,
+    rgba(0,0,0,0.15) 0px,
+    rgba(0,0,0,0.15) 3px,
+    transparent 3px,
     transparent 50px
   );
-  animation: quantumLines2 14s linear infinite;
+  animation: quantumLines2New 14s cubic-bezier(0.65, 0, 0.35, 1) infinite reverse;
   pointer-events: none;
-  mix-blend-mode: multiply;
+  mix-blend-mode: lighten;
+  opacity: 0.45;
 }
 
-@keyframes quantumLines {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(-50px,0); }
+@keyframes quantumLinesNew {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-60px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
 }
 
-@keyframes quantumLines2 {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(0,-80px); }
+@keyframes quantumLines2New {
+  0% {
+    transform: translate(0,0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translate(20px, -20px) scale(0.98) rotate(2deg);
+  }
+  50% {
+    transform: translate(-40px, 10px) scale(1.02) rotate(-2deg);
+  }
+  75% {
+    transform: translate(10px, 0) scale(0.98) rotate(2deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
 }
 
 .globalContainerWrap {
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  /* optional: background: rgba(255,255,255,0.85); */
 }

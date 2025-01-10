@@ -1,40 +1,49 @@
 /* kaleidoBase.css */
 /* ベースリセット */
 * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: sans-serif;
-    background: #ffffff;
-    color: #333;
-    overflow: hidden; /* 全画面固定 */
-  }
-  a {
-    color: #cc0077;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* 全体 */
-  .globalHeader, .globalFooter {
-    text-align: center;
-    padding: 1rem;
-    background: rgba(255,255,255,0.5);
-    backdrop-filter: blur(4px);
-  }
-  .globalFooter p {
-    font-size: 0.8rem;
-    color: #666;
-  }
-  
-  /* メイン領域共通 */
-  .kaleidoMain {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - 140px); /* header/footer分を除いた例 */
-    overflow: hidden;
-    background: #ffffff;
-  }
-  
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  background: #ffffff;
+  color: #333;
+  overflow: hidden; /* 全画面固定 */
+}
+a {
+  color: #cc0077;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* 全体のヘッダーとフッター */
+.globalHeader, .globalFooter {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(4px);
+}
+.globalFooter p {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* メイン領域共通 */
+.kaleidoMain {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 140px); /* header/footer分を除いた例 */
+  overflow: hidden;
+  background: #ffffff;
+  animation: subtleGlow 12s ease-in-out infinite alternate;
+}
+
+/* “subtleGlow” は背景色を微妙に揺らす(ほんのり明るさを変化) */
+@keyframes subtleGlow {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.03); }
+  100% { filter: brightness(1); }
+}

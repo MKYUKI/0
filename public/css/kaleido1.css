@@ -1,65 +1,65 @@
 /* kaleido1.css */
 
-/* SVGの位置 */
+/* SVGラップ */
 .svgWrap1 {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    overflow: hidden;
-  }
-  .kaleido1Svg {
-    width: 100%; height: 100%;
-    display: block;
-  }
-  
-  /* アニメする要素 */
-  .circleSpin1 {
-    animation: circleSpin1 8s linear infinite;
-    transform-origin: 100px 100px;
-  }
-  @keyframes circleSpin1 {
-    0%   { transform: rotate(0deg) scale(1); }
-    50%  { transform: rotate(180deg) scale(1.2); }
-    100% { transform: rotate(360deg) scale(1); }
-  }
-  .circleSpin2 {
-    animation: circleSpin2 6s ease-in-out infinite;
-    transform-origin: 100px 100px;
-  }
-  @keyframes circleSpin2 {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  .pathSpin1 {
-    animation: pathSpin1 5s linear infinite;
-    transform-origin: 100px 80px;
-  }
-  @keyframes pathSpin1 {
-    0% { transform: rotate(0deg); }
-    50%{ transform: rotate(180deg); }
-    100%{ transform: rotate(360deg); }
-  }
-  
-  /* 前景コンテンツ */
-  .frontContent1 {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(3px);
-    padding: 2rem;
-    text-align: center;
-    border-radius: 8px;
-  }
-  .frontContent1 h2 {
-    font-size: 1.8rem; margin-bottom: 1rem;
-  }
-  .frontContent1 p {
-    margin-bottom: 1rem;
-  }
-  .frontContent1 nav a {
-    display: inline-block;
-    margin-top: 0.5rem;
-    font-weight: bold;
-  }
-  
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+.kaleido1Svg {
+  width: 100%; 
+  height: 100%;
+  display: block;
+}
+
+/* 新しいアニメ: 回転 + ズーム + ゆらぎ(非線形) */
+.circleSpin1 {
+  animation: circleSpin1New 10s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+  transform-origin: 100px 100px;
+}
+
+@keyframes circleSpin1New {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(90deg) scale(1.1); }
+  50%  { transform: rotate(180deg) scale(0.9); }
+  75%  { transform: rotate(270deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.circleSpin2 {
+  animation: circleSpin2New 8s ease-in-out infinite alternate;
+  transform-origin: 100px 100px;
+}
+
+@keyframes circleSpin2New {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg) scale(1.15); }
+}
+
+.pathSpin1 {
+  animation: pathSpin1New 6s linear infinite alternate;
+  transform-origin: 100px 80px;
+}
+
+@keyframes pathSpin1New {
+  0% { transform: rotate(0deg) translate(0,0) scale(1); }
+  100%{ transform: rotate(360deg) translate(10px, -10px) scale(0.8); }
+}
+
+/* 前景コンテンツ */
+.frontContent1 {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  text-align: center;
+  border-radius: 8px;
+  animation: frontContent1Flicker 14s ease-in-out infinite;
+}
+@keyframes frontContent1Flicker {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,192,203,0.3); }
+  50% { box-shadow: 0 0 20px rgba(255,192,203,0.6); }
+}
