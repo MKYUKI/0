@@ -1,5 +1,5 @@
 // public/js/quantum3D.js
-// Updated: 3D scene with advanced rotating shape
+// Minimal example: spinning TorusKnot with Three.js
 (() => {
     const container = document.getElementById('quantum3DContainer');
     if (!container) return;
@@ -9,33 +9,33 @@
     container.appendChild(renderer.domElement);
   
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#ffffff');
+    scene.background = new THREE.Color(0xffffff);
   
-    const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 2000);
-    camera.position.set(0, 0, 70);
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight, 0.1, 2000);
+    camera.position.set(0, 0, 60);
     scene.add(camera);
   
-    const ambient = new THREE.AmbientLight(0xffffff, 0.9);
+    const ambient = new THREE.AmbientLight(0xffffff, 1.0);
     scene.add(ambient);
   
-    // new geometry
-    const geometry = new THREE.TorusKnotGeometry(10, 2.5, 200, 18, 3, 7);
+    const geometry = new THREE.TorusKnotGeometry(10, 3, 140, 24);
     const material = new THREE.MeshPhongMaterial({
       color: 0x000000,
-      emissive: 0x111111,
-      shininess: 200,
+      emissive: 0x222222,
+      shininess: 100,
       wireframe: false,
     });
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    const knot = new THREE.Mesh(geometry, material);
+    scene.add(knot);
   
     let start = performance.now();
     function animate() {
       requestAnimationFrame(animate);
-      const t = (performance.now() - start) * 0.001;
-      mesh.rotation.x = t * 0.4;
-      mesh.rotation.y = t * 0.6;
-      mesh.rotation.z = t * 0.2;
+      const dt = performance.now() - start;
+      const t = dt * 0.0004;
+      knot.rotation.x = t * 0.6;
+      knot.rotation.y = t * 0.45;
+      knot.rotation.z = t * 0.1;
       renderer.render(scene, camera);
     }
     animate();

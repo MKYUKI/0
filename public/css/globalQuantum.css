@@ -1,9 +1,7 @@
 /* public/css/globalQuantum.css */
 /* 
-  Updated quantum lines:
-  - Multi-layer shifting lines at random angles
-  - Pulsating scale from 0.95 to 1.05
-  - Use difference/lighten or screen modes
+   量子的黒線をさらに複雑に: 
+   Random angles, difference/lighten blend, subtle scaling 
 */
 .quantumGeometryBG {
   position: relative;
@@ -13,49 +11,64 @@
   overflow: hidden;
 }
 
-/* Vertical stripes + random angle stripes */
+/* Layer 1 (vertical-ish lines) */
 .quantumGeometryBG::before {
   content: "";
-  position: absolute; 
+  position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    12deg,
-    rgba(0,0,0,0.15) 0px,
-    rgba(0,0,0,0.15) 2px,
+    0deg,
+    rgba(0,0,0,0.2) 0px,
+    rgba(0,0,0,0.2) 2px,
     transparent 2px,
-    transparent 40px
+    transparent 50px
   );
-  animation: quantumLinePulse1 10s ease-in-out infinite alternate;
-  pointer-events: none;
+  animation: quantumLinesVert 10s ease-in-out infinite alternate;
   mix-blend-mode: difference;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
+@keyframes quantumLinesVert {
+  0% {
+    transform: translate(0,0) scale(1);
+  }
+  50% {
+    transform: translate(-40px,0) scale(1.02);
+  }
+  100% {
+    transform: translate(0,0) scale(1);
+  }
+}
+
+/* Layer 2 (diagonal lines) */
 .quantumGeometryBG::after {
   content: "";
-  position: absolute; 
+  position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    98deg,
-    rgba(0,0,0,0.2) 0px,
-    rgba(0,0,0,0.2) 3px,
+    60deg,
+    rgba(0,0,0,0.15) 0px,
+    rgba(0,0,0,0.15) 3px,
     transparent 3px,
-    transparent 40px
+    transparent 60px
   );
-  animation: quantumLinePulse2 12s ease-in-out infinite alternate;
-  pointer-events: none;
+  animation: quantumLinesDiag 12s ease-in-out infinite alternate-reverse;
   mix-blend-mode: lighten;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
-@keyframes quantumLinePulse1 {
-  0% { transform: scale(0.98) translate(0,0); }
-  50%{ transform: scale(1.05) translate(-20px, 10px); }
-  100%{ transform: scale(0.98) translate(0,0); }
-}
-
-@keyframes quantumLinePulse2 {
-  0% { transform: scale(1) translate(0,0) rotate(0deg); }
-  50%{ transform: scale(1.03) translate(10px, -10px) rotate(1deg); }
-  100%{ transform: scale(1) translate(0,0) rotate(0deg); }
+@keyframes quantumLinesDiag {
+  0% {
+    transform: translate(0,0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(30px,-20px) scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: translate(0,0) scale(1) rotate(0deg);
+  }
 }
 
 .globalContainerWrap {

@@ -1,26 +1,49 @@
 /* kaleidoBase.css */
-/* Reset or tailwind base can be appended */
 
-html, body {
-  margin: 0; 
-  padding: 0; 
-  width: 100%; 
-  height: 100%;
-  font-family: system-ui, sans-serif;
-  background: #ffffff;
-  overflow: hidden;
+/* reset-ish */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  background: #fff;
+  color: #333;
+  overflow: hidden; /* optional */
+}
+a {
+  color: #cc0077;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
+/* header/footer example */
+.globalHeader,
+.globalFooter {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(4px);
+}
+.globalFooter p {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* main area */
 .kaleidoMain {
   position: relative;
   width: 100%;
-  height: calc(100vh - 440px); /* 360px header + ~80px footer */
-  background: #fff;
-  animation: baseGlow 10s alternate ease-in-out infinite;
+  height: calc(100vh - 160px); /* example offset for header + chat area */
+  overflow: hidden;
+  animation: subtleGlow 12s ease-in-out infinite alternate;
 }
 
-@keyframes baseGlow {
-  0% { filter: brightness(1); }
-  50%{ filter: brightness(1.04) hue-rotate(10deg); }
-  100%{ filter: brightness(1); }
+@keyframes subtleGlow {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.05); }
+  100% { filter: brightness(1); }
 }

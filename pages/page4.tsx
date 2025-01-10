@@ -1,12 +1,12 @@
 // pages/page4.tsx
-import Head from 'next/head';
+import Head from 'next/head'
 
 export default function Page4() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Page4 - Beige Radiance Field</title>
+        <title>Page4 | Beige NeRF Calm</title>
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido4.css" />
         <script src="/js/page4Logic.js" defer></script>
@@ -15,20 +15,13 @@ export default function Page4() {
       <main className="kaleidoMain">
         <canvas id="canvas4" className="canvas4"></canvas>
         <section className="frontContent4">
-          <h2>Beige Radiance Field</h2>
-          <p>
-            Leveraging{' '}
-            <a href="https://arxiv.org/abs/2003.08934" target="_blank" rel="noreferrer">
-              NeRF
-            </a>{' '}
-            concepts, we unify neural volumetric rendering with Transformer-based wave illusions. 
-            Dive into calm beige synergy.
-          </p>
+          <h2>Neural Radiance Fields (NeRF) Canvas</h2>
+          <p>Volumetric rendering meets wave illusions in a tranquil Beige realm.</p>
           <nav>
-            <a href="/page5">⇒ Page5</a>
+            <a href="/page5">Go to Page5 &raquo;</a>
           </nav>
         </section>
       </main>
     </>
-  );
+  )
 }
