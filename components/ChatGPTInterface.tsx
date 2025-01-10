@@ -17,7 +17,6 @@ export default function ChatGPTInterface(){
     setInput('');
 
     try {
-      // Fake /api/ask usage
       const res = await fetch('/api/ask',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
