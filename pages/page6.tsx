@@ -6,15 +6,17 @@ export default function Page6() {
     <>
       <Head>
         <title>Page6</title>
-        {/* 6ページ目用のCSS */}
+        {/* 1) CSSを読み込む: /css/kaleido6.css (publicディレクトリに配置) */}
         <link rel="stylesheet" href="/css/kaleido6.css" />
-        {/* 6ページ目用のJS (アニメーション等) */}
+        {/* 2) JSを読み込む: /js/page6Logic.js (publicディレクトリに配置) */}
         <script src="/js/page6Logic.js" defer />
       </Head>
       <main>
         <h1>Page6 Title</h1>
-        <p>Content from old page6.html goes here. You can include any HTML that was in page6.html.</p>
-        {/* もし page6.html に <div id="heroBanner"> などがあればここに埋め込む */}
+        <p>
+          ここに旧 <code>page6.html</code> の本体HTMLを移植してください。<br />
+          例えば <code>&lt;div id="banner"&gt;...&lt;/div&gt;</code> とかあれば入れましょう。
+        </p>
       </main>
     </>
   );
