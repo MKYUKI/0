@@ -1,23 +1,38 @@
-// pages/page6.tsx
 import Head from 'next/head';
 
 export default function Page6() {
   return (
     <>
       <Head>
-        <title>Page6</title>
-        {/* 1) CSSを読み込む: /css/kaleido6.css (publicディレクトリに配置) */}
+        <meta charSet="UTF-8" />
+        <title>【6】フィナーレ：虹色のフィルター</title>
+        <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido6.css" />
-        {/* 2) JSを読み込む: /js/page6Logic.js (publicディレクトリに配置) */}
+        {/* 6ページ目JS → public/js/page6Logic.js */}
         <script src="/js/page6Logic.js" defer />
       </Head>
-      <main>
-        <h1>Page6 Title</h1>
-        <p>
-          ここに旧 <code>page6.html</code> の本体HTMLを移植してください。<br />
-          例えば <code>&lt;div id="banner"&gt;...&lt;/div&gt;</code> とかあれば入れましょう。
-        </p>
+
+      <header className="globalHeader">
+        <h1>第6ページ：虹色シャワーのフィナーレ</h1>
+      </header>
+
+      <main className="kaleidoMain">
+        <div className="rainbowOverlay"></div>
+        <section className="frontContent6">
+          <h2>フィナーレ：虹色の祝福</h2>
+          <p>全ての存在が調和し、最高峰に到達した瞬間です。</p>
+          <nav>
+            <a href="/">最初に戻る</a>
+          </nav>
+        </section>
       </main>
+
+      <footer className="globalFooter">
+        <p>
+          <a href="/page5">← 戻る</a>
+        </p>
+        <p>©2023 Legendary Website</p>
+      </footer>
     </>
   );
 }
