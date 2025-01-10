@@ -1,47 +1,43 @@
 /* kaleido6.css */
-
-/* 虹色フィルターを重ねる */
+/* rainbow overlay finale */
 .rainbowOverlay {
   position: absolute;
   top:0; left:0;
   width:100%; height:100%;
-  background: linear-gradient(45deg,
+  background: linear-gradient(60deg,
     rgba(255,0,0,0.3) 0%,
-    rgba(255,165,0,0.3) 15%,
+    rgba(255,127,0,0.3) 15%,
     rgba(255,255,0,0.3) 30%,
     rgba(0,255,0,0.3)   45%,
     rgba(0,255,255,0.3) 60%,
     rgba(0,0,255,0.3)   75%,
     rgba(255,0,255,0.3) 90%
   );
-  background-size: 200% 200%;
-  animation: rainbowMoveNew 10s ease-in-out infinite;
+  background-size: 180% 180%;
+  animation: rainbowSweep 8s ease-in-out infinite alternate;
   mix-blend-mode: screen;
 }
 
-@keyframes rainbowMoveNew {
-  0% { background-position: 0% 50%; transform: scale(1); }
-  50%{ background-position: 100% 50%; transform: scale(1.05); }
-  100%{ background-position: 0% 50%; transform: scale(1); }
+@keyframes rainbowSweep {
+  0% { background-position: 0% 50%; transform: scale(1);}
+  100%{ background-position: 100% 50%; transform: scale(1.06);}
 }
 
-/* 前景 */
 .frontContent6 {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  background: rgba(255,255,255,0.4);
-  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(8px);
+  color:#000;
   padding: 2rem;
   text-align: center;
-  color:#000;
   border-radius:8px;
-  animation: frontContent6Final 6s ease-in-out infinite alternate;
+  animation: finalPulse 5s ease-in-out infinite alternate;
 }
-@keyframes frontContent6Final {
-  0%   { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
-  50%  { transform: translate(-50%,-55%) scale(1.1) rotate(3deg); }
-  100% { transform: translate(-50%,-50%) scale(1) rotate(0deg); }
+@keyframes finalPulse {
+  0%  { transform: translate(-50%,-50%) scale(1) rotate(0deg);}
+  100%{ transform: translate(-50%,-52%) scale(1.08) rotate(2deg);}
 }
 
 .frontContent6 h2 {

@@ -3,20 +3,22 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 
-import '../styles/globals.css';
+import '../styles/globals.css';  // Tailwind or your global resets
+import '../styles/globalQuantum.css'; // New quantum lines animation
+
 import ChatGPTInterface from '../components/ChatGPTInterface';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        {/* quantum lines CSS */}
-        <link rel="stylesheet" href="/css/globalQuantum.css" />
+        {/* meta tags, favicons, etc. */}
       </Head>
 
       {/*
-        Using Next.js <Script> with strategy="beforeInteractive"
-        ensures that THREE is loaded before quantum3D.js uses it.
+        - Using next/script to ensure Three.js and custom scripts 
+          load in correct order. 
+        - "beforeInteractive" allows quantum3D to find THREE.
       */}
       <Script src="https://unpkg.com/three@0.153.0/build/three.min.js" strategy="beforeInteractive" />
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
@@ -24,76 +26,87 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
 
       <div className="quantumGeometryBG">
-        <div className="globalContainerWrap" style={{ position: 'relative', minHeight: '100vh' }}>
-          {/* 
-            3D Torus 
-            We'll place an absolutely positioned div at top, or
-            you can keep it any style you want.
-          */}
-          <div style={{ position: 'relative', width: '100%', height: 400, overflow: 'hidden' }}>
+        <div className="globalContainerWrap" style={{ minHeight: '100vh', position: 'relative' }}>
+          
+          {/* --- TOP BLOCK: 3D Torus + waveCanvas + starCanvas --- */}
+          <header style={{ position: 'relative', height: '360px', overflow: 'hidden' }}>
+            {/* 3D Container (quantum3D.js manipulates #quantum3DContainer) */}
             <div id="quantum3DContainer" style={{ width: '100%', height: '100%' }} />
-          </div>
 
-          {/*
-            Wave & Stars Canvas as background:
-            pointerEvents: 'none' so user can still click links, etc
-          */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          >
-            <canvas id="waveCanvas" style={{ width: '100%', height: '100%' }} />
-            <canvas id="starsCanvas" style={{ width: '100%', height: '100%' }} />
-          </div>
+            {/* waveCanvas + starCanvas overlay (pointerEvents: none で操作を妨げない) */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                pointerEvents: 'none',
+              }}
+            >
+              <canvas id="waveCanvas" style={{ width: '100%', height: '100%' }} />
+              <canvas id="starsCanvas" style={{ width: '100%', height: '100%' }} />
+            </div>
 
-          {/* Navigation */}
-          <nav style={{ padding: '0.5rem', background: '#eee', textAlign: 'center', zIndex: 1 }}>
-            <a href="/">Home(Page1)</a> |{' '}
-            <a href="/page2">Page2</a> |{' '}
-            <a href="/page3">Page3</a> |{' '}
-            <a href="/page4">Page4</a> |{' '}
-            <a href="/page5">Page5</a> |{' '}
-            <a href="/page6">Page6</a>
-          </nav>
+            {/* Navigation */}
+            <nav
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                padding: '0.5rem',
+                background: 'rgba(255,255,255,0.65)',
+                textAlign: 'center',
+              }}
+            >
+              <a href="/">Page1</a> | <a href="/page2">Page2</a> | <a href="/page3">Page3</a> |{' '}
+              <a href="/page4">Page4</a> | <a href="/page5">Page5</a> | <a href="/page6">Page6</a>
+            </nav>
+          </header>
 
-          {/* Page-specific content */}
-          <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* --- MIDDLE BLOCK: Page-specific content --- */}
+          <div style={{ position: 'relative', zIndex: 2 }}>
             <Component {...pageProps} />
           </div>
 
-          {/* ChatGPT Interface at bottom */}
+          {/* --- BOTTOM BLOCK: ChatGPT + Footer --- */}
           <section
             style={{
-              padding: '1rem',
-              background: 'rgba(255,255,255,0.8)',
-              marginTop: '2rem',
-              borderTop: '1px solid #ccc',
               position: 'relative',
-              zIndex: 1,
+              background: 'rgba(255,255,255,0.85)',
+              marginTop: '2rem',
+              padding: '1rem',
             }}
           >
-            <h2 style={{ textAlign: 'center' }}>Next-Quantum ChatGPT Search (Transformer-based)</h2>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold' }}>
+              Next-Quantum ChatGPT Search (Advanced Transformer)
+            </h2>
             <ChatGPTInterface />
           </section>
 
-          {/* Footer */}
           <footer
             style={{
               padding: '1rem',
               textAlign: 'center',
-              background: 'rgba(255,255,255,0.85)',
-              position: 'relative',
-              zIndex: 1,
+              background: 'rgba(255,255,255,0.9)',
             }}
           >
-            <p>©2024 Legendary Next-Quantum Website. Built with Three.js + Transformers.</p>
+            <p>
+              ©2025 Future-Quantum | Integrated with{' '}
+              <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
+                Transformer(2017)
+              </a>
+              ,{' '}
+              <a href="https://arxiv.org/abs/2210.06423" target="_blank" rel="noreferrer">
+                Mistral
+              </a>
+              ,{' '}
+              <a href="https://arxiv.org/abs/2302.04089" target="_blank" rel="noreferrer">
+                LLaMA2
+              </a>
+              , etc. 
+            </p>
           </footer>
         </div>
       </div>

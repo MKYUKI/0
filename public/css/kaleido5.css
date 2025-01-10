@@ -1,37 +1,29 @@
 /* kaleido5.css */
-
-/* 背景 深い青 */
+/* dark cosmic background */
 body {
-  background: #001133;
+  background: #000b33;
 }
 .starCanvas {
-  position: absolute; top: 0; left:0;
-  width:100%; height:100%;
+  position: absolute; 
+  top: 0; left:0;
+  width:100%; 
+  height:100%;
 }
 
-/* 前景 */
 .frontContent5 {
   position: absolute;
   top: 50%; left:50%;
   transform: translate(-50%,-50%);
-  background: rgba(0,0,64,0.5);
+  background: rgba(0,0,64,0.3);
   backdrop-filter: blur(4px);
   color: #fff;
   padding: 2rem;
   text-align: center;
   border-radius:8px;
-  animation: frontContent5Glow 8s ease-in-out infinite alternate;
+  animation: cosmicGlow 7s ease-in-out infinite alternate;
 }
-
-@keyframes frontContent5Glow {
-  0%   { box-shadow: 0 0 10px rgba(0,64,255,0.3); }
-  50%  { box-shadow: 0 0 30px rgba(0,128,255,0.7); }
-  100% { box-shadow: 0 0 10px rgba(0,64,255,0.3); }
-}
-
-.frontContent5 h2 {
-  margin-bottom:1rem;
-}
-.frontContent5 nav a {
-  font-weight: bold;
+@keyframes cosmicGlow {
+  0%  { box-shadow: 0 0 10px rgba(0,0,128,0.4);}
+  50% { box-shadow: 0 0 25px rgba(0,0,200,0.7);}
+  100%{ box-shadow: 0 0 10px rgba(0,0,128,0.4);}
 }

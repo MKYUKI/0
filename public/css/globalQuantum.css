@@ -1,88 +1,65 @@
 /* public/css/globalQuantum.css */
-
 /* 
-  新しい量子的黒線アニメ:
-  - ランダムな角度でラインを2枚以上重ねる
-  - ゆっくり反転したり、scale(1.05)→scale(0.95)を繰り返す
-  - blend-mode: difference や lighten 等も検討
+  Updated quantum lines:
+  - Multi-layer shifting lines at random angles
+  - Pulsating scale from 0.95 to 1.05
+  - Use difference/lighten or screen modes
 */
 .quantumGeometryBG {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #ffffff; /* 背景は白 */
+  background: #ffffff;
   overflow: hidden;
 }
 
-/* 垂直方向の線を複数レイヤーで */
+/* Vertical stripes + random angle stripes */
 .quantumGeometryBG::before {
   content: "";
-  position: absolute;
+  position: absolute; 
   inset: 0;
   background: repeating-linear-gradient(
-    0deg,
-    rgba(0,0,0,0.2) 0px,
-    rgba(0,0,0,0.2) 2px,
+    12deg,
+    rgba(0,0,0,0.15) 0px,
+    rgba(0,0,0,0.15) 2px,
     transparent 2px,
-    transparent 60px
+    transparent 40px
   );
-  animation: quantumLinesNew 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation: quantumLinePulse1 10s ease-in-out infinite alternate;
   pointer-events: none;
   mix-blend-mode: difference;
-  opacity: 0.6;
 }
 
-/* 水平方向の線(アングルつき) */
 .quantumGeometryBG::after {
   content: "";
-  position: absolute;
+  position: absolute; 
   inset: 0;
   background: repeating-linear-gradient(
-    45deg,
-    rgba(0,0,0,0.15) 0px,
-    rgba(0,0,0,0.15) 3px,
+    98deg,
+    rgba(0,0,0,0.2) 0px,
+    rgba(0,0,0,0.2) 3px,
     transparent 3px,
-    transparent 50px
+    transparent 40px
   );
-  animation: quantumLines2New 14s cubic-bezier(0.65, 0, 0.35, 1) infinite reverse;
+  animation: quantumLinePulse2 12s ease-in-out infinite alternate;
   pointer-events: none;
   mix-blend-mode: lighten;
-  opacity: 0.45;
 }
 
-@keyframes quantumLinesNew {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-60px, 0) scale(1.05);
-  }
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
+@keyframes quantumLinePulse1 {
+  0% { transform: scale(0.98) translate(0,0); }
+  50%{ transform: scale(1.05) translate(-20px, 10px); }
+  100%{ transform: scale(0.98) translate(0,0); }
 }
 
-@keyframes quantumLines2New {
-  0% {
-    transform: translate(0,0) scale(1) rotate(0deg);
-  }
-  25% {
-    transform: translate(20px, -20px) scale(0.98) rotate(2deg);
-  }
-  50% {
-    transform: translate(-40px, 10px) scale(1.02) rotate(-2deg);
-  }
-  75% {
-    transform: translate(10px, 0) scale(0.98) rotate(2deg);
-  }
-  100% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
-  }
+@keyframes quantumLinePulse2 {
+  0% { transform: scale(1) translate(0,0) rotate(0deg); }
+  50%{ transform: scale(1.03) translate(10px, -10px) rotate(1deg); }
+  100%{ transform: scale(1) translate(0,0) rotate(0deg); }
 }
 
 .globalContainerWrap {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  /* optional: background: rgba(255,255,255,0.85); */
 }
