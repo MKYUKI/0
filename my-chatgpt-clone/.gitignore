@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -40,13 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-=======
-# ---- .gitignore ----
-node_modules
-dist
-.next
-pnpm-lock.yaml
-.env
-Dockerfile
-docker-compose.yml
->>>>>>> 290fc3de1c5c7661a22360224c5d8f014fed34a4

@@ -1,0 +1,5 @@
+
+> x-clone@1.0.0 build /Users/masaki/Desktop/0
+> next build "#" "=" "build," "no" "error"
+
+ ELIFECYCLE  Command failed with exit code 1.
