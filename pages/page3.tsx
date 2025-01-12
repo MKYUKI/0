@@ -1,63 +1,104 @@
 // pages/page3.tsx
-import Head from 'next/head';
-import React from 'react';
-import GlobalLayout from '../layout/GlobalLayout';
-import ChatGPTInterface from '../components/ChatGPTInterface';
+import React from 'react'
+import Head from 'next/head'
+import '../public/css/kaleido3.css'
 
-// 3ページ目の個別CSS
-import '../public/css/kaleido3.css';
+// 例: 著作権表記ドロップダウン
+import ReferencesDropdown from '../components/ReferencesDropdown'
 
 export default function Page3() {
   return (
-    <GlobalLayout>
+    <>
       <Head>
         <meta charSet="UTF-8"/>
-        <title>Page3 | Cutting-Edge Tech & Resume</title>
+        <title>Page3 | Purple Lightning & SparseMoE</title>
         <link rel="stylesheet" href="/css/kaleido3.css"/>
       </Head>
 
-      <section className="kaleidoMain3">
-        <h2>Cutting-edge Papers & Tech References</h2>
-        <p>
-          Behold the apex of civilization with sparse gating, MoE, and 
-          attention-based breakthroughs at your fingertips.
-        </p>
+      <main className="kaleidoMain">
+        <div className="svgWrap3">
+          {/* 幾何学SVG or Canvas */}
+          <svg className="kaleido3Svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="grad3" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stopColor="#cc00ff"/>
+                <stop offset="100%" stopColor="#550066"/>
+              </radialGradient>
+            </defs>
+            <rect
+              x="40" y="40" width="120" height="120"
+              fill="url(#grad3)"
+              className="rectSpin1"
+            />
+            <circle
+              cx="100" cy="100" r="35"
+              fill="none" stroke="#fff" strokeWidth="2"
+              className="circleSpark"
+            />
+          </svg>
+        </div>
 
-        <ul className="paper-list">
-          <li>
-            Vaswani et al. (2017). "Attention Is All You Need."
-            <br />
-            <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
-              arXiv:1706.03762
-            </a>
-          </li>
-          <li>
-            Brown et al. (2020). "Language Models are Few-Shot Learners."
-            <br />
-            <a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noreferrer">
-              arXiv:2005.14165
-            </a>
-          </li>
-          <li>
-            (その他の世界最先端論文を多数追記)
-          </li>
-        </ul>
+        <section className="frontContent3">
+          <h2>Purple Lightning: Sparse Gated MoE</h2>
+          <p>
+            Page3: Harnessing
+            <a href="https://arxiv.org/abs/1701.06538" target="_blank" rel="noreferrer">Sparse Gated MoE</a>
+            for massive parallelization...
+          </p>
 
-        <h3>Resume & Career Documents</h3>
-        <p>
-          <a href="/docs/MasakiKusaka_Resume.docx" download>Download Resume (Word)</a> |{' '}
-          <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>
-        </p>
-        <p>
-          <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Download CareerHistory (Word)</a> |{' '}
-          <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>CareerHistory (PDF)</a>
-        </p>
-      </section>
+          {/* 履歴書ダウンロード */}
+          <div className="resume-section">
+            <h3>Download My Resume & Career History</h3>
+            <p>
+              <a href="/docs/MasakiKusaka_Resume.docx" download>
+                Resume (Word)
+              </a>
+               | 
+              <a href="/docs/MasakiKusaka_Resume.pdf" download>
+                Resume (PDF)
+              </a>
+            </p>
+            <p>
+              <a href="/docs/MasakiKusaka_CareerHistory.docx" download>
+                CareerHistory (Word)
+              </a>
+               | 
+              <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>
+                CareerHistory (PDF)
+              </a>
+            </p>
+          </div>
 
-      {/* 下部チャットUI */}
-      <div style={{ marginTop: '2rem', padding: '1rem' }}>
-        <ChatGPTInterface />
-      </div>
-    </GlobalLayout>
-  );
+          {/* 最先端技術論文例 */}
+          <div className="cutting-edge-papers">
+            <h3>Cutting-edge Papers</h3>
+            <ul>
+              <li>
+                <strong>AlphaFold</strong> 
+                <br />
+                <a href="https://www.nature.com/articles/s41586-021-03819-2" target="_blank" rel="noreferrer">
+                  Nature (2021)
+                </a>
+              </li>
+              <li>
+                <strong>S4 (State Space)</strong>
+                <br />
+                <a href="https://arxiv.org/abs/2111.00396" target="_blank" rel="noreferrer">
+                  arXiv:2111.00396
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div style={{ marginTop: '2rem' }}>
+            <ReferencesDropdown />
+          </div>
+
+          <nav style={{ marginTop: '2rem' }}>
+            <a href="/page4">⇒ Page4</a>
+          </nav>
+        </section>
+      </main>
+    </>
+  )
 }

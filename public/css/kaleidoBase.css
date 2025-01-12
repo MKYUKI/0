@@ -1,122 +1,31 @@
-/* kaleidoBase.css */
+/* public/css/kaleidoBase.css */
 
-/* 3D・星・波Canvasの共通スタイル */
-.bg-canvas-layer {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* global layout container */
-.root-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Base button style */
 .base-button {
-  padding: 8px 16px;
   background: #565869;
-  border: 1px solid #8e8e8e;
+  color: #fff;
+  padding: 8px 16px;
+  border: 1px solid #888;
   border-radius: 4px;
   cursor: pointer;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
 }
-
 .base-button:hover {
   background: #6a6b7d;
 }
 
-/* Chat Container (generic style override) */
-.chat-container {
+.three-d-container {
   position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  margin: 0 auto;
-  height: 70vh; /* 例: 70%の高さ確保 */
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
-/* Chat messages window */
-.messages-window {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-}
-
-/* Input area */
-.input-container {
-  display: flex;
-  background: #f0f0f0;
-  padding: 0.5rem;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-  border-top: 1px solid #ccc;
-}
-
-.input-container textarea {
-  flex: 1;
-  resize: none;
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 4px;
-  font-family: 'Arial', sans-serif;
-  outline: none;
-  box-sizing: border-box;
-}
-
-.input-container button {
-  margin-left: 8px;
-  background-color: #10a37f;
+.attention-popup {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  background: rgba(0,0,0,0.8);
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0 16px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.input-container button:hover {
-  background-color: #0e8d73;
-}
-
-.input-container button:disabled {
-  background-color: #999;
-  cursor: not-allowed;
-}
-
-/* Message bubble styles */
-.message-bubble {
-  max-width: 75%;
-  margin: 8px 0;
-  padding: 12px 16px;
+  padding: 1rem;
   border-radius: 8px;
-  line-height: 1.4;
-  word-wrap: break-word;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
-}
-
-.message-bubble.user {
-  align-self: flex-end;
-  background-color: #2b6feb;
-  box-shadow: 0 2px 5px rgba(43, 111, 235, 0.3);
-}
-
-.message-bubble.assistant {
-  align-self: flex-start;
-  background-color: #40414f;
-  box-shadow: 0 2px 5px rgba(64, 65, 79, 0.3);
-}
-
-.message-bubble.system {
-  align-self: center;
-  background-color: #333333;
-  font-style: italic;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }

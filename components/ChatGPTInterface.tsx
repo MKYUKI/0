@@ -1,91 +1,90 @@
 // components/ChatGPTInterface.tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 
-// メッセージの吹き出しコンポーネント
-function MessageBubble({ role, content }: { role: 'user' | 'assistant' | 'system'; content: string }) {
+// 吹き出しコンポーネント
+function MessageBubble({
+  role, 
+  content 
+}: { role: 'user' | 'assistant' | 'system'; content: string }) {
   return (
     <div className={`message-bubble ${role}`}>
-      <div className="bubble-content">
-        {content}
-      </div>
+      <div className="bubble-content">{content}</div>
     </div>
-  );
+  )
 }
 
 export default function ChatGPTInterface() {
-  // 全メッセージを管理するステート
-  const [messages, setMessages] = useState<{ role: 'user' | 'assistant' | 'system'; content: string }[]>([]);
-  // ユーザーの入力
-  const [userInput, setUserInput] = useState('');
-  // API呼び出し中フラグ
-  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<
+    { role: 'user' | 'assistant' | 'system'; content: string }[]
+  >([])
+  const [userInput, setUserInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  // スクロール制御に使うRef
-  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
-  // ユーザーが送信ボタンを押した際の処理
+  // 送信処理
   const handleSend = async () => {
-    if (!userInput.trim()) return;
-    const newUserMessage = { role: 'user', content: userInput };
-    setMessages((prev) => [...prev, newUserMessage]);
-    setUserInput('');
-    setIsLoading(true);
+    if (!userInput.trim()) return
+    const newUserMessage = { role: 'user' as const, content: userInput }
 
-    // ---- GPTモデル推論リクエスト例 ----
+    setMessages(prev => [...prev, newUserMessage])
+    setUserInput('')
+    setIsLoading(true)
+
     try {
+      // GPT-4.0推論例
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'gpt-4', // GPT-4.0を利用（APIキーが対応している場合）
-          messages: [...messages, newUserMessage],
-          // ここに自前Attentionや独自トークナイザなどを利用する場合のパラメータを追加可能
+          model: 'gpt-4',
+          messages: [...messages, newUserMessage]
         }),
-      });
-      const data = await response.json();
-      const text = data.choices?.[0]?.message?.content ?? '';
+      })
+      const data = await response.json()
+      const text = data.choices?.[0]?.message?.content ?? ''
 
       // 文字送り演出
-      let buffer = '';
-      let idx = 0;
-
-      const typeInterval = setInterval(() => {
-        if (idx < text.length) {
-          buffer += text.charAt(idx);
-          idx++;
-          setMessages((prev) => {
-            // すでに末尾がassistantなら上書き
-            const last = prev[prev.length - 1];
-            if (last && last.role === 'assistant') {
+      let buffer = ''
+      let i = 0
+      const intervalID = setInterval(() => {
+        if (i < text.length) {
+          buffer += text.charAt(i++)
+          setMessages(prev => {
+            const lastMsg = prev[prev.length - 1]
+            if (lastMsg && lastMsg.role === 'assistant') {
               return [
                 ...prev.slice(0, -1),
-                { role: 'assistant', content: buffer },
-              ];
+                { role: 'assistant', content: buffer }
+              ]
             } else {
-              return [...prev, { role: 'assistant', content: buffer }];
+              return [
+                ...prev,
+                { role: 'assistant', content: buffer }
+              ]
             }
-          });
+          })
         } else {
-          clearInterval(typeInterval);
-          setIsLoading(false);
+          clearInterval(intervalID)
+          setIsLoading(false)
         }
-      }, 20); // 打鍵速度(ミリ秒)
+      }, 20)
     } catch (err) {
-      console.error(err);
-      setIsLoading(false);
+      console.error(err)
+      setIsLoading(false)
     }
-  };
+  }
 
-  // メッセージ末尾へ自動スクロール
+  // メッセージ末尾へスクロール
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   return (
     <div className="chat-container">
       <div className="messages-window">
-        {messages.map((msg, i) => (
-          <MessageBubble key={i} role={msg.role} content={msg.content} />
+        {messages.map((m, i) => (
+          <MessageBubble key={i} role={m.role} content={m.content} />
         ))}
         <div ref={messagesEndRef} />
       </div>
@@ -94,7 +93,7 @@ export default function ChatGPTInterface() {
         <textarea
           placeholder="Type your message..."
           value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
+          onChange={e => setUserInput(e.target.value)}
           disabled={isLoading}
         />
         <button onClick={handleSend} disabled={isLoading || !userInput.trim()}>
@@ -102,5 +101,5 @@ export default function ChatGPTInterface() {
         </button>
       </div>
     </div>
-  );
+  )
 }
