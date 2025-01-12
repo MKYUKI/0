@@ -5,9 +5,9 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" />
-        <title>Page1 | Quantum-Transformer Home</title>
-        {/* kaleidoBase + kaleido1: 最新版 */}
+        <meta charSet="UTF-8"/>
+        <title>Page1 | Quantum-Apex Home</title>
+        {/* 大幅刷新した kaleidoBase & kaleido1 */}
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido1.css" />
       </Head>
@@ -15,20 +15,30 @@ export default function HomePage() {
       <main className="kaleidoMain">
         <div className="svgWrap1">
           <svg
-            viewBox="0 0 200 200"
             className="kaleido1Svg"
+            viewBox="0 0 220 220"
             preserveAspectRatio="xMidYMid slice"
           >
             <defs>
               <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#ffaaff" />
-                <stop offset="100%" stopColor="#ff66dd" />
+                <stop offset="0%" stopColor="#ff99ff" />
+                <stop offset="100%" stopColor="#ff33cc" />
               </radialGradient>
             </defs>
-            <circle cx="100" cy="100" r="80" fill="url(#grad1)" className="circleSpin1" />
-            <circle cx="100" cy="100" r="50" fill="none" stroke="#ff33cc" strokeWidth="4" className="circleSpin2" />
+            <circle
+              cx="110" cy="110" r="80"
+              fill="url(#grad1)"
+              className="circleSpin1"
+            />
+            <circle
+              cx="110" cy="110" r="50"
+              fill="none"
+              stroke="#ffccff"
+              strokeWidth="4"
+              className="circleSpin2"
+            />
             <path
-              d="M100,20 L140,60 L100,100 L60,60 Z"
+              d="M110,20 L150,60 L110,100 L70,60 Z"
               fill="#fff"
               fillOpacity="0.5"
               className="pathSpin1"
@@ -37,16 +47,14 @@ export default function HomePage() {
         </div>
 
         <section className="frontContent1">
-          <h2>Quantum-Transformer Platform</h2>
+          <h2>Quantum Apex — Transformer Evolution</h2>
           <p>
-            Page1: Integrating multi-head self-attention with quantum-inspired
-            fractal geometry. (参考: 
-            <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
-              Transformers
-            </a>)
+            Page1: Pioneering multi-head self-attention with fractal illusions 
+            (<a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">Attention Is All You Need</a>)
+            to shape the next era.
           </p>
           <nav>
-            <a href="/page2">Go to Page2 &raquo;</a>
+            <a href="/page2">⇒ Go to Page2</a>
           </nav>
         </section>
       </main>

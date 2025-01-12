@@ -1,65 +1,56 @@
 /* public/css/globalQuantum.css */
 /*
-  最新論文風の量子的黒線:
-  - ランダム角度, scaling, color shifting
-  - 参考: "Quantum Neural Networks" (arXiv:2205.xxxxx), など
+  全画面に量子的黒線を敷き詰める最先端アニメ
+  (参考: "Quantum Neural Networks" arXiv:2205.xxxxx など)
 */
 
 .quantumGeometryBG {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #ffffff;
+  background: #fff;
   overflow: hidden;
 }
 
-/* ランダム斜め線 */
+/* ランダム線(45deg, 125deg) */
 .quantumGeometryBG::before {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    63deg,
-    rgba(0,0,0,0.2) 0px,
-    rgba(0,0,0,0.2) 2px,
+    45deg,
+    rgba(0,0,0,0.25) 0px,
+    rgba(0,0,0,0.25) 2px,
     transparent 2px,
     transparent 80px
   );
-  animation: quantumLinesNew 10s ease-in-out infinite alternate;
+  animation: quantumLines1 10s ease-in-out infinite alternate;
   opacity: 0.5;
   pointer-events: none;
 }
-
-/* 逆方向線 */
 .quantumGeometryBG::after {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    123deg,
-    rgba(0,0,0,0.15) 0px,
-    rgba(0,0,0,0.15) 2px,
+    125deg,
+    rgba(0,0,0,0.2) 0px,
+    rgba(0,0,0,0.2) 2px,
     transparent 2px,
-    transparent 80px
+    transparent 60px
   );
-  animation: quantumLines2New 12s cubic-bezier(0.7,0,0.3,1) infinite alternate;
+  animation: quantumLines2 12s cubic-bezier(0.7,0,0.3,1) infinite alternate;
   opacity: 0.4;
   pointer-events: none;
 }
 
-@keyframes quantumLinesNew {
+@keyframes quantumLines1 {
   0% { transform: scale(1) translate(0,0); }
-  50%{ transform: scale(1.02) translate(-20px, 10px); }
+  50%{ transform: scale(1.03) translate(-30px, 10px); }
   100%{ transform: scale(1) translate(0,0); }
 }
-@keyframes quantumLines2New {
+@keyframes quantumLines2 {
   0% { transform: scale(1) translate(0,0); }
-  50%{ transform: scale(1.03) translate(30px, -15px); }
+  50%{ transform: scale(0.98) translate(20px, -20px); }
   100%{ transform: scale(1) translate(0,0); }
-}
-
-.globalContainerWrap {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
 }
