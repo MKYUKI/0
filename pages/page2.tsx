@@ -1,35 +1,31 @@
 // pages/page2.tsx
 import React from 'react'
 import Head from 'next/head'
-import '../public/css/kaleido2.css' // 2ページ目専用にしたい場合
+
+// 2ページ目専用CSS
+import '../public/css/kaleido2.css'
 
 export default function Page2() {
   return (
     <>
       <Head>
-        <title>Page2 | GPT Search-like Interface</title>
-        <meta
-          name="description"
-          content="GPT-4.0 chat UI with a white background and quantum black lines"
-        />
+        <meta charSet="UTF-8"/>
+        <title>Page2 | GPT Search-like UI</title>
         <link rel="stylesheet" href="/css/kaleido2.css" />
       </Head>
 
       <main className="kaleidoMain2">
-        <h1 style={{ textAlign: 'center' }}>
-          Page2: Next-Level GPT Search UI
-        </h1>
-
-        <p style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          This page simulates a <strong>ChatGPT Search-like</strong> interface
-          with a white background and quantum black lines dancing in the back.
+        <h1>ChatGPT Search-Like Interface</h1>
+        <p>
+          Enjoy the unstoppable unstoppable synergy with a 
+          <strong> ChatGPT style search bar</strong> on a white background, 
+          black quantum lines, and advanced synergy.
         </p>
 
-        {/* 
-          もし下部にチャットを入れたいなら 
-          <ChatGPTInterface /> 
-          ただしフッターにすでにChatUIがあるなら不要かも
-        */}
+        <div className="search-bar">
+          <input type="text" placeholder="Search unstoppable code..." />
+          <button>Search</button>
+        </div>
       </main>
     </>
   )
