@@ -1,27 +1,37 @@
 /* public/css/kaleidoBase.css */
-/* 
-   Common swirling background for each page,
-   plus subtle hue-rotate
-*/
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+/* 共通のボタンスタイル */
+.base-button {
+  padding: 8px 16px;
+  background: #565869;
+  border: 1px solid #8e8e8e;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
 }
-body {
-  font-family: sans-serif;
-  background: #fff;
-  color: #333;
+
+.base-button:hover {
+  background: #6a6b7d;
 }
-.kaleidoMain {
+
+/* 3Dの要素を配置する際に使用する汎用クラス */
+.three-d-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - 140px);
-  overflow: hidden;
-  animation: subtleGlow 10s linear infinite alternate;
+  height: 100%;
 }
-@keyframes subtleGlow {
-  0%   { filter: hue-rotate(0deg) brightness(1); }
-  50%  { filter: hue-rotate(30deg) brightness(1.05); }
-  100% { filter: hue-rotate(0deg) brightness(1); }
+
+/* Attention Transformer 説明ポップアップ用(サンプル) */
+.attention-popup {
+  position: absolute;
+  bottom: 120px;
+  right: 20px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  width: 240px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }

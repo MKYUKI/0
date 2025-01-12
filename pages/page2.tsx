@@ -1,53 +1,61 @@
 // pages/page2.tsx
-import Head from 'next/head'
+import React, { useEffect } from 'react';
+import Head from 'next/head';
+import ChatGPTInterface from '../components/ChatGPTInterface';
+
+// グローバルCSSなどをインポート
+import '../public/css/globalQuantum.css';
+import '../public/css/kaleidoBase.css';
+import '../public/css/kaleido1.css';
 
 export default function Page2() {
+  // マウント時に 3D アニメーションなど読み込み
+  useEffect(() => {
+    import('../public/js/quantum3D.js');
+    import('../public/js/starsAnim.js');
+    import('../public/js/waveAnim.js');
+  }, []);
+
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" />
-        <title>Page2 | AquaFlow + MoE</title>
-        <link rel="stylesheet" href="/css/kaleidoBase.css" />
-        <link rel="stylesheet" href="/css/kaleido2.css" />
+        <title>Page2 | GPT Search-like Interface</title>
+        <meta 
+          name="description" 
+          content="GPT-4.0 chat UI with a white background and quantum black lines" 
+        />
       </Head>
 
-      <main className="kaleidoMain">
-        <div className="svgWrap2">
-          <svg
-            className="kaleido2Svg"
-            viewBox="0 0 200 200"
-            preserveAspectRatio="xMidYMid slice"
-          >
-            <defs>
-              <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#aaffff" />
-                <stop offset="100%" stopColor="#33eeff" />
-              </radialGradient>
-            </defs>
-            <circle cx="100" cy="100" r="70" fill="url(#grad2)" className="circSpinA" />
-            <circle cx="100" cy="100" r="45" fill="none" stroke="#33bbcc" strokeWidth="3" className="circSpinB" />
-            <path
-              d="M70,130 Q100,100 130,130 T70,130"
-              fill="#ddffff"
-              fillOpacity="0.4"
-              className="pathSpin2"
-            />
-          </svg>
-        </div>
+      <div className="root-container">
+        {/* 背景 3 層のキャンバス */}
+        <canvas id="bg-canvas" className="bg-canvas-layer"></canvas>
+        <canvas id="stars-canvas" className="bg-canvas-layer"></canvas>
+        <canvas id="wave-canvas" className="bg-canvas-layer"></canvas>
 
-        <section className="frontContent2">
-          <h2>AquaFlow + MoE</h2>
-          <p>
-            Achieving fluid transformations via Mixture-of-Experts. 
-            (<a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noreferrer">
-              arXiv:2005.14165
-            </a>)
-          </p>
-          <nav>
-            <a href="/page3">Next: Page3 &raquo;</a>
-          </nav>
-        </section>
-      </main>
+        <main style={{ position: 'relative', zIndex: 10, minHeight: '100vh' }}>
+          <h1 
+            style={{
+              textAlign: 'center',
+              margin: '1rem 0',
+              fontSize: '1.8rem',
+              color: '#000'
+            }}
+          >
+            Page2: Next-Level GPT Search UI
+          </h1>
+
+          {/* 検索 UI or チャット UI */}
+          <section style={{ maxWidth: '900px', margin: '0 auto' }}>
+            <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#333' }}>
+              This page simulates a <strong>ChatGPT Search-like</strong> interface
+              with a white background and quantum black lines dancing in the back.
+            </p>
+
+            {/* ChatGPT 風チャットコンポーネント */}
+            <ChatGPTInterface />
+          </section>
+        </main>
+      </div>
     </>
-  )
+  );
 }

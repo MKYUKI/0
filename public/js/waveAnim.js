@@ -1,27 +1,48 @@
 // public/js/waveAnim.js
-(() => {
-  const canvas = document.getElementById('waveCanvas')
-  if (!canvas) return
+(function() {
+  const canvasId = 'wave-canvas';
 
-  const ctx = canvas.getContext('2d')
-  let startTime = performance.now()
+  function initWave() {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
 
-  function animate() {
-    requestAnimationFrame(animate)
-    const dt = performance.now() - startTime
-    const waveOffset = 20 * Math.sin(dt * 0.001)
+    let w, h;
+    let waveOffset = 0;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = 'rgba(100, 200, 255, 0.25)'
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+    }
 
-    ctx.beginPath()
-    ctx.rect(0, canvas.height / 2 + waveOffset, canvas.width, 80)
-    ctx.fill()
+    function drawWave() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.beginPath();
+      const amplitude = 30; // 波の高さ
+      const wavelength = 0.02; // 波長
+      const speed = 0.02; // 進行速度
+
+      for (let x = 0; x < w; x++) {
+        const y = Math.sin(x * wavelength + waveOffset) * amplitude + h / 2;
+        ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = 'rgba(0,0,0,0.2)'; // 薄い黒い波
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      waveOffset += speed;
+      requestAnimationFrame(drawWave);
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('load', () => {
+      resize();
+      drawWave();
+    });
   }
-  animate()
 
-  window.addEventListener('resize', () => {
-    canvas.width = canvas.clientWidth
-    canvas.height = canvas.clientHeight
-  })
-})()
+  window.addEventListener('load', initWave);
+})();

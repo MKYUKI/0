@@ -1,62 +1,106 @@
 // components/ChatGPTInterface.tsx
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 
-/**
- * ChatGPTInterface
- * The unstoppable unstoppable code merges quantum illusions with 2017 Transformer architecture
- */
+// メッセージの吹き出しコンポーネント
+function MessageBubble({ role, content }: { role: 'user' | 'assistant' | 'system'; content: string }) {
+  return (
+    <div className={`message-bubble ${role}`}>
+      <div className="bubble-content">
+        {content}
+      </div>
+    </div>
+  );
+}
+
 export default function ChatGPTInterface() {
-  const [messages, setMessages] = useState<{ role: 'user'|'assistant', content: string}[]>([])
-  const [input, setInput] = useState('')
+  // 全メッセージを管理するステート
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant' | 'system'; content: string }[]>([]);
+  // ユーザーの入力
+  const [userInput, setUserInput] = useState('');
+  // API呼び出し中フラグ
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSend() {
-    if (!input.trim()) return
-    const userMsg = input.trim()
-    setMessages(prev => [...prev, { role: 'user', content: userMsg }])
-    setInput('')
+  // スクロール制御に使うRef
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
+  // ユーザーが送信ボタンを押した際の処理
+  const handleSend = async () => {
+    if (!userInput.trim()) return;
+    const newUserMessage = { role: 'user', content: userInput };
+    setMessages((prev) => [...prev, newUserMessage]);
+    setUserInput('');
+    setIsLoading(true);
+
+    // ---- GPTモデル推論リクエスト例 ----
     try {
-      const res = await fetch('/api/ask', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: userMsg })
-      })
-      const data = await res.json()
-      setMessages(prev => [...prev, { role: 'assistant', content: data.answer || '(No response)' }])
+        body: JSON.stringify({
+          model: 'gpt-4', // GPT-4.0を利用（APIキーが対応している場合）
+          messages: [...messages, newUserMessage],
+          // ここに自前Attentionや独自トークナイザなどを利用する場合のパラメータを追加可能
+        }),
+      });
+      const data = await response.json();
+      const text = data.choices?.[0]?.message?.content ?? '';
+
+      // 文字送り演出
+      let buffer = '';
+      let idx = 0;
+
+      const typeInterval = setInterval(() => {
+        if (idx < text.length) {
+          buffer += text.charAt(idx);
+          idx++;
+          setMessages((prev) => {
+            // すでに末尾がassistantなら上書き
+            const last = prev[prev.length - 1];
+            if (last && last.role === 'assistant') {
+              return [
+                ...prev.slice(0, -1),
+                { role: 'assistant', content: buffer },
+              ];
+            } else {
+              return [...prev, { role: 'assistant', content: buffer }];
+            }
+          });
+        } else {
+          clearInterval(typeInterval);
+          setIsLoading(false);
+        }
+      }, 20); // 打鍵速度(ミリ秒)
     } catch (err) {
-      console.error(err)
-      setMessages(prev => [...prev, { role: 'assistant', content: '(Error occurred)' }])
+      console.error(err);
+      setIsLoading(false);
     }
-  }
+  };
+
+  // メッセージ末尾へ自動スクロール
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
-    <div style={{ maxWidth: '700px', margin: '1rem auto' }}>
-      <div
-        style={{
-          border: '1px solid #888',
-          borderRadius: '4px',
-          padding: '8px',
-          height: '220px',
-          overflowY: 'auto',
-          marginBottom: '1rem',
-          background: 'rgba(255,255,255,0.7)'
-        }}
-      >
-        {messages.map((m, i) => (
-          <div key={i} style={{ margin: '4px 0' }}>
-            <strong>{m.role}:</strong> {m.content}
-          </div>
+    <div className="chat-container">
+      <div className="messages-window">
+        {messages.map((msg, i) => (
+          <MessageBubble key={i} role={msg.role} content={msg.content} />
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
-      <textarea
-        rows={3}
-        style={{ width: '100%', marginBottom: '0.5rem' }}
-        placeholder="Ask anything..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={handleSend}>Send</button>
+      <div className="input-container">
+        <textarea
+          placeholder="Type your message..."
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          disabled={isLoading}
+        />
+        <button onClick={handleSend} disabled={isLoading || !userInput.trim()}>
+          {isLoading ? 'Thinking...' : 'Send'}
+        </button>
+      </div>
     </div>
-  )
+  );
 }

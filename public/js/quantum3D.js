@@ -1,52 +1,63 @@
 // public/js/quantum3D.js
-(() => {
-  const container = document.getElementById('quantum3DContainer')
-  if (!container) return
+// 参考: three.js docs https://threejs.org/docs/
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true })
-  renderer.setSize(container.clientWidth, container.clientHeight)
-  container.appendChild(renderer.domElement)
+import * as THREE from 'three';
 
-  const scene = new THREE.Scene()
-  scene.background = new THREE.Color(0xffffff)
+function initQuantum3D() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
 
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+
+  const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
-    45,
-    container.clientWidth / container.clientHeight,
+    50,
+    window.innerWidth / window.innerHeight,
     0.1,
-    2000
-  )
-  camera.position.set(0, 0, 60)
-  scene.add(camera)
+    1000
+  );
+  camera.position.z = 20;
 
-  const ambient = new THREE.AmbientLight(0xffffff, 1)
-  scene.add(ambient)
+  // 幾何学的なラインが揺れるようにする
+  const lineMaterial = new THREE.LineBasicMaterial({
+    color: 0x000000, // 黒いライン
+    transparent: true,
+    opacity: 0.5,
+  });
 
-  const geometry = new THREE.TorusKnotGeometry(10, 3, 144, 24)
-  const material = new THREE.MeshPhongMaterial({
-    color: 0xaa00ff,
-    emissive: 0x220022,
-    shininess: 120,
-    wireframe: false,
-  })
-  const knot = new THREE.Mesh(geometry, material)
-  scene.add(knot)
-
-  let startTime = performance.now()
-  function animate() {
-    requestAnimationFrame(animate)
-    const dt = performance.now() - startTime
-    const t = dt * 0.0003
-    knot.rotation.x = t * 0.7
-    knot.rotation.y = t * 0.6
-    knot.rotation.z = t * 0.2
-    renderer.render(scene, camera)
+  // ランダムに頂点を配置
+  const geometry = new THREE.BufferGeometry();
+  const positions = [];
+  for (let i = 0; i < 500; i++) {
+    positions.push(
+      (Math.random() - 0.5) * 50,
+      (Math.random() - 0.5) * 50,
+      (Math.random() - 0.5) * 50
+    );
   }
-  animate()
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
 
-  window.addEventListener('resize', () => {
-    renderer.setSize(container.clientWidth, container.clientHeight)
-    camera.aspect = container.clientWidth / container.clientHeight
-    camera.updateProjectionMatrix()
-  })
-})()
+  const line = new THREE.LineLoop(geometry, lineMaterial);
+  scene.add(line);
+
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    // ラインを回転させて揺らめくように見せる
+    line.rotation.x += 0.0005;
+    line.rotation.y += 0.001;
+    renderer.render(scene, camera);
+  }
+
+  window.addEventListener('resize', onWindowResize, false);
+  onWindowResize();
+  animate();
+}
+
+window.addEventListener('load', initQuantum3D);
