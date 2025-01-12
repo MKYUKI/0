@@ -2,9 +2,9 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
-
-// This is your Tailwind or basic reset
-import '../styles/globals.css'
+import '../styles/globals.css'   // e.g., Tailwind or basic reset
+// IMPORTANT: remove direct import of globalQuantum.css from here!
+// We'll load it via <link> below
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
@@ -12,45 +12,35 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        {/* LOAD globalQuantum.css FROM public/css/ */}
+        {/* Load globalQuantum.css from /public/css/ */}
         <link rel="stylesheet" href="/css/globalQuantum.css" />
       </Head>
 
-      {/* Three.js + quantum3D.js + waveAnim + starsAnim => load in <Script> */}
-      <Script
-        src="https://unpkg.com/three@0.153.0/build/three.min.js"
-        strategy="beforeInteractive"
-      />
+      {/* Preload advanced 3D + wave + star scripts */}
+      <Script src="https://unpkg.com/three@0.153.0/build/three.min.js" strategy="beforeInteractive" />
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
 
-      {/* Outer container with quantum BG */}
       <div className="quantumGeometryBG" style={{ position: 'relative', minHeight: '100vh' }}>
-        {/* Fullscreen 3D BG + wave + stars */}
+        {/* Fullscreen 3D + wave + stars */}
         <div
           style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
+            top: 0, left: 0,
+            width: '100%', height: '100%',
             zIndex: 0,
             overflow: 'hidden',
           }}
         >
-          {/* Three.js 3D container */}
           <div
             id="quantum3DContainer"
             style={{
               position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
+              top: 0, left: 0,
+              width: '100%', height: '100%',
             }}
           />
-          {/* wave & stars canvases */}
           <canvas
             id="waveCanvas"
             style={{
@@ -69,16 +59,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           />
         </div>
 
-        {/* Main content (relative) */}
+        {/* Page content above the animations */}
         <div
           style={{
             position: 'relative',
             zIndex: 1,
-            minHeight: 'calc(100vh - 250px)',
-            padding: '0.5rem',
+            minHeight: 'calc(100vh - 300px)',
+            padding: '1rem',
           }}
         >
-          {/* Simple nav bar */}
+          {/* Simple nav */}
           <nav
             style={{
               background: 'rgba(255,255,255,0.85)',
@@ -95,11 +85,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <a href="/page6">Page6</a>
           </nav>
 
-          {/* Render page */}
+          {/* Render the actual page */}
           <Component {...pageProps} />
         </div>
 
-        {/* Footer with ChatGPT */}
+        {/* ChatGPT footer */}
         <footer
           style={{
             position: 'relative',
@@ -109,10 +99,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             borderTop: '1px solid #ccc',
           }}
         >
-          <h2 style={{ textAlign: 'center' }}>Next-Quantum ChatGPT (Transformer-based)</h2>
+          <h2 style={{ textAlign: 'center' }}>
+            Next-Quantum ChatGPT (Transformer-based)
+          </h2>
           <ChatGPTInterface />
           <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-            ©2025 Quantum Apex. Built with Three.js, Transformers, MoE, Diffusion.
+            ©2025 Quantum Apex. Built with Three.js, Transformers, MoE, Diffusion. <br />
+            (Self-evolving unstoppable unstoppable code.)
           </p>
         </footer>
       </div>

@@ -7,7 +7,7 @@ export default function HomePage() {
       <Head>
         <meta charSet="UTF-8" />
         <title>Page1 | Quantum-Transformer Home</title>
-        {/* kaleidoBase + kaleido1 => swirl */}
+        {/* load kaleidoBase + kaleido1 from /public/css/ */}
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido1.css" />
       </Head>
@@ -54,9 +54,9 @@ export default function HomePage() {
         <section className="frontContent1">
           <h1>MasakiKusaka 日下真旗: Portfolio + Resume</h1>
           <p style={{ marginBottom: '1rem' }}>
-            This site merges fractal illusions with multi-head self-attention,
-            culminating in a historically apex civilization platform. 
-            Enjoy unstoppable unstoppable code. 
+            This unstoppable unstoppable code merges fractal illusions with 
+            multi-head self-attention, culminating in a historical apex 
+            of civilization. 
           </p>
 
           {/* Download links */}
@@ -68,14 +68,14 @@ export default function HomePage() {
                 download
                 style={{ color: '#d00855', marginRight: '1rem' }}
               >
-                Download Resume (Word)
+                Resume (Word)
               </a>
               <a
                 href="/docs/MasakiKusaka_Resume.pdf"
                 download
                 style={{ color: '#bc03b5' }}
               >
-                Download Resume (PDF)
+                Resume (PDF)
               </a>
             </p>
             <p>
@@ -84,23 +84,22 @@ export default function HomePage() {
                 download
                 style={{ color: '#d00855', marginRight: '1rem' }}
               >
-                Download CareerHistory (Word)
+                CareerHistory (Word)
               </a>
               <a
                 href="/docs/MasakiKusaka_CareerHistory.pdf"
                 download
                 style={{ color: '#bc03b5' }}
               >
-                Download CareerHistory (PDF)
+                CareerHistory (PDF)
               </a>
             </p>
           </div>
 
           <p>
-            This platform is an unstoppable unstoppable code merging 
-            2017 Transformer “Attention is All You Need” architecture with 
-            quantum geometry fractals, wave animations, 3D star fields, 
-            and advanced iFrame logic. 
+            Enjoy unstoppable unstoppable quantum geometry backgrounds, 
+            wave & star animations, and bottom-located ChatGPT synergy. 
+            “Attention is All You Need” (2017).
           </p>
 
           <nav style={{ marginTop: '2rem' }}>

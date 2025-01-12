@@ -1,32 +1,27 @@
 // public/js/waveAnim.js
-window.addEventListener('load', () => {
-  const canvas = document.getElementById('waveCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+(() => {
+  const canvas = document.getElementById('waveCanvas')
+  if (!canvas) return
 
-  function onResize() {
-    canvas.width = canvas.clientWidth;
-    canvas.height= canvas.clientHeight;
-  }
-  onResize();
-  window.addEventListener('resize', onResize);
-
-  let tStart = performance.now();
+  const ctx = canvas.getContext('2d')
+  let startTime = performance.now()
 
   function animate() {
-    requestAnimationFrame(animate);
-    const t = (performance.now() - tStart)*0.002;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    requestAnimationFrame(animate)
+    const dt = performance.now() - startTime
+    const waveOffset = 20 * Math.sin(dt * 0.001)
 
-    ctx.strokeStyle = 'rgba(80,60,160,0.6)';
-    ctx.lineWidth=2;
-    ctx.beginPath();
-    for(let x=0; x<canvas.width; x+=10){
-      const y = canvas.height*0.5 + Math.sin((x*0.02)+ t)*40;
-      if(x===0) ctx.moveTo(x,y);
-      else ctx.lineTo(x,y);
-    }
-    ctx.stroke();
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = 'rgba(100, 200, 255, 0.25)'
+
+    ctx.beginPath()
+    ctx.rect(0, canvas.height / 2 + waveOffset, canvas.width, 80)
+    ctx.fill()
   }
-  animate();
-});
+  animate()
+
+  window.addEventListener('resize', () => {
+    canvas.width = canvas.clientWidth
+    canvas.height = canvas.clientHeight
+  })
+})()

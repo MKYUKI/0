@@ -1,15 +1,12 @@
+/* styles/globals.css */
+
+/* If using Tailwind: */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Basic resets or your additional styling can go here. */
-
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: sans-serif;
-  background-color: #ffffff;
-  overflow: hidden; /* optional, if you want to lock the page. */
-}
+/* Or a simple reset if you don't use Tailwind:
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:sans-serif; }
+... 
+*/

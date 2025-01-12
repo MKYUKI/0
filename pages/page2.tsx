@@ -24,22 +24,8 @@ export default function Page2() {
                 <stop offset="100%" stopColor="#33eeff" />
               </radialGradient>
             </defs>
-            <circle
-              cx="100"
-              cy="100"
-              r="70"
-              fill="url(#grad2)"
-              className="circSpinA"
-            />
-            <circle
-              cx="100"
-              cy="100"
-              r="45"
-              fill="none"
-              stroke="#33bbcc"
-              strokeWidth="3"
-              className="circSpinB"
-            />
+            <circle cx="100" cy="100" r="70" fill="url(#grad2)" className="circSpinA" />
+            <circle cx="100" cy="100" r="45" fill="none" stroke="#33bbcc" strokeWidth="3" className="circSpinB" />
             <path
               d="M70,130 Q100,100 130,130 T70,130"
               fill="#ddffff"
@@ -50,12 +36,12 @@ export default function Page2() {
         </div>
 
         <section className="frontContent2">
-          <h2>AquaFlow + Mixture-of-Experts (MoE)</h2>
+          <h2>AquaFlow + MoE</h2>
           <p>
-            Achieving fluid transformations via 
-            <a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noreferrer">
-              Mixture-of-Experts
-            </a>.
+            Achieving fluid transformations via Mixture-of-Experts. 
+            (<a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noreferrer">
+              arXiv:2005.14165
+            </a>)
           </p>
           <nav>
             <a href="/page3">Next: Page3 &raquo;</a>

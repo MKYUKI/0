@@ -1,15 +1,18 @@
 /* public/css/globalQuantum.css */
-/* Full-screen quantum geometric lines + animation from prior code */
+/* 
+   Master quantum geometry lines + color shifting 
+   => ensuring no file import error 
+*/
 
 .quantumGeometryBG {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: #ffffff;
   overflow: hidden;
 }
 
-/* quantum geometry lines (example) */
+/* lines overlay */
 .quantumGeometryBG::before {
   content: "";
   position: absolute;
@@ -21,15 +24,33 @@
     transparent 2px,
     transparent 80px
   );
-  animation: quantumLines 10s ease-in-out infinite alternate;
+  animation: quantumLines1 10s ease-in-out infinite alternate;
   opacity: 0.5;
   pointer-events: none;
 }
+.quantumGeometryBG::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    123deg,
+    rgba(0,0,0,0.15) 0px,
+    rgba(0,0,0,0.15) 2px,
+    transparent 2px,
+    transparent 80px
+  );
+  animation: quantumLines2 12s ease-in-out infinite alternate;
+  opacity: 0.4;
+  pointer-events: none;
+}
 
-@keyframes quantumLines {
+@keyframes quantumLines1 {
   0% { transform: scale(1) translate(0,0); }
   50%{ transform: scale(1.02) translate(-20px, 10px); }
   100%{ transform: scale(1) translate(0,0); }
 }
-
-/* etc. Add your advanced quantum patterns here */
+@keyframes quantumLines2 {
+  0% { transform: scale(1) translate(0,0); }
+  50%{ transform: scale(1.03) translate(30px, -15px); }
+  100%{ transform: scale(1) translate(0,0); }
+}
