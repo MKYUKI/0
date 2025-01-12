@@ -1,18 +1,18 @@
 /* public/css/globalQuantum.css */
-
-/* リセット */
+/* Reset & global styles */
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
 }
 
-/* html, bodyを白背景に */
 html, body {
   width: 100%;
   height: 100%;
-  background: #ffffff; /* 白 */
+  background-color: #ffffff; /* 白背景 */
   color: #000;
   font-family: 'Inter', sans-serif;
-  overflow: hidden; /* チャットエリアでスクロール */
+  overflow: hidden; /* スクロールはチャット上で */
 }
 
 #__next {
@@ -20,7 +20,7 @@ html, body {
   height: 100%;
 }
 
-/* 幻想的量子ライン(オーバーレイ例) */
+/* (量子ライン overlay はお好みで) */
 .quantum-overlay {
   position: absolute;
   top: 0; left: 0;

@@ -1,51 +1,54 @@
-/* public/css/kaleido3.css */
+/* kaleido3.css */
 /*
-  Page3: Purple lightning
-  参考: "Lightning MoE Patterns" (arXiv:2109.xxxxx)
+   前例のPurple Lightningを大幅に変更し、黒基調の3D回転 + 脈動
+   (紫要素を排除し、要望に合わせ黒ベースの超越アニメへ)
 */
 
-.svgWrap3 {
-  position: absolute; 
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-}
-.kaleido3Svg {
-  width: 100%; 
-  height: 100%;
+/* 全画面回転する黒い円形リングを想定 */
+@keyframes blackRingSpin {
+  0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1);   opacity: 0.7; }
+  50%  { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); opacity: 1.0; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1);   opacity: 0.7; }
 }
 
-.rectSpin1 {
-  animation: rectSpin1New 3s cubic-bezier(0.7,0,0.3,1) infinite alternate;
-  transform-origin: 100px 100px;
-}
-@keyframes rectSpin1New {
-  0% { transform: rotate(0deg) scale(1);}
-  100%{ transform: rotate(360deg) scale(1.5);}
-}
-
-.circleSpark {
-  animation: circleSparkNew 2.5s ease-in-out infinite;
-  transform-origin: 100px 100px;
-}
-@keyframes circleSparkNew {
-  0% { stroke-dasharray: 0 100; transform: rotate(0deg) scale(1); }
-  50%{ stroke-dasharray: 60 40; transform: rotate(180deg) scale(1.2); }
-  100%{ stroke-dasharray: 0 100; transform: rotate(360deg) scale(1); }
+/* 中心に巨大リング */
+.ringWrap3 {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120vw; height: 120vw;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  animation: blackRingSpin 10s infinite linear;
+  pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
+/* 追加でパルスアニメ */
+@keyframes ringPulse {
+  0%   { box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+  100% { box-shadow: 0 0 30px rgba(0,0,0,0.6); }
+}
+.ringWrap3:hover {
+  animation: blackRingSpin 10s infinite linear, ringPulse 3s infinite alternate;
+}
+
+/* フロントコンテンツ(ページ中央にテキスト) */
 .frontContent3 {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  background: rgba(160,0,160,0.3);
-  backdrop-filter: blur(8px);
-  padding: 2rem;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 3rem;
+  color: #000;
   text-align: center;
   border-radius: 12px;
-  color: #fff;
-  animation: frontContent3Pulse 6s ease-in-out infinite alternate;
 }
-@keyframes frontContent3Pulse {
-  0% { box-shadow: 0 0 10px rgba(128,0,128,0.4); }
-  100%{ box-shadow: 0 0 30px rgba(128,0,128,0.8); }
+
+/* 吹き出し: 超濃い黒 */
+.message-bubble.user {
+  background-color: #101010 !important;
+}
+.message-bubble.assistant {
+  background-color: #303030 !important;
 }

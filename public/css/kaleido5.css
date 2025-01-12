@@ -1,34 +1,49 @@
-/* public/css/kaleido5.css */
-/*
-  Page5: DeepBlue starfield + latent diffusion
-  参考: "Latent Diffusion Models" (arXiv:2112.xxxxx)
+/* kaleido5.css */
+/* 
+   ブラックホール的スパイラルアニメ
 */
 
-body {
-  background: #001144;
+/* スパイラルのkeyframes */
+@keyframes blackholeSpin {
+  0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1);   opacity: 0.8; }
+  40%  { transform: translate(-50%, -50%) rotate(180deg) scale(0.7); opacity: 1.0; }
+  60%  { transform: translate(-50%, -50%) rotate(360deg) scale(1.2); opacity: 1.0; }
+  100% { transform: translate(-50%, -50%) rotate(540deg) scale(1);   opacity: 0.8; }
 }
 
-.starCanvas {
-  position: absolute; 
-  top: 0; left: 0;
-  width: 100%; 
-  height: 100%;
+.spiral5 {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 150vw; height: 150vw;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(0,0,0,0.0),
+    rgba(0,0,0,0.8),
+    rgba(0,0,0,0.0)
+  );
+  animation: blackholeSpin 12s infinite ease-in-out;
+  pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
+/* フロント枠 */
 .frontContent5 {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  background: rgba(0,0,80,0.5);
-  backdrop-filter: blur(5px);
-  color: #fff;
-  padding: 2rem;
+  background: rgba(0,0,0,0.05);
+  backdrop-filter: blur(6px);
+  color: #000;
+  padding: 3rem;
+  border-radius: 12px;
   text-align: center;
-  border-radius: 10px;
-  animation: frontContent5Glow 7s ease-in-out infinite alternate;
 }
 
-@keyframes frontContent5Glow {
-  0%   { box-shadow: 0 0 15px rgba(0,64,255,0.4); }
-  100% { box-shadow: 0 0 40px rgba(0,128,255,0.9); }
+/* チャット吹き出しをさらに濃く */
+.message-bubble.user {
+  background-color: #0d0d0d;
+}
+.message-bubble.assistant {
+  background-color: #2b2b2b;
 }

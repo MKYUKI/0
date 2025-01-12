@@ -1,0 +1,31 @@
+/* public/css/kaleidoBase.css */
+
+.base-button {
+  background: #565869;
+  color: #fff;
+  padding: 8px 16px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.base-button:hover {
+  background: #6a6b7d;
+}
+
+.three-d-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.attention-popup {
+  position: absolute;
+  bottom: 100px;
+  right: 20px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}

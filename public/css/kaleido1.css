@@ -1,24 +1,40 @@
-/* public/css/kaleido1.css */
+/* kaleido1.css */
+/* 
+   Page1: 幾何学パターンが一定周期で波打ちながら浮遊する 
+   背景は白、黒系ラインがうねり、画面下部にChatが固定
+*/
 
-/* ルートコンテナ */
+/* ルートコンテナ(背景は白) */
 .root-container {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background: #ffffff; /* 白 */
+  overflow: hidden;
 }
 
-/* 背景キャンバス */
-.bg-canvas-layer {
+/* 黒い幾何学パターンが波打つアニメ(例) */
+@keyframes geoFloat1 {
+  0%   { transform: translate(-50%, -50%) scale(1) rotate(0deg);   opacity: 0.6; }
+  25%  { transform: translate(-40%, -55%) scale(1.1) rotate(15deg); opacity: 0.8; }
+  50%  { transform: translate(-60%, -45%) scale(1.2) rotate(-10deg); opacity: 1.0; }
+  75%  { transform: translate(-55%, -50%) scale(1.05) rotate(20deg); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg);   opacity: 0.6; }
+}
+
+/* 幾何学SVGやCanvasを中央に配置し、アニメさせる例 */
+.geoPattern1 {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
+  top: 50%; left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(rgba(0,0,0,0.3), transparent 70%);
+  animation: geoFloat1 12s ease-in-out infinite;
   pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
-/* Chat容器 */
+/* --- Chat Container Override --- */
 .chat-container {
   position: relative;
   z-index: 10;
@@ -26,78 +42,35 @@
   flex-direction: column;
   max-width: 800px;
   margin: 0 auto;
-  height: 75vh; /* 下に余白をあける or 調整 */
+  height: calc(100vh - 80px); /* 下部の固定チャット入力に合わせる */
   box-sizing: border-box;
   padding-top: 1rem;
+  /* ここで背景など重ねたい場合は変更 */
 }
 
-/* メッセージウィンドウ */
-.messages-window {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-}
-
-/* メッセージ吹き出し */
-.message-bubble {
-  max-width: 75%;
-  margin: 10px 0;
-  padding: 12px 16px;
-  border-radius: 8px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  color: #ffffff;
-  font-family: 'Arial', sans-serif;
-}
+/* メッセージ吹き出し(ユーザ) */
 .message-bubble.user {
-  background-color: #2b6feb;
-  align-self: flex-end;
-  box-shadow: 0 2px 5px rgba(43, 111, 235, 0.3);
-}
-.message-bubble.assistant {
-  background-color: #40414f;
-  align-self: flex-start;
-  box-shadow: 0 2px 5px rgba(64, 65, 79, 0.3);
-}
-.message-bubble.system {
-  align-self: center;
-  background-color: #333;
-  font-style: italic;
+  background-color: #2b2b2b; /* 深い黒 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* 入力欄 */
+/* アシスタント( ChatGPTっぽい ) */
+.message-bubble.assistant {
+  background-color: #505050; 
+  box-shadow: 0 2px 8px rgba(80, 80, 80, 0.4);
+}
+
+/* 入力欄のデザインを多少強化 */
 .input-container {
-  display: flex;
-  background: #f0f0f0;
-  padding: 8px;
+  background: #f8f8f8;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
 }
 .input-container textarea {
-  flex: 1;
-  resize: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-  outline: none;
-  box-sizing: border-box;
+  border: 1px solid #aaa;
 }
 .input-container button {
-  margin-left: 8px;
-  background-color: #10a37f;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0 16px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
-  font-family: 'Arial', sans-serif;
+  background-color: #292929;
 }
 .input-container button:hover {
-  background-color: #0e8d73;
-}
-.input-container button:disabled {
-  background-color: #999;
-  cursor: not-allowed;
+  background-color: #111;
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import Head from 'next/head'
 import '../public/css/kaleido3.css'
 
-// 例: 著作権表記ドロップダウン
+// 著作権/参考文献ドロップダウン
 import ReferencesDropdown from '../components/ReferencesDropdown'
 
 export default function Page3() {
@@ -15,9 +15,8 @@ export default function Page3() {
         <link rel="stylesheet" href="/css/kaleido3.css"/>
       </Head>
 
-      <main className="kaleidoMain">
+      <main className="root-container">
         <div className="svgWrap3">
-          {/* 幾何学SVG or Canvas */}
           <svg className="kaleido3Svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
             <defs>
               <radialGradient id="grad3" cx="50%" cy="50%" r="60%">
@@ -41,62 +40,27 @@ export default function Page3() {
         <section className="frontContent3">
           <h2>Purple Lightning: Sparse Gated MoE</h2>
           <p>
-            Page3: Harnessing
-            <a href="https://arxiv.org/abs/1701.06538" target="_blank" rel="noreferrer">Sparse Gated MoE</a>
-            for massive parallelization...
+            Harness advanced MoE (Mixture-of-Experts) with lightning storms.
+            <br />
+            <a href="https://arxiv.org/abs/1701.06538" target="_blank" rel="noreferrer">
+              Sparse Gated MoE (arXiv:1701.06538)
+            </a>
           </p>
 
-          {/* 履歴書ダウンロード */}
-          <div className="resume-section">
-            <h3>Download My Resume & Career History</h3>
+          <div style={{ margin: '2rem 0' }}>
+            <h3>Download Resume & CareerHistory</h3>
             <p>
-              <a href="/docs/MasakiKusaka_Resume.docx" download>
-                Resume (Word)
-              </a>
-               | 
-              <a href="/docs/MasakiKusaka_Resume.pdf" download>
-                Resume (PDF)
-              </a>
+              <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a> |{' '}
+              <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>
             </p>
             <p>
-              <a href="/docs/MasakiKusaka_CareerHistory.docx" download>
-                CareerHistory (Word)
-              </a>
-               | 
-              <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>
-                CareerHistory (PDF)
-              </a>
+              <a href="/docs/MasakiKusaka_CareerHistory.docx" download>CareerHistory (Word)</a> |{' '}
+              <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>CareerHistory (PDF)</a>
             </p>
           </div>
 
-          {/* 最先端技術論文例 */}
-          <div className="cutting-edge-papers">
-            <h3>Cutting-edge Papers</h3>
-            <ul>
-              <li>
-                <strong>AlphaFold</strong> 
-                <br />
-                <a href="https://www.nature.com/articles/s41586-021-03819-2" target="_blank" rel="noreferrer">
-                  Nature (2021)
-                </a>
-              </li>
-              <li>
-                <strong>S4 (State Space)</strong>
-                <br />
-                <a href="https://arxiv.org/abs/2111.00396" target="_blank" rel="noreferrer">
-                  arXiv:2111.00396
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div style={{ marginTop: '2rem' }}>
-            <ReferencesDropdown />
-          </div>
-
-          <nav style={{ marginTop: '2rem' }}>
-            <a href="/page4">⇒ Page4</a>
-          </nav>
+          {/* 参考文献ドロップダウン */}
+          <ReferencesDropdown />
         </section>
       </main>
     </>
