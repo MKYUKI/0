@@ -1,14 +1,11 @@
 // pages/api/ask.ts
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-/**
- * Mock endpoint
- */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { question } = req.body
-    // Just echo it, referencing the 2017 Transformer
-    const answer = `Mock response for "${question}". [Transformer(2017), MoE, NeRF, Diffusion references inside]`
+    // Mock response
+    const answer = `Simulated answer for "${question}". [Ref: Transformers(2017), MoE, Diffusion, etc.]`
     res.status(200).json({ answer })
   } catch (err) {
     console.error(err)

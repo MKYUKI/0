@@ -1,5 +1,5 @@
 // public/js/quantum3D.js
-// Minimal example of a TorusKnot with fresh color
+// Minimal TorusKnot in Three.js
 (() => {
     const container = document.getElementById('quantum3DContainer')
     if (!container) return
@@ -23,9 +23,9 @@
     const ambient = new THREE.AmbientLight(0xffffff, 1)
     scene.add(ambient)
   
-    const geometry = new THREE.TorusKnotGeometry(10, 3, 144, 24)
+    const geometry = new THREE.TorusKnotGeometry(10, 3, 150, 24)
     const material = new THREE.MeshPhongMaterial({
-      color: 0xaa00ff,
+      color: 0x9900ff,
       emissive: 0x220022,
       shininess: 120,
       wireframe: false,
@@ -33,10 +33,10 @@
     const knot = new THREE.Mesh(geometry, material)
     scene.add(knot)
   
-    let startT = performance.now()
+    let startTime = performance.now()
     function animate(){
       requestAnimationFrame(animate)
-      const dt = performance.now() - startT
+      const dt = performance.now() - startTime
       const t = dt * 0.0003
       knot.rotation.x = t * 0.7
       knot.rotation.y = t * 0.6
