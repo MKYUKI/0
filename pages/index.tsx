@@ -1,42 +1,119 @@
 // pages/index.tsx
-import React, { useEffect } from 'react';
-import ChatGPTInterface from '../components/ChatGPTInterface';
+import Head from 'next/head';
+import ReferencesDropdown from '../components/ReferencesDropdown'; // 追加
 
-// グローバルCSSをインポート
-import '../public/css/globalQuantum.css';
-import '../public/css/kaleidoBase.css';
-import '../public/css/kaleido1.css';
-
-export default function Home() {
-  // 3Dアニメーションやその他アニメをロードする
-  useEffect(() => {
-    // quantum3D.js の初期化を呼ぶ
-    import('../public/js/quantum3D.js');
-    // starsAnim.js の初期化を呼ぶ
-    import('../public/js/starsAnim.js');
-    // waveAnim.js の初期化を呼ぶ
-    import('../public/js/waveAnim.js');
-  }, []);
-
+export default function HomePage() {
   return (
-    <div className="root-container">
-      <head>
-        <title>My ChatGPT Clone - GPT-4.0 Powered</title>
-        <meta
-          name="description"
-          content="A GPT-4.0 powered chat interface, inspired by ChatGPT"
-        />
-      </head>
+    <>
+      <Head>
+        <meta charSet="UTF-8" />
+        <title>Page1 | Quantum-Transformer Home</title>
+        {/* load kaleidoBase + kaleido1 from /public/css/ */}
+        <link rel="stylesheet" href="/css/kaleidoBase.css" />
+        <link rel="stylesheet" href="/css/kaleido1.css" />
+      </Head>
 
-      {/* 背景用のキャンバスを複数配置し、3Dや星空、波形アニメを重ね合わせ */}
-      <canvas id="bg-canvas" className="bg-canvas-layer"></canvas>
-      <canvas id="stars-canvas" className="bg-canvas-layer"></canvas>
-      <canvas id="wave-canvas" className="bg-canvas-layer"></canvas>
+      <main className="kaleidoMain">
+        <div className="svgWrap1">
+          <svg
+            className="kaleido1Svg"
+            viewBox="0 0 220 220"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <defs>
+              <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#ff99ff" />
+                <stop offset="100%" stopColor="#ff33cc" />
+              </radialGradient>
+            </defs>
+            <circle
+              cx="110"
+              cy="110"
+              r="80"
+              fill="url(#grad1)"
+              className="circleSpin1"
+            />
+            <circle
+              cx="110"
+              cy="110"
+              r="50"
+              fill="none"
+              stroke="#ffccff"
+              strokeWidth="4"
+              className="circleSpin2"
+            />
+            <path
+              d="M110,20 L150,60 L110,100 L70,60 Z"
+              fill="#fff"
+              fillOpacity="0.5"
+              className="pathSpin1"
+            />
+          </svg>
+        </div>
 
-      <main>
-        {/* ChatGPTと同じようなインターフェース */}
-        <ChatGPTInterface />
+        <section className="frontContent1">
+          <h1>MasakiKusaka 日下真旗: Portfolio + Resume</h1>
+          <p style={{ marginBottom: '1rem' }}>
+            This unstoppable unstoppable code merges fractal illusions with
+            multi-head self-attention, culminating in a historical apex
+            of civilization.
+          </p>
+
+          {/* Download links */}
+          <div style={{ textAlign: 'center', margin: '2rem 0' }}>
+            <h3>Resume & CareerHistory (Word/PDF)</h3>
+            <p>
+              <a
+                href="/docs/MasakiKusaka_Resume.docx"
+                download
+                style={{ color: '#d00855', marginRight: '1rem' }}
+              >
+                Resume (Word)
+              </a>
+              <a
+                href="/docs/MasakiKusaka_Resume.pdf"
+                download
+                style={{ color: '#bc03b5' }}
+              >
+                Resume (PDF)
+              </a>
+            </p>
+            <p>
+              <a
+                href="/docs/MasakiKusaka_CareerHistory.docx"
+                download
+                style={{ color: '#d00855', marginRight: '1rem' }}
+              >
+                CareerHistory (Word)
+              </a>
+              <a
+                href="/docs/MasakiKusaka_CareerHistory.pdf"
+                download
+                style={{ color: '#bc03b5' }}
+              >
+                CareerHistory (PDF)
+              </a>
+            </p>
+          </div>
+
+          <p>
+            Enjoy unstoppable unstoppable quantum geometry backgrounds,
+            wave & star animations, and bottom-located ChatGPT synergy.
+            “Attention is All You Need” (2017).
+          </p>
+
+          {/* ドロップダウン(参考文献等) */}
+          <div style={{ margin: '2rem 0' }}>
+            <ReferencesDropdown />
+          </div>
+
+          <nav style={{ marginTop: '2rem' }}>
+            <a href="/page2" style={{ fontWeight: 'bold' }}>
+              ⇒ Go to Page2
+            </a>
+          </nav>
+        </section>
       </main>
-    </div>
+    </>
   );
 }
