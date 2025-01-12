@@ -1,23 +1,35 @@
 // pages/_app.tsx
-
 import type { AppProps } from 'next/app'
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
+import Link from 'next/link'
 
+/** グローバルCSS */
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 
+/** チャットUI */
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
+/** 
+ * シンプルなナビバー: 
+ * Next.jsの<Link>でページ遷移を行う
+ */
 function NavBar() {
   return (
     <nav style={{ textAlign: 'center', padding: '0.5rem', background: '#eee' }}>
-      <a href="/">Page1</a> | <a href="/page2">Page2</a> | <a href="/page3">Page3</a> |{' '}
-      <a href="/page4">Page4</a> | <a href="/page5">Page5</a> | <a href="/page6">Page6</a>
+      <Link href="/">Page1</Link> |{' '}
+      <Link href="/page2">Page2</Link> |{' '}
+      <Link href="/page3">Page3</Link> |{' '}
+      <Link href="/page4">Page4</Link> |{' '}
+      <Link href="/page5">Page5</Link> |{' '}
+      <Link href="/page6">Page6</Link>
     </nav>
   )
 }
+
+/** Attention Transformer可視化用の簡易ポップアップ例 */
 function AttentionPopup() {
   const [open, setOpen] = useState(false)
   return (
@@ -49,8 +61,8 @@ function AttentionPopup() {
         >
           <h4>Attention Is All You Need (2017)</h4>
           <p style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
-            This could visualize multi-head attention or 
-            show how Q-K-V are computed in real-time. <br />
+            Visualize multi-head attention or show how Q-K-V 
+            are computed in real-time. <br />
             <a
               href="https://arxiv.org/abs/1706.03762"
               target="_blank"
@@ -77,7 +89,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      {/* Scriptタグで3D/星/波jsを読み込む (ES ModuleでなくともOK) */}
+      {/* Scriptタグで3D/星/波jsを読み込む */}
       <Script
         src="/js/quantum3D.js"
         strategy="beforeInteractive"
@@ -94,7 +106,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         onError={(e) => console.error('Failed to load waveAnim.js', e)}
       />
 
-      {/* 背景Canvas (固定) */}
+      {/* 背景Canvas */}
       <div
         style={{
           position: 'fixed',
@@ -108,13 +120,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* メイン領域 & Attention Popup */}
+      {/* 上部のナビ + 本文 + Attention可視化 */}
       <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
+        <NavBar />
         <AttentionPopup />
+
+        {/* ページコンテンツ */}
         <Component {...pageProps} />
       </div>
 
-      {/* フッターに ChatGPT UI */}
+      {/* 画面下部に固定されるChatUI */}
       <footer
         style={{
           position: 'fixed',

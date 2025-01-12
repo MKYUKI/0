@@ -1,7 +1,7 @@
 // components/ChatGPTInterface.tsx
 import React, { useState, useEffect, useRef } from 'react'
 
-// メッセージの吹き出し
+// 吹き出しコンポーネント
 function MessageBubble({
   role,
   content
@@ -29,7 +29,7 @@ export default function ChatGPTInterface() {
     setIsLoading(true)
 
     try {
-      // OpenAI API(仮)
+      // OpenAI API(例: /api/chat)
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -41,7 +41,7 @@ export default function ChatGPTInterface() {
       const data = await res.json()
       const text = data.choices?.[0]?.message?.content ?? ''
 
-      // 文字送り演出
+      // 文字送りアニメ
       let buffer = ''
       let i = 0
       const intervalID = setInterval(() => {
@@ -50,15 +50,9 @@ export default function ChatGPTInterface() {
           setMessages(prev => {
             const last = prev[prev.length - 1]
             if (last && last.role === 'assistant') {
-              return [
-                ...prev.slice(0, -1),
-                { role: 'assistant', content: buffer }
-              ]
+              return [...prev.slice(0, -1), { role: 'assistant', content: buffer }]
             } else {
-              return [
-                ...prev,
-                { role: 'assistant', content: buffer }
-              ]
+              return [...prev, { role: 'assistant', content: buffer }]
             }
           })
         } else {
@@ -72,7 +66,7 @@ export default function ChatGPTInterface() {
     }
   }
 
-  // 最新メッセージにスクロール
+  // メッセージ末尾に自動スクロール
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
