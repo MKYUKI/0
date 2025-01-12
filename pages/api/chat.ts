@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { model, messages } = req.body;
+
+    // 例: OpenAI APIを呼ぶ
     const openAiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -16,9 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       })
     });
     const data = await openAiRes.json();
+
     res.status(200).json(data);
   } catch (err) {
-    console.error(err);
+    console.error('API Error:', err);
     res.status(500).json({ error: 'Internal server error' });
   }
 }

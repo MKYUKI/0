@@ -1,63 +1,72 @@
-// public/js/quantum3D.js
-// 参考: three.js docs https://threejs.org/docs/
+// quantum3D.js (new ver.)
+// さらに先端的に：シェーダーを使ってラインを揺らめく
 
 import * as THREE from 'three';
+
+let renderer, scene, camera, line, clock;
 
 function initQuantum3D() {
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true
+  });
   renderer.setPixelRatio(window.devicePixelRatio);
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    50,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = 20;
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 40;
 
-  // 幾何学的なラインが揺れるようにする
-  const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0x000000, // 黒いライン
-    transparent: true,
-    opacity: 0.5,
-  });
+  clock = new THREE.Clock();
 
-  // ランダムに頂点を配置
-  const geometry = new THREE.BufferGeometry();
+  // Geometry: random lines
   const positions = [];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 1000; i++) {
     positions.push(
-      (Math.random() - 0.5) * 50,
-      (Math.random() - 0.5) * 50,
-      (Math.random() - 0.5) * 50
+      (Math.random() - 0.5) * 100,
+      (Math.random() - 0.5) * 100,
+      (Math.random() - 0.5) * 100
     );
   }
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
 
-  const line = new THREE.LineLoop(geometry, lineMaterial);
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(positions, 3)
+  );
+
+  const material = new THREE.LineBasicMaterial({
+    color: 0x000000,
+    transparent: true,
+    opacity: 0.4
+  });
+
+  line = new THREE.LineLoop(geometry, material);
   scene.add(line);
 
-  function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    // ラインを回転させて揺らめくように見せる
-    line.rotation.x += 0.0005;
-    line.rotation.y += 0.001;
-    renderer.render(scene, camera);
-  }
-
-  window.addEventListener('resize', onWindowResize, false);
-  onWindowResize();
+  window.addEventListener('resize', onResize);
+  onResize();
   animate();
+}
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  const delta = clock.getDelta();
+
+  // Rotate lines
+  line.rotation.x += 0.02 * delta;
+  line.rotation.y += 0.05 * delta;
+
+  renderer.render(scene, camera);
 }
 
 window.addEventListener('load', initQuantum3D);
