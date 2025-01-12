@@ -5,9 +5,9 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8"/>
-        <title>Page1 | Quantum-Apex Home</title>
-        {/* 大幅刷新した kaleidoBase & kaleido1 */}
+        <meta charSet="UTF-8" />
+        <title>Page1 | Quantum-Transformer Apex</title>
+        {/* kaleidoBase + kaleido1 => Overhauled pink swirl */}
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido1.css" />
       </Head>
@@ -47,11 +47,11 @@ export default function HomePage() {
         </div>
 
         <section className="frontContent1">
-          <h2>Quantum Apex — Transformer Evolution</h2>
+          <h2>Quantum-Transformer Apex</h2>
           <p>
-            Page1: Pioneering multi-head self-attention with fractal illusions 
-            (<a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">Attention Is All You Need</a>)
-            to shape the next era.
+            Page1: Merging fractal illusions with multi-head self-attention. 
+            See <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
+            “Attention Is All You Need”</a> for the foundation of Transformers.
           </p>
           <nav>
             <a href="/page2">⇒ Go to Page2</a>

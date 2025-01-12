@@ -1,7 +1,5 @@
 // public/js/quantum3D.js
-// Minimal 3D TorusKnot, color changed or param changed for fresh look
-// (参考: Three.js docs: https://threejs.org/)
-
+// Minimal example of a TorusKnot with fresh color
 (() => {
     const container = document.getElementById('quantum3DContainer')
     if (!container) return
@@ -13,17 +11,21 @@
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xffffff)
   
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 2000)
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      2000
+    )
     camera.position.set(0, 0, 60)
     scene.add(camera)
   
     const ambient = new THREE.AmbientLight(0xffffff, 1)
     scene.add(ambient)
   
-    // Purple-ish TorusKnot
-    const geometry = new THREE.TorusKnotGeometry(10, 3, 150, 24)
+    const geometry = new THREE.TorusKnotGeometry(10, 3, 144, 24)
     const material = new THREE.MeshPhongMaterial({
-      color: 0x9900ff,
+      color: 0xaa00ff,
       emissive: 0x220022,
       shininess: 120,
       wireframe: false,
@@ -31,18 +33,14 @@
     const knot = new THREE.Mesh(geometry, material)
     scene.add(knot)
   
-    let startTime = performance.now()
-  
-    function animate() {
+    let startT = performance.now()
+    function animate(){
       requestAnimationFrame(animate)
-      const dt = performance.now() - startTime
+      const dt = performance.now() - startT
       const t = dt * 0.0003
-  
-      // Spin, scale
       knot.rotation.x = t * 0.7
       knot.rotation.y = t * 0.6
       knot.rotation.z = t * 0.2
-  
       renderer.render(scene, camera)
     }
     animate()
