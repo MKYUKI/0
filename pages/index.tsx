@@ -6,14 +6,14 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Page1 | Quantum Apex | MasakiKusaka Resume</title>
-        {/* 最新の kaleidoBase & kaleido1, etc. */}
+        <title>Page1 | Quantum-Transformer Home</title>
+        {/* kaleidoBase + kaleido1 => swirl */}
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido1.css" />
       </Head>
 
       <main className="kaleidoMain">
-        {/* SVG Animation (pink swirl) */}
+        {/* swirling SVG */}
         <div className="svgWrap1">
           <svg
             className="kaleido1Svg"
@@ -27,12 +27,16 @@ export default function HomePage() {
               </radialGradient>
             </defs>
             <circle
-              cx="110" cy="110" r="80"
+              cx="110"
+              cy="110"
+              r="80"
               fill="url(#grad1)"
               className="circleSpin1"
             />
             <circle
-              cx="110" cy="110" r="50"
+              cx="110"
+              cy="110"
+              r="50"
               fill="none"
               stroke="#ffccff"
               strokeWidth="4"
@@ -47,66 +51,61 @@ export default function HomePage() {
           </svg>
         </div>
 
-        {/* ---- Foreground Content ---- */}
         <section className="frontContent1">
-          <h2 style={{ fontSize: '1.8rem' }}>
-            Masaki Kusaka Resume & Career History
-          </h2>
+          <h1>MasakiKusaka 日下真旗: Portfolio + Resume</h1>
           <p style={{ marginBottom: '1rem' }}>
-            This homepage integrates quantum fractal illusions with 
-            <strong> multi-head self-attention</strong>. 
-            We also host <strong>Word/PDF versions</strong> of 
-            MasakiKusaka(日下真旗) official resume and career history.
+            This site merges fractal illusions with multi-head self-attention,
+            culminating in a historically apex civilization platform. 
+            Enjoy unstoppable unstoppable code. 
           </p>
 
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '0.5rem',
-            marginBottom: '1rem'
-          }}>
-            {/* Word links */}
-            <a
-              href="/docs/MasakiKusaka_Resume.docx"
-              download
-              style={{ color: '#f006', textDecoration: 'underline' }}
-            >
-              Download Resume (Word .docx)
-            </a>
-            <a
-              href="/docs/MasakiKusaka_CareerHistory.docx"
-              download
-              style={{ color: '#f006', textDecoration: 'underline' }}
-            >
-              Download CareerHistory (Word .docx)
-            </a>
-
-            {/* PDF links */}
-            <a
-              href="/docs/MasakiKusaka_Resume.pdf"
-              download
-              style={{ color: '#c0c', textDecoration: 'underline' }}
-            >
-              Download Resume (PDF)
-            </a>
-            <a
-              href="/docs/MasakiKusaka_CareerHistory.pdf"
-              download
-              style={{ color: '#c0c', textDecoration: 'underline' }}
-            >
-              Download CareerHistory (PDF)
-            </a>
+          {/* Download links */}
+          <div style={{ textAlign: 'center', margin: '2rem 0' }}>
+            <h3>Resume & CareerHistory (Word/PDF)</h3>
+            <p>
+              <a
+                href="/docs/MasakiKusaka_Resume.docx"
+                download
+                style={{ color: '#d00855', marginRight: '1rem' }}
+              >
+                Download Resume (Word)
+              </a>
+              <a
+                href="/docs/MasakiKusaka_Resume.pdf"
+                download
+                style={{ color: '#bc03b5' }}
+              >
+                Download Resume (PDF)
+              </a>
+            </p>
+            <p>
+              <a
+                href="/docs/MasakiKusaka_CareerHistory.docx"
+                download
+                style={{ color: '#d00855', marginRight: '1rem' }}
+              >
+                Download CareerHistory (Word)
+              </a>
+              <a
+                href="/docs/MasakiKusaka_CareerHistory.pdf"
+                download
+                style={{ color: '#bc03b5' }}
+              >
+                Download CareerHistory (PDF)
+              </a>
+            </p>
           </div>
 
-          <p style={{ marginBottom: '1rem' }}>
-            <em>All files are hosted in <code>public/docs/</code> folder, 
-            ensuring direct download capability.</em>
+          <p>
+            This platform is an unstoppable unstoppable code merging 
+            2017 Transformer “Attention is All You Need” architecture with 
+            quantum geometry fractals, wave animations, 3D star fields, 
+            and advanced iFrame logic. 
           </p>
 
-          <nav>
+          <nav style={{ marginTop: '2rem' }}>
             <a href="/page2" style={{ fontWeight: 'bold' }}>
-              ⇒ Explore Next: Page2
+              ⇒ Go to Page2
             </a>
           </nav>
         </section>

@@ -1,9 +1,9 @@
 /* public/css/globalQuantum.css */
-/*
-  量子的黒線アニメ:
-  - ランダム角度, ゆらぎ
-  - 参考: "Quantum Neural Networks" (arXiv:2205.xxxxx)
+/* 
+   Fullscreen quantum lines with scale + color shifting 
+   referencing "Quantum Neural Networks" 
 */
+
 .quantumGeometryBG {
   position: relative;
   width: 100%;
@@ -12,47 +12,47 @@
   overflow: hidden;
 }
 
-/* 斜め線(45度) */
+/* slanted lines */
 .quantumGeometryBG::before {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    45deg,
-    rgba(0,0,0,0.25) 0px,
-    rgba(0,0,0,0.25) 2px,
+    63deg,
+    rgba(0,0,0,0.2) 0px,
+    rgba(0,0,0,0.2) 2px,
     transparent 2px,
     transparent 80px
   );
-  animation: quantumLines1 10s ease-in-out infinite alternate;
+  animation: quantumLinesNew 10s ease-in-out infinite alternate;
   opacity: 0.5;
   pointer-events: none;
 }
 
-/* 逆方向線(125度) */
 .quantumGeometryBG::after {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
-    125deg,
-    rgba(0,0,0,0.2) 0px,
-    rgba(0,0,0,0.2) 2px,
+    123deg,
+    rgba(0,0,0,0.15) 0px,
+    rgba(0,0,0,0.15) 2px,
     transparent 2px,
-    transparent 60px
+    transparent 80px
   );
-  animation: quantumLines2 12s cubic-bezier(0.7,0,0.3,1) infinite alternate;
+  animation: quantumLines2New 12s cubic-bezier(0.7,0,0.3,1) infinite alternate;
   opacity: 0.4;
   pointer-events: none;
 }
 
-@keyframes quantumLines1 {
-  0% { transform: scale(1) translate(0,0); }
-  50%{ transform: scale(1.03) translate(-30px, 10px); }
-  100%{ transform: scale(1) translate(0,0); }
+@keyframes quantumLinesNew {
+  0%   { transform: scale(1) translate(0,0); }
+  50%  { transform: scale(1.02) translate(-20px, 10px); }
+  100% { transform: scale(1) translate(0,0); }
 }
-@keyframes quantumLines2 {
-  0% { transform: scale(1) translate(0,0); }
-  50%{ transform: scale(0.98) translate(20px, -20px); }
-  100%{ transform: scale(1) translate(0,0); }
+@keyframes quantumLines2New {
+  0%   { transform: scale(1) translate(0,0); }
+  50%  { transform: scale(1.03) translate(30px, -15px); }
+  100% { transform: scale(1) translate(0,0); }
 }
+

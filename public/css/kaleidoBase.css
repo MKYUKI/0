@@ -1,26 +1,27 @@
 /* public/css/kaleidoBase.css */
-/*
-  リセット + メイン領域の微妙なカラーゆらぎ
-  (参考: "Attention-based style transfer" arXiv:2107.xxxxx)
+/* 
+   Common swirling background for each page,
+   plus subtle hue-rotate
 */
 * {
-  margin: 0; padding: 0; box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 body {
   font-family: sans-serif;
   background: #fff;
-  color: #222;
-  overflow: hidden;
+  color: #333;
 }
 .kaleidoMain {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* 余白削除 */
-  animation: subtleGlow 12s linear infinite alternate;
+  height: calc(100vh - 140px);
+  overflow: hidden;
+  animation: subtleGlow 10s linear infinite alternate;
 }
-
 @keyframes subtleGlow {
-  0%   { filter: brightness(1) hue-rotate(0deg); }
-  50%  { filter: brightness(1.05) hue-rotate(20deg); }
-  100% { filter: brightness(1) hue-rotate(0deg); }
+  0%   { filter: hue-rotate(0deg) brightness(1); }
+  50%  { filter: hue-rotate(30deg) brightness(1.05); }
+  100% { filter: hue-rotate(0deg) brightness(1); }
 }

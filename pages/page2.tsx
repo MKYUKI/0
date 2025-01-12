@@ -5,11 +5,10 @@ export default function Page2() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8"/>
+        <meta charSet="UTF-8" />
         <title>Page2 | AquaFlow + MoE</title>
         <link rel="stylesheet" href="/css/kaleidoBase.css" />
         <link rel="stylesheet" href="/css/kaleido2.css" />
-        <script src="/js/page2Logic.js" defer />
       </Head>
 
       <main className="kaleidoMain">
@@ -21,18 +20,24 @@ export default function Page2() {
           >
             <defs>
               <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#88ffff" />
-                <stop offset="100%" stopColor="#44ddff" />
+                <stop offset="0%" stopColor="#aaffff" />
+                <stop offset="100%" stopColor="#33eeff" />
               </radialGradient>
             </defs>
             <circle
-              cx="100" cy="100" r="70"
+              cx="100"
+              cy="100"
+              r="70"
               fill="url(#grad2)"
               className="circSpinA"
             />
             <circle
-              cx="100" cy="100" r="45"
-              fill="none" stroke="#33bbcc" strokeWidth="3"
+              cx="100"
+              cy="100"
+              r="45"
+              fill="none"
+              stroke="#33bbcc"
+              strokeWidth="3"
               className="circSpinB"
             />
             <path
@@ -47,13 +52,13 @@ export default function Page2() {
         <section className="frontContent2">
           <h2>AquaFlow + Mixture-of-Experts (MoE)</h2>
           <p>
-            Page2: Achieving fluid transformations with 
+            Achieving fluid transformations via 
             <a href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noreferrer">
               Mixture-of-Experts
             </a>.
           </p>
           <nav>
-            <a href="/page3">⇒ Next: Page3 (PurpleLightning)</a>
+            <a href="/page3">Next: Page3 &raquo;</a>
           </nav>
         </section>
       </main>
