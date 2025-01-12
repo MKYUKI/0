@@ -1,31 +1,34 @@
+// components/ChatGPTInterface.tsx
 import React, { useState } from 'react'
 
 /**
- * ChatGPTInterface: 
- * The unstoppable unstoppable code merges quantum illusions with 2017 Transformer architecture
+ * ChatGPTInterface:
+ * Simple mock Q&A
  */
 export default function ChatGPTInterface() {
-  const [messages, setMessages] = useState<{ role: 'user'|'assistant', content: string}[]>([]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>([])
+  const [input, setInput] = useState('')
 
   async function handleSend() {
-    if (!input.trim()) return;
-    const userMsg = input.trim();
-    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
-    setInput('');
+    if (!input.trim()) return
+    const userMsg = input.trim()
+    setMessages((prev) => [...prev, { role: 'user', content: userMsg }])
+    setInput('')
 
     try {
-      // call mock /api/ask
       const res = await fetch('/api/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: userMsg }),
-      });
-      const data = await res.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.answer || '(No response)' }]);
-    } catch(e) {
-      console.error(e);
-      setMessages(prev => [...prev, { role: 'assistant', content: '(Error occurred)' }]);
+      })
+      const data = await res.json()
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: data.answer || '(No response)' },
+      ])
+    } catch (err) {
+      console.error(err)
+      setMessages((prev) => [...prev, { role: 'assistant', content: '(Error occurred)' }])
     }
   }
 
@@ -39,12 +42,12 @@ export default function ChatGPTInterface() {
           height: '220px',
           overflowY: 'auto',
           marginBottom: '1rem',
-          background: 'rgba(255,255,255,0.7)'
+          background: 'rgba(255,255,255,0.7)',
         }}
       >
         {messages.map((m, i) => (
           <div key={i} style={{ margin: '4px 0' }}>
-            <strong>{m.role}:</strong> {m.content}
+            <b>{m.role}:</b> {m.content}
           </div>
         ))}
       </div>
@@ -52,7 +55,7 @@ export default function ChatGPTInterface() {
       <textarea
         rows={3}
         style={{ width: '100%', marginBottom: '0.5rem' }}
-        placeholder="Ask anything..."
+        placeholder="Ask your question..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
