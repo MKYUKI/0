@@ -1,5 +1,5 @@
 // public/js/quantum3D.js
-// Minimal TorusKnot in Three.js
+// Minimal 3D TorusKnot in Three.js
 (() => {
     const container = document.getElementById('quantum3DContainer')
     if (!container) return
@@ -34,13 +34,15 @@
     scene.add(knot)
   
     let startTime = performance.now()
-    function animate(){
+    function animate() {
       requestAnimationFrame(animate)
       const dt = performance.now() - startTime
       const t = dt * 0.0003
+  
       knot.rotation.x = t * 0.7
       knot.rotation.y = t * 0.6
       knot.rotation.z = t * 0.2
+  
       renderer.render(scene, camera)
     }
     animate()

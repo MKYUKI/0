@@ -1,16 +1,18 @@
 /* public/css/globalQuantum.css */
 /*
-  Quantum black-lines across the entire screen
-  (参考: "Quantum Neural Networks" etc.)
+  量子的黒線アニメ:
+  - ランダム角度, ゆらぎ
+  - 参考: "Quantum Neural Networks" (arXiv:2205.xxxxx)
 */
 .quantumGeometryBG {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #fff; 
+  background: #fff;
   overflow: hidden;
 }
 
+/* 斜め線(45度) */
 .quantumGeometryBG::before {
   content: "";
   position: absolute;
@@ -26,6 +28,8 @@
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* 逆方向線(125度) */
 .quantumGeometryBG::after {
   content: "";
   position: absolute;
@@ -51,10 +55,4 @@
   0% { transform: scale(1) translate(0,0); }
   50%{ transform: scale(0.98) translate(20px, -20px); }
   100%{ transform: scale(1) translate(0,0); }
-}
-
-.globalContainerWrap {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
 }
