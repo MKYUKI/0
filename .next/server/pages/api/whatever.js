@@ -40,7 +40,7 @@ module.exports = require("next/dist/server/future/route-modules/route-module.js"
 
 /***/ }),
 
-/***/ 689:
+/***/ 8489:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -69,7 +69,7 @@ var helpers = __webpack_require__(7305);
 // EXTERNAL MODULE: external "next-auth"
 var external_next_auth_ = __webpack_require__(3227);
 // EXTERNAL MODULE: ./pages/api/auth/[...nextauth].ts
-var _nextauth_ = __webpack_require__(9980);
+var _nextauth_ = __webpack_require__(9025);
 ;// CONCATENATED MODULE: ./pages/api/whatever.ts
 // pages/api/whatever.ts
 
@@ -124,7 +124,7 @@ const routeModule = new PagesAPIRouteModule({
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [172,980], () => (__webpack_exec__(689)));
+var __webpack_exports__ = __webpack_require__.X(0, [172,25], () => (__webpack_exec__(8489)));
 module.exports = __webpack_exports__;
 
 })();

@@ -2,7 +2,7 @@
 import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
-import '../public/css/page1.css'
+//import '../public/css/page1.css'
 
 export default function HomePage() {
   return (

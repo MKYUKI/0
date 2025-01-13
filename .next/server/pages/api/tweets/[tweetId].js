@@ -19,7 +19,7 @@ module.exports = require("next/dist/server/future/route-modules/route-module.js"
 
 /***/ }),
 
-/***/ 8138:
+/***/ 9428:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -101,7 +101,7 @@ const routeModule = new PagesAPIRouteModule({
 var __webpack_require__ = require("../../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(8138)));
+var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(9428)));
 module.exports = __webpack_exports__;
 
 })();

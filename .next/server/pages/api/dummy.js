@@ -19,41 +19,78 @@ module.exports = require("next/dist/server/future/route-modules/route-module.js"
 
 /***/ }),
 
-/***/ 7518:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ 2079:
+/***/ ((module) => {
 
-// ESM COMPAT FLAG
+module.exports = import("openai");;
+
+/***/ }),
+
+/***/ 6673:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   config: () => (/* binding */ config),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   routeModule: () => (/* binding */ routeModule)
+/* harmony export */ });
+/* harmony import */ var next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6429);
+/* harmony import */ var next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7153);
+/* harmony import */ var next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7305);
+/* harmony import */ var private_next_pages_api_dummy_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8660);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([private_next_pages_api_dummy_ts__WEBPACK_IMPORTED_MODULE_3__]);
+private_next_pages_api_dummy_ts__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+// @ts-ignore this need to be imported from next/dist to be external
 
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  config: () => (/* binding */ config),
-  "default": () => (/* binding */ next_route_loaderkind_PAGES_API_page_2Fapi_2Fdummy_preferredRegion_absolutePagePath_private_next_pages_2Fapi_2Fdummy_ts_middlewareConfigBase64_e30_3D_),
-  routeModule: () => (/* binding */ routeModule)
+
+
+const PagesAPIRouteModule = next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__.PagesAPIRouteModule;
+// Import the userland code.
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+// Re-export the handler (should be the default export).
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_api_dummy_ts__WEBPACK_IMPORTED_MODULE_3__, "default"));
+// Re-export config.
+const config = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_api_dummy_ts__WEBPACK_IMPORTED_MODULE_3__, "config");
+// Create and export the route module that will be consumed.
+const routeModule = new PagesAPIRouteModule({
+    definition: {
+        kind: next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__/* .RouteKind */ .x.PAGES_API,
+        page: "/api/dummy",
+        pathname: "/api/dummy",
+        // The following aren't used in production.
+        bundlePath: "",
+        filename: ""
+    },
+    userland: private_next_pages_api_dummy_ts__WEBPACK_IMPORTED_MODULE_3__
 });
 
-// NAMESPACE OBJECT: ./pages/api/dummy.ts
-var dummy_namespaceObject = {};
-__webpack_require__.r(dummy_namespaceObject);
-__webpack_require__.d(dummy_namespaceObject, {
-  "default": () => (handler)
-});
+//# sourceMappingURL=pages-api.js.map
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
-// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/pages-api/module.js
-var pages_api_module = __webpack_require__(6429);
-// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-kind.js
-var route_kind = __webpack_require__(7153);
-// EXTERNAL MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js
-var helpers = __webpack_require__(7305);
-;// CONCATENATED MODULE: external "openai"
-const external_openai_namespaceObject = require("openai");
-;// CONCATENATED MODULE: ./pages/api/dummy.ts
+/***/ }),
+
+/***/ 8660:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ handler)
+/* harmony export */ });
+/* harmony import */ var openai__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2079);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([openai__WEBPACK_IMPORTED_MODULE_0__]);
+openai__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 // pages/api/dummy.ts
  // openai v4系
 // ↑ "import { OpenAIApi } from 'openai'" では無いので要注意
 async function handler(req, res) {
     // openai client
-    const openai = new external_openai_namespaceObject.OpenAI({
+    const openai = new openai__WEBPACK_IMPORTED_MODULE_0__.OpenAI({
         apiKey: process.env.OPENAI_API_KEY ?? ""
     });
     // 例: POST で promptを受け取ってChatCompletion
@@ -90,33 +127,8 @@ async function handler(req, res) {
     }
 }
 
-;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Fdummy&preferredRegion=&absolutePagePath=private-next-pages%2Fapi%2Fdummy.ts&middlewareConfigBase64=e30%3D!
-// @ts-ignore this need to be imported from next/dist to be external
-
-
-
-const PagesAPIRouteModule = pages_api_module.PagesAPIRouteModule;
-// Import the userland code.
-// @ts-expect-error - replaced by webpack/turbopack loader
-
-// Re-export the handler (should be the default export).
-/* harmony default export */ const next_route_loaderkind_PAGES_API_page_2Fapi_2Fdummy_preferredRegion_absolutePagePath_private_next_pages_2Fapi_2Fdummy_ts_middlewareConfigBase64_e30_3D_ = ((0,helpers/* hoist */.l)(dummy_namespaceObject, "default"));
-// Re-export config.
-const config = (0,helpers/* hoist */.l)(dummy_namespaceObject, "config");
-// Create and export the route module that will be consumed.
-const routeModule = new PagesAPIRouteModule({
-    definition: {
-        kind: route_kind/* RouteKind */.x.PAGES_API,
-        page: "/api/dummy",
-        pathname: "/api/dummy",
-        // The following aren't used in production.
-        bundlePath: "",
-        filename: ""
-    },
-    userland: dummy_namespaceObject
-});
-
-//# sourceMappingURL=pages-api.js.map
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ })
 
@@ -127,7 +139,7 @@ const routeModule = new PagesAPIRouteModule({
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(7518)));
+var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(6673)));
 module.exports = __webpack_exports__;
 
 })();

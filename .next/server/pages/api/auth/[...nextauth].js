@@ -53,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7153);
 /* harmony import */ var next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7305);
-/* harmony import */ var private_next_pages_api_auth_nextauth_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9980);
+/* harmony import */ var private_next_pages_api_auth_nextauth_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9025);
 // @ts-ignore this need to be imported from next/dist to be external
 
 
@@ -90,7 +90,7 @@ const routeModule = new PagesAPIRouteModule({
 var __webpack_require__ = require("../../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [172,980], () => (__webpack_exec__(7692)));
+var __webpack_exports__ = __webpack_require__.X(0, [172,25], () => (__webpack_exec__(7692)));
 module.exports = __webpack_exports__;
 
 })();

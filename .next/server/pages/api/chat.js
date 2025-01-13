@@ -19,7 +19,7 @@ module.exports = require("next/dist/server/future/route-modules/route-module.js"
 
 /***/ }),
 
-/***/ 3905:
+/***/ 8163:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -50,6 +50,7 @@ var helpers = __webpack_require__(7305);
 async function handler(req, res) {
     try {
         const { model, messages } = req.body;
+        // OpenAI API への問い合わせ
         const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -108,7 +109,7 @@ const routeModule = new PagesAPIRouteModule({
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(3905)));
+var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(8163)));
 module.exports = __webpack_exports__;
 
 })();
