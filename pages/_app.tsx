@@ -1,6 +1,6 @@
 // pages/_app.tsx
 import type { AppProps } from 'next/app'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
 import Link from 'next/link'
@@ -9,39 +9,43 @@ import Link from 'next/link'
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 
-/** チャットUI */
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-/** 
- * シンプルなナビバー: 
- * Next.jsの<Link>でページ遷移を行う
+
+/**
+ * シンプルなページ間ナビ
+ * Next.js の <Link> で 1～6ページへ自由に遷移
  */
 function NavBar() {
   return (
-    <nav style={{ textAlign: 'center', padding: '0.5rem', background: '#eee' }}>
-      <Link href="/">Page1</Link> |{' '}
-      <Link href="/page2">Page2</Link> |{' '}
-      <Link href="/page3">Page3</Link> |{' '}
-      <Link href="/page4">Page4</Link> |{' '}
-      <Link href="/page5">Page5</Link> |{' '}
-      <Link href="/page6">Page6</Link>
+    <nav style={{ textAlign: 'center', padding: '0.5rem', background: '#111', color: '#fff' }}>
+      <Link href="/" style={{ margin: '0 1rem' }}>Page1</Link>
+      <Link href="/page2" style={{ margin: '0 1rem' }}>Page2</Link>
+      <Link href="/page3" style={{ margin: '0 1rem' }}>Page3</Link>
+      <Link href="/page4" style={{ margin: '0 1rem' }}>Page4</Link>
+      <Link href="/page5" style={{ margin: '0 1rem' }}>Page5</Link>
+      <Link href="/page6" style={{ margin: '0 1rem' }}>Page6</Link>
     </nav>
   )
 }
 
-/** Attention Transformer可視化用の簡易ポップアップ例 */
+
+/**
+ * Attention Transformer 可視化用ポップアップ (簡易例)
+ */
 function AttentionPopup() {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ position: 'fixed', top: '60px', right: '1rem', zIndex: 999 }}>
+    <div style={{ position: 'fixed', top: '64px', right: '1rem', zIndex: 999 }}>
       <button
         style={{
-          background: '#444',
-          color: '#fff',
+          background: '#222',
+          color: '#66ffcc',
           border: 'none',
-          borderRadius: '4px',
+          borderRadius: '6px',
           padding: '0.5rem 1rem',
           cursor: 'pointer',
+          fontWeight: 'bold',
         }}
         onClick={() => setOpen(!open)}
       >
@@ -55,14 +59,13 @@ function AttentionPopup() {
             color: '#fff',
             padding: '1rem',
             borderRadius: '8px',
-            width: '280px',
+            width: '300px',
             boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
           }}
         >
           <h4>Attention Is All You Need (2017)</h4>
-          <p style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
-            Visualize multi-head attention or show how Q-K-V 
-            are computed in real-time. <br />
+          <p style={{ fontSize: '0.9rem', lineHeight: '1.6' }}>
+            Real-time multi-head attention visualization could go here.<br />
             <a
               href="https://arxiv.org/abs/1706.03762"
               target="_blank"
@@ -78,58 +81,42 @@ function AttentionPopup() {
   )
 }
 
+
 export default function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    // Next.js (CSR)でのみ動く
+    import('../public/js/quantum3D.js')
+    import('../public/js/starsAnim.js')
+    import('../public/js/waveAnim.js')
+  }, [])
+
   return (
     <>
       <Head>
-        <title>Quantum GPT Clone: World’s Most Advanced Transformer</title>
+        <title>Quantum GPT Clone - Ultimate Transformer</title>
         <meta
           name="description"
-          content="A GPT-4.0 based ChatGPT clone with advanced 3D animations + Attention synergy."
+          content="A GPT-4.0 ChatGPT clone with advanced 3D animations & professional unstoppable synergy."
         />
       </Head>
 
-      {/* Scriptタグで3D/星/波jsを読み込む */}
-      <Script
-        src="/js/quantum3D.js"
-        strategy="beforeInteractive"
-        onError={(e) => console.error('Failed to load quantum3D.js', e)}
-      />
-      <Script
-        src="/js/starsAnim.js"
-        strategy="beforeInteractive"
-        onError={(e) => console.error('Failed to load starsAnim.js', e)}
-      />
-      <Script
-        src="/js/waveAnim.js"
-        strategy="beforeInteractive"
-        onError={(e) => console.error('Failed to load waveAnim.js', e)}
-      />
-
-      {/* 背景Canvas */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0, left: 0,
-          width: '100%', height: '100%',
-          zIndex: 0
-        }}
-      >
+      {/* 3D/星/波 Canvas */}
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* 上部のナビ + 本文 + Attention可視化 */}
-      <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
-        <NavBar />
-        <AttentionPopup />
+      {/* ナビバー + Attentionポップアップ */}
+      <NavBar />
+      <AttentionPopup />
 
-        {/* ページコンテンツ */}
+      {/* 各ページの中身 */}
+      <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
         <Component {...pageProps} />
       </div>
 
-      {/* 画面下部に固定されるChatUI */}
+      {/* フッターにチャットUI */}
       <footer
         style={{
           position: 'fixed',
@@ -137,8 +124,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           left: 0,
           width: '100%',
           background: '#f0f0f0',
-          boxShadow: '0 -2px 5px rgba(0,0,0,0.1)',
           zIndex: 10,
+          boxShadow: '0 -2px 10px rgba(0,0,0,0.2)',
         }}
       >
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>

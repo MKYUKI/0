@@ -1,31 +1,22 @@
 // pages/page6.tsx
+import React from 'react'
 import Head from 'next/head'
+import '../public/css/kaleido6.css'
 
-export default function Page6(){
+export default function Page6() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8"/>
-        <title>Page6 | Rainbow Finale & Ultra-Transformer</title>
-        <link rel="stylesheet" href="/css/kaleidoBase.css"/>
-        <link rel="stylesheet" href="/css/kaleido6.css"/>
-        <script src="/js/page6Logic.js" defer />
+        <title>Page6 | Rainbow Finale</title>
+        <link rel="stylesheet" href="/css/kaleido6.css" />
       </Head>
 
-      <main className="kaleidoMain">
-        <div className="rainbowOverlay"></div>
-        <section className="frontContent6">
-          <h2>Finale: Rainbow Blessing & Ultra-Transformer</h2>
-          <p>
-            Page6: Melding quantum fractals with advanced 
-            <a href="https://arxiv.org/abs/2106.01345" target="_blank" rel="noreferrer">
-              Transformer scaling
-            </a>. A historical apex of civilization.
-          </p>
-          <nav>
-            <a href="/">Return to Home</a>
-          </nav>
-        </section>
+      <main className="kaleidoMain6">
+        <div className="rainbow-finale">
+          <h2>Rainbow Finale + Ultimate Transformer</h2>
+          <p>Historic apex of synergy, unstoppable unstoppable illusions, etc...</p>
+        </div>
       </main>
     </>
   )

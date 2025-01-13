@@ -1,30 +1,23 @@
 // pages/page5.tsx
+import React from 'react'
 import Head from 'next/head'
+import '../public/css/kaleido5.css'
 
-export default function Page5(){
+export default function Page5() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8"/>
-        <title>Page5 | DeepBlue Diffusion</title>
-        <link rel="stylesheet" href="/css/kaleidoBase.css"/>
-        <link rel="stylesheet" href="/css/kaleido5.css"/>
-        <script src="/js/page5Logic.js" defer />
+        <title>Page5 | DeepBlue Starfield</title>
+        <link rel="stylesheet" href="/css/kaleido5.css" />
       </Head>
 
-      <main className="kaleidoMain">
-        <canvas id="starCanvas" className="starCanvas"></canvas>
-        <section className="frontContent5">
-          <h2>DeepBlue Starfield + Diffusion Models</h2>
+      <main className="kaleidoMain5">
+        <section className="deepblue-section">
+          <h2>DeepBlue Starfield + Latent Diffusion</h2>
           <p>
-            Page5: Leveraging 
-            <a href="https://github.com/CompVis/latent-diffusion" target="_blank" rel="noreferrer">
-              latent diffusion
-            </a> for cosmic star generation in real-time.
+            A cosmic starfield realm with unstoppable unstoppable synergy...
           </p>
-          <nav>
-            <a href="/page6">⇒ Page6 (Final)</a>
-          </nav>
         </section>
       </main>
     </>
