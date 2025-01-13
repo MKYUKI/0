@@ -8,32 +8,28 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page1 (ChatGPT.com Clone, Large Chat for All)</title>
+        <title>0 - Page1 (ChatGPT.com Clone, Large Chat)</title>
       </Head>
 
       <main className="page1-main-container">
-        {/* Hero */}
         <section className="hero-section-clone">
           <div className="hero-content">
             <h1 className="hero-title">Welcome to 0</h1>
             <h2 className="hero-subtitle">Universal Public GPT Access</h2>
             <p className="hero-description">
-              Providing unstoppable synergy, illusions, quantum lines — for all beings
-              across the cosmos.
+              Freed for all cosmic beings, unstoppable synergy, illusions, quantum lines.
             </p>
           </div>
         </section>
 
-        {/* Public Info */}
         <section className="public-section">
-          <h2>Open to Everyone</h2>
+          <h2>Open for Everyone</h2>
           <p>
-            Experience GPT-4, advanced illusions, and synergy with no barriers. 
-            This platform is dedicated to universal freedom and equality.
+            No resume downloads here — just chat & synergy. Experience GPT-4
+            with a huge chat interface on any device.
           </p>
         </section>
 
-        {/* Chat UI */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">

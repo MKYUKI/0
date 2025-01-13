@@ -2,7 +2,6 @@
 (function(){
   if(typeof window==='undefined') return
 
-  // three.jsロード
   const script = document.createElement('script')
   script.src = "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"
   document.head.appendChild(script)

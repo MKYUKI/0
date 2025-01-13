@@ -21,7 +21,7 @@ export default function Page5() {
             Connect with global or local initiatives. Let 0 guide your contributions
             to maximize real-world impact.
           </p>
-          <button className="donate-button">Explore Donation Opportunities</button>
+          <button className="donate-button">Discover Donation Opportunities</button>
         </section>
 
         <ReferencesDropdown />

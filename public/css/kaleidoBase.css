@@ -1,6 +1,6 @@
 /* public/css/kaleidoBase.css */
 
-/* 背景Canvas共通 */
+/* 背景Canvas */
 .bg-canvas-layer {
   position: absolute;
   top: 0; left: 0;
@@ -10,27 +10,19 @@
   pointer-events: none;
 }
 
-/* 
- Chat Container
- 全ページ共通だが、_app.tsxで
- isPage1Overrideプロップで高さなど変更可
-*/
+/* Chat container: "7割" 高さを確保 */
 .chat-container {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  border-top: 1px solid #ddd;
   background: #fafafa;
-  overflow: hidden;
-
-  /* デフォルト:
-     Page1Override時に上書きされる */
-  height: 60vh;
-  max-width: 800px;
+  border: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
   width: 100%;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-radius: 0 0 8px 8px;
+  max-width: 100%;
+  /* 画面の70%の高さ（footer部分） */
+  height: 70vh;
+  overflow: hidden;
 }
 
 /* メッセージ一覧 */
@@ -49,6 +41,7 @@
   padding: 0.75rem;
   gap: 0.75rem;
 }
+
 .input-container textarea {
   flex: 1;
   resize: none;
@@ -63,6 +56,7 @@
   background: #fff;
   min-height: 48px;
 }
+
 .input-container button {
   background-color: #31a37d;
   color: #fff;
@@ -73,9 +67,11 @@
   border-radius: 4px;
   min-width: 84px;
 }
+
 .input-container button:hover {
   background-color: #2b9772;
 }
+
 .input-container button:disabled {
   background-color: #c4c4c4;
   cursor: not-allowed;
