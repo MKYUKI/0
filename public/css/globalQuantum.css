@@ -1,33 +1,31 @@
 /* public/css/globalQuantum.css */
-
-/* リセットなど */
+/* リセット + 全体設定 */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* 全体ベース */
 html, body {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  color: #000;
-  font-family: 'Inter', sans-serif;
-  overflow: hidden; /* チャット内部でスクロール */
+  width:100%;
+  height:100%;
+  background:#fff;
+  color:#000;
+  font-family:'Inter',sans-serif;
+  overflow:hidden; /* 全体スクロールhidden → ChatUI内部でスクロール */
 }
 
 #__next {
-  width: 100%;
-  height: 100%;
+  width:100%;
+  height:100%;
 }
 
-/* 量子的ラインイメージ (お好みで使うなら) */
+/* (オプション) 量子ラインのオーバーレイ */
 .quantum-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('/img/quantum-lines.png') center/cover no-repeat;
-  opacity: 0.1;
-  pointer-events: none;
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:url('/img/quantum-lines.png') center/cover no-repeat;
+  opacity:0.1;
+  pointer-events:none;
 }

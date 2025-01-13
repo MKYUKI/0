@@ -50,12 +50,11 @@ var helpers = __webpack_require__(7305);
 async function handler(req, res) {
     try {
         const { model, messages } = req.body;
-        // OpenAI ChatCompletions
         const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+                "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
             },
             body: JSON.stringify({
                 model: model || "gpt-4",

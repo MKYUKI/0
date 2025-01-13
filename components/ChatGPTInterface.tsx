@@ -1,7 +1,7 @@
 // components/ChatGPTInterface.tsx
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-function MessageBubble({ role, content }:{ role:'user'|'assistant'|'system', content:string }) {
+function MessageBubble({ role, content }:{ role:'user'|'assistant'|'system'; content:string }) {
   return (
     <div className={`message-bubble ${role}`}>
       {content}
@@ -18,7 +18,9 @@ export default function ChatGPTInterface() {
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior:'smooth' })
   }
-  useEffect(() => { scrollToBottom() }, [messages])
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   const handleSend = async () => {
     if(!userInput.trim()) return
@@ -31,21 +33,21 @@ export default function ChatGPTInterface() {
       const res = await fetch('/api/chat', {
         method:'POST',
         headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify({
+        body:JSON.stringify({
           model:'gpt-4',
           messages:[...messages, userMsg]
         })
       })
       const data = await res.json()
-      const text = data.choices?.[0]?.message?.content || ''
+      const text = data?.choices?.[0]?.message?.content || ''
 
-      let buffer = ''
+      let buffer=''
       let i=0
-      const intervalID = setInterval(() => {
+      const intervalID = setInterval(()=>{
         if(i<text.length){
           buffer += text.charAt(i++)
-          setMessages(prev => {
-            const last = prev[prev.length-1]
+          setMessages(prev=>{
+            const last=prev[prev.length-1]
             if(last && last.role==='assistant'){
               return [...prev.slice(0,-1), { role:'assistant', content:buffer }]
             } else {
@@ -58,7 +60,7 @@ export default function ChatGPTInterface() {
         }
       },20)
     } catch(err){
-      console.error('Error sending to /api/chat:', err)
+      console.error('Error calling /api/chat:', err)
       setIsLoading(false)
     }
   }
@@ -66,9 +68,9 @@ export default function ChatGPTInterface() {
   return (
     <div className="chat-container">
       <div className="messages-window">
-        {messages.map((m, idx)=>(
+        {messages.map((m, idx)=>
           <MessageBubble key={idx} role={m.role} content={m.content} />
-        ))}
+        )}
         <div ref={bottomRef} />
       </div>
 

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}";
+self.__REACT_LOADABLE_MANIFEST='{"_app.tsx -> ../public/js/quantum3D.js":{"id":7269,"files":["static/chunks/fb7d5399.a8728d7f61fc2fca.js","static/chunks/2d36dd80.32f825fea9861c72.js","static/chunks/269.bf32addff9361181.js"]},"_app.tsx -> ../public/js/starsAnim.js":{"id":1946,"files":["static/chunks/946.4538ed0d9cdbaa22.js"]},"_app.tsx -> ../public/js/waveAnim.js":{"id":3357,"files":["static/chunks/357.787ad3dfe9778e17.js"]}}';

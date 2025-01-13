@@ -1,29 +1,32 @@
 // pages/_app.tsx
 import type { AppProps } from 'next/app'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
+import Link from 'next/link'
 
 // グローバルCSS
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 
-// シンプルなナビ + 2017Transformer可視化
-import Link from 'next/link'
+// ChatUI
+import ChatGPTInterface from '../components/ChatGPTInterface'
+
+// シンプルナビバー
 function NavBar() {
   return (
-    <nav style={{ textAlign: 'center', padding: '0.8rem', background: '#eee', fontFamily:'Helvetica' }}>
-      <Link href="/">[Page1]</Link> |{' '}
-      <Link href="/page2">[Page2]</Link> |{' '}
-      <Link href="/page3">[Page3]</Link> |{' '}
-      <Link href="/page4">[Page4]</Link> |{' '}
-      <Link href="/page5">[Page5]</Link> |{' '}
-      <Link href="/page6">[Page6]</Link>
+    <nav style={{ textAlign:'center', padding:'0.6rem', background:'#eee' }}>
+      <Link href="/">Page1</Link> |{' '}
+      <Link href="/page2">Page2</Link> |{' '}
+      <Link href="/page3">Page3</Link> |{' '}
+      <Link href="/page4">Page4</Link> |{' '}
+      <Link href="/page5">Page5</Link> |{' '}
+      <Link href="/page6">Page6</Link>
     </nav>
   )
 }
 
-// Attention Transformerポップアップ例
+// Attention Transformer可視化ポップアップ例
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
@@ -61,51 +64,43 @@ function AttentionPopup() {
   )
 }
 
-// ChatGPT風チャットUI (Footerで固定)
-import ChatGPTInterface from '../components/ChatGPTInterface'
-
 export default function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    // クライアントサイドのみ: 3D量子パーティクル、黒星、黒波アニメを取り込み
-    import('../public/js/quantum3D.js')
-    import('../public/js/starsAnim.js')
-    import('../public/js/waveAnim.js')
-  }, [])
-
   return (
     <>
       <Head>
         <title>Quantum GPT Clone: Apex Edition</title>
         <meta
           name="description"
-          content="GPT-4.0 based super synergy with black quantum lines, unstoppable illusions, 2017 Transformer integration, 3D animations."
+          content="A GPT-4 based ChatGPT-like site with black quantum lines, advanced synergy, 2017 Transformer."
         />
       </Head>
 
-      {/* Scriptタグで3D/星/波jsを読み込み */}
-      <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
-      <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
-      <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
+      {/* Next.js Script で public/js/*.js を読み込み */}
+      <Script src="/js/quantum3D.js"  strategy="beforeInteractive" />
+      <Script src="/js/starsAnim.js"   strategy="beforeInteractive" />
+      <Script src="/js/waveAnim.js"    strategy="beforeInteractive" />
 
       {/* 背景Canvas */}
-      <div style={{ position:'fixed', top:0, left:0, width:'100%', height:'100%', zIndex:0 }}>
-        <canvas id="bg-canvas" className="bg-canvas-layer" />
+      <div style={{
+        position:'fixed', inset:0, zIndex:0
+      }}>
+        <canvas id="bg-canvas"    className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
-        <canvas id="wave-canvas" className="bg-canvas-layer" />
+        <canvas id="wave-canvas"  className="bg-canvas-layer" />
       </div>
 
-      {/* ページ内容 */}
+      {/* ページ本体 */}
       <div style={{ position:'relative', zIndex:1, minHeight:'100vh' }}>
         <NavBar />
         <AttentionPopup />
         <Component {...pageProps} />
       </div>
 
-      {/* 下部固定のChatUI */}
+      {/* フッター固定のChatUI */}
       <footer
         style={{
           position:'fixed', bottom:0, left:0, width:'100%',
-          background:'#fafafa',
+          background:'#f0f0f0',
           boxShadow:'0 -2px 5px rgba(0,0,0,0.1)',
           zIndex:10
         }}
