@@ -1,29 +1,26 @@
 // pages/page2.tsx
 import React from 'react'
 import Head from 'next/head'
-import '../public/css/kaleido2.css'
+import ReferencesDropdown from '../components/ReferencesDropdown'
+import '../public/css/page2.css'
 
 export default function Page2() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8"/>
-        <title>Page2 | GPT Search UI</title>
-        <link rel="stylesheet" href="/css/kaleido2.css" />
+        <title>Page2 | GPT Search-like UI</title>
+        <link rel="stylesheet" href="/css/page2.css"/>
       </Head>
 
-      <main className="kaleidoMain2">
-        <div className="fireworkGroup2">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div key={i} className={`fireLine2 l${i}`} />
-          ))}
-        </div>
+      <main className="page2-container">
+        <div className="quantum-swirls-overlay"></div>
 
         <section className="page2-content">
-          <h1>ChatGPT Search-Like Interface (Black Fireworks)</h1>
+          <h1>Page2: ChatGPT Search-like Interface</h1>
           <p>
-            White background, unstoppable synergy with black lines & search bar. 
-            Inspired by ChatGPT's homepage.
+            White background, black quantum lines swirling in unstoppable synergy.
+            A search UI reminiscent of ChatGPT’s homepage.
           </p>
 
           <div className="search-bar2">
@@ -31,6 +28,8 @@ export default function Page2() {
             <button>Search</button>
           </div>
         </section>
+
+        <ReferencesDropdown />
       </main>
     </>
   )

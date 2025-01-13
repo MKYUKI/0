@@ -1,8 +1,8 @@
-/* kaleido1.css */
-/* 
-   Page1: 幾何学パターンが一定周期で波打ちながら浮遊する 
-   背景は白、黒系ラインがうねり、画面下部にChatが固定
+/*
+  Page1: 幾何学パターンが一定周期で波打ちながら浮遊する
+  背景は白、黒系ラインがうねり、画面下部にChatが固定
 */
+
 
 /* ルートコンテナ(背景は白) */
 .root-container {
@@ -11,19 +11,21 @@
   height: 100%;
   background: #ffffff; /* 白 */
   overflow: hidden;
-}
-
-/* 黒い幾何学パターンが波打つアニメ(例) */
-@keyframes geoFloat1 {
+ }
+ 
+ 
+ /* 黒い幾何学パターンが波打つアニメ(例) */
+ @keyframes geoFloat1 {
   0%   { transform: translate(-50%, -50%) scale(1) rotate(0deg);   opacity: 0.6; }
   25%  { transform: translate(-40%, -55%) scale(1.1) rotate(15deg); opacity: 0.8; }
   50%  { transform: translate(-60%, -45%) scale(1.2) rotate(-10deg); opacity: 1.0; }
   75%  { transform: translate(-55%, -50%) scale(1.05) rotate(20deg); opacity: 0.7; }
   100% { transform: translate(-50%, -50%) scale(1) rotate(0deg);   opacity: 0.6; }
-}
-
-/* 幾何学SVGやCanvasを中央に配置し、アニメさせる例 */
-.geoPattern1 {
+ }
+ 
+ 
+ /* 幾何学SVGやCanvasを中央に配置し、アニメさせる例 */
+ .geoPattern1 {
   position: absolute;
   top: 50%; left: 50%;
   width: 200%;
@@ -32,10 +34,11 @@
   animation: geoFloat1 12s ease-in-out infinite;
   pointer-events: none;
   mix-blend-mode: multiply;
-}
-
-/* --- Chat Container Override --- */
-.chat-container {
+ }
+ 
+ 
+ /* --- Chat Container Override --- */
+ .chat-container {
   position: relative;
   z-index: 10;
   display: flex;
@@ -46,31 +49,35 @@
   box-sizing: border-box;
   padding-top: 1rem;
   /* ここで背景など重ねたい場合は変更 */
-}
-
-/* メッセージ吹き出し(ユーザ) */
-.message-bubble.user {
+ }
+ 
+ 
+ /* メッセージ吹き出し(ユーザ) */
+ .message-bubble.user {
   background-color: #2b2b2b; /* 深い黒 */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-/* アシスタント( ChatGPTっぽい ) */
-.message-bubble.assistant {
-  background-color: #505050; 
+ }
+ 
+ 
+ /* アシスタント( ChatGPTっぽい ) */
+ .message-bubble.assistant {
+  background-color: #505050;
   box-shadow: 0 2px 8px rgba(80, 80, 80, 0.4);
-}
-
-/* 入力欄のデザインを多少強化 */
-.input-container {
+ }
+ 
+ 
+ /* 入力欄のデザインを多少強化 */
+ .input-container {
   background: #f8f8f8;
   box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-}
-.input-container textarea {
+ }
+ .input-container textarea {
   border: 1px solid #aaa;
-}
-.input-container button {
+ }
+ .input-container button {
   background-color: #292929;
-}
-.input-container button:hover {
+ }
+ .input-container button:hover {
   background-color: #111;
-}
+ }
+ 
