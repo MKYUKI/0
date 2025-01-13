@@ -1,5 +1,6 @@
 /* public/css/kaleidoBase.css */
-/* 背景Canvasレイヤー */
+
+/* 背景Canvas共通 */
 .bg-canvas-layer {
   position: absolute;
   top: 0; left: 0;
@@ -9,60 +10,80 @@
   pointer-events: none;
 }
 
-/* Chatコンテナ */
+/* 
+ Chat Container
+ 全ページ共通だが、_app.tsxで
+ isPage1Overrideプロップで高さなど変更可
+*/
 .chat-container {
   display: flex;
   flex-direction: column;
-  max-width: 800px;
   margin: 0 auto;
-  height: 60vh;
-  position: relative;
-  background: #fdfdfd;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border-top: 1px solid #ddd;
+  background: #fafafa;
   overflow: hidden;
+
+  /* デフォルト:
+     Page1Override時に上書きされる */
+  height: 60vh;
+  max-width: 800px;
+  width: 100%;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-radius: 0 0 8px 8px;
 }
+
+/* メッセージ一覧 */
 .messages-window {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
+  scrollbar-gutter: stable;
 }
+
+/* 入力欄 */
 .input-container {
   display: flex;
   background: #f3f3f3;
   border-top: 1px solid #ccc;
+  padding: 0.75rem;
+  gap: 0.75rem;
 }
 .input-container textarea {
   flex: 1;
   resize: none;
-  border: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   padding: 12px;
   font-family: 'Helvetica', sans-serif;
   outline: none;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 0.95rem;
   color: #000;
   background: #fff;
+  min-height: 48px;
 }
 .input-container button {
-  background-color: #008060;
+  background-color: #31a37d;
   color: #fff;
   border: none;
   padding: 0 24px;
+  font-size: 0.95rem;
   cursor: pointer;
-  font-size: 14px;
+  border-radius: 4px;
+  min-width: 84px;
 }
 .input-container button:hover {
-  background-color: #00684b;
+  background-color: #2b9772;
 }
 .input-container button:disabled {
-  background-color: #999;
+  background-color: #c4c4c4;
   cursor: not-allowed;
 }
 
 /* 吹き出し */
 .message-bubble {
-  max-width: 80%;
+  max-width: 75%;
   margin: 8px 0;
   padding: 12px 16px;
   border-radius: 8px;
@@ -71,18 +92,21 @@
   color: #fff;
   font-family: 'Helvetica', sans-serif;
 }
+
 /* ユーザ(右) */
 .message-bubble.user {
   margin-left: auto;
   background: #333;
   box-shadow: 0 2px 5px rgba(51,51,51,0.3);
 }
+
 /* アシスタント(左) */
 .message-bubble.assistant {
   margin-right: auto;
   background: #555;
   box-shadow: 0 2px 5px rgba(85,85,85,0.3);
 }
+
 /* system(中央) */
 .message-bubble.system {
   margin: 0 auto;

@@ -2,40 +2,38 @@
 import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
-//import '../public/css/page1.css'
 
 export default function HomePage() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page1 (Public ChatGPT.com Clone)</title>
-        <link rel="stylesheet" href="/css/page1.css" />
+        <title>0 - Page1 (ChatGPT.com Clone, Large Chat for All)</title>
       </Head>
 
       <main className="page1-main-container">
-        {/* ヒーローセクション: chatgpt.com風 */}
+        {/* Hero */}
         <section className="hero-section-clone">
           <div className="hero-content">
             <h1 className="hero-title">Welcome to 0</h1>
             <h2 className="hero-subtitle">Universal Public GPT Access</h2>
             <p className="hero-description">
-              Enjoy unstoppable synergy with GPT-4, advanced illusions, and black quantum lines.
+              Providing unstoppable synergy, illusions, quantum lines — for all beings
+              across the cosmos.
             </p>
           </div>
         </section>
 
-        {/* ここではダウンロードリンク等を一切排除 */}
-        {/* 代わりに軽い説明を配置 */}
+        {/* Public Info */}
         <section className="public-section">
-          <h2>Open to All Beings</h2>
+          <h2>Open to Everyone</h2>
           <p>
-            0 is a universal platform where anyone, from any corner of the cosmos,
-            can freely access AI assistance and knowledge.
+            Experience GPT-4, advanced illusions, and synergy with no barriers. 
+            This platform is dedicated to universal freedom and equality.
           </p>
         </section>
 
-        {/* Chat UI  */}
+        {/* Chat UI */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">

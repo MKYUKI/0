@@ -4,11 +4,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { model, messages } = req.body
-    // OpenAI API への問い合わせ
+
+    // OpenAI API へ問い合わせ
     const openAiRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Content-Type':'application/json',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
