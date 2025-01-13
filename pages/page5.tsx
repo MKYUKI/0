@@ -8,15 +8,19 @@ export default function Page5() {
     <>
       <Head>
         <meta charSet="UTF-8"/>
-        <title>Page5 | DeepBlue Starfield</title>
-        <link rel="stylesheet" href="/css/kaleido5.css" />
+        <title>Page5 | DeepBlue Starfield? White + BlackStars</title>
+        <link rel="stylesheet" href="/css/kaleido5.css"/>
+        <script src="/js/page5Logic.js" defer />
       </Head>
 
       <main className="kaleidoMain5">
-        <section className="deepblue-section">
-          <h2>DeepBlue Starfield + Latent Diffusion</h2>
+        <canvas id="starCanvas5" className="starCanvas5"></canvas>
+
+        <section className="frontContent5">
+          <h2>Latent Diffusion meets BlackStar Universe</h2>
           <p>
-            A cosmic starfield realm with unstoppable unstoppable synergy...
+            3D starfield illusions drifting in black-white synergy,
+            referencing <strong>Latent Diffusion Models</strong>.
           </p>
         </section>
       </main>

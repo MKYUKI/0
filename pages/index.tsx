@@ -8,7 +8,7 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Page1 | Ultimate GPT Clone</title>
+        <title>Page1 | QuantumGPT - ChatGPT Clone</title>
         <link rel="stylesheet" href="/css/kaleido1.css" />
       </Head>
 
@@ -16,7 +16,7 @@ export default function HomePage() {
         <section className="page1-hero">
           <h1>MasakiKusaka - Page1</h1>
           <p>
-            White background, black quantum lines, unstoppable synergy.
+            White background, black quantum lines swirling with unstoppable synergy.
             <br />
             Resume & CareerHistory below...
           </p>

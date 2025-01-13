@@ -8,15 +8,19 @@ export default function Page4() {
     <>
       <Head>
         <meta charSet="UTF-8"/>
-        <title>Page4 | Beige Canvas + NeRF illusions</title>
-        <link rel="stylesheet" href="/css/kaleido4.css" />
+        <title>Page4 | NeRF illusions + 3D synergy</title>
+        <link rel="stylesheet" href="/css/kaleido4.css"/>
+        <script src="/js/page4Logic.js" defer />
       </Head>
 
       <main className="kaleidoMain4">
-        <section className="page4-nerf">
-          <h2>Beige + NeRF illusions</h2>
+        <canvas id="canvas4" className="nerfCanvas4"></canvas>
+
+        <section className="frontContent4">
+          <h2>Beige + BlackWire NeRF illusions</h2>
           <p>
-            3D illusions & advanced 2017 Transformer synergy...
+            A swirling torus wireframe with unstoppable synergy,
+            referencing <strong>NeRF-based illusions</strong> + 2017 Transformer.
           </p>
         </section>
       </main>

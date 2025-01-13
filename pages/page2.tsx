@@ -13,13 +13,19 @@ export default function Page2() {
       </Head>
 
       <main className="kaleidoMain2">
-        <section className="page2-search">
-          <h1>Page2: ChatGPT Search-like Interface</h1>
+        <div className="fireworkGroup2">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className={`fireLine2 l${i}`} />
+          ))}
+        </div>
+
+        <section className="page2-content">
+          <h1>ChatGPT Search-Like Interface (Black Fireworks)</h1>
           <p>
-            White BG, black lines. 
-            <strong> Searching unstoppable unstoppable code </strong>
-            with 2017 Transformer synergy...
+            White background, unstoppable synergy with black lines & search bar. 
+            Inspired by ChatGPT's homepage.
           </p>
+
           <div className="search-bar2">
             <input type="text" placeholder="Search unstoppable illusions..." />
             <button>Search</button>

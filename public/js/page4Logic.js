@@ -1,35 +1,42 @@
+// public/js/page4Logic.js
+(function(){
+  if(typeof window === 'undefined') return;
 
-// page4Logic.js
-window.addEventListener('load', ()=>{
   const canvas = document.getElementById('canvas4');
-  if(!canvas)return;
+  if(!canvas) return;
   const ctx = canvas.getContext('2d');
-   function resize(){
+
+  function resize(){
     canvas.width = canvas.clientWidth;
     canvas.height= canvas.clientHeight;
   }
   resize();
   window.addEventListener('resize', resize);
-   let tStart = performance.now();
-   function animate(){
+
+  let tStart = performance.now();
+
+  function animate(){
     requestAnimationFrame(animate);
-    const t = (performance.now()-tStart)*0.001;
-     // 背景クリア
+    const t = (performance.now() - tStart)*0.002;
+
+    // 背景クリア
     ctx.clearRect(0,0,canvas.width,canvas.height);
-     // 波を描く
-    ctx.strokeStyle= 'rgba(100,80,30,0.5)';
-    ctx.lineWidth=2;
-    ctx.beginPath();
-    for(let x=0; x<canvas.width; x+=10){
-      let y = canvas.height/2 + Math.sin((x*0.01)+ t)*50;
-      if(x===0) ctx.moveTo(x,y);
-      else ctx.lineTo(x,y);
+
+    // 擬似トーラスを描く
+    ctx.save();
+    ctx.translate(canvas.width/2, canvas.height/2);
+    ctx.rotate(t);
+    ctx.strokeStyle='rgba(0,0,0,0.6)';
+    ctx.lineWidth=1;
+
+    for(let i=0; i<16; i++){
+      ctx.beginPath();
+      ctx.arc(0,0,100,0,Math.PI*2);
+      ctx.stroke();
+      ctx.rotate(Math.PI/8);
     }
-    ctx.stroke();
+
+    ctx.restore();
   }
   animate();
-});
-
-
-
-
+})();
