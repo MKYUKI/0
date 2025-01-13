@@ -1,49 +1,49 @@
-/* kaleido5.css */
-/* 
-   ブラックホール的スパイラルアニメ
-*/
-
-/* スパイラルのkeyframes */
-@keyframes blackholeSpin {
-  0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1);   opacity: 0.8; }
-  40%  { transform: translate(-50%, -50%) rotate(180deg) scale(0.7); opacity: 1.0; }
-  60%  { transform: translate(-50%, -50%) rotate(360deg) scale(1.2); opacity: 1.0; }
-  100% { transform: translate(-50%, -50%) rotate(540deg) scale(1);   opacity: 0.8; }
+/* public/css/page5.css */
+.page5-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
 }
-
-.spiral5 {
+.page5-canvas {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 150vw; height: 150vw;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    rgba(0,0,0,0.0),
-    rgba(0,0,0,0.8),
-    rgba(0,0,0,0.0)
-  );
-  animation: blackholeSpin 12s infinite ease-in-out;
-  pointer-events: none;
-  mix-blend-mode: multiply;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
 }
-
-/* フロント枠 */
-.frontContent5 {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  background: rgba(0,0,0,0.05);
-  backdrop-filter: blur(6px);
-  color: #000;
-  padding: 3rem;
-  border-radius: 12px;
+/* フローティング枠 */
+.page5-content {
+  position: relative;
+  z-index: 1;
   text-align: center;
+  max-width: 700px;
+  margin: 4rem auto;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
-
-/* チャット吹き出しをさらに濃く */
-.message-bubble.user {
-  background-color: #0d0d0d;
+.page5-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
 }
-.message-bubble.assistant {
-  background-color: #2b2b2b;
+.page5-content p {
+  color: #444;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+.donate-button {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  color: #fff;
+  background: #d35400;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.donate-button:hover {
+  background: #b03a00;
 }

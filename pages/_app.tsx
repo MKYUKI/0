@@ -15,45 +15,68 @@ import ChatGPTInterface from '../components/ChatGPTInterface'
 // シンプルナビバー
 function NavBar() {
   return (
-    <nav style={{ textAlign:'center', padding:'0.6rem', background:'#eee' }}>
-      <Link href="/">Page1</Link> |{' '}
-      <Link href="/page2">Page2</Link> |{' '}
-      <Link href="/page3">Page3</Link> |{' '}
-      <Link href="/page4">Page4</Link> |{' '}
-      <Link href="/page5">Page5</Link> |{' '}
-      <Link href="/page6">Page6</Link>
+    <nav style={{ textAlign: 'center', padding: '0.6rem', background: '#222' }}>
+      <Link href="/">
+        <span style={{ color: '#fff', margin: '0 8px' }}>Page1</span>
+      </Link>
+      <Link href="/page2">
+        <span style={{ color: '#fff', margin: '0 8px' }}>Page2</span>
+      </Link>
+      <Link href="/page3">
+        <span style={{ color: '#fff', margin: '0 8px' }}>Page3</span>
+      </Link>
+      <Link href="/page4">
+        <span style={{ color: '#fff', margin: '0 8px' }}>Page4</span>
+      </Link>
+      <Link href="/page5">
+        <span style={{ color: '#fff', margin: '0 8px' }}>Page5</span>
+      </Link>
+      <Link href="/page6">
+        <span style={{ color: '#fff', margin: '0 8px' }}>Page6</span>
+      </Link>
     </nav>
   )
 }
 
-// Attention Transformer可視化ポップアップ例
+// Attention Transformer可視化ポップアップ（オプション例）
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
-    <div style={{ position:'fixed', top:'60px', right:'1rem', zIndex:999 }}>
+    <div style={{ position: 'fixed', top: '60px', right: '1rem', zIndex: 999 }}>
       <button
         style={{
-          background:'#444', color:'#fff', border:'none',
-          borderRadius:'4px', padding:'0.5rem 1rem', cursor:'pointer'
+          background: '#444',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '4px',
+          padding: '0.5rem 1rem',
+          cursor: 'pointer'
         }}
-        onClick={()=>setOpen(!open)}
+        onClick={() => setOpen(!open)}
       >
-        { open ? 'Hide Transformer' : 'Show Transformer' }
+        {open ? 'Hide Transformer' : 'Show Transformer'}
       </button>
       {open && (
-        <div style={{
-          marginTop:'0.5rem', background:'rgba(0,0,0,0.85)', color:'#fff',
-          padding:'1rem', borderRadius:'8px', width:'280px',
-          boxShadow:'0 4px 8px rgba(0,0,0,0.3)'
-        }}>
+        <div
+          style={{
+            marginTop: '0.5rem',
+            background: 'rgba(0,0,0,0.85)',
+            color: '#fff',
+            padding: '1rem',
+            borderRadius: '8px',
+            width: '300px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+          }}
+        >
           <h4>Attention Is All You Need (2017)</h4>
-          <p style={{ fontSize:'0.9rem', lineHeight:'1.4' }}>
-            Visualize multi-head attention or show how Q-K-V
-            are computed in real-time.<br/>
+          <p style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
+            Visualize multi-head attention or watch how Q-K-V
+            are computed in real-time.<br />
             <a
               href="https://arxiv.org/abs/1706.03762"
-              target="_blank" rel="noreferrer"
-              style={{ color:'#66ffcc', textDecoration:'underline' }}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: '#66ffcc', textDecoration: 'underline' }}
             >
               [arXiv:1706.03762]
             </a>
@@ -68,29 +91,27 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Quantum GPT Clone: Apex Edition</title>
+        <title>0 - The Ultimate Quantum GPT Clone</title>
         <meta
           name="description"
-          content="A GPT-4 based ChatGPT-like site with black quantum lines, advanced synergy, 2017 Transformer."
+          content="0: A GPT-4 based ChatGPT-like site with black quantum lines, advanced synergy, unstoppable illusions."
         />
       </Head>
 
       {/* Next.js Script で public/js/*.js を読み込み */}
-      <Script src="/js/quantum3D.js"  strategy="beforeInteractive" />
-      <Script src="/js/starsAnim.js"   strategy="beforeInteractive" />
-      <Script src="/js/waveAnim.js"    strategy="beforeInteractive" />
+      <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
+      <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
+      <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
       {/* 背景Canvas */}
-      <div style={{
-        position:'fixed', inset:0, zIndex:0
-      }}>
-        <canvas id="bg-canvas"    className="bg-canvas-layer" />
+      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
+        <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
-        <canvas id="wave-canvas"  className="bg-canvas-layer" />
+        <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
       {/* ページ本体 */}
-      <div style={{ position:'relative', zIndex:1, minHeight:'100vh' }}>
+      <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
         <NavBar />
         <AttentionPopup />
         <Component {...pageProps} />
@@ -99,13 +120,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       {/* フッター固定のChatUI */}
       <footer
         style={{
-          position:'fixed', bottom:0, left:0, width:'100%',
-          background:'#f0f0f0',
-          boxShadow:'0 -2px 5px rgba(0,0,0,0.1)',
-          zIndex:10
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          width: '100%',
+          background: '#111',
+          boxShadow: '0 -2px 5px rgba(0,0,0,0.5)',
+          zIndex: 10
         }}
       >
-        <div style={{ maxWidth:'800px', margin:'0 auto' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <ChatGPTInterface />
         </div>
       </footer>

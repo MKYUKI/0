@@ -8,21 +8,30 @@ export default function Page3() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8"/>
-        <title>Page3 | 2017 Transformer + PurpleLightning</title>
-        <link rel="stylesheet" href="/css/page3.css"/>
+        <meta charSet="UTF-8" />
+        <title>0 - Page3 (Global Collaboration)</title>
+        <link rel="stylesheet" href="/css/page3.css" />
       </Head>
 
       <main className="page3-container">
-        <div className="attention-ring-bg"></div>
-
-        <section className="page3-content">
-          <h2>PurpleLightning + 2017 Transformer</h2>
+        <section className="global-collab-hero">
+          <div className="collab-overlay"></div>
+          <h1>Global Collaboration Arena</h1>
           <p>
-            Real-time synergy with Q-K-V arcs, referencing
-            <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
-              [Attention Is All You Need, 2017]
-            </a>
+            Join forces with the entire planet. Brainstorm solutions for
+            humanity’s greatest challenges, backed by 0’s unstoppable AI synergy.
+          </p>
+        </section>
+
+        <section className="collab-section">
+          <h2>Submit Your Ideas</h2>
+          <div className="collab-form">
+            <input type="text" placeholder="Your Name or Group" />
+            <textarea placeholder="Describe your proposal or challenge..."></textarea>
+            <button>Submit</button>
+          </div>
+          <p className="collab-note">
+            All submissions will be analyzed by 0 to find potential collaborators and solutions worldwide.
           </p>
         </section>
 

@@ -8,23 +8,21 @@ export default function Page5() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8"/>
-        <title>Page5 | DeepBlue Starfield + Latent Diffusion</title>
-        <link rel="stylesheet" href="/css/page5.css"/>
+        <meta charSet="UTF-8" />
+        <title>0 - Page5 (Global Impact & Philanthropy)</title>
+        <link rel="stylesheet" href="/css/page5.css" />
         <script src="/js/page5Logic.js" defer />
       </Head>
 
       <main className="page5-container">
         <canvas id="deepblue-star-canvas" className="page5-canvas"></canvas>
-
         <section className="page5-content">
-          <h2>DeepBlue Starfield + Latent Diffusion</h2>
+          <h2>Empower the World Through Action</h2>
           <p>
-            A cosmic realm with unstoppable synergy. 
-            <a href="https://arxiv.org/abs/2112.10752" target="_blank" rel="noreferrer">
-              Latent Diffusion
-            </a>
+            Contribute to global solutions, from UN SDGs to local grassroots
+            initiatives. Let 0 guide you in maximizing your social impact.
           </p>
+          <button className="donate-button">Discover Donation Opportunities</button>
         </section>
 
         <ReferencesDropdown />

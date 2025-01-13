@@ -1,31 +1,41 @@
 /* public/css/globalQuantum.css */
-/* リセット + 全体設定 */
+/* Reset */
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
-  width:100%;
-  height:100%;
-  background:#fff;
-  color:#000;
-  font-family:'Inter',sans-serif;
-  overflow:hidden; /* 全体スクロールhidden → ChatUI内部でスクロール */
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden; /* 全体スクロールhidden → ChatUI内部でスクロール */
 }
 
 #__next {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 }
 
-/* (オプション) 量子ラインのオーバーレイ */
-.quantum-overlay {
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:url('/img/quantum-lines.png') center/cover no-repeat;
-  opacity:0.1;
-  pointer-events:none;
+/* 背景に超淡い量子ラインを流し込むアニメ */
+@keyframes quantumSweep {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 2000px 0;
+  }
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('/img/quantum-lines.png') repeat-x;
+  opacity: 0.02;
+  animation: quantumSweep 60s linear infinite;
+  pointer-events: none;
+  z-index: -1;
 }

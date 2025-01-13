@@ -9,38 +9,40 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Page1 | Ultimate GPT Clone</title>
+        <title>0 - Page1 (Public ChatGPT.com Clone)</title>
         <link rel="stylesheet" href="/css/page1.css" />
       </Head>
 
       <main className="page1-main-container">
-        <div className="quantum-lines-overlay"></div>
-
-        <section className="page1-content">
-          <h1>MasakiKusaka - Page1</h1>
-          <p>
-            White background + black quantum lines swirling with unstoppable synergy.<br/>
-            Experience the ultimate 2017 Transformer synergy plus advanced 3D illusions.
-          </p>
-
-          <div className="resume-links">
-            <h3>Resume & Career History</h3>
-            <p>
-              <a href="/docs/MasakiKusaka_Resume.docx" download>Resume(Word)</a> |{' '}
-              <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume(PDF)</a>
-            </p>
-            <p>
-              <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Career(Word)</a> |{' '}
-              <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>Career(PDF)</a>
+        {/* ヒーローセクション: chatgpt.com風 */}
+        <section className="hero-section-clone">
+          <div className="hero-content">
+            <h1 className="hero-title">Welcome to 0</h1>
+            <h2 className="hero-subtitle">Universal Public GPT Access</h2>
+            <p className="hero-description">
+              Enjoy unstoppable synergy with GPT-4, advanced illusions, and black quantum lines.
             </p>
           </div>
         </section>
 
-        <div className="page1-chat-wrap">
-          <p style={{ textAlign:'center', color:'#777', marginBottom:'1rem' }}>
-            (Below is an actual Chat interface!)
+        {/* ここではダウンロードリンク等を一切排除 */}
+        {/* 代わりに軽い説明を配置 */}
+        <section className="public-section">
+          <h2>Open to All Beings</h2>
+          <p>
+            0 is a universal platform where anyone, from any corner of the cosmos,
+            can freely access AI assistance and knowledge.
           </p>
-        </div>
+        </section>
+
+        {/* Chat UI  */}
+        <section className="chat-ui-section">
+          <div className="chat-ui-wrapper">
+            <p className="chat-ui-note">
+              (Below is an actual AI chat interface powered by 0)
+            </p>
+          </div>
+        </section>
 
         <ReferencesDropdown />
       </main>

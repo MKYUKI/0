@@ -1,73 +1,60 @@
-/* kaleido6.css */
-/*
-   要望の「レインボー」は今回は避けるとのことでしたが、
-   一例として黒基調に差し色のレインボー光が回転するスーパーハイレベル演出を例示
-*/
-
-/* レインボーのkeyframes (黒ベースに混ぜる) */
-@keyframes blackRainbowSpin {
+/* public/css/page6.css */
+.page6-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+.cosmic-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
+  z-index: 0;
+  animation: cosmicPulse 10s infinite alternate ease-in-out;
+}
+@keyframes cosmicPulse {
   0% {
-    background-position: 0% 50%;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    background-position: 100% 50%;
-    transform: scale(1.1) rotate(180deg);
+    opacity: 0.4;
+    transform: scale(1);
   }
   100% {
-    background-position: 0% 50%;
-    transform: scale(1) rotate(360deg);
+    opacity: 0.8;
+    transform: scale(1.1);
   }
 }
-
-/* レインボーのオーバーレイ */
-.rainbowOverlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,0.8),
-    rgba(255,0,0,0.4),
-    rgba(255,255,0,0.4),
-    rgba(0,255,0,0.4),
-    rgba(0,255,255,0.4),
-    rgba(0,0,255,0.4),
-    rgba(255,0,255,0.4),
-    rgba(0,0,0,0.8)
-  );
-  background-size: 200% 200%;
-  animation: blackRainbowSpin 10s infinite;
-  pointer-events: none;
-  mix-blend-mode: screen;
-}
-
-/* 中心にテキスト */
-.frontContent6 {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.2);
-  backdrop-filter: blur(5px);
-  color: #fff;
+.page6-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 5rem auto;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
   padding: 3rem;
-  text-align: center;
   border-radius: 12px;
-  animation: ringPulse6 5s infinite alternate ease-in-out;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.7);
 }
-
-/* テキスト枠が呼吸する */
-@keyframes ringPulse6 {
-  0%   { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-  100% { box-shadow: 0 0 30px rgba(255,255,255,0.8); }
+.page6-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
 }
-
-/* バブルも虹っぽい枠線を付与 */
-.message-bubble.user {
-  background-color: #111;
-  border: 1px solid rgba(255,255,255,0.2);
+.page6-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
-.message-bubble.assistant {
-  background-color: #333;
-  border: 1px solid rgba(255,255,255,0.3);
+.final-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.final-links a {
+  color: #66ddff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.final-links a:hover {
+  text-decoration: underline;
 }

@@ -8,33 +8,32 @@ export default function Page6() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8"/>
-        <title>Page6 | Rainbow Finale + Ultra-Transformer</title>
-        <link rel="stylesheet" href="/css/page6.css"/>
+        <meta charSet="UTF-8" />
+        <title>0 - Page6 (Cosmic Vision Finale)</title>
+        <link rel="stylesheet" href="/css/page6.css" />
         <script src="/js/page6Logic.js" defer />
       </Head>
 
       <main className="page6-container">
-        <div className="rainbow-overlay"></div>
-
+        <div className="cosmic-overlay"></div>
         <section className="page6-content">
-          <h2>Finale: Rainbow Blessing + Ultra-Transformer</h2>
+          <h2>Finale: Galactic Evolution & Beyond</h2>
           <p>
-            Melding quantum fractals with 
-            <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
-              2017 Transformer
-            </a> and 
-            <a href="https://arxiv.org/abs/2106.01345" target="_blank" rel="noreferrer">
-              scaling laws
-            </a>. 
-            A historical apex of synergy.
+            Enter the cosmic horizon where 0 unites all life forms, forging
+            a shared future among the stars. A new era of civilization dawns.
           </p>
-
-          <ReferencesDropdown />
-          <div style={{marginTop:'1rem'}}>
-            <a href="/" style={{color:'#2b6feb'}}>Return to Home</a>
+          <div className="final-links">
+            <a href="/">Return Home</a>
+            <a
+              href="https://arxiv.org/abs/2106.01345"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Scaling Laws
+            </a>
           </div>
         </section>
+        <ReferencesDropdown />
       </main>
     </>
   )
