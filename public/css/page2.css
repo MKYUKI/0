@@ -1,46 +1,77 @@
 /* public/css/page2.css */
-
-.page2-container {
-  width: 100%;
-  min-height: 100vh;
-  background: #fff; /* 最外を白 */
-  position: relative;
-}
-
-/* 白背景 placeholder */
-.outer-white-bg {
-  width: 100%;
-  height: 100%;
+.page2-main-container {
+  /* 
+     画面の下に固定フッターがあるため、最低限の高さを確保したい
+     → min-height: calc(100vh - 60px) 等
+     ただしフッターを足しても余裕あるように ...
+  */
+  min-height: calc(100vh - 60px);
+  /* background: #fff; // or black (but you prefer the black quantum animation) */
   background: #fff;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 中央を黒にして文字白、リンク緑 */
-.black-foreground {
+/* 量子的黒背景セクション */
+.black-quantum-bg {
+  position: relative;
+  width: 100%;
+  /* ここで大きめに確保 */
+  min-height: 80vh; /* 大きめにとり、アニメ空間を再現 */
+  background-color: black; /* fallback */
+}
+
+/* 量子アニメ: 以前のように広めに */
+.black-quantum-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/quantum-line1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  opacity: 0.3; /* 以前よりやや強く */
+  animation: quantumPulse 12s infinite alternate ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes quantumPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); opacity: 0.6; }
+  100% { transform: scale(1.1); opacity: 0.3; }
+}
+
+/* 白ブロック */
+.white-page-foreground {
+  position: relative;
+  z-index: 2;
   max-width: 900px;
-  margin: 4rem auto;
+  margin: 0 auto;
   padding: 2rem;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   border-radius: 12px;
-  text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  top: 10%; /* 画面の上から少し下げて配置 */
 }
 
-.black-foreground h1 {
+/* Heading */
+.white-page-foreground h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #333;
 }
 
+/* text */
 .intro {
-  color: #ccc;
+  color: #444;
   margin-bottom: 2rem;
-  max-width: 600px;
-  margin: 0.5rem auto 2rem;
 }
 
-/* 緑リンク */
+/* link */
 .resume-section a {
-  color: #00ff99;
+  color: #008060;
   font-weight: bold;
   text-decoration: none;
   margin: 0 0.5rem;

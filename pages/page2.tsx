@@ -8,20 +8,23 @@ export default function Page2() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page2 (MasakiKusaka Homepage - Inverted)</title>
+        <title>0 - Page2 (MasakiKusaka Homepage)</title>
       </Head>
 
-      <main className="page2-container">
-        <section className="outer-white-bg">
-          <div className="black-foreground">
-            <h1>MasakiKusaka Official Home - by 0</h1>
+      {/**
+       * ★ ここで minHeight を確保し、上部アニメをしっかり表示
+       */}
+      <main className="page2-main-container">
+        <section className="black-quantum-bg">
+          <div className="white-page-foreground">
+            <h1>MasakiKusaka’s Official Home - by 0</h1>
             <p className="intro">
-              Black container with white text, green link references below. 
-              Word/PDF downloads included.
+              (Restored) Majestic synergy with black quantum lines. 
+              Enough vertical space to enjoy the original animation.
             </p>
 
             <div className="resume-section">
-              <h3>Resume & Career</h3>
+              <h3>Resume & Career History</h3>
               <p>
                 <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a> |{' '}
                 <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>

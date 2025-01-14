@@ -6,7 +6,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// ★ グローバルCSS一括 import
+// ★ グローバルCSS
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 import '../public/css/page1.css'
@@ -18,7 +18,6 @@ import '../public/css/page6.css'
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-/** 固定ヘッダー: 高さ60px程度 */
 function NavBar() {
   return (
     <header
@@ -36,9 +35,7 @@ function NavBar() {
         color: '#fff',
       }}
     >
-      {/* 左上に GPT-4 Model の明記 */}
       <span style={{ fontWeight: 'bold', marginRight: '2rem' }}>GPT-4 Model</span>
-
       <nav style={{ display: 'flex', gap: '1rem', fontSize: '1rem' }}>
         <Link href="/">
           <span style={{ cursor: 'pointer' }}>Page1</span>
@@ -63,7 +60,6 @@ function NavBar() {
   )
 }
 
-/** Attention可視化(オプション) */
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
@@ -126,37 +122,34 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    // もしクライアントサイドで動的インポートしたいJSがあればここ
+    // dynamic import if needed
   }, [])
 
   return (
     <>
       <Head>
-        <title>0 - The Ultimate GPT-4 Quantum Clone</title>
+        <title>0 - GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
+          content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
         />
-        {/* PC/スマホ完全対応: スクロール問題解消 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* 背景アニメスクリプト */}
+      {/* Scripts for background animation */}
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
-      {/* 背景Canvas */}
+      {/* Background Canvas */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/**
-       * ★ ここが重要 ★
-       * body全体をスクロール可能にするため、
-       * Next.jsの最上位ラッパに overflow: auto を付与
+      {/** 
+       * Body Scroll 
        */}
       <div
         id="app-wrapper"
@@ -164,26 +157,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           position: 'relative',
           zIndex: 1,
           minHeight: '100vh',
-          overflowX: 'hidden', // 横スクロール抑制
-          overflowY: 'auto',  // 縦スクロールOK
+          overflowY: 'auto',
+          overflowX: 'hidden',
         }}
       >
-        {/* 固定ヘッダー */}
         <NavBar />
         <AttentionPopup />
 
-        {/**
-         * 上部 60px 分はヘッダーが覆う。
-         * 下部にフッター(チャット欄)を配置。
-         */}
-        <div style={{ marginTop: '60px', marginBottom: '0px' }}>
+        {/* ヘッダーが60px → main content needs marginTop:60px */}
+        <div style={{ marginTop: '60px', paddingBottom: '0' }}>
           <Component {...pageProps} />
         </div>
 
-        {/**
-         * フッター(チャットUI)を固定化し、
-         * 1ページ目だけチャット欄を非常に大きく(PC,スマホともに)
-         */}
+        {/** Fixed footer: ChatUI */}
         <footer
           style={{
             position: 'fixed',
@@ -196,7 +182,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           }}
         >
           <ChatGPTInterface
-            isPage1Override={router.pathname === '/'} // 1ページ目のみ特大
+            // 1ページ目だけチャット欄を巨大化
+            isPage1Override={router.pathname === '/'}
           />
         </footer>
       </div>
