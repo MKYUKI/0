@@ -1,5 +1,6 @@
 /* public/css/page1.css */
 
+/* 全体: 100% */
 .page1-main-container {
   width: 100%;
   min-height: 100vh;
@@ -7,12 +8,12 @@
   overflow: hidden;
 }
 
-/* Hero ~ chatgpt.com風 */
+/* ヒーロー: chatgpt.com風 */
 .hero-section-clone {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 55vh;
+  height: 50vh;
   background: linear-gradient(135deg, #fff, #f7f7f7 40%, #ededed);
   position: relative;
   overflow: hidden;
@@ -24,79 +25,68 @@
 }
 
 .hero-title {
-  font-size: 3.2rem;
-  font-weight: 800;
+  font-size: 2.8rem;
+  font-weight: 700;
   color: #333;
   margin-bottom: 0.5rem;
 }
 .hero-subtitle {
-  font-size: 1.8rem;
-  font-weight: 400;
+  font-size: 1.6rem;
   color: #666;
   margin-bottom: 1rem;
 }
 .hero-description {
-  color: #444;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
   font-size: 1.1rem;
+  color: #444;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto;
 }
 
-/* フェードインパーティクル */
+/* アニメ */
 @keyframes fadeParticles {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity:0; transform: translateY(20px);}
+  100% { opacity:1; transform: translateY(0);}
 }
 .hero-section-clone::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: url('/img/quantum-lines.png') center/cover no-repeat;
   opacity: 0.15;
-  animation: fadeParticles 3s ease-in-out forwards;
+  animation: fadeParticles 2.5s ease-in-out forwards;
 }
 
-/* Public Info */
+/* Info */
 .public-section {
-  text-align: center;
   padding: 2rem 1rem;
   background: #fafafa;
+  text-align: center;
 }
 .public-section h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
   color: #333;
+  margin-bottom: 1rem;
 }
 .public-section p {
-  max-width: 700px;
-  margin: 0 auto;
   color: #555;
   line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* ChatUIセクション */
+/* Chat UI placeholder */
 .chat-ui-section {
   padding: 2rem 1rem;
   background: #fff;
 }
 .chat-ui-wrapper {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
 }
 .chat-ui-note {
-  color: #555;
-  margin-bottom: 1rem;
+  color: #666;
   font-style: italic;
   font-size: 0.9rem;
 }

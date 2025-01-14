@@ -8,30 +8,25 @@ export default function Page2() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page2 (MasakiKusaka Homepage, 70% Chat)</title>
+        <title>0 - Page2 (MasakiKusaka Home, Inverted Colors)</title>
       </Head>
 
       <main className="page2-container">
-        {/* 外側 背景は真っ白 */}
         <section className="outer-white-bg">
-          {/* 黒いコンテナ */}
-          <div className="black-page-foreground">
+          <div className="black-foreground">
             <h1>MasakiKusaka Official Home - by 0</h1>
             <p className="intro">
-              Word / PDF download links are shown in white text,
-              and the background is black with green links.
+              Black container, white text, green link, with Word/PDF downloads below.
             </p>
 
             <div className="resume-section">
-              <h3>Resume & Career History</h3>
+              <h3>Resume & Career</h3>
               <p>
-                <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a>{' '}
-                |{' '}
+                <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a> |{' '}
                 <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>
               </p>
               <p>
-                <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Career (Word)</a>{' '}
-                |{' '}
+                <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Career (Word)</a> |{' '}
                 <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>Career (PDF)</a>
               </p>
             </div>

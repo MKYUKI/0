@@ -4,8 +4,9 @@ import React, { useEffect } from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-// ★ すべてのグローバルCSSを一括インポート（Next.js要件）
+// ★ グローバルCSS一括 import
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 import '../public/css/page1.css'
@@ -18,57 +19,61 @@ import '../public/css/page6.css'
 // ChatUI
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-// シンプルナビバー
+/** スティッキーナビバー + GPT-4表記 + Page1～6リンク */
 function NavBar() {
   return (
-    <nav
+    <header
       style={{
-        textAlign: 'center',
-        padding: '0.6rem',
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 9999,
         background: '#222',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0.6rem 1rem',
         color: '#fff',
-        fontSize: '1rem',
       }}
     >
-      {/* 左上に「GPT-4」などモデル名を明確に示す例 */}
-      <span style={{ marginRight: '2rem', fontWeight: 'bold' }}>
-        GPT-4 Model
-      </span>
+      {/* 左上に GPT-4 Model の明記 */}
+      <span style={{ fontWeight: 'bold', marginRight: '2rem' }}>GPT-4 Model</span>
 
-      <Link href="/">
-        <span style={{ margin: '0 8px', cursor: 'pointer' }}>Page1</span>
-      </Link>
-      <Link href="/page2">
-        <span style={{ margin: '0 8px', cursor: 'pointer' }}>Page2</span>
-      </Link>
-      <Link href="/page3">
-        <span style={{ margin: '0 8px', cursor: 'pointer' }}>Page3</span>
-      </Link>
-      <Link href="/page4">
-        <span style={{ margin: '0 8px', cursor: 'pointer' }}>Page4</span>
-      </Link>
-      <Link href="/page5">
-        <span style={{ margin: '0 8px', cursor: 'pointer' }}>Page5</span>
-      </Link>
-      <Link href="/page6">
-        <span style={{ margin: '0 8px', cursor: 'pointer' }}>Page6</span>
-      </Link>
-    </nav>
+      <nav style={{ display: 'flex', gap: '1rem', fontSize: '1rem' }}>
+        <Link href="/">
+          <span style={{ cursor: 'pointer' }}>Page1</span>
+        </Link>
+        <Link href="/page2">
+          <span style={{ cursor: 'pointer' }}>Page2</span>
+        </Link>
+        <Link href="/page3">
+          <span style={{ cursor: 'pointer' }}>Page3</span>
+        </Link>
+        <Link href="/page4">
+          <span style={{ cursor: 'pointer' }}>Page4</span>
+        </Link>
+        <Link href="/page5">
+          <span style={{ cursor: 'pointer' }}>Page5</span>
+        </Link>
+        <Link href="/page6">
+          <span style={{ cursor: 'pointer' }}>Page6</span>
+        </Link>
+      </nav>
+    </header>
   )
 }
 
-// Attention Transformer可視化ポップアップ (オプション例)
+/** Attention可視化のオプション例 */
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
-
   return (
     <div
       style={{
         position: 'fixed',
         top: '60px',
         right: '1rem',
-        zIndex: 999,
-        fontSize: '0.85rem',
+        zIndex: 9999,
+        fontSize: '0.9rem',
       }}
     >
       <button
@@ -77,7 +82,7 @@ function AttentionPopup() {
           color: '#fff',
           border: 'none',
           borderRadius: '4px',
-          padding: '0.5rem 1rem',
+          padding: '0.4rem 0.8rem',
           cursor: 'pointer',
         }}
         onClick={() => setOpen(!open)}
@@ -87,21 +92,20 @@ function AttentionPopup() {
       {open && (
         <div
           style={{
-            marginTop: '0.5rem',
+            marginTop: '0.3rem',
             background: 'rgba(0,0,0,0.85)',
             color: '#fff',
             padding: '1rem',
             borderRadius: '8px',
-            width: '300px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+            width: '280px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
           }}
         >
-          <h4 style={{ marginBottom: '0.5rem' }}>
+          <h4 style={{ marginBottom: '0.3rem' }}>
             Attention Is All You Need (2017)
           </h4>
-          <p style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
-            Visualize multi-head attention or see how Q-K-V are computed in
-            real-time.
+          <p style={{ fontSize: '0.88rem', lineHeight: '1.4' }}>
+            Visualize multi-head attention or see how Q-K-V are computed in real-time.
             <br />
             <a
               href="https://arxiv.org/abs/1706.03762"
@@ -119,38 +123,37 @@ function AttentionPopup() {
 }
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
   useEffect(() => {
-    // 例: クライアントサイドでJSを動的インポート
-    // import('../public/js/starsAnim.js')
-    // import('../public/js/waveAnim.js')
-    // import('../public/js/quantum3D.js')
+    // dynamic import for client if needed
   }, [])
 
   return (
     <>
       <Head>
-        <title>0 - Ultimate GPT Clone</title>
+        <title>0 - The Ultimate GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="0: GPT-4 site with unstoppable illusions, quantum lines, advanced synergy."
+          content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
         />
-        {/* Responsive Meta Tag */}
+        {/* 超重要: PC/スマホ完全対応 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* 背景アニメ用JS */}
+      {/* スクリプト: 幻想的量子線アニメ */}
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
-      {/* 背景Canvas */}
+      {/* 背景Canvas (黒い量子線 + 星 + 波) */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ページ本体 */}
+      {/* ページ本体: stickyヘッダーを考慮し、下部コンテンツが隠れないよう注意 */}
       <div
         style={{
           position: 'relative',
@@ -163,13 +166,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <NavBar />
         <AttentionPopup />
 
-        {/* メイン表示 */}
+        {/* メインコンテンツ */}
         <div style={{ flex: 1 }}>
           <Component {...pageProps} />
         </div>
       </div>
 
-      {/* フッター固定のChatUI */}
+      {/* フッター固定チャットUI
+         1ページ目だけチャット欄大きく
+         router.pathname === '/' で判定*/}
       <footer
         style={{
           position: 'fixed',
@@ -177,25 +182,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           left: 0,
           width: '100%',
           background: '#f0f0f0',
-          boxShadow: '0 -2px 5px rgba(0,0,0,0.1)',
-          zIndex: 10,
+          boxShadow: '0 -2px 6px rgba(0,0,0,0.2)',
+          zIndex: 10000,
         }}
       >
-        {/* 
-          1ページ目 (index.tsx) は画面の 90% の大きさにする 
-          2〜6ページ目は 70% にする 
-          → ChatGPTInterface に isHomePage (or isPage1) を渡す 
-        */}
-        {/* 
-          ここでページ判定: たとえば pageProps から route 情報を取り、"/"ならisHome=true 
-          or もっと簡単に contextで読み取るなど 
-        */}
-        {/*
-          今回は簡易的に: 
-          if (typeof window !== 'undefined' && window.location.pathname === '/') ...
-          ただしSSRの場合は要工夫
-        */}
-        <ChatGPTInterface />
+        <ChatGPTInterface
+          isPage1Override={router.pathname === '/'}  // 1ページ目のみ特大
+        />
       </footer>
     </>
   )

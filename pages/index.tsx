@@ -2,44 +2,44 @@
 import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
-// ★ （グローバルCSSは _app.tsx で import しているのでここではimportしない）
 
 export default function HomePage() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page1 (ChatGPT.com Clone, 90% Chat)</title>
+        <title>0 - Page1 (ChatGPT.com Clone, Extra Large Chat)</title>
       </Head>
 
       <main className="page1-main-container">
-        {/* Hero */}
+        {/* ヒーロー */}
         <section className="hero-section-clone">
           <div className="hero-content">
-            <h1 className="hero-title">Welcome to 0</h1>
-            <h2 className="hero-subtitle">Universal Public GPT Access</h2>
+            <h1 className="hero-title">お手伝いできることはありますか？</h1>
+            <h2 className="hero-subtitle">
+              (Reference: <strong>chatgpt.com</strong>)
+            </h2>
             <p className="hero-description">
-              Providing unstoppable synergy, illusions, quantum lines — for all beings
-              across the cosmos. <br />
-              <strong>Ref: chatgpt.com</strong> (参考文献としてこのUIを使用しています)
+              ユーザのコメントは画面右上、アシスタント回答は左下から表示されます。
+              ファイル(Word, PDF, 画像 etc.)もアップロード可能です。
             </p>
           </div>
         </section>
 
-        {/* Public Info */}
+        {/* Info */}
         <section className="public-section">
-          <h2>Open to Everyone</h2>
+          <h2>Universal GPT-4 Access</h2>
           <p>
-            Experience GPT-4 with no barriers. This platform is dedicated to universal 
-            freedom and equality, across Earth and beyond.
+            We offer unstoppable synergy with GPT-4 to all cosmic beings. Free, open, and
+            harnessing illusions of quantum lines.
           </p>
         </section>
 
-        {/* Chat UI (フッター固定になる想定だが一応区切りセクションだけ) */}
+        {/* UI placeholder */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">
-              (Below is an actual AI chat interface powered by 0)
+              (The real chat bar is pinned at the bottom - just like chatgpt.com!)
             </p>
           </div>
         </section>

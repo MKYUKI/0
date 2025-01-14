@@ -11,7 +11,16 @@ function MessageBubble({
   return <div className={`message-bubble ${role}`}>{content}</div>
 }
 
-export default function ChatGPTInterface() {
+interface ChatProps {
+  isPage1Override?: boolean
+}
+
+/**
+ * 1ページ目のみ: height → ほぼ画面全体
+ * 2～6ページ目: height 60～70%程度
+ * さらにファイルアップロード(Word/PDF/画像/その他)可能。
+ */
+export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
   const [messages, setMessages] = useState<
     { role: 'user' | 'assistant' | 'system'; content: string }[]
   >([])
@@ -19,30 +28,30 @@ export default function ChatGPTInterface() {
   const [isLoading, setIsLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
-  // チャット欄の高さを 1ページ目 9割 (0.9 * window.innerHeight)
-  // 2〜6ページ目 7割 (0.7 * window.innerHeight) にする例
-  // Next.js SSRとの兼ね合いで、typeof window を使いクライアントサイドで判定
-  const [chatHeight, setChatHeight] = useState<string>('70vh')
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const currentPath = window.location.pathname
-      if (currentPath === '/') {
-        // Page1
-        setChatHeight('90vh')
-      } else {
-        // Page2〜6
-        setChatHeight('70vh')
-      }
-    }
-  }, [])
-
+  // 常に最下部へ
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // ファイルアップロード → Base64化してメッセージに表示
+  const handleFileUpload = async (files: FileList | null) => {
+    if (!files || !files[0]) return
+    const file = files[0]
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const base64 = e.target?.result
+      if (!base64 || typeof base64 !== 'string') return
+      const fileMsg = {
+        role: 'user' as const,
+        content: `File uploaded: ${file.name} (size=${file.size} bytes, base64Len=${base64.length})`,
+      }
+      setMessages((prev) => [...prev, fileMsg])
+    }
+    reader.readAsDataURL(file)
+  }
 
   const handleSend = async () => {
     if (!userInput.trim()) return
@@ -80,91 +89,107 @@ export default function ChatGPTInterface() {
           clearInterval(intervalID)
           setIsLoading(false)
         }
-      }, 20)
+      }, 25)
     } catch (err) {
-      console.error('Error calling /api/chat:', err)
+      console.error(err)
       setIsLoading(false)
     }
   }
 
-  // インラインスタイルで高さを設定
-  // 例: border や幅を適宜アレンジ
-  // ここで height: chatHeight
+  // レイアウト
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto',
-    width: '100%', // 横は100%
-    maxWidth: '1400px',
-    height: chatHeight, // '90vh' か '70vh'
+    background: 'rgba(255,255,255,0.9)',
     border: '1px solid #ddd',
     borderRadius: '8px 8px 0 0',
-    background: '#fafafa',
     overflow: 'hidden',
+    margin: '0 auto',
   }
 
-  const messagesWindowStyle: React.CSSProperties = {
+  if (isPage1Override) {
+    // 1ページ目 → ほぼ全画面
+    containerStyle.width = '100%'
+    containerStyle.maxWidth = '100%'
+    containerStyle.height = 'calc(100vh - 70px)' // sticky nav の高さ差し引き
+  } else {
+    // 2~6ページ目
+    containerStyle.width = '100%'
+    containerStyle.maxWidth = '900px'
+    containerStyle.height = '60vh' // 大きさは適宜変更可
+  }
+
+  const topAreaStyle: React.CSSProperties = {
     flex: 1,
     overflowY: 'auto',
-    padding: '16px',
+    padding: '1rem',
   }
 
-  const inputContainerStyle: React.CSSProperties = {
+  const bottomAreaStyle: React.CSSProperties = {
     display: 'flex',
-    background: '#f3f3f3',
-    borderTop: '1px solid #ccc',
+    gap: '0.5rem',
     padding: '0.75rem',
-    gap: '0.75rem',
+    borderTop: '1px solid #ccc',
+    background: '#f3f3f3',
   }
 
   const textAreaStyle: React.CSSProperties = {
     flex: 1,
     resize: 'none',
     border: '1px solid #ccc',
-    borderRadius: 4,
-    padding: 12,
-    fontFamily: 'Helvetica, sans-serif',
-    outline: 'none',
-    boxSizing: 'border-box' as const,
+    borderRadius: '4px',
+    padding: '0.75rem',
     fontSize: '0.95rem',
-    color: '#000',
-    background: '#fff',
   }
 
-  const buttonStyle: React.CSSProperties = {
-    backgroundColor: '#31a37d',
+  const fileButtonStyle: React.CSSProperties = {
+    background: '#fff',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    padding: '0.3rem',
+  }
+
+  const sendButtonStyle: React.CSSProperties = {
+    background: '#31a37d',
     color: '#fff',
     border: 'none',
-    padding: '0 24px',
-    fontSize: '0.95rem',
+    borderRadius: '4px',
+    padding: '0 16px',
+    fontSize: '1rem',
     cursor: 'pointer',
-    borderRadius: 4,
-    minWidth: 84,
   }
 
   return (
     <div style={containerStyle}>
-      <div style={messagesWindowStyle}>
+      <div style={topAreaStyle}>
         {messages.map((m, idx) => (
           <MessageBubble key={idx} role={m.role} content={m.content} />
         ))}
         <div ref={bottomRef} />
       </div>
 
-      <div style={inputContainerStyle}>
+      <div style={bottomAreaStyle}>
+        {/* ファイル送信用 Input */}
+        <input
+          type="file"
+          style={fileButtonStyle}
+          onChange={(e) => handleFileUpload(e.target.files)}
+        />
+
         <textarea
           style={textAreaStyle}
-          placeholder="Send a message (text/word/pdf/image/etc.)"
+          placeholder="(Inspired by chatgpt.com) Enter your text or attach files..."
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           disabled={isLoading}
         />
         <button
-          style={buttonStyle}
+          style={sendButtonStyle}
           onClick={handleSend}
           disabled={isLoading || !userInput.trim()}
         >
-          {isLoading ? 'Thinking...' : 'Send'}
+          {isLoading ? '...' : 'Send'}
         </button>
       </div>
     </div>

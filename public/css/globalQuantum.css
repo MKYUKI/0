@@ -40,3 +40,26 @@ body::after {
   pointer-events: none;
   z-index: -1;
 }
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
+  .black-foreground {
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+
+  .page6-content {
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  /* etc... */
+}
