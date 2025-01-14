@@ -16,8 +16,8 @@ export default function Page3() {
           <div className="collab-overlay"></div>
           <h1>Global Collaboration Arena</h1>
           <p>
-            Unite the entire planet. Brainstorm solutions, 
-            with unstoppable synergy from 0.
+            Join forces with the entire planet. Brainstorm solutions for
+            humanity’s greatest challenges, backed by 0’s unstoppable AI synergy.
           </p>
         </section>
 
@@ -25,11 +25,11 @@ export default function Page3() {
           <h2>Submit Your Ideas</h2>
           <div className="collab-form">
             <input type="text" placeholder="Your Name or Group" />
-            <textarea placeholder="Your proposal or challenge..." />
+            <textarea placeholder="Describe your proposal or challenge..." />
             <button>Submit</button>
           </div>
           <p className="collab-note">
-            0 will analyze and suggest potential collaborators worldwide.
+            All submissions will be analyzed by 0 to find potential collaborators worldwide.
           </p>
         </section>
 

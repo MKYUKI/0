@@ -16,10 +16,10 @@ export default function Page4() {
         <canvas id="page4-canvas" className="page4-canvas"></canvas>
 
         <section className="page4-content">
-          <h2>Quantum AI & NeRF Visualization</h2>
+          <h2>Quantum AI Research & Holographic Exploration</h2>
           <p>
-            Delve into advanced illusions, from Transformers to fractals, 
-            pushing the next wave of cosmic discovery.
+            Delve into real-time NeRF illusions, Transformer visualizations,
+            and advanced quantum fractals. A synergy found nowhere else.
           </p>
           <div className="link-list">
             <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">

@@ -50,8 +50,8 @@ var helpers = __webpack_require__(7305);
 async function handler(req, res) {
     try {
         const { question } = req.body;
-        // Just echo
-        const answer = `Simulated response for: "${question}". [Quantum fractals, 2017 Transformer references inside.]`;
+        // ダミー応答
+        const answer = `Simulated response for: "${question}". [Quantum fractals, synergy, 2017 Transformer references inside.]`;
         res.status(200).json({
             answer
         });

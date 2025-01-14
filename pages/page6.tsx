@@ -16,9 +16,10 @@ export default function Page6() {
         <div className="cosmic-overlay"></div>
 
         <section className="page6-content">
-          <h2>Finale: Galactic Vision & Future</h2>
+          <h2>Finale: Galactic Evolution & Beyond</h2>
           <p>
-            Merge all civilizations into a cosmic tapestry, forging new frontiers beyond Earth.
+            Enter the cosmic horizon where 0 unites all life forms, forging
+            a shared future among the stars. A new era of civilization dawns.
           </p>
           <div className="final-links">
             <a href="/">Return Home</a>

@@ -16,29 +16,32 @@ exports.modules = {
 
 
 function ReferencesDropdown() {
-    const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+    const [open, setOpen] = react__WEBPACK_IMPORTED_MODULE_1___default().useState(false);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "references-dropdown",
         style: {
-            marginTop: "2rem",
-            textAlign: "center"
+            textAlign: "center",
+            marginTop: "1rem"
         },
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                className: "references-button",
+                onClick: ()=>setOpen(!open),
                 style: {
-                    background: "#000",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "4px",
+                    backgroundColor: "#f0f0f0",
+                    color: "#333",
+                    border: "1px solid #ccc",
                     padding: "0.5rem 1rem",
+                    borderRadius: "4px",
                     cursor: "pointer"
                 },
-                onClick: ()=>setOpen(!open),
                 children: open ? "Hide References" : "Show References"
             }),
             open && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "references-content",
                 style: {
                     marginTop: "1rem",
-                    background: "#fefefe",
+                    background: "#fafafa",
                     border: "1px solid #ccc",
                     borderRadius: "4px",
                     textAlign: "left",
@@ -48,8 +51,8 @@ function ReferencesDropdown() {
                     fontSize: "0.95rem"
                 },
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h3", {
-                        children: "Key References"
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                        children: "Some references for AI research, quantum lines, synergy, etc."
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
                         children: [
@@ -58,15 +61,11 @@ function ReferencesDropdown() {
                                     href: "https://arxiv.org/abs/1706.03762",
                                     target: "_blank",
                                     rel: "noreferrer",
+                                    style: {
+                                        color: "#0066cc",
+                                        textDecoration: "underline"
+                                    },
                                     children: "Attention Is All You Need (2017)"
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    href: "https://arxiv.org/abs/2106.01345",
-                                    target: "_blank",
-                                    rel: "noreferrer",
-                                    children: "Scaling Laws for Neural Language Models"
                                 })
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
@@ -74,23 +73,23 @@ function ReferencesDropdown() {
                                     href: "https://arxiv.org/abs/2003.08934",
                                     target: "_blank",
                                     rel: "noreferrer",
-                                    children: "NeRF: Representing Scenes as Neural Radiance Fields"
+                                    style: {
+                                        color: "#0066cc",
+                                        textDecoration: "underline"
+                                    },
+                                    children: "NeRF (2020)"
                                 })
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    href: "https://arxiv.org/abs/2112.10752",
+                                    href: "https://arxiv.org/abs/2106.01345",
                                     target: "_blank",
                                     rel: "noreferrer",
-                                    children: "Latent Diffusion Models"
-                                })
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                    href: "https://arxiv.org/abs/1701.06538",
-                                    target: "_blank",
-                                    rel: "noreferrer",
-                                    children: "Sparsely-Gated Mixture-of-Experts"
+                                    style: {
+                                        color: "#0066cc",
+                                        textDecoration: "underline"
+                                    },
+                                    children: "Scaling Laws"
                                 })
                             })
                         ]

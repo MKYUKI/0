@@ -12,16 +12,17 @@ export default function Page2() {
       </Head>
 
       <main className="page2-container">
-        {/* 黒い量子線 + 白ページ */}
+        {/* 黒い量子背景 → 白いpage */}
         <section className="black-quantum-bg">
           <div className="white-page-foreground">
             <h1>MasakiKusaka’s Official Home - by 0</h1>
             <p className="intro">
-              The grand platform with black quantum lines swirling in majestic synergy.
+              Behold the pinnacle of cosmic creation. Welcome to the grand platform
+              where black quantum lines swirl in majestic synergy.
             </p>
 
             <div className="resume-section">
-              <h3>Resume & Career</h3>
+              <h3>Resume & Career History Download</h3>
               <p>
                 <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a> |{' '}
                 <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>

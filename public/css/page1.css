@@ -1,5 +1,6 @@
 /* public/css/page1.css */
 
+/* 全体 */
 .page1-main-container {
   width: 100%;
   min-height: 100vh;
@@ -7,7 +8,7 @@
   overflow: hidden;
 }
 
-/* chatgpt.com風 hero */
+/* ヒーローセクション: chatgpt.com風 */
 .hero-section-clone {
   display: flex;
   align-items: center;
@@ -43,9 +44,10 @@
   font-size: 1.1rem;
 }
 
+/* 背景粒子アニメ */
 @keyframes fadeParticles {
-  0% { opacity: 0; transform: translateY(30px);}
-  100% { opacity: 1; transform: translateY(0);}
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 .hero-section-clone::before {
   content: "";
@@ -57,7 +59,7 @@
   animation: fadeParticles 3s ease-in-out forwards;
 }
 
-/* public info */
+/* Publicセクション */
 .public-section {
   text-align: center;
   padding: 2rem 1rem;
@@ -75,7 +77,7 @@
   line-height: 1.6;
 }
 
-/* chat ui */
+/* ChatUIセクション */
 .chat-ui-section {
   padding: 2rem 1rem;
   background: #fff;

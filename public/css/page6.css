@@ -1,4 +1,5 @@
 /* public/css/page6.css */
+
 .page6-container {
   width: 100%;
   min-height: 100vh;
@@ -6,6 +7,7 @@
   position: relative;
   overflow: hidden;
 }
+
 .cosmic-overlay {
   position: absolute;
   inset: 0;
@@ -23,6 +25,7 @@
     transform: scale(1.1);
   }
 }
+
 .page6-content {
   position: relative;
   z-index: 1;
@@ -36,25 +39,30 @@
   color: #fff;
   box-shadow: 0 8px 30px rgba(0,0,0,0.7);
 }
+
 .page6-content h2 {
   font-size: 2.2rem;
   margin-bottom: 1rem;
 }
+
 .page6-content p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
 }
+
 .final-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
 }
+
 .final-links a {
   color: #66ddff;
   text-decoration: none;
   font-weight: bold;
 }
+
 .final-links a:hover {
   text-decoration: underline;
 }

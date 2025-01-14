@@ -1,6 +1,5 @@
 /* public/css/page2.css */
 
-/* 全体 */
 .page2-container {
   width: 100%;
   min-height: 100vh;
@@ -16,7 +15,6 @@
   height: 100%;
 }
 
-/* 背景アニメ */
 @keyframes quantumPulse {
   0% {
     background-position: 0 0;
@@ -31,7 +29,6 @@
     opacity: 0.2;
   }
 }
-
 .black-quantum-bg::before {
   content: "";
   position: absolute;
@@ -44,7 +41,7 @@
   pointer-events: none;
 }
 
-/* 白いページ (前面) */
+/* 白いページ */
 .white-page-foreground {
   position: relative;
   z-index: 1;

@@ -1,6 +1,6 @@
 // public/js/waveAnim.js
 (function(){
-  if(typeof window==='undefined')return
+  if(typeof window==='undefined') return
 
   window.addEventListener('load', ()=>{
     const canvas = document.getElementById('wave-canvas')
@@ -24,7 +24,7 @@
       ctx.beginPath()
       const amplitude=40, wavelength=0.02, speed=0.04
       for(let x=0; x<w; x++){
-        const y=Math.sin(x*wavelength + waveOffset)*amplitude + h/2
+        const y = Math.sin(x*wavelength + waveOffset)*amplitude + h/2
         ctx.lineTo(x,y)
       }
       ctx.strokeStyle='rgba(0,0,0,0.15)'

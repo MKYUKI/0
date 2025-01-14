@@ -50,7 +50,7 @@ var helpers = __webpack_require__(7305);
 async function handler(req, res) {
     try {
         const { model, messages } = req.body;
-        // OpenAI API への問い合わせ
+        // OpenAI API へ問い合わせ
         const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {

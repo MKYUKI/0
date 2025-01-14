@@ -18,6 +18,7 @@ __webpack_require__.d(__webpack_exports__, {
 var jsx_runtime = __webpack_require__(5893);
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__(6689);
+var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
 // EXTERNAL MODULE: external "next/head"
 var head_ = __webpack_require__(968);
 var head_default = /*#__PURE__*/__webpack_require__.n(head_);
@@ -150,7 +151,7 @@ function ChatGPTInterface() {
                 className: "input-container",
                 children: [
                     /*#__PURE__*/ jsx_runtime.jsx("textarea", {
-                        placeholder: "Ask 0 anything...",
+                        placeholder: "Send a message...",
                         value: userInput,
                         onChange: (e)=>setUserInput(e.target.value),
                         disabled: isLoading
@@ -167,12 +168,13 @@ function ChatGPTInterface() {
 }
 
 ;// CONCATENATED MODULE: ./pages/_app.tsx
+// pages/_app.tsx
 
 
 
 
 
-// ▼ ここで全てのグローバルCSSをインポート ▼
+// ★ グローバルCSSをまとめてインポート
 
 
 
@@ -181,10 +183,9 @@ function ChatGPTInterface() {
 
 
 
-// もしPostCSSで何か設定があれば、postcss.config.jsで行う。 
-// "content" など Next.js 非推奨のフィールドは削除してください。
+// ChatUI
 
-// シンプルなNavBar例
+// シンプルナビバー
 function NavBar() {
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("nav", {
         style: {
@@ -198,7 +199,8 @@ function NavBar() {
                 children: /*#__PURE__*/ jsx_runtime.jsx("span", {
                     style: {
                         color: "#fff",
-                        margin: "0 8px"
+                        margin: "0 8px",
+                        cursor: "pointer"
                     },
                     children: "Page1"
                 })
@@ -208,7 +210,8 @@ function NavBar() {
                 children: /*#__PURE__*/ jsx_runtime.jsx("span", {
                     style: {
                         color: "#fff",
-                        margin: "0 8px"
+                        margin: "0 8px",
+                        cursor: "pointer"
                     },
                     children: "Page2"
                 })
@@ -218,7 +221,8 @@ function NavBar() {
                 children: /*#__PURE__*/ jsx_runtime.jsx("span", {
                     style: {
                         color: "#fff",
-                        margin: "0 8px"
+                        margin: "0 8px",
+                        cursor: "pointer"
                     },
                     children: "Page3"
                 })
@@ -228,7 +232,8 @@ function NavBar() {
                 children: /*#__PURE__*/ jsx_runtime.jsx("span", {
                     style: {
                         color: "#fff",
-                        margin: "0 8px"
+                        margin: "0 8px",
+                        cursor: "pointer"
                     },
                     children: "Page4"
                 })
@@ -238,7 +243,8 @@ function NavBar() {
                 children: /*#__PURE__*/ jsx_runtime.jsx("span", {
                     style: {
                         color: "#fff",
-                        margin: "0 8px"
+                        margin: "0 8px",
+                        cursor: "pointer"
                     },
                     children: "Page5"
                 })
@@ -248,7 +254,8 @@ function NavBar() {
                 children: /*#__PURE__*/ jsx_runtime.jsx("span", {
                     style: {
                         color: "#fff",
-                        margin: "0 8px"
+                        margin: "0 8px",
+                        cursor: "pointer"
                     },
                     children: "Page6"
                 })
@@ -256,17 +263,90 @@ function NavBar() {
         ]
     });
 }
+// AttentionPopup コンポーネント（正しく JSX を return する）
+function AttentionPopup() {
+    const [open, setOpen] = external_react_default().useState(false);
+    return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+        style: {
+            position: "fixed",
+            top: "60px",
+            right: "1rem",
+            zIndex: 999
+        },
+        children: [
+            /*#__PURE__*/ jsx_runtime.jsx("button", {
+                style: {
+                    background: "#444",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "4px",
+                    padding: "0.5rem 1rem",
+                    cursor: "pointer"
+                },
+                onClick: ()=>setOpen(!open),
+                children: open ? "Hide Transformer" : "Show Transformer"
+            }),
+            open && /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                style: {
+                    marginTop: "0.5rem",
+                    background: "rgba(0,0,0,0.85)",
+                    color: "#fff",
+                    padding: "1rem",
+                    borderRadius: "8px",
+                    width: "300px",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.3)"
+                },
+                children: [
+                    /*#__PURE__*/ jsx_runtime.jsx("h4", {
+                        children: "Attention Is All You Need (2017)"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime.jsxs)("p", {
+                        style: {
+                            fontSize: "0.9rem",
+                            lineHeight: "1.4"
+                        },
+                        children: [
+                            "Visualize multi-head attention or see how Q-K-V are computed in real-time.",
+                            /*#__PURE__*/ jsx_runtime.jsx("br", {}),
+                            /*#__PURE__*/ jsx_runtime.jsx("a", {
+                                href: "https://arxiv.org/abs/1706.03762",
+                                target: "_blank",
+                                rel: "noreferrer",
+                                style: {
+                                    color: "#66ffcc",
+                                    textDecoration: "underline"
+                                },
+                                children: "[arXiv:1706.03762]"
+                            })
+                        ]
+                    })
+                ]
+            })
+        ]
+    });
+}
 function MyApp({ Component, pageProps }) {
+    (0,external_react_.useEffect)(()=>{
+    // 例: クライアントサイドでJSを動的に読み込むなら:
+    // import('../public/js/starsAnim.js')
+    // import('../public/js/waveAnim.js')
+    // import('../public/js/quantum3D.js')
+    // ここでは <Script> で読み込むのでコメントアウト
+    }, []);
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsxs)((head_default()), {
                 children: [
                     /*#__PURE__*/ jsx_runtime.jsx("title", {
-                        children: "0 - The Ultimate Quantum GPT Clone"
+                        children: "0 - Ultimate GPT Clone"
                     }),
                     /*#__PURE__*/ jsx_runtime.jsx("meta", {
                         name: "description",
-                        content: "0: A GPT-4 based ChatGPT-like site with black quantum lines, advanced synergy, unstoppable illusions."
+                        content: "0: GPT-4 site with unstoppable illusions, quantum lines, advanced synergy."
+                    }),
+                    /*#__PURE__*/ jsx_runtime.jsx("meta", {
+                        name: "viewport",
+                        content: "width=device-width, initial-scale=1.0"
                     })
                 ]
             }),
@@ -311,6 +391,7 @@ function MyApp({ Component, pageProps }) {
                 },
                 children: [
                     /*#__PURE__*/ jsx_runtime.jsx(NavBar, {}),
+                    /*#__PURE__*/ jsx_runtime.jsx(AttentionPopup, {}),
                     /*#__PURE__*/ jsx_runtime.jsx(Component, {
                         ...pageProps
                     })
@@ -322,13 +403,13 @@ function MyApp({ Component, pageProps }) {
                     bottom: 0,
                     left: 0,
                     width: "100%",
-                    background: "#111",
-                    boxShadow: "0 -2px 5px rgba(0,0,0,0.5)",
+                    background: "#f0f0f0",
+                    boxShadow: "0 -2px 5px rgba(0,0,0,0.1)",
                     zIndex: 10
                 },
                 children: /*#__PURE__*/ jsx_runtime.jsx("div", {
                     style: {
-                        maxWidth: "800px",
+                        maxWidth: "1400px",
                         margin: "0 auto"
                     },
                     children: /*#__PURE__*/ jsx_runtime.jsx(ChatGPTInterface, {})

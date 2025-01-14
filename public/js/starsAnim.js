@@ -8,7 +8,7 @@
 
     const ctx = canvas.getContext('2d')
     let w,h
-    const starCount=150
+    const starCount = 150
     let stars=[]
 
     function resize(){
@@ -39,14 +39,15 @@
       requestAnimationFrame(animate)
       ctx.clearRect(0,0,w,h)
       stars.forEach(s=>{
-        s.x+=s.vx; s.y+=s.vy
+        s.x+=s.vx
+        s.y+=s.vy
         if(s.x<0) s.x+=w
         if(s.x>w) s.x-=w
         if(s.y<0) s.y+=h
         if(s.y>h) s.y-=h
 
         ctx.beginPath()
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2)
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2)
         ctx.fillStyle=`rgba(0,0,0,${s.alpha})`
         ctx.fill()
       })

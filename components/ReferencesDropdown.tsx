@@ -1,67 +1,71 @@
 // components/ReferencesDropdown.tsx
-import React, { useState } from 'react'
+import React from 'react'
 
 export default function ReferencesDropdown() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = React.useState(false)
 
   return (
-    <div style={{ marginTop:'2rem', textAlign:'center' }}>
+    <div className="references-dropdown" style={{ textAlign: 'center', marginTop: '1rem' }}>
       <button
+        className="references-button"
+        onClick={() => setOpen(!open)}
         style={{
-          background:'#000', color:'#fff',
-          border:'none', borderRadius:'4px', padding:'0.5rem 1rem',
-          cursor:'pointer'
+          backgroundColor: '#f0f0f0',
+          color: '#333',
+          border: '1px solid #ccc',
+          padding: '0.5rem 1rem',
+          borderRadius: '4px',
+          cursor: 'pointer'
         }}
-        onClick={()=>setOpen(!open)}
       >
-        { open ? 'Hide References' : 'Show References' }
+        {open ? 'Hide References' : 'Show References'}
       </button>
+
       {open && (
-        <div style={{
-          marginTop:'1rem', background:'#fefefe', border:'1px solid #ccc',
-          borderRadius:'4px', textAlign:'left', padding:'1rem',
-          maxWidth:'600px', margin:'1rem auto', fontSize:'0.95rem'
-        }}>
-          <h3>Key References</h3>
+        <div
+          className="references-content"
+          style={{
+            marginTop: '1rem',
+            background: '#fafafa',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            textAlign: 'left',
+            padding: '1rem',
+            maxWidth: '600px',
+            margin: '1rem auto',
+            fontSize: '0.95rem'
+          }}
+        >
+          <p>Some references for AI research, quantum lines, synergy, etc.</p>
           <ul>
             <li>
               <a
                 href="https://arxiv.org/abs/1706.03762"
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: '#0066cc', textDecoration: 'underline' }}
               >
                 Attention Is All You Need (2017)
               </a>
             </li>
             <li>
               <a
-                href="https://arxiv.org/abs/2106.01345"
-                target="_blank" rel="noreferrer"
-              >
-                Scaling Laws for Neural Language Models
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://arxiv.org/abs/2003.08934"
-                target="_blank" rel="noreferrer"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: '#0066cc', textDecoration: 'underline' }}
               >
-                NeRF: Representing Scenes as Neural Radiance Fields
+                NeRF (2020)
               </a>
             </li>
             <li>
               <a
-                href="https://arxiv.org/abs/2112.10752"
-                target="_blank" rel="noreferrer"
+                href="https://arxiv.org/abs/2106.01345"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: '#0066cc', textDecoration: 'underline' }}
               >
-                Latent Diffusion Models
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://arxiv.org/abs/1701.06538"
-                target="_blank" rel="noreferrer"
-              >
-                Sparsely-Gated Mixture-of-Experts
+                Scaling Laws
               </a>
             </li>
           </ul>
