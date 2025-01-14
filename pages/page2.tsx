@@ -8,21 +8,20 @@ export default function Page2() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page2 (MasakiKusaka Homepage)</title>
+        <title>0 - Page2 | MasakiKusaka Home</title>
       </Head>
 
-      <main className="page2-container">
-        {/* 黒い量子背景 → 白いpage */}
-        <section className="black-quantum-bg">
-          <div className="white-page-foreground">
-            <h1>MasakiKusaka’s Official Home - by 0</h1>
+      <main className="page2-reverse-container">
+        {/* 背景: 真っ白 */}
+        <section className="reverse-bg-section">
+          <div className="reverse-foreground">
+            <h1>MasakiKusaka Official Home - by 0</h1>
             <p className="intro">
-              Behold the pinnacle of cosmic creation. Welcome to the grand platform
-              where black quantum lines swirl in majestic synergy.
+              Word/PDFファイルなどをこちらでダウンロードできます。
             </p>
 
             <div className="resume-section">
-              <h3>Resume & Career History Download</h3>
+              <h3>Resume & Career (Download)</h3>
               <p>
                 <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a> |{' '}
                 <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>

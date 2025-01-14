@@ -1,84 +1,54 @@
 /* public/css/page2.css */
 
-.page2-container {
+/* 背景を真っ白 & Foregroundを黒背景 + 白文字 + 緑リンク */
+
+.page2-reverse-container {
   width: 100%;
   min-height: 100vh;
-  background: #000; /* 黒 */
-  position: relative;
+  background: #fff; /* 背景 白 */
   overflow: hidden;
 }
 
-/* 黒い量子的背景 */
-.black-quantum-bg {
+.reverse-bg-section {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  padding: 4rem 1rem;
 }
 
-@keyframes quantumPulse {
-  0% {
-    background-position: 0 0;
-    opacity: 0.2;
-  }
-  50% {
-    background-position: 200px 100px;
-    opacity: 0.6;
-  }
-  100% {
-    background-position: 0 0;
-    opacity: 0.2;
-  }
-}
-.black-quantum-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('/img/quantum-line1.png');
-  background-repeat: repeat;
-  background-position: center;
-  animation: quantumPulse 12s infinite alternate ease-in-out;
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-/* 白いページ */
-.white-page-foreground {
-  position: relative;
-  z-index: 1;
-  max-width: 1000px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background: #fff;
+.reverse-foreground {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #000; /* 黒背景 */
+  color: #fff;      /* 白文字 */
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  padding: 2rem;
   text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-.white-page-foreground h1 {
-  font-size: 2.2rem;
-  color: #333;
+.reverse-foreground h1 {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
 .intro {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin: 0.5rem auto 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 
-/* レジュメDL */
 .resume-section h3 {
   font-size: 1.4rem;
   margin-bottom: 0.8rem;
-  color: #222;
+  color: #66ffcc; /* 緑系にしてみる */
 }
+
 .resume-section a {
-  color: #008060;
+  color: #66ffcc;
   font-weight: bold;
   text-decoration: none;
-  margin: 0 0.5rem;
+  margin: 0 0.3rem;
 }
 .resume-section a:hover {
   text-decoration: underline;

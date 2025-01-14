@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Script from 'next/script'
 import Link from 'next/link'
 
-// ★ グローバルCSSをまとめてインポート
+// グローバルCSS
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 import '../public/css/page1.css'
@@ -18,33 +18,51 @@ import '../public/css/page6.css'
 // ChatUI
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-// シンプルナビバー
+
+// シンプルナビバー（上部に 1～6ページへのリンク + 左上にモデル名表記）
 function NavBar() {
   return (
-    <nav style={{ textAlign: 'center', padding: '0.6rem', background: '#222' }}>
-      <Link href="/">
-        <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page1</span>
-      </Link>
-      <Link href="/page2">
-        <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page2</span>
-      </Link>
-      <Link href="/page3">
-        <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page3</span>
-      </Link>
-      <Link href="/page4">
-        <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page4</span>
-      </Link>
-      <Link href="/page5">
-        <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page5</span>
-      </Link>
-      <Link href="/page6">
-        <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page6</span>
-      </Link>
+    <nav
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0.6rem 1rem',
+        background: '#222',
+        color: '#fff'
+      }}
+    >
+      {/* 左上： ChatGPT4モデル名など */}
+      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+        [ GPT-4 : <span style={{ color: '#66ffcc' }}>0 AI</span> ]
+      </div>
+
+      {/* 右側：ページ遷移リンク */}
+      <div>
+        <Link href="/">
+          <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page1</span>
+        </Link>
+        <Link href="/page2">
+          <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page2</span>
+        </Link>
+        <Link href="/page3">
+          <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page3</span>
+        </Link>
+        <Link href="/page4">
+          <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page4</span>
+        </Link>
+        <Link href="/page5">
+          <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page5</span>
+        </Link>
+        <Link href="/page6">
+          <span style={{ color: '#fff', margin: '0 8px', cursor: 'pointer' }}>Page6</span>
+        </Link>
+      </div>
     </nav>
   )
 }
 
-// AttentionPopup コンポーネント（正しく JSX を return する）
+// Attention Transformer可視化ポップアップ
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
 
@@ -78,9 +96,8 @@ function AttentionPopup() {
         >
           <h4>Attention Is All You Need (2017)</h4>
           <p style={{ fontSize: '0.9rem', lineHeight: '1.4' }}>
-            Visualize multi-head attention or see how Q-K-V
-            are computed in real-time.
-            <br />
+            Visualize multi-head attention or watch how Q-K-V
+            are computed in real-time.<br />
             <a
               href="https://arxiv.org/abs/1706.03762"
               target="_blank"
@@ -96,28 +113,25 @@ function AttentionPopup() {
   )
 }
 
+
 export default function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // 例: クライアントサイドでJSを動的に読み込むなら:
+    // ここでクライアントサイドJS読み込みも可能
     // import('../public/js/starsAnim.js')
     // import('../public/js/waveAnim.js')
     // import('../public/js/quantum3D.js')
-    // ここでは <Script> で読み込むのでコメントアウト
   }, [])
 
   return (
     <>
       <Head>
-        <title>0 - Ultimate GPT Clone</title>
-        <meta
-          name="description"
-          content="0: GPT-4 site with unstoppable illusions, quantum lines, advanced synergy."
-        />
-        {/* Responsive Meta Tag */}
+        <title>0 - The Ultimate GPT Clone</title>
+        <meta name="description" content="0: Next-gen ChatGPT-like site." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* 参考文献: ChatGPT.com 的なUIを参考に開発 (openai.com / chat.openai.com) */}
       </Head>
 
-      {/* 背景アニメ用JSファイルを読み込み */}
+      {/* 背景アニメのJS */}
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
@@ -139,20 +153,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       {/* フッター固定のChatUI */}
       <footer
         style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          width: '100%',
+          position: 'fixed', bottom: 0, left: 0, width: '100%',
           background: '#f0f0f0',
           boxShadow: '0 -2px 5px rgba(0,0,0,0.1)',
           zIndex: 10
         }}
       >
-        {/* Page1の場合は大きめのチャット欄、2〜6ページは小さめ等を
-            ChatGPTInterfaceに isPage1Override プロップを渡して制御 */}
-        {/* 例: urlパスが "/" なら isPage1Override をtrue にするなど、下記のように: */}
+        {/* 1ページ目は大きめチャット欄, 2-6ページは標準 → ChatGPTInterface に isPage1Override を渡す */}
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <ChatGPTInterface />
+          {/* URLが "/" の場合に isPage1Override = true とする例：
+              ここでは固定trueとしてますが、router.pathname などで条件分岐してもOK */}
+          <ChatGPTInterface isPage1Override />
         </div>
       </footer>
     </>

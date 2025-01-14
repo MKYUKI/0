@@ -12,27 +12,25 @@ window.addEventListener('load', () => {
   resize()
   window.addEventListener('resize', resize)
 
-  let tStart = performance.now()
-
+  let t0 = performance.now()
   function animate() {
     requestAnimationFrame(animate)
-    const t = (performance.now() - tStart) * 0.001
+    let t = (performance.now() - t0)*0.001
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0,0,canvas.width,canvas.height)
 
-    // 量子スパイラルの例
-    const cx = canvas.width / 2
-    const cy = canvas.height / 2
-    ctx.strokeStyle = 'rgba(0,0,0,0.7)'
-    ctx.lineWidth = 1.5
-
+    // 幾何学エフェクト
+    ctx.strokeStyle = 'rgba(102,255,204,0.7)'
+    ctx.lineWidth = 1.2
+    const cx = canvas.width/2
+    const cy = canvas.height/2
     ctx.beginPath()
-    for (let angle = 0; angle < Math.PI * 6; angle += 0.05) {
-      const r = angle * 5
-      const x = cx + r * Math.cos(angle + t)
-      const y = cy + r * Math.sin(angle + t)
-      if (angle === 0) ctx.moveTo(x, y)
-      else ctx.lineTo(x, y)
+    for (let angle = 0; angle < Math.PI*8; angle += 0.03) {
+      const r = 0.6 * angle * 50
+      const x = cx + r*Math.cos(angle + t)
+      const y = cy + r*Math.sin(angle + t)
+      if (angle === 0) ctx.moveTo(x,y)
+      else ctx.lineTo(x,y)
     }
     ctx.stroke()
   }

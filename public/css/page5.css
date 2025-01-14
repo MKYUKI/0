@@ -1,11 +1,11 @@
 /* public/css/page5.css */
 
-.page5-container {
+.page5-philanthropy-container {
   width: 100%;
   min-height: 100vh;
-  background: #ffffff;
   position: relative;
   overflow: hidden;
+  background: #f0f0ff;
 }
 
 .page5-canvas {
@@ -15,42 +15,35 @@
   z-index: 0;
 }
 
-/* フローティング枠 */
-.page5-content {
+.philanthropy-content {
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 700px;
-  margin: 4rem auto;
-  background: rgba(255,255,255,0.7);
+  max-width: 600px;
+  margin: 6rem auto;
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(5px);
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  color: #333;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-
-.page5-content h2 {
+.philanthropy-content h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #222;
 }
-
-.page5-content p {
-  color: #444;
-  line-height: 1.4;
-  margin-bottom: 1.5rem;
-}
-
-.donate-button {
-  padding: 0.8rem 1.2rem;
+.philanthropy-content p {
   font-size: 1rem;
-  color: #fff;
-  background: #d35400; /* オレンジ系 */
+  margin-bottom: 1rem;
+}
+.donate-btn {
+  background: #ff7f50;
   border: none;
-  border-radius: 6px;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
 }
-
-.donate-button:hover {
-  background: #b03a00;
+.donate-btn:hover {
+  opacity: 0.8;
 }

@@ -2,26 +2,27 @@
 import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
+import '../public/css/page5.css'
 
 export default function Page5() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page5 (Global Impact & Philanthropy)</title>
+        <title>0 - Page5 | Philanthropy & Society</title>
         <script src="/js/page5Logic.js" defer />
       </Head>
 
-      <main className="page5-container">
+      <main className="page5-philanthropy-container">
         <canvas id="deepblue-star-canvas" className="page5-canvas"></canvas>
 
-        <section className="page5-content">
-          <h2>Empower Humanity Through Action</h2>
+        <section className="philanthropy-content">
+          <h2>Philanthropy Portal</h2>
           <p>
-            Contribute to global solutions, from UN SDGs to local grassroots
-            initiatives. Let 0 guide you in maximizing your social impact.
+            Support global causes, donate to various campaigns.
+            Real-time synergy ensures transparency & maximum impact.
           </p>
-          <button className="donate-button">Discover Donation Opportunities</button>
+          <button className="donate-btn">Donate Now</button>
         </section>
 
         <ReferencesDropdown />

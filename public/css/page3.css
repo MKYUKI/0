@@ -1,89 +1,53 @@
 /* public/css/page3.css */
-
 .page3-container {
   width: 100%;
   min-height: 100vh;
-  background: #fafafa;
+  background: #111;
+  color: #fff;
   overflow: hidden;
-}
-
-/* ヒーロー */
-.global-collab-hero {
   position: relative;
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #e2f1f8, #ffffff 50%);
-  color: #333;
 }
 
-.global-collab-hero h1 {
-  font-size: 2.5rem;
+/* 幾何学的量子線を背景に流す */
+.quantum-geodesic-hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(120deg, #222, #333 70%);
+}
+.quantum-geodesic-hero h1 {
+  font-size: 2.2rem;
   margin-bottom: 1rem;
 }
-
-.global-collab-hero p {
-  font-size: 1.2rem;
-  max-width: 700px;
+.quantum-geodesic-hero p {
+  max-width: 600px;
   margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
-/* オーバーレイ */
-.collab-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('/img/collab-network.png') center/cover no-repeat;
-  opacity: 0.1;
-  pointer-events: none;
-}
-
-/* フォーム */
-.collab-section {
+/* フォーラム参加ボタンなど */
+.qnet-section {
   text-align: center;
-  padding: 2rem 1rem;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 2rem;
 }
-
-.collab-section h2 {
+.qnet-section h2 {
   font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
-
-.collab-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.collab-form input,
-.collab-form textarea {
-  padding: 0.8rem;
+.qnet-section p {
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  max-width: 600px;
+  margin: 0 auto 1rem;
 }
-
-.collab-form textarea {
-  min-height: 120px;
-}
-
-.collab-form button {
-  padding: 0.8rem;
-  background: #008060;
-  color: #fff;
+.qnet-section button {
+  background: #66ffcc;
+  color: #000;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
   cursor: pointer;
+  font-size: 1rem;
 }
-
-.collab-form button:hover {
-  background: #00684b;
-}
-
-.collab-note {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #666;
+.qnet-section button:hover {
+  opacity: 0.8;
 }

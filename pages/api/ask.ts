@@ -7,8 +7,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // ダミー応答
     const answer = `Simulated response for: "${question}". [Quantum fractals, synergy, 2017 Transformer references inside.]`
     res.status(200).json({ answer })
-  } catch (err) {
+  } catch (err){
     console.error(err)
-    res.status(500).json({ answer: '(Backend error occurred)' })
+    res.status(500).json({ answer:'(Backend error occurred)' })
   }
 }

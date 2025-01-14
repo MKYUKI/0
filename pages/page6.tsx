@@ -2,32 +2,29 @@
 import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
+import '../public/css/page6.css'
 
 export default function Page6() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page6 (Cosmic Vision Finale)</title>
+        <title>0 - Page6 | The Cosmic Finale</title>
         <script src="/js/page6Logic.js" defer />
       </Head>
 
-      <main className="page6-container">
+      <main className="page6-finale-container">
         <div className="cosmic-overlay"></div>
 
-        <section className="page6-content">
-          <h2>Finale: Galactic Evolution & Beyond</h2>
+        <section className="finale-content">
+          <h2>Cosmic Finale: The Apex of Civilization</h2>
           <p>
-            Enter the cosmic horizon where 0 unites all life forms, forging
-            a shared future among the stars. A new era of civilization dawns.
+            Harness the synergy of all pages, forging an eternal platform
+            that stands as water to all existence. 
           </p>
-          <div className="final-links">
+          <div className="links-row">
             <a href="/">Return Home</a>
-            <a
-              href="https://arxiv.org/abs/2106.01345"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://arxiv.org/abs/2106.01345" target="_blank" rel="noreferrer">
               Scaling Laws
             </a>
           </div>
