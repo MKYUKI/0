@@ -31,7 +31,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     scrollToBottom()
   }, [messages])
 
-  // ファイルアップロード(Word, PDF, 画像…)
+  // ファイルアップロード
   const handleFileUpload = (files: FileList | null) => {
     if (!files || !files[0]) return
     const file = files[0]
@@ -39,12 +39,11 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     reader.onload = (e) => {
       const base64 = e.target?.result
       if (!base64 || typeof base64 !== 'string') return
-      // とりあえずメッセージに反映
-      const fileMsg = {
+      const msg = {
         role: 'user' as const,
-        content: `File uploaded: ${file.name}, size=${file.size} bytes, base64Len=${base64.length}`,
+        content: `File upload: ${file.name}, size=${file.size}, base64Len=${base64.length}`,
       }
-      setMessages((prev) => [...prev, fileMsg])
+      setMessages((prev) => [...prev, msg])
     }
     reader.readAsDataURL(file)
   }
@@ -76,10 +75,10 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
           setMessages((prev) => {
             const last = prev[prev.length - 1]
             if (last && last.role === 'assistant') {
-              // すでにアシスタントが直前にいれば連結
+              // 直前がassistantなら連結
               return [...prev.slice(0, -1), { role: 'assistant', content: buffer }]
             } else {
-              // なければ新規追加
+              // 新規assistant回答
               return [...prev, { role: 'assistant', content: buffer }]
             }
           })
@@ -89,60 +88,49 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
         }
       }, 25)
     } catch (err) {
-      console.error('Error calling /api/chat:', err)
+      console.error('Error in chat API:', err)
       setIsLoading(false)
     }
   }
 
-  // レイアウト定義
-  // isPage1Override が true ならさらに大きく
-  const containerStyle: React.CSSProperties = {
+  // レイアウト: フッターに固定されているコンポーネント
+  // isPage1Overrideなら「height: calc(100vh - 60px)」 → ほぼ画面全体
+  // そうしないと、スクロール不可問題が再発する可能性があるため
+  const container: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    background: '#fafafa',
-    borderTop: '1px solid #ddd',
-    borderLeft: '1px solid #ddd',
-    borderRight: '1px solid #ddd',
-    borderRadius: '8px 8px 0 0',
-    overflow: 'hidden',
-    width: '100%',
+    margin: '0 auto',
+    background: '#fff',
+    // 1ページ目なら特大
+    height: isPage1Override ? 'calc(100vh - 60px)' : '300px', // 300px程度でOK
+    borderTop: '1px solid #ccc',
+    boxShadow: '0 -2px 4px rgba(0,0,0,0.1)',
   }
 
-  // 1ページ目のみ「height: calc(100vh - 60px - 80px)」 で完璧に埋める
-  if (isPage1Override) {
-    containerStyle.height = 'calc(100vh - 60px - 80px)'
-  } else {
-    // 2～6ページ目はある程度の高さ(60vh)で十分
-    containerStyle.height = '60vh'
-    containerStyle.maxWidth = '800px'
-    containerStyle.margin = '0 auto'
-  }
-
-  const topArea: React.CSSProperties = {
+  const messagesWindow: React.CSSProperties = {
     flex: 1,
     overflowY: 'auto',
     padding: '1rem',
+    background: 'rgba(255,255,255,0.85)',
   }
 
-  const bottomArea: React.CSSProperties = {
+  const inputContainer: React.CSSProperties = {
     display: 'flex',
     gap: '0.5rem',
-    padding: '0.75rem',
     borderTop: '1px solid #ccc',
+    padding: '0.75rem',
     background: '#f3f3f3',
   }
 
   const textAreaStyle: React.CSSProperties = {
     flex: 1,
     resize: 'none',
-    border: '1px solid #ccc',
     borderRadius: '4px',
-    padding: '0.75rem',
-    fontSize: '0.95rem',
-    fontFamily: 'sans-serif',
+    border: '1px solid #ccc',
+    padding: '0.6rem',
   }
 
-  const fileButtonStyle: React.CSSProperties = {
+  const fileBtnStyle: React.CSSProperties = {
     background: '#fff',
     border: '1px solid #ccc',
     borderRadius: '4px',
@@ -150,40 +138,38 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     padding: '0.3rem',
   }
 
-  const sendButtonStyle: React.CSSProperties = {
+  const sendBtnStyle: React.CSSProperties = {
     background: '#31a37d',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
-    padding: '0 16px',
-    fontSize: '1rem',
+    padding: '0 1rem',
     cursor: 'pointer',
   }
 
   return (
-    <div style={containerStyle}>
-      <div style={topArea}>
+    <div style={container}>
+      <div style={messagesWindow}>
         {messages.map((m, idx) => (
           <MessageBubble key={idx} role={m.role} content={m.content} />
         ))}
         <div ref={bottomRef} />
       </div>
-
-      <div style={bottomArea}>
+      <div style={inputContainer}>
         <input
           type="file"
-          style={fileButtonStyle}
+          style={fileBtnStyle}
           onChange={(e) => handleFileUpload(e.target.files)}
         />
         <textarea
           style={textAreaStyle}
-          placeholder="(Reference: chatgpt.com) Enter message or attach file..."
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           disabled={isLoading}
+          placeholder="(Reference: chatgpt.com) Type a message or attach a file..."
         />
         <button
-          style={sendButtonStyle}
+          style={sendBtnStyle}
           onClick={handleSend}
           disabled={isLoading || !userInput.trim()}
         >

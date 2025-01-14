@@ -18,7 +18,7 @@ import '../public/css/page6.css'
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-/** 上部ナビバー: 固定高さ60px想定 */
+/** 固定ヘッダー: 高さ60px程度 */
 function NavBar() {
   return (
     <header
@@ -26,7 +26,7 @@ function NavBar() {
         position: 'fixed',
         top: 0,
         left: 0,
-        height: '60px', // ヘッダー固定高さ
+        height: '60px',
         width: '100%',
         zIndex: 9999,
         background: '#222',
@@ -137,60 +137,69 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
         />
-        {/* PC/スマホ完全対応 */}
+        {/* PC/スマホ完全対応: スクロール問題解消 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* スクリプト: 幻想的量子線アニメ */}
+      {/* 背景アニメスクリプト */}
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
-      {/* 背景Canvas (黒い量子線 + 星 + 波) */}
+      {/* 背景Canvas */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ページ本体: ヘッダー60px + フッター80px を除いた領域を丸ごと使う */}
+      {/**
+       * ★ ここが重要 ★
+       * body全体をスクロール可能にするため、
+       * Next.jsの最上位ラッパに overflow: auto を付与
+       */}
       <div
+        id="app-wrapper"
         style={{
           position: 'relative',
           zIndex: 1,
-          // 上部60px分だけ余白あけて、ヘッダーが被らないように
-          paddingTop: '60px',
-          // 下部に80px分だけ空けてフッターとの被り回避
-          paddingBottom: '80px',
           minHeight: '100vh',
-          boxSizing: 'border-box',
+          overflowX: 'hidden', // 横スクロール抑制
+          overflowY: 'auto',  // 縦スクロールOK
         }}
       >
+        {/* 固定ヘッダー */}
         <NavBar />
         <AttentionPopup />
 
-        {/* メインコンテンツ */}
-        <Component {...pageProps} />
-      </div>
+        {/**
+         * 上部 60px 分はヘッダーが覆う。
+         * 下部にフッター(チャット欄)を配置。
+         */}
+        <div style={{ marginTop: '60px', marginBottom: '0px' }}>
+          <Component {...pageProps} />
+        </div>
 
-      {/* 固定フッター (ChatUI) */}
-      <footer
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          height: '80px', // フッターの固定高さ
-          width: '100%',
-          background: '#f0f0f0',
-          boxShadow: '0 -2px 6px rgba(0,0,0,0.2)',
-          zIndex: 10000,
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        {/* 1ページ目だけチャット欄を極端に大きくする → isPage1Override */}
-        <ChatGPTInterface isPage1Override={router.pathname === '/'} />
-      </footer>
+        {/**
+         * フッター(チャットUI)を固定化し、
+         * 1ページ目だけチャット欄を非常に大きく(PC,スマホともに)
+         */}
+        <footer
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            background: '#f0f0f0',
+            boxShadow: '0 -2px 6px rgba(0,0,0,0.2)',
+            zIndex: 10000,
+          }}
+        >
+          <ChatGPTInterface
+            isPage1Override={router.pathname === '/'} // 1ページ目のみ特大
+          />
+        </footer>
+      </div>
     </>
   )
 }
