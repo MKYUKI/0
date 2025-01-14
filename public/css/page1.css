@@ -1,41 +1,43 @@
 /* public/css/page1.css */
-/* 1ページ目を chatgpt.com とほぼ同等にする */
+/* ★ 1ページ目を chatgpt.com と同等レイアウトに仕上げる */
 
 /* 全体レイアウト */
 .page1-main-container {
   width: 100%;
   min-height: 100vh;
-  background: #ffffff;
+  background: #fff;
   overflow: hidden;
 }
 
-/* ヒーロー: chatgpt.comっぽい */
+/* Hero: chatgpt.com-like */
 .hero-section-clone {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 55vh; /* chatgpt.com-like */
-  background: linear-gradient(135deg, #ffffff, #f7f7f7 30%, #ededed 60%);
+  height: 58vh; /* chatgpt.comのように半分弱の高さ */
+  background: linear-gradient(135deg, #fff, #f7f7f7 30%, #ededed 80%);
   position: relative;
   overflow: hidden;
+  padding: 2rem 1rem;
 }
 
 .hero-content {
   text-align: center;
   z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .hero-title {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #222;
-  margin-bottom: 0.5rem;
+  color: #333;
+  margin-bottom: 0.6rem;
 }
 .hero-subtitle {
   font-size: 1.4rem;
   color: #666;
   margin-bottom: 1rem;
-  font-weight: 500;
 }
 .hero-subtitle a {
   color: #2bc760;
@@ -44,18 +46,18 @@
 .hero-subtitle a:hover {
   text-decoration: underline;
 }
+
 .hero-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #444;
-  max-width: 600px;
   line-height: 1.6;
   margin: 0 auto;
 }
 
-/* 背景の淡いライン + フェードイン */
+/* フェードインアニメ */
 @keyframes fadeParticles {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0%   { opacity:0; transform:translateY(20px);}
+  100% { opacity:1; transform:translateY(0);}
 }
 .hero-section-clone::before {
   content: "";
@@ -63,11 +65,12 @@
   inset: 0;
   background: url('/img/quantum-lines.png') center/cover no-repeat;
   opacity: 0.15;
-  animation: fadeParticles 2.5s ease-in-out forwards;
+  animation: fadeParticles 2s ease forwards;
 }
 
-/* 下部 Info */
+/* 下部Info */
 .public-section {
+  width: 100%;
   text-align: center;
   padding: 2rem 1rem;
   background: #fafafa;
@@ -84,23 +87,23 @@
   line-height: 1.6;
 }
 
-/* チャットUIセクション(実際はフッターにある) */
+/* ChatUI placeholder */
 .chat-ui-section {
   padding: 2rem 1rem;
   background: #fff;
 }
 .chat-ui-wrapper {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 .chat-ui-note {
   color: #666;
-  font-size: 0.9rem;
   font-style: italic;
+  font-size: 0.9rem;
 }
 
-/* スマホ対応: フォント縮小など */
+/* スマホ対応(768px以下) */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
@@ -112,6 +115,6 @@
     font-size: 0.95rem;
   }
   .public-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }

@@ -12,37 +12,35 @@ export default function HomePage() {
       </Head>
 
       <main className="page1-main-container">
-        {/* ★ヒーロー: chatgpt.com 参考 */}
+        {/* Hero: chatgpt.com そっくり */}
         <section className="hero-section-clone">
           <div className="hero-content">
-            <h1 className="hero-title">
-              お手伝いできることはありますか？
-            </h1>
+            <h1 className="hero-title">お手伝いできることはありますか？</h1>
             <h2 className="hero-subtitle">
-              <strong>参考文献:</strong> <a href="https://chatgpt.com">chatgpt.com</a>
+              参考文献: <strong><a href="https://chatgpt.com" target="_blank" rel="noreferrer">chatgpt.com</a></strong>
             </h2>
             <p className="hero-description">
-              コメントを入力すると右上に表示され、その直下(左下方向)から
-              GPT-4の回答が生成されます。ファイル(Word/PDF/画像)も送信可能。
+              この画面では、上部メニューやページスクロール、右上ユーザ発言・左下GPT回答など
+              <strong>chatgpt.com</strong>と同等の機能を再現しています。<br/>
+              テキストやWord/PDF/画像などをアップロードすれば、リアルタイムにGPT-4回答が得られます。
             </p>
           </div>
         </section>
 
         {/* Info */}
         <section className="public-section">
-          <h2>世界最高峰のGPT-4シナジーを無料開放</h2>
+          <h2>世界最高峰のGPT-4を無料開放</h2>
           <p>
-            宇宙の誰もが自由に利用可能です。先端の量子錯覚アニメが加わり、
-            chatgpt.comと同等機能をさらに進化。
+            PC/スマホ両対応。長いスクロールでも履歴を保持し、
+            <strong>chatgpt.com</strong>同様に多数の回答を連続表示できます。
           </p>
         </section>
 
-        {/* チャットUI placeholder (実際はフッター固定) */}
+        {/* チャットUI placeholder(実際はフッター固定) */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">
-              画面下部(フッター)に本物のチャット欄があります。
-              (PC/スマホ対応)
+              下部の固定チャット欄を利用して、何でも入力して下さい。
             </p>
           </div>
         </section>

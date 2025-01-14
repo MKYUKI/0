@@ -6,20 +6,20 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// ★ グローバルCSS 一括 import (Next.js規定)
+// ★ グローバルCSS 一括 import
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
-import '../public/css/page1.css'    // Page1(大幅変更)
-import '../public/css/page2.css'    // Page2～Page6(現状維持)
+import '../public/css/page1.css'   // Page1: chatgpt.com風
+import '../public/css/page2.css'
 import '../public/css/page3.css'
 import '../public/css/page4.css'
 import '../public/css/page5.css'
 import '../public/css/page6.css'
 
-// チャット欄UI
+// ChatUI
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-/** スティッキーナビ + GPT-4表記 + Page1~6リンク */
+/** Stickyヘッダー + GPT-4 Model表記 + Page1~6リンク */
 function NavBar() {
   return (
     <header
@@ -32,11 +32,11 @@ function NavBar() {
         background: '#222',
         display: 'flex',
         alignItems: 'center',
-        padding: '0.6rem 1rem',
+        padding: '0.75rem 1.2rem',
         color: '#fff',
       }}
     >
-      {/* 左上に GPT-4 Model の明記 */}
+      {/* 左上に GPT-4 Model */}
       <span style={{ fontWeight: 'bold', marginRight: '2rem' }}>GPT-4 Model</span>
 
       <nav style={{ display: 'flex', gap: '1rem', fontSize: '1rem' }}>
@@ -63,14 +63,14 @@ function NavBar() {
   )
 }
 
-/** (任意) Attention可視化ポップアップ例 */
+/** (任意) Attention可視化ポップアップ */
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
     <div
       style={{
         position: 'fixed',
-        top: '60px',
+        top: '70px',
         right: '1rem',
         zIndex: 9999,
         fontSize: '0.9rem',
@@ -105,7 +105,7 @@ function AttentionPopup() {
             Attention Is All You Need (2017)
           </h4>
           <p style={{ fontSize: '0.88rem', lineHeight: '1.4' }}>
-            Visualize multi-head attention or see how Q-K-V are computed in real-time.
+            Multi-head attention or Q-K-V visualizations in real-time.
             <br />
             <a
               href="https://arxiv.org/abs/1706.03762"
@@ -132,21 +132,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>0 - The Ultimate GPT-4 Quantum Clone</title>
+        <title>0 - Ultimate GPT-4 Clone</title>
         <meta
           name="description"
-          content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
+          content="0: GPT-4 based ChatGPT-like site with unstoppable illusions, quantum synergy, cosmic expansions."
         />
         {/* PC/スマホ完全対応 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* スクリプト: 幻想的量子線アニメ */}
+      {/* アニメスクリプト: 量子線, 星, 波 */}
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
-      {/* 幻想的黒線+星+波の背景Canvas */}
+      {/* 幾何学的量子的 黒線 + 星 + 波 */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
@@ -166,15 +166,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <NavBar />
         <AttentionPopup />
 
-        {/* 各ページ表示 */}
+        {/* メインコンテンツ */}
         <div style={{ flex: 1 }}>
           <Component {...pageProps} />
         </div>
       </div>
 
-      {/* フッター固定チャットUI
-         → 1ページ目だけ「chatgpt.comそっくりの大サイズ」を実現
-      */}
+      {/* フッター固定: 1ページ目のみチャット欄を超大サイズ */}
       <footer
         style={{
           position: 'fixed',
@@ -187,7 +185,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <ChatGPTInterface
-          // 1ページ目('/')のみ 大サイズ
+          // 1ページ目('/')のみ 特大
           isPage1Override={router.pathname === '/'}
         />
       </footer>
