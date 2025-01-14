@@ -2,7 +2,6 @@
 import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
-import '../public/css/page5.css'
 
 export default function Page5() {
   return (

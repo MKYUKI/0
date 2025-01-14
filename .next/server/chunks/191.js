@@ -54,34 +54,46 @@ function MessageBubble({ role, content }) {
         children: content
     });
 }
-function ChatGPTInterface() {
+function ChatGPTInterface({ isPage1Override }) {
     const [messages, setMessages] = (0,external_react_.useState)([]);
     const [userInput, setUserInput] = (0,external_react_.useState)("");
+    const [file, setFile] = (0,external_react_.useState)(null);
     const [isLoading, setIsLoading] = (0,external_react_.useState)(false);
     const bottomRef = (0,external_react_.useRef)(null);
-    const scrollToBottom = ()=>{
+    // Scroll to bottom
+    (0,external_react_.useEffect)(()=>{
         bottomRef.current?.scrollIntoView({
             behavior: "smooth"
         });
-    };
-    (0,external_react_.useEffect)(()=>{
-        scrollToBottom();
     }, [
         messages
     ]);
+    const handleFileChange = (e)=>{
+        if (e.target.files && e.target.files.length > 0) {
+            setFile(e.target.files[0]);
+        }
+    };
     const handleSend = async ()=>{
-        if (!userInput.trim()) return;
+        if (!userInput.trim() && !file) return;
+        // 送信メッセージ作成
+        let userMsgContent = userInput.trim();
+        if (file) {
+            userMsgContent += ` [Attached File: ${file.name}]`;
+        }
         const userMsg = {
             role: "user",
-            content: userInput.trim()
+            content: userMsgContent
         };
         setMessages((prev)=>[
                 ...prev,
                 userMsg
             ]);
+        // Reset
         setUserInput("");
+        setFile(null);
         setIsLoading(true);
         try {
+            // ChatGPT API
             const res = await fetch("/api/chat", {
                 method: "POST",
                 headers: {
@@ -97,6 +109,7 @@ function ChatGPTInterface() {
             });
             const data = await res.json();
             const text = data?.choices?.[0]?.message?.content || "";
+            // タイピング風表示
             let buffer = "";
             let i = 0;
             const intervalID = setInterval(()=>{
@@ -132,11 +145,37 @@ function ChatGPTInterface() {
             setIsLoading(false);
         }
     };
+    // ★ isPage1Override: Chat欄をフル画面に近く
+    const containerStyle = {
+        display: "flex",
+        flexDirection: "column",
+        margin: "0 auto",
+        background: "#fafafa",
+        overflow: "hidden",
+        borderTop: "1px solid #ddd",
+        borderLeft: "1px solid #ddd",
+        borderRight: "1px solid #ddd",
+        borderRadius: "8px 8px 0 0"
+    };
+    if (isPage1Override) {
+        containerStyle.height = "calc(100vh - 80px)";
+        containerStyle.width = "100%";
+        containerStyle.maxWidth = "100%";
+    } else {
+        containerStyle.height = "60vh";
+        containerStyle.width = "100%";
+        containerStyle.maxWidth = "800px";
+    }
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
-        className: "chat-container",
+        style: containerStyle,
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 className: "messages-window",
+                style: {
+                    flex: 1,
+                    overflowY: "auto",
+                    padding: 16
+                },
                 children: [
                     messages.map((m, idx)=>/*#__PURE__*/ jsx_runtime.jsx(MessageBubble, {
                             role: m.role,
@@ -149,16 +188,41 @@ function ChatGPTInterface() {
             }),
             /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
                 className: "input-container",
+                style: {
+                    display: "flex",
+                    background: "#f3f3f3",
+                    borderTop: "1px solid #ccc",
+                    padding: "0.75rem",
+                    gap: "0.75rem"
+                },
                 children: [
+                    /*#__PURE__*/ jsx_runtime.jsx("input", {
+                        type: "file",
+                        onChange: handleFileChange
+                    }),
                     /*#__PURE__*/ jsx_runtime.jsx("textarea", {
-                        placeholder: "Send a message...",
+                        style: {
+                            flex: 1,
+                            resize: "none",
+                            border: "1px solid #ccc",
+                            borderRadius: 4,
+                            padding: 12
+                        },
+                        placeholder: "Type or attach a file...",
                         value: userInput,
                         onChange: (e)=>setUserInput(e.target.value),
                         disabled: isLoading
                     }),
                     /*#__PURE__*/ jsx_runtime.jsx("button", {
+                        style: {
+                            background: "#31a37d",
+                            color: "#fff",
+                            border: "none",
+                            padding: "0 24px",
+                            borderRadius: 4
+                        },
                         onClick: handleSend,
-                        disabled: isLoading || !userInput.trim(),
+                        disabled: isLoading || !userInput.trim() && !file,
                         children: isLoading ? "Thinking..." : "Send"
                     })
                 ]
@@ -174,7 +238,7 @@ function ChatGPTInterface() {
 
 
 
-// ★ グローバルCSSをまとめてインポート
+// グローバルCSS
 
 
 
@@ -185,85 +249,108 @@ function ChatGPTInterface() {
 
 // ChatUI
 
-// シンプルナビバー
+// シンプルナビバー（上部に 1～6ページへのリンク + 左上にモデル名表記）
 function NavBar() {
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("nav", {
         style: {
-            textAlign: "center",
-            padding: "0.6rem",
-            background: "#222"
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0.6rem 1rem",
+            background: "#222",
+            color: "#fff"
         },
         children: [
-            /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                href: "/",
-                children: /*#__PURE__*/ jsx_runtime.jsx("span", {
-                    style: {
-                        color: "#fff",
-                        margin: "0 8px",
-                        cursor: "pointer"
-                    },
-                    children: "Page1"
-                })
+            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                style: {
+                    fontSize: "1.2rem",
+                    fontWeight: "bold"
+                },
+                children: [
+                    "[ GPT-4 : ",
+                    /*#__PURE__*/ jsx_runtime.jsx("span", {
+                        style: {
+                            color: "#66ffcc"
+                        },
+                        children: "0 AI"
+                    }),
+                    " ]"
+                ]
             }),
-            /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                href: "/page2",
-                children: /*#__PURE__*/ jsx_runtime.jsx("span", {
-                    style: {
-                        color: "#fff",
-                        margin: "0 8px",
-                        cursor: "pointer"
-                    },
-                    children: "Page2"
-                })
-            }),
-            /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                href: "/page3",
-                children: /*#__PURE__*/ jsx_runtime.jsx("span", {
-                    style: {
-                        color: "#fff",
-                        margin: "0 8px",
-                        cursor: "pointer"
-                    },
-                    children: "Page3"
-                })
-            }),
-            /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                href: "/page4",
-                children: /*#__PURE__*/ jsx_runtime.jsx("span", {
-                    style: {
-                        color: "#fff",
-                        margin: "0 8px",
-                        cursor: "pointer"
-                    },
-                    children: "Page4"
-                })
-            }),
-            /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                href: "/page5",
-                children: /*#__PURE__*/ jsx_runtime.jsx("span", {
-                    style: {
-                        color: "#fff",
-                        margin: "0 8px",
-                        cursor: "pointer"
-                    },
-                    children: "Page5"
-                })
-            }),
-            /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
-                href: "/page6",
-                children: /*#__PURE__*/ jsx_runtime.jsx("span", {
-                    style: {
-                        color: "#fff",
-                        margin: "0 8px",
-                        cursor: "pointer"
-                    },
-                    children: "Page6"
-                })
+            /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
+                children: [
+                    /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                        href: "/",
+                        children: /*#__PURE__*/ jsx_runtime.jsx("span", {
+                            style: {
+                                color: "#fff",
+                                margin: "0 8px",
+                                cursor: "pointer"
+                            },
+                            children: "Page1"
+                        })
+                    }),
+                    /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                        href: "/page2",
+                        children: /*#__PURE__*/ jsx_runtime.jsx("span", {
+                            style: {
+                                color: "#fff",
+                                margin: "0 8px",
+                                cursor: "pointer"
+                            },
+                            children: "Page2"
+                        })
+                    }),
+                    /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                        href: "/page3",
+                        children: /*#__PURE__*/ jsx_runtime.jsx("span", {
+                            style: {
+                                color: "#fff",
+                                margin: "0 8px",
+                                cursor: "pointer"
+                            },
+                            children: "Page3"
+                        })
+                    }),
+                    /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                        href: "/page4",
+                        children: /*#__PURE__*/ jsx_runtime.jsx("span", {
+                            style: {
+                                color: "#fff",
+                                margin: "0 8px",
+                                cursor: "pointer"
+                            },
+                            children: "Page4"
+                        })
+                    }),
+                    /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                        href: "/page5",
+                        children: /*#__PURE__*/ jsx_runtime.jsx("span", {
+                            style: {
+                                color: "#fff",
+                                margin: "0 8px",
+                                cursor: "pointer"
+                            },
+                            children: "Page5"
+                        })
+                    }),
+                    /*#__PURE__*/ jsx_runtime.jsx((link_default()), {
+                        href: "/page6",
+                        children: /*#__PURE__*/ jsx_runtime.jsx("span", {
+                            style: {
+                                color: "#fff",
+                                margin: "0 8px",
+                                cursor: "pointer"
+                            },
+                            children: "Page6"
+                        })
+                    })
+                ]
             })
         ]
     });
 }
-// AttentionPopup コンポーネント（正しく JSX を return する）
+// Attention Transformer可視化ポップアップ
 function AttentionPopup() {
     const [open, setOpen] = external_react_default().useState(false);
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)("div", {
@@ -306,7 +393,7 @@ function AttentionPopup() {
                             lineHeight: "1.4"
                         },
                         children: [
-                            "Visualize multi-head attention or see how Q-K-V are computed in real-time.",
+                            "Visualize multi-head attention or watch how Q-K-V are computed in real-time.",
                             /*#__PURE__*/ jsx_runtime.jsx("br", {}),
                             /*#__PURE__*/ jsx_runtime.jsx("a", {
                                 href: "https://arxiv.org/abs/1706.03762",
@@ -327,22 +414,21 @@ function AttentionPopup() {
 }
 function MyApp({ Component, pageProps }) {
     (0,external_react_.useEffect)(()=>{
-    // 例: クライアントサイドでJSを動的に読み込むなら:
+    // ここでクライアントサイドJS読み込みも可能
     // import('../public/js/starsAnim.js')
     // import('../public/js/waveAnim.js')
     // import('../public/js/quantum3D.js')
-    // ここでは <Script> で読み込むのでコメントアウト
     }, []);
     return /*#__PURE__*/ (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
         children: [
             /*#__PURE__*/ (0,jsx_runtime.jsxs)((head_default()), {
                 children: [
                     /*#__PURE__*/ jsx_runtime.jsx("title", {
-                        children: "0 - Ultimate GPT Clone"
+                        children: "0 - The Ultimate GPT Clone"
                     }),
                     /*#__PURE__*/ jsx_runtime.jsx("meta", {
                         name: "description",
-                        content: "0: GPT-4 site with unstoppable illusions, quantum lines, advanced synergy."
+                        content: "0: Next-gen ChatGPT-like site."
                     }),
                     /*#__PURE__*/ jsx_runtime.jsx("meta", {
                         name: "viewport",
@@ -412,7 +498,9 @@ function MyApp({ Component, pageProps }) {
                         maxWidth: "1400px",
                         margin: "0 auto"
                     },
-                    children: /*#__PURE__*/ jsx_runtime.jsx(ChatGPTInterface, {})
+                    children: /*#__PURE__*/ jsx_runtime.jsx(ChatGPTInterface, {
+                        isPage1Override: true
+                    })
                 })
             })
         ]

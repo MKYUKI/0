@@ -50,7 +50,12 @@ var helpers = __webpack_require__(7305);
 async function handler(req, res) {
     try {
         const { model, messages } = req.body;
-        // OpenAI API へ問い合わせ
+        // OPENAI_API_KEY が設定されているか?
+        if (!process.env.OPENAI_API_KEY) {
+            return res.status(400).json({
+                error: "OPENAI_API_KEY not found in env"
+            });
+        }
         const openAiRes = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
