@@ -1,5 +1,4 @@
 /* public/css/page6.css */
-
 .page6-container {
   width: 100%;
   min-height: 100vh;
@@ -7,15 +6,13 @@
   position: relative;
   overflow: hidden;
 }
-
 .cosmic-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 70%);
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
   z-index: 0;
   animation: cosmicPulse 10s infinite alternate ease-in-out;
 }
-
 @keyframes cosmicPulse {
   0% {
     opacity: 0.4;
@@ -26,38 +23,33 @@
     transform: scale(1.1);
   }
 }
-
 .page6-content {
   position: relative;
   z-index: 1;
   max-width: 900px;
   margin: 5rem auto;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   backdrop-filter: blur(6px);
   padding: 3rem;
   border-radius: 12px;
   text-align: center;
   color: #fff;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.7);
 }
-
 .page6-content h2 {
   font-size: 2.2rem;
   margin-bottom: 1rem;
 }
-
 .page6-content p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
 }
-
 .final-links {
   display: flex;
   justify-content: center;
   gap: 2rem;
 }
-
 .final-links a {
   color: #66ddff;
   text-decoration: none;

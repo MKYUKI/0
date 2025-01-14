@@ -1,10 +1,9 @@
 /* public/css/page2.css */
 
-/* 最外を真っ白 */
 .page2-container {
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: #fff; /* 最外を白 */
   position: relative;
 }
 
@@ -15,7 +14,7 @@
   background: #fff;
 }
 
-/* 中央ブロックを黒にして文字を白、リンク緑 */
+/* 中央を黒にして文字白、リンク緑 */
 .black-foreground {
   max-width: 900px;
   margin: 4rem auto;
@@ -39,7 +38,7 @@
   margin: 0.5rem auto 2rem;
 }
 
-/* リンクは緑 */
+/* 緑リンク */
 .resume-section a {
   color: #00ff99;
   font-weight: bold;

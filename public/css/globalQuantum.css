@@ -7,13 +7,14 @@
   box-sizing: border-box;
 }
 
+/* Basic HTML, Body config */
 html, body {
   width: 100%;
   height: 100%;
   background: #fff;
   color: #000;
   font-family: 'Inter', sans-serif;
-  overflow: hidden; /* 全体を覆い、スクロールは内部要素で */
+  overflow: hidden; /* PC/スマホとも内部スクロールに対応 */
 }
 
 #__next {
@@ -21,14 +22,10 @@ html, body {
   height: 100%;
 }
 
-/* 背景に超淡い量子ラインを流し込む */
+/* 超淡い量子ライン */
 @keyframes quantumSweep {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 2000px 0;
-  }
+  0% { background-position: 0 0; }
+  100% { background-position: 2000px 0; }
 }
 body::after {
   content: "";
@@ -40,6 +37,8 @@ body::after {
   pointer-events: none;
   z-index: -1;
 }
+
+/* レスポンシブ例 (スマホでフォント縮小 etc.) */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
@@ -48,11 +47,10 @@ body::after {
     font-size: 1.2rem;
   }
   .hero-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
-  /* page1, page2, ... など個別に調整 */
-  .page2-container h1 {
-    font-size: 1.6rem;
+  .page6-content {
+    margin: 2rem auto;
+    padding: 1rem;
   }
-  /* ...etc. */
 }

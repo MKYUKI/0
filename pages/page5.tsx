@@ -16,10 +16,10 @@ export default function Page5() {
         <canvas id="deepblue-star-canvas" className="page5-canvas"></canvas>
 
         <section className="page5-content">
-          <h2>Empower Humanity Through Action</h2>
+          <h2>Empower the World Through Action</h2>
           <p>
-            Connect with global or local initiatives. Let 0 guide your contributions
-            to maximize real-world impact.
+            Connect with global or local initiatives. Let 0 guide you to maximize
+            your contributions and transform lives.
           </p>
           <button className="donate-button">Explore Donation Opportunities</button>
         </section>

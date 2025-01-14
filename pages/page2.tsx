@@ -8,7 +8,7 @@ export default function Page2() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page2 (MasakiKusaka Home, Inverted Colors)</title>
+        <title>0 - Page2 (MasakiKusaka Homepage - Inverted)</title>
       </Head>
 
       <main className="page2-container">
@@ -16,7 +16,8 @@ export default function Page2() {
           <div className="black-foreground">
             <h1>MasakiKusaka Official Home - by 0</h1>
             <p className="intro">
-              Black container, white text, green link, with Word/PDF downloads below.
+              Black container with white text, green link references below. 
+              Word/PDF downloads included.
             </p>
 
             <div className="resume-section">

@@ -8,7 +8,7 @@ export default function Page4() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page4 (Quantum & AI Playground)</title>
+        <title>0 - Page4 (Quantum & AI Research)</title>
         <script src="/js/page4Logic.js" defer />
       </Head>
 
@@ -18,22 +18,14 @@ export default function Page4() {
         <section className="page4-content">
           <h2>Quantum AI Research & Holographic Exploration</h2>
           <p>
-            Dive into real-time illusions (NeRF, Transformers, fractals),
-            accelerating the next wave of discovery.
+            Dive into illusions (NeRF, Transformers, fractals) in real-time. 
+            An unstoppable synergy for scientific breakthroughs.
           </p>
           <div className="link-list">
-            <a
-              href="https://arxiv.org/abs/1706.03762"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noreferrer">
               Transformer (2017)
             </a>
-            <a
-              href="https://arxiv.org/abs/2003.08934"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://arxiv.org/abs/2003.08934" target="_blank" rel="noreferrer">
               NeRF (2020)
             </a>
           </div>

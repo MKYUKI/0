@@ -12,7 +12,6 @@ function MessageBubble({
 }
 
 interface ChatProps {
-  /** 1ページ目のみ true → 高さを (100vh - Xpx) */
   isPage1Override?: boolean
 }
 
@@ -24,7 +23,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
   const [isLoading, setIsLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
-  // スクロール自動追尾
+  // 常に最下部へスクロール
   const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -32,24 +31,24 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     scrollToBottom()
   }, [messages])
 
-  // ファイルアップロード: Base64化してメッセージとして表示 (参考実装)
-  const handleFileUpload = async (files: FileList | null) => {
+  // ファイルアップロード(Word, PDF, 画像…)
+  const handleFileUpload = (files: FileList | null) => {
     if (!files || !files[0]) return
     const file = files[0]
     const reader = new FileReader()
     reader.onload = (e) => {
       const base64 = e.target?.result
       if (!base64 || typeof base64 !== 'string') return
+      // とりあえずメッセージに反映
       const fileMsg = {
         role: 'user' as const,
-        content: `File: ${file.name}, size=${file.size}, base64Len=${base64.length}`,
+        content: `File uploaded: ${file.name}, size=${file.size} bytes, base64Len=${base64.length}`,
       }
       setMessages((prev) => [...prev, fileMsg])
     }
     reader.readAsDataURL(file)
   }
 
-  // テキスト送信
   const handleSend = async () => {
     if (!userInput.trim()) return
     const userMsg = { role: 'user' as const, content: userInput.trim() }
@@ -58,7 +57,6 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     setIsLoading(true)
 
     try {
-      // Chat API
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -70,125 +68,122 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
       const data = await res.json()
       const text = data?.choices?.[0]?.message?.content || ''
 
-      // 1文字ずつ出力
       let buffer = ''
       let i = 0
-      const typingAnim = setInterval(() => {
+      const intervalID = setInterval(() => {
         if (i < text.length) {
           buffer += text.charAt(i++)
           setMessages((prev) => {
-            // 直前がassistantなら結合
             const last = prev[prev.length - 1]
             if (last && last.role === 'assistant') {
+              // すでにアシスタントが直前にいれば連結
               return [...prev.slice(0, -1), { role: 'assistant', content: buffer }]
             } else {
+              // なければ新規追加
               return [...prev, { role: 'assistant', content: buffer }]
             }
           })
         } else {
-          clearInterval(typingAnim)
+          clearInterval(intervalID)
           setIsLoading(false)
         }
-      }, 20)
+      }, 25)
     } catch (err) {
-      console.error(err)
+      console.error('Error calling /api/chat:', err)
       setIsLoading(false)
     }
   }
 
-  // レイアウト: 1ページ目だけ画面ほぼ全体
+  // レイアウト定義
+  // isPage1Override が true ならさらに大きく
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    background: '#fefefe',  // chatgpt.comに近い
+    background: '#fafafa',
     borderTop: '1px solid #ddd',
     borderLeft: '1px solid #ddd',
     borderRight: '1px solid #ddd',
     borderRadius: '8px 8px 0 0',
     overflow: 'hidden',
-    margin: '0 auto',
+    width: '100%',
   }
 
+  // 1ページ目のみ「height: calc(100vh - 60px - 80px)」 で完璧に埋める
   if (isPage1Override) {
-    containerStyle.width = '100%'
-    containerStyle.maxWidth = '100%'
-    containerStyle.height = 'calc(100vh - 80px)' // navbar分差し引き
+    containerStyle.height = 'calc(100vh - 60px - 80px)'
   } else {
-    containerStyle.width = '100%'
-    containerStyle.maxWidth = '800px'
+    // 2～6ページ目はある程度の高さ(60vh)で十分
     containerStyle.height = '60vh'
+    containerStyle.maxWidth = '800px'
+    containerStyle.margin = '0 auto'
   }
 
-  const chatAreaStyle: React.CSSProperties = {
+  const topArea: React.CSSProperties = {
     flex: 1,
     overflowY: 'auto',
     padding: '1rem',
   }
 
-  const inputAreaStyle: React.CSSProperties = {
+  const bottomArea: React.CSSProperties = {
     display: 'flex',
-    alignItems: 'center',
     gap: '0.5rem',
     padding: '0.75rem',
     borderTop: '1px solid #ccc',
     background: '#f3f3f3',
   }
 
-  const fileStyle: React.CSSProperties = {
-    background: '#fff',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    padding: '0.3rem',
-    fontSize: '0.85rem',
-  }
-
-  const textStyle: React.CSSProperties = {
+  const textAreaStyle: React.CSSProperties = {
     flex: 1,
     resize: 'none',
     border: '1px solid #ccc',
     borderRadius: '4px',
     padding: '0.75rem',
     fontSize: '0.95rem',
+    fontFamily: 'sans-serif',
   }
 
-  const btnStyle: React.CSSProperties = {
-    background: '#2bc760',
+  const fileButtonStyle: React.CSSProperties = {
+    background: '#fff',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    padding: '0.3rem',
+  }
+
+  const sendButtonStyle: React.CSSProperties = {
+    background: '#31a37d',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
-    padding: '0.5rem 1rem',
-    fontSize: '0.95rem',
+    padding: '0 16px',
+    fontSize: '1rem',
     cursor: 'pointer',
-    minWidth: '80px',
   }
 
   return (
     <div style={containerStyle}>
-      {/* メッセージ表示エリア */}
-      <div style={chatAreaStyle}>
+      <div style={topArea}>
         {messages.map((m, idx) => (
           <MessageBubble key={idx} role={m.role} content={m.content} />
         ))}
         <div ref={bottomRef} />
       </div>
 
-      {/* 入力欄 */}
-      <div style={inputAreaStyle}>
+      <div style={bottomArea}>
         <input
           type="file"
-          style={fileStyle}
+          style={fileButtonStyle}
           onChange={(e) => handleFileUpload(e.target.files)}
         />
         <textarea
-          style={textStyle}
-          placeholder="(Ref: chatgpt.com) Enter text or drop files..."
+          style={textAreaStyle}
+          placeholder="(Reference: chatgpt.com) Enter message or attach file..."
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           disabled={isLoading}
         />
         <button
-          style={btnStyle}
+          style={sendButtonStyle}
           onClick={handleSend}
           disabled={isLoading || !userInput.trim()}
         >

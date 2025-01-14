@@ -16,10 +16,10 @@ export default function Page6() {
         <div className="cosmic-overlay"></div>
 
         <section className="page6-content">
-          <h2>Finale: Galactic Expansion & Unified Future</h2>
+          <h2>Finale: Galactic Evolution & Beyond</h2>
           <p>
-            Merge civilizations into a single cosmic tapestry, forging
-            the next era among the stars.
+            0 merges civilizations across space-time, heralding the next era
+            of cosmic synergy. Travel beyond the stars together.
           </p>
           <div className="final-links">
             <a href="/">Return Home</a>
