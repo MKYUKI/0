@@ -7,15 +7,13 @@
   box-sizing: border-box;
 }
 
-/* Basic HTML, Body config */
 html, body {
   width: 100%;
   height: 100%;
   background: #fff;
   color: #000;
   font-family: 'Inter', sans-serif;
-  /* スマホ含むあらゆる端末で内部スクロールにする */
-  overflow: hidden;
+  overflow: hidden; /* 全体を覆い、スクロールは内部要素で */
 }
 
 #__next {
@@ -23,10 +21,14 @@ html, body {
   height: 100%;
 }
 
-/* body 背景に淡い量子ライン */
+/* 背景に超淡い量子ラインを流し込む */
 @keyframes quantumSweep {
-  0% { background-position: 0 0; }
-  100% { background-position: 2000px 0; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 2000px 0;
+  }
 }
 body::after {
   content: "";

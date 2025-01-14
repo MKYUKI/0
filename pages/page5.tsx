@@ -8,20 +8,20 @@ export default function Page5() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page5 | Philanthropy & Society</title>
+        <title>0 - Page5 (Social Impact & Charity)</title>
         <script src="/js/page5Logic.js" defer />
       </Head>
 
-      <main className="page5-philanthropy-container">
+      <main className="page5-container">
         <canvas id="deepblue-star-canvas" className="page5-canvas"></canvas>
 
-        <section className="philanthropy-content">
-          <h2>Philanthropy Portal</h2>
+        <section className="page5-content">
+          <h2>Empower Humanity Through Action</h2>
           <p>
-            Support global causes, donate to various campaigns.
-            Real-time synergy ensures transparency & maximum impact.
+            Connect with global or local initiatives. Let 0 guide your contributions
+            to maximize real-world impact.
           </p>
-          <button className="donate-btn">Donate Now</button>
+          <button className="donate-button">Explore Donation Opportunities</button>
         </section>
 
         <ReferencesDropdown />

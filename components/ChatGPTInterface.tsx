@@ -1,73 +1,79 @@
 // components/ChatGPTInterface.tsx
 import React, { useState, useEffect, useRef } from 'react'
 
-function MessageBubble({ role, content }: { role: 'user'|'assistant'|'system'; content: string }) {
+function MessageBubble({
+  role,
+  content,
+}: {
+  role: 'user' | 'assistant' | 'system'
+  content: string
+}) {
   return <div className={`message-bubble ${role}`}>{content}</div>
 }
 
-interface ChatProps {
-  isPage1Override?: boolean
-}
-
-export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
-  const [messages, setMessages] = useState<{ role:'user'|'assistant'|'system'; content:string }[]>([])
+export default function ChatGPTInterface() {
+  const [messages, setMessages] = useState<
+    { role: 'user' | 'assistant' | 'system'; content: string }[]
+  >([])
   const [userInput, setUserInput] = useState('')
-  const [file, setFile] = useState<File|null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const bottomRef = useRef<HTMLDivElement|null>(null)
+  const bottomRef = useRef<HTMLDivElement | null>(null)
 
-  // Scroll to bottom
+  // チャット欄の高さを 1ページ目 9割 (0.9 * window.innerHeight)
+  // 2〜6ページ目 7割 (0.7 * window.innerHeight) にする例
+  // Next.js SSRとの兼ね合いで、typeof window を使いクライアントサイドで判定
+  const [chatHeight, setChatHeight] = useState<string>('70vh')
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior:'smooth' })
+    if (typeof window !== 'undefined') {
+      const currentPath = window.location.pathname
+      if (currentPath === '/') {
+        // Page1
+        setChatHeight('90vh')
+      } else {
+        // Page2〜6
+        setChatHeight('70vh')
+      }
+    }
+  }, [])
+
+  const scrollToBottom = () => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+  useEffect(() => {
+    scrollToBottom()
   }, [messages])
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.files && e.target.files.length>0){
-      setFile(e.target.files[0])
-    }
-  }
-
   const handleSend = async () => {
-    if(!userInput.trim() && !file) return
-
-    // 送信メッセージ作成
-    let userMsgContent = userInput.trim()
-    if(file) {
-      userMsgContent += ` [Attached File: ${file.name}]`
-    }
-    const userMsg = { role:'user' as const, content: userMsgContent }
-    setMessages(prev=>[...prev, userMsg])
-
-    // Reset
+    if (!userInput.trim()) return
+    const userMsg = { role: 'user' as const, content: userInput.trim() }
+    setMessages((prev) => [...prev, userMsg])
     setUserInput('')
-    setFile(null)
     setIsLoading(true)
 
     try {
-      // ChatGPT API
       const res = await fetch('/api/chat', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'gpt-4',
-          messages:[...messages, userMsg]
-        })
+          messages: [...messages, userMsg],
+        }),
       })
       const data = await res.json()
       const text = data?.choices?.[0]?.message?.content || ''
 
-      // タイピング風表示
-      let buffer=''
-      let i=0
-      const intervalID = setInterval(()=>{
-        if(i< text.length){
+      let buffer = ''
+      let i = 0
+      const intervalID = setInterval(() => {
+        if (i < text.length) {
           buffer += text.charAt(i++)
-          setMessages(prev=>{
-            const last = prev[prev.length-1]
-            if(last && last.role==='assistant'){
-              return [...prev.slice(0,-1), {role:'assistant', content: buffer}]
+          setMessages((prev) => {
+            const last = prev[prev.length - 1]
+            if (last && last.role === 'assistant') {
+              return [...prev.slice(0, -1), { role: 'assistant', content: buffer }]
             } else {
-              return [...prev, {role:'assistant', content: buffer}]
+              return [...prev, { role: 'assistant', content: buffer }]
             }
           })
         } else {
@@ -75,57 +81,88 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
           setIsLoading(false)
         }
       }, 20)
-
-    } catch(err){
-      console.error("Error calling /api/chat:", err)
+    } catch (err) {
+      console.error('Error calling /api/chat:', err)
       setIsLoading(false)
     }
   }
 
-  // ★ isPage1Override: Chat欄をフル画面に近く
+  // インラインスタイルで高さを設定
+  // 例: border や幅を適宜アレンジ
+  // ここで height: chatHeight
   const containerStyle: React.CSSProperties = {
-    display:'flex',
-    flexDirection:'column',
-    margin:'0 auto',
-    background:'#fafafa',
-    overflow:'hidden',
-    borderTop:'1px solid #ddd',
-    borderLeft:'1px solid #ddd',
-    borderRight:'1px solid #ddd',
-    borderRadius:'8px 8px 0 0'
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '0 auto',
+    width: '100%', // 横は100%
+    maxWidth: '1400px',
+    height: chatHeight, // '90vh' か '70vh'
+    border: '1px solid #ddd',
+    borderRadius: '8px 8px 0 0',
+    background: '#fafafa',
+    overflow: 'hidden',
   }
-  if(isPage1Override){
-    containerStyle.height = 'calc(100vh - 80px)'
-    containerStyle.width = '100%'
-    containerStyle.maxWidth = '100%'
-  } else {
-    containerStyle.height= '60vh'
-    containerStyle.width= '100%'
-    containerStyle.maxWidth= '800px'
+
+  const messagesWindowStyle: React.CSSProperties = {
+    flex: 1,
+    overflowY: 'auto',
+    padding: '16px',
+  }
+
+  const inputContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    background: '#f3f3f3',
+    borderTop: '1px solid #ccc',
+    padding: '0.75rem',
+    gap: '0.75rem',
+  }
+
+  const textAreaStyle: React.CSSProperties = {
+    flex: 1,
+    resize: 'none',
+    border: '1px solid #ccc',
+    borderRadius: 4,
+    padding: 12,
+    fontFamily: 'Helvetica, sans-serif',
+    outline: 'none',
+    boxSizing: 'border-box' as const,
+    fontSize: '0.95rem',
+    color: '#000',
+    background: '#fff',
+  }
+
+  const buttonStyle: React.CSSProperties = {
+    backgroundColor: '#31a37d',
+    color: '#fff',
+    border: 'none',
+    padding: '0 24px',
+    fontSize: '0.95rem',
+    cursor: 'pointer',
+    borderRadius: 4,
+    minWidth: 84,
   }
 
   return (
     <div style={containerStyle}>
-      <div className="messages-window" style={{ flex:1, overflowY:'auto', padding:16 }}>
-        {messages.map((m, idx)=>
+      <div style={messagesWindowStyle}>
+        {messages.map((m, idx) => (
           <MessageBubble key={idx} role={m.role} content={m.content} />
-        )}
-        <div ref={bottomRef}/>
+        ))}
+        <div ref={bottomRef} />
       </div>
 
-      <div className="input-container" style={{ display:'flex', background:'#f3f3f3', borderTop:'1px solid #ccc', padding:'0.75rem', gap:'0.75rem'}}>
-        <input type="file" onChange={handleFileChange} />
+      <div style={inputContainerStyle}>
         <textarea
-          style={{ flex:1, resize:'none', border:'1px solid #ccc', borderRadius:4, padding:12 }}
-          placeholder="Type or attach a file..."
+          style={textAreaStyle}
+          placeholder="Send a message (text/word/pdf/image/etc.)"
           value={userInput}
-          onChange={(e)=>setUserInput(e.target.value)}
+          onChange={(e) => setUserInput(e.target.value)}
           disabled={isLoading}
         />
         <button
-          style={{ background:'#31a37d', color:'#fff', border:'none', padding:'0 24px', borderRadius:4 }}
+          style={buttonStyle}
           onClick={handleSend}
-          disabled={isLoading || (!userInput.trim() && !file)}
+          disabled={isLoading || !userInput.trim()}
         >
           {isLoading ? 'Thinking...' : 'Send'}
         </button>

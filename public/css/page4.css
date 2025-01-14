@@ -1,47 +1,55 @@
 /* public/css/page4.css */
 
-.page4-lab-container {
+.page4-container {
   width: 100%;
   min-height: 100vh;
-  background: #222;
+  background: #fefefe;
   position: relative;
   overflow: hidden;
 }
+
 .page4-canvas {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
 }
-.ai-lab-content {
+
+.page4-content {
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 700px;
-  margin: 6rem auto;
-  background: rgba(0,0,0,0.6);
+  max-width: 800px;
+  margin: 4rem auto;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
   padding: 2rem;
   border-radius: 12px;
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
-.ai-lab-content h2 {
+
+.page4-content h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #333;
 }
-.ai-lab-content p {
-  margin-bottom: 1rem;
+.page4-content p {
+  color: #444;
   line-height: 1.4;
+  margin-bottom: 1rem;
 }
-.ai-lab-content button {
-  background: #66ffcc;
-  color: #000;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
+.link-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
-.ai-lab-content button:hover {
-  opacity: 0.8;
+.link-list a {
+  color: #008060;
+  font-weight: bold;
+  text-decoration: none;
+}
+.link-list a:hover {
+  text-decoration: underline;
 }

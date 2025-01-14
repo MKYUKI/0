@@ -1,54 +1,54 @@
 /* public/css/page2.css */
 
-/* 背景を真っ白 & Foregroundを黒背景 + 白文字 + 緑リンク */
-
-.page2-reverse-container {
+/* 一番外側を白 */
+.page2-container {
   width: 100%;
   min-height: 100vh;
-  background: #fff; /* 背景 白 */
+  background: #fff;
+  position: relative;
   overflow: hidden;
 }
 
-.reverse-bg-section {
+/* 外側が白 */
+.outer-white-bg {
   position: relative;
   width: 100%;
-  height: auto;
-  padding: 4rem 1rem;
+  height: 100%;
+  background: #fff;
 }
 
-.reverse-foreground {
-  max-width: 800px;
-  margin: 0 auto;
-  background: #000; /* 黒背景 */
-  color: #fff;      /* 白文字 */
-  border-radius: 12px;
+/* 内部が黒いページ */
+.black-page-foreground {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 4rem auto;
   padding: 2rem;
+  background: #000;
+  color: #fff; /* 白文字 */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-.reverse-foreground h1 {
+.black-page-foreground h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
 
 .intro {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin: 0.5rem auto 2rem;
 }
 
-.resume-section h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-  color: #66ffcc; /* 緑系にしてみる */
-}
-
+/* リンクを緑色に */
 .resume-section a {
-  color: #66ffcc;
+  color: #00ff99; /* 緑 */
   font-weight: bold;
   text-decoration: none;
-  margin: 0 0.3rem;
 }
 .resume-section a:hover {
   text-decoration: underline;

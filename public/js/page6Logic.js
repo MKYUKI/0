@@ -1,9 +1,9 @@
 // public/js/page6Logic.js
-(function(){
-  if(typeof window==='undefined') return
+(function() {
+  if (typeof window === 'undefined') return
 
-  window.addEventListener('load', ()=>{
-    console.log("Page6 cosmic synergy launched.")
-    // Could add a 3D starfield, fractal rainbow, etc.
+  window.addEventListener('load', () => {
+    console.log('page6Logic.js: Launching cosmic finale synergy...')
+    // ここでThree.jsなどを使った銀河シミュレーションを追加可能
   })
 })()

@@ -3,26 +3,40 @@ import React from 'react'
 import Head from 'next/head'
 import ReferencesDropdown from '../components/ReferencesDropdown'
 
-
 export default function Page4() {
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page4 | Advanced AI Lab</title>
+        <title>0 - Page4 (Quantum & AI Playground)</title>
         <script src="/js/page4Logic.js" defer />
       </Head>
 
-      <main className="page4-lab-container">
+      <main className="page4-container">
         <canvas id="page4-canvas" className="page4-canvas"></canvas>
 
-        <section className="ai-lab-content">
-          <h2>Advanced AI Lab</h2>
+        <section className="page4-content">
+          <h2>Quantum AI Research & Holographic Exploration</h2>
           <p>
-            Explore multi-modal uploads: text, Word/PDF, images, even live streams,
-            feeding into GPT-4 synergy for collaborative analysis.
+            Dive into real-time illusions (NeRF, Transformers, fractals),
+            accelerating the next wave of discovery.
           </p>
-          <button>Upload and Analyze</button>
+          <div className="link-list">
+            <a
+              href="https://arxiv.org/abs/1706.03762"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Transformer (2017)
+            </a>
+            <a
+              href="https://arxiv.org/abs/2003.08934"
+              target="_blank"
+              rel="noreferrer"
+            >
+              NeRF (2020)
+            </a>
+          </div>
         </section>
 
         <ReferencesDropdown />
