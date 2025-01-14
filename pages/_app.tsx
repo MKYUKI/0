@@ -6,20 +6,20 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// ★ グローバルCSS一括 import
+// ★ グローバルCSS 一括 import (Next.js規定)
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
-import '../public/css/page1.css'
-import '../public/css/page2.css'
+import '../public/css/page1.css'    // Page1(大幅変更)
+import '../public/css/page2.css'    // Page2～Page6(現状維持)
 import '../public/css/page3.css'
 import '../public/css/page4.css'
 import '../public/css/page5.css'
 import '../public/css/page6.css'
 
-// ChatUI
+// チャット欄UI
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-/** スティッキーナビバー + GPT-4表記 + Page1～6リンク */
+/** スティッキーナビ + GPT-4表記 + Page1~6リンク */
 function NavBar() {
   return (
     <header
@@ -63,7 +63,7 @@ function NavBar() {
   )
 }
 
-/** Attention可視化のオプション例 */
+/** (任意) Attention可視化ポップアップ例 */
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
@@ -126,7 +126,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    // dynamic import for client if needed
+    // dynamic import if needed
   }, [])
 
   return (
@@ -137,7 +137,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
         />
-        {/* 超重要: PC/スマホ完全対応 */}
+        {/* PC/スマホ完全対応 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
@@ -146,14 +146,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
-      {/* 背景Canvas (黒い量子線 + 星 + 波) */}
+      {/* 幻想的黒線+星+波の背景Canvas */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ページ本体: stickyヘッダーを考慮し、下部コンテンツが隠れないよう注意 */}
+      {/* ページ本体 */}
       <div
         style={{
           position: 'relative',
@@ -166,15 +166,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <NavBar />
         <AttentionPopup />
 
-        {/* メインコンテンツ */}
+        {/* 各ページ表示 */}
         <div style={{ flex: 1 }}>
           <Component {...pageProps} />
         </div>
       </div>
 
       {/* フッター固定チャットUI
-         1ページ目だけチャット欄大きく
-         router.pathname === '/' で判定*/}
+         → 1ページ目だけ「chatgpt.comそっくりの大サイズ」を実現
+      */}
       <footer
         style={{
           position: 'fixed',
@@ -187,7 +187,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <ChatGPTInterface
-          isPage1Override={router.pathname === '/'}  // 1ページ目のみ特大
+          // 1ページ目('/')のみ 大サイズ
+          isPage1Override={router.pathname === '/'}
         />
       </footer>
     </>

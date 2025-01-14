@@ -8,38 +8,41 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page1 (ChatGPT.com Clone, Extra Large Chat)</title>
+        <title>0 - Page1 (ChatGPT.com Perfect Clone)</title>
       </Head>
 
       <main className="page1-main-container">
-        {/* ヒーロー */}
+        {/* ★ヒーロー: chatgpt.com 参考 */}
         <section className="hero-section-clone">
           <div className="hero-content">
-            <h1 className="hero-title">お手伝いできることはありますか？</h1>
+            <h1 className="hero-title">
+              お手伝いできることはありますか？
+            </h1>
             <h2 className="hero-subtitle">
-              (Reference: <strong>chatgpt.com</strong>)
+              <strong>参考文献:</strong> <a href="https://chatgpt.com">chatgpt.com</a>
             </h2>
             <p className="hero-description">
-              ユーザのコメントは画面右上、アシスタント回答は左下から表示されます。
-              ファイル(Word, PDF, 画像 etc.)もアップロード可能です。
+              コメントを入力すると右上に表示され、その直下(左下方向)から
+              GPT-4の回答が生成されます。ファイル(Word/PDF/画像)も送信可能。
             </p>
           </div>
         </section>
 
         {/* Info */}
         <section className="public-section">
-          <h2>Universal GPT-4 Access</h2>
+          <h2>世界最高峰のGPT-4シナジーを無料開放</h2>
           <p>
-            We offer unstoppable synergy with GPT-4 to all cosmic beings. Free, open, and
-            harnessing illusions of quantum lines.
+            宇宙の誰もが自由に利用可能です。先端の量子錯覚アニメが加わり、
+            chatgpt.comと同等機能をさらに進化。
           </p>
         </section>
 
-        {/* UI placeholder */}
+        {/* チャットUI placeholder (実際はフッター固定) */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">
-              (The real chat bar is pinned at the bottom - just like chatgpt.com!)
+              画面下部(フッター)に本物のチャット欄があります。
+              (PC/スマホ対応)
             </p>
           </div>
         </section>

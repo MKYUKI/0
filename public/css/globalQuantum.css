@@ -47,19 +47,12 @@ body::after {
   .hero-subtitle {
     font-size: 1.2rem;
   }
-
   .hero-description {
     font-size: 0.9rem;
   }
-
-  .black-foreground {
-    margin: 2rem auto;
-    padding: 1rem;
+  /* page1, page2, ... など個別に調整 */
+  .page2-container h1 {
+    font-size: 1.6rem;
   }
-
-  .page6-content {
-    margin: 2rem auto;
-    padding: 1rem;
-  }
-  /* etc... */
+  /* ...etc. */
 }
