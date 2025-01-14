@@ -1,27 +1,23 @@
 /* public/css/page2.css */
-.page2-main-container {
-  /* 
-     画面の下に固定フッターがあるため、最低限の高さを確保したい
-     → min-height: calc(100vh - 60px) 等
-     ただしフッターを足しても余裕あるように ...
+
+.page2-container {
+  /* ヘッダー60px + フッター80px の中でスクロールできるので
+     ここで min-height: calc(100vh - 60px - 80px); としても可
   */
-  min-height: calc(100vh - 60px);
-  /* background: #fff; // or black (but you prefer the black quantum animation) */
-  background: #fff;
+  min-height: calc(100vh - 60px - 80px);
+  background: #fff; 
   position: relative;
   overflow: hidden;
 }
 
-/* 量子的黒背景セクション */
 .black-quantum-bg {
   position: relative;
   width: 100%;
-  /* ここで大きめに確保 */
-  min-height: 80vh; /* 大きめにとり、アニメ空間を再現 */
-  background-color: black; /* fallback */
+  min-height: 80vh; /* 大きく確保 */
+  background-color: #000; /* fallback */
+  /* アニメ or BG(量子線)は ::before or canvasで表現 */
 }
 
-/* 量子アニメ: 以前のように広めに */
 .black-quantum-bg::before {
   content: "";
   position: absolute;
@@ -30,19 +26,18 @@
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
-  opacity: 0.3; /* 以前よりやや強く */
   animation: quantumPulse 12s infinite alternate ease-in-out;
+  opacity: 0.3;
   pointer-events: none;
   z-index: 1;
 }
 
 @keyframes quantumPulse {
-  0% { transform: scale(1); }
+  0% { transform: scale(1); opacity: 0.3; }
   50% { transform: scale(1.05); opacity: 0.6; }
   100% { transform: scale(1.1); opacity: 0.3; }
 }
 
-/* 白ブロック */
 .white-page-foreground {
   position: relative;
   z-index: 2;
@@ -53,29 +48,5 @@
   color: #000;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  top: 10%; /* 画面の上から少し下げて配置 */
-}
-
-/* Heading */
-.white-page-foreground h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-/* text */
-.intro {
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-/* link */
-.resume-section a {
-  color: #008060;
-  font-weight: bold;
-  text-decoration: none;
-  margin: 0 0.5rem;
-}
-.resume-section a:hover {
-  text-decoration: underline;
+  top: 10%; /* アニメ領域が上に出るよう少し下げる */
 }

@@ -6,7 +6,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// ★ グローバルCSS
+// ★ グローバルCSS一括 import
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 import '../public/css/page1.css'
@@ -18,6 +18,7 @@ import '../public/css/page6.css'
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
+/** 上部ナビバー: 固定高さ60px想定 */
 function NavBar() {
   return (
     <header
@@ -25,7 +26,7 @@ function NavBar() {
         position: 'fixed',
         top: 0,
         left: 0,
-        height: '60px',
+        height: '60px', // ヘッダー固定高さ
         width: '100%',
         zIndex: 9999,
         background: '#222',
@@ -35,7 +36,9 @@ function NavBar() {
         color: '#fff',
       }}
     >
+      {/* 左上に GPT-4 Model の明記 */}
       <span style={{ fontWeight: 'bold', marginRight: '2rem' }}>GPT-4 Model</span>
+
       <nav style={{ display: 'flex', gap: '1rem', fontSize: '1rem' }}>
         <Link href="/">
           <span style={{ cursor: 'pointer' }}>Page1</span>
@@ -60,6 +63,7 @@ function NavBar() {
   )
 }
 
+/** Attention可視化(オプション) */
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
@@ -122,71 +126,77 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    // dynamic import if needed
+    // もしクライアントサイドで動的インポートしたいJSがあればここ
   }, [])
 
   return (
     <>
       <Head>
-        <title>0 - GPT-4 Quantum Clone</title>
+        <title>0 - The Ultimate GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
+          content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
         />
+        {/* PC/スマホ完全対応 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* Scripts for background animation */}
+      {/* スクリプト: 幻想的量子線アニメ */}
       <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
       <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
       <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
 
-      {/* Background Canvas */}
+      {/* === 幻想的量子線 + 星 + 波 === */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/** 
-       * Body Scroll 
-       */}
+      {/* 
+        ページ本体:
+        ヘッダー(高さ60px) + フッター(80px)を除き、スクロール出来るように 
+        body(html)に overflow: auto; かつ ここでも min-height: 100vh
+      */}
       <div
-        id="app-wrapper"
         style={{
           position: 'relative',
           zIndex: 1,
+          // stickyヘッダー60px分だけ上を空ける (あるいはmarginTop:60pxでも可)
+          paddingTop: '60px',
+          // 下にフッター80pxを確保
+          paddingBottom: '80px',
           minHeight: '100vh',
-          overflowY: 'auto',
-          overflowX: 'hidden',
+          // overflowはbodyに任せるならOK。 
+          // ここで display:'block' or 'flex' でも可
         }}
       >
+        {/* ヘッダー(固定) */}
         <NavBar />
         <AttentionPopup />
 
-        {/* ヘッダーが60px → main content needs marginTop:60px */}
-        <div style={{ marginTop: '60px', paddingBottom: '0' }}>
-          <Component {...pageProps} />
-        </div>
-
-        {/** Fixed footer: ChatUI */}
-        <footer
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            width: '100%',
-            background: '#f0f0f0',
-            boxShadow: '0 -2px 6px rgba(0,0,0,0.2)',
-            zIndex: 10000,
-          }}
-        >
-          <ChatGPTInterface
-            // 1ページ目だけチャット欄を巨大化
-            isPage1Override={router.pathname === '/'}
-          />
-        </footer>
+        {/* メインコンテンツ */}
+        <Component {...pageProps} />
       </div>
+
+      {/* === 固定フッター: ChatUI === */}
+      <footer
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          height: '80px',
+          width: '100%',
+          background: '#f0f0f0',
+          boxShadow: '0 -2px 6px rgba(0,0,0,0.2)',
+          zIndex: 10000,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        {/* 1ページ目だけチャット欄を極端に大きく */}
+        <ChatGPTInterface isPage1Override={router.pathname === '/'} />
+      </footer>
     </>
   )
 }
