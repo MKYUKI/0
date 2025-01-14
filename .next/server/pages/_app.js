@@ -211,6 +211,13 @@ module.exports = require("next/head");
 
 /***/ }),
 
+/***/ 1853:
+/***/ ((module) => {
+
+module.exports = require("next/router");
+
+/***/ }),
+
 /***/ 6689:
 /***/ ((module) => {
 

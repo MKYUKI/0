@@ -25,36 +25,40 @@ function ReferencesDropdown() {
         },
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                className: "references-button",
-                onClick: ()=>setOpen(!open),
                 style: {
-                    backgroundColor: "#f0f0f0",
-                    color: "#333",
-                    border: "1px solid #ccc",
-                    padding: "0.5rem 1rem",
+                    background: "#444",
+                    color: "#fff",
+                    border: "none",
                     borderRadius: "4px",
-                    cursor: "pointer"
+                    padding: "0.5rem 1rem",
+                    cursor: "pointer",
+                    fontSize: "0.9rem"
                 },
+                onClick: ()=>setOpen(!open),
                 children: open ? "Hide References" : "Show References"
             }),
             open && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: "references-content",
                 style: {
-                    marginTop: "1rem",
-                    background: "#fafafa",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    textAlign: "left",
+                    marginTop: "0.5rem",
+                    background: "rgba(0,0,0,0.7)",
+                    color: "#fff",
                     padding: "1rem",
+                    borderRadius: "8px",
+                    width: "90%",
                     maxWidth: "600px",
-                    margin: "1rem auto",
-                    fontSize: "0.95rem"
+                    margin: "0.5rem auto"
                 },
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                         children: "Some references for AI research, quantum lines, synergy, etc."
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
+                        style: {
+                            textAlign: "left",
+                            marginLeft: "1rem",
+                            lineHeight: "1.6"
+                        },
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -62,7 +66,7 @@ function ReferencesDropdown() {
                                     target: "_blank",
                                     rel: "noreferrer",
                                     style: {
-                                        color: "#0066cc",
+                                        color: "#66ffcc",
                                         textDecoration: "underline"
                                     },
                                     children: "Attention Is All You Need (2017)"
@@ -74,7 +78,7 @@ function ReferencesDropdown() {
                                     target: "_blank",
                                     rel: "noreferrer",
                                     style: {
-                                        color: "#0066cc",
+                                        color: "#66ffcc",
                                         textDecoration: "underline"
                                     },
                                     children: "NeRF (2020)"
@@ -86,10 +90,18 @@ function ReferencesDropdown() {
                                     target: "_blank",
                                     rel: "noreferrer",
                                     style: {
-                                        color: "#0066cc",
+                                        color: "#66ffcc",
                                         textDecoration: "underline"
                                     },
                                     children: "Scaling Laws"
+                                })
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("strong", {
+                                    style: {
+                                        color: "#ffbfff"
+                                    },
+                                    children: "Reference: chatgpt.com"
                                 })
                             })
                         ]
