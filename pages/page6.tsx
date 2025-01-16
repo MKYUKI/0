@@ -1,36 +1,28 @@
 // pages/page6.tsx
 import React from 'react'
 import Head from 'next/head'
-import ReferencesDropdown from '../components/ReferencesDropdown'
 
 export default function Page6() {
   return (
     <>
       <Head>
+        <title>0 - Page6</title>
         <meta charSet="UTF-8" />
-        <title>0 - Page6 (Cosmic Vision Finale)</title>
-        <script src="/js/page6Logic.js" defer />
       </Head>
 
-      <main className="page6-container">
-        <div className="cosmic-overlay"></div>
-
-        <section className="page6-content">
-          <h2>Finale: Galactic Evolution & Beyond</h2>
-          <p>
-            0 merges civilizations across space-time, heralding the next era
-            of cosmic synergy. Travel beyond the stars together.
+      <div className="page6-wrapper">
+        <section className="page6-hero">
+          <h1>Page6 - Final Layout Example</h1>
+          <p className="page6-intro">
+            A final page showcasing a consistent responsive approach.
           </p>
-          <div className="final-links">
-            <a href="/">Return Home</a>
-            <a href="https://arxiv.org/abs/2106.01345" target="_blank" rel="noreferrer">
-              Scaling Laws
-            </a>
-          </div>
         </section>
 
-        <ReferencesDropdown />
-      </main>
+        <section className="page6-content">
+          <h2>Conclusion</h2>
+          <p>This site is fully responsive on pages 1 through 6!</p>
+        </section>
+      </div>
     </>
   )
 }

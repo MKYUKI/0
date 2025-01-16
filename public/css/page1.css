@@ -1,5 +1,6 @@
 /* public/css/page1.css */
 
+/* PCデフォルト */
 .page1-main-container {
   width: 100%;
   min-height: 100vh;
@@ -7,24 +8,21 @@
   overflow: hidden;
 }
 
-/* Heroセクション */
 .hero-section-clone {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60vh; /* やや大きく */
+  height: 60vh;
   background: linear-gradient(135deg, #fff, #f7f7f7 40%, #ededed);
   position: relative;
   overflow: hidden;
 }
-
 .hero-content {
   text-align: center;
   z-index: 1;
   max-width: 700px;
   margin: 0 2rem;
 }
-
 .hero-title {
   font-size: 3.2rem;
   font-weight: 700;
@@ -43,7 +41,7 @@
   margin: 0 auto;
 }
 
-/* 背景量子ライン (軽くフェードイン) */
+/* fadeIn量子ライン */
 @keyframes fadeParticles {
   0%   { opacity: 0; transform: translateY(30px);}
   100% { opacity: 1; transform: translateY(0);}
@@ -57,7 +55,6 @@
   animation: fadeParticles 3s ease-in-out forwards;
 }
 
-/* Infoセクション */
 .public-section {
   padding: 2rem 1rem;
   background: #fafafa;
@@ -76,7 +73,6 @@
   font-size: 1rem;
 }
 
-/* チャットUI placeholder */
 .chat-ui-section {
   padding: 2rem 1rem;
   background: #fff;
@@ -90,4 +86,25 @@
   color: #888;
   font-style: italic;
   font-size: 0.9rem;
+}
+
+/* ============== レスポンシブ ============== */
+@media screen and (max-width: 768px) {
+  .hero-section-clone {
+    height: 50vh; 
+  }
+  .hero-title {
+    font-size: 2rem; 
+  }
+  .hero-subtitle {
+    font-size: 1.4rem; 
+  }
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .public-section h2 {
+    font-size: 1.5rem;
+  }
+  /* 必要に応じてさらに調整 */
 }

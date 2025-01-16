@@ -37,6 +37,16 @@
       "static/chunks/main.js",
       "static/chunks/pages/page3.js"
     ],
+    "/page4": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/page4.js"
+    ],
+    "/page5": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/page5.js"
+    ],
     "/page6": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

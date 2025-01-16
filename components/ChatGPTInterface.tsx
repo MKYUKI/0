@@ -91,7 +91,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     }
   }
 
-  // layout
+  // レイアウト
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -105,15 +105,15 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
   }
 
   if (isPage1Override) {
-    // 1ページ目 → 上部60pxだけ除いて全て使う
+    // Page1 だけ全画面使用
     containerStyle.width = '100%'
     containerStyle.maxWidth = '100%'
     containerStyle.height = 'calc(100vh - 60px)'
   } else {
-    // 2~6ページ目
+    // Page2～6: 指定された高さ
     containerStyle.width = '100%'
     containerStyle.maxWidth = '800px'
-    containerStyle.height = '60vh' // ★指示どおり変更しない
+    containerStyle.height = '60vh'
   }
 
   const topAreaStyle: React.CSSProperties = {

@@ -1,72 +1,50 @@
 // public/js/starsAnim.js
-// 白背景上で、黒い量子粒子(ドット)が無数に浮遊・拡散
-
 (function(){
-  console.log("starsAnim.js (quantum-particles) loaded...");
-
+  console.log("starsAnim.js is running...");
   let canvas, ctx;
   let w, h;
-  let particles = [];
-  const PARTICLE_COUNT = 80;
+  let stars = [];
 
   function init(){
     canvas = document.getElementById('stars-canvas');
     if(!canvas) {
-      console.error("starsAnim: #stars-canvas not found, skipping...");
+      console.error("stars-canvas not found!");
       return;
     }
     ctx = canvas.getContext('2d');
     resize();
-    createParticles(PARTICLE_COUNT);
+    createStars(100);
     animate();
   }
-
   function resize(){
-    if(!canvas) return;
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
   }
-
-  function createParticles(num){
-    particles = [];
+  function createStars(num){
+    stars = [];
     for(let i=0; i<num; i++){
-      particles.push({
+      stars.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: Math.random() * 2 + 0.5,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.5 + 0.3,
+        speed: Math.random() * 0.5 + 0.2,
+        r: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.5 + 0.5
       });
     }
   }
-
   function animate(){
-    if(!canvas) return;
     ctx.clearRect(0,0,w,h);
-
-    // 粒子を描画(黒ドット)
-    particles.forEach(p=>{
-      ctx.globalAlpha = p.alpha;
-      ctx.fillStyle = '#000000';
+    ctx.fillStyle = '#ffffff';
+    stars.forEach(star => {
+      ctx.globalAlpha = star.alpha;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
       ctx.fill();
-
-      // update
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // 画面外に出たら反対側へワープ (量子的トーラス空間)
-      if(p.x < 0) p.x = w;
-      if(p.x > w) p.x = 0;
-      if(p.y < 0) p.y = h;
-      if(p.y > h) p.y = 0;
+      star.y -= star.speed;
+      if(star.y < 0) star.y = h;
     });
-
     requestAnimationFrame(animate);
   }
-
-  window.addEventListener('load', init);
   window.addEventListener('resize', resize);
+  window.addEventListener('DOMContentLoaded', init);
 })();

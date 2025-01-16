@@ -1,7 +1,6 @@
-/* -------------------------------------
-   public/css/globalQuantum.css
-------------------------------------- */
+/* public/css/globalQuantum.css */
 
+/* PC・共通デフォルト */
 html, body {
   margin: 0;
   padding: 0;
@@ -9,8 +8,8 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: sans-serif;
-  background: transparent; /* 透過 */
-  overflow: hidden;        /* body自体は隠す */
+  background: transparent; /* 背景はCanvasで描画 */
+  overflow: hidden;        /* PCで余計なスクロール非表示 */
 }
 
 #app-wrapper {
@@ -19,8 +18,7 @@ html, body {
   overflow-x: hidden;
   width: 100%;
   min-height: 100vh;
-  /* 下部に固定フッターがあるためpadding-bottom多め */
-  padding-bottom: 300px;
+  padding-bottom: 300px; /* 固定チャット欄の分 */
 }
 
 .global-bg-canvas-container {
@@ -36,11 +34,10 @@ html, body {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
 }
 
-/* ヘッダー(ナビ) */
+/* ナビバー */
 .global-nav-bar {
   position: fixed;
   top: 0;
@@ -54,7 +51,6 @@ html, body {
   padding: 0 1rem;
   color: #fff;
 }
-
 .nav-bar-title {
   font-weight: bold;
   margin-right: 2rem;
@@ -71,7 +67,7 @@ html, body {
 #main-content {
   position: relative;
   z-index: 1;
-  margin-top: 60px; 
+  margin-top: 60px; /* ヘッダー高さ */
   width: 100%;
   box-sizing: border-box;
 }
@@ -113,13 +109,25 @@ html, body {
   box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
-/* レスポンシブ(スマホ向け) */
-@media screen and (max-width: 600px) {
+/* ========= レスポンシブ (スマホ/タブレット) ========= */
+@media screen and (max-width: 768px) {
+  /* ナビバー */
   .nav-bar-links {
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
+  /* チャットフッター */
   #chat-footer {
     font-size: 0.9rem;
   }
+  /* Attention Popup */
+  .attention-popup-container {
+    right: 0.5rem;
+    font-size: 0.8rem;
+  }
+  /* 余白を少なくするなどの調整 */
+  #app-wrapper {
+    padding-bottom: 260px; /* 少し減らす等 */
+  }
+  /* 必要に応じてさらに追記 */
 }

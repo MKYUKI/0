@@ -1,40 +1,28 @@
 // pages/page3.tsx
 import React from 'react'
 import Head from 'next/head'
-import ReferencesDropdown from '../components/ReferencesDropdown'
 
 export default function Page3() {
   return (
     <>
       <Head>
+        <title>0 - Page3</title>
         <meta charSet="UTF-8" />
-        <title>0 - Page3 (Global Collaboration)</title>
       </Head>
 
-      <main className="page3-container">
-        <section className="global-collab-hero">
-          <div className="collab-overlay"></div>
-          <h1>Global Collaboration Arena</h1>
-          <p>
-            Join forces with the entire planet. Brainstorm solutions for
-            humanity’s greatest challenges, powered by 0’s unstoppable synergy.
+      <div className="page3-wrapper">
+        <section className="hero-section3">
+          <h1>Page3 - Example Layout</h1>
+          <p className="intro3">
+            This is an example of page3 content. 
+            Adapted to be responsive for both PC and mobile.
           </p>
         </section>
 
-        <section className="collab-section">
-          <h2>Submit Your Ideas</h2>
-          <div className="collab-form">
-            <input type="text" placeholder="Your Name or Group" />
-            <textarea placeholder="Describe your proposal or challenge..." />
-            <button>Submit</button>
-          </div>
-          <p className="collab-note">
-            0 will match you with potential collaborators worldwide.
-          </p>
+        <section className="content3">
+          <p>Some details or placeholders for Page3.</p>
         </section>
-
-        <ReferencesDropdown />
-      </main>
+      </div>
     </>
   )
 }

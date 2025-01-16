@@ -12,13 +12,7 @@ export default function HomePage() {
       </Head>
 
       <main className="page1-main-container">
-        {/**
-         * ヒーローセクション:
-         *  - 大見出し: お手伝いできることはありますか？
-         *  - 英語: What can I help you with?
-         *  - 「(Performance same as chatgpt.com)」等の文言で
-         *    “実用性・先進性”を強調
-         */}
+        {/* ヒーローセクション */}
         <section className="hero-section-clone">
           <div className="hero-content">
             <h1 className="hero-title">お手伝いできることはありますか？</h1>
@@ -34,10 +28,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/**
-         * 情報セクション
-         *  - 世界最高峰を示す文言をさらに強化
-         */}
+        {/* 情報セクション */}
         <section className="public-section">
           <h2>Civilization's Most Advanced GPT-4 Portal</h2>
           <p>
@@ -48,9 +39,7 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/**
-         * Chat placeholder (実際のチャットはフッター固定)
-         */}
+        {/* Chat placeholder (本来はフッター固定チャット) */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">
@@ -59,7 +48,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Referencesなど */}
         <ReferencesDropdown />
       </main>
     </>

@@ -1,31 +1,28 @@
 // pages/page5.tsx
 import React from 'react'
 import Head from 'next/head'
-import ReferencesDropdown from '../components/ReferencesDropdown'
 
 export default function Page5() {
   return (
     <>
       <Head>
+        <title>0 - Page5</title>
         <meta charSet="UTF-8" />
-        <title>0 - Page5 (Social Impact & Charity)</title>
-        <script src="/js/page5Logic.js" defer />
       </Head>
 
-      <main className="page5-container">
-        <canvas id="deepblue-star-canvas" className="page5-canvas"></canvas>
-
-        <section className="page5-content">
-          <h2>Empower the World Through Action</h2>
-          <p>
-            Connect with global or local initiatives. Let 0 guide you to maximize
-            your contributions and transform lives.
+      <div className="page5-wrapper">
+        <section className="page5-hero">
+          <h1>Page5 - Yet Another Layout</h1>
+          <p className="page5-intro">
+            Here we illustrate more content sections with responsiveness.
           </p>
-          <button className="donate-button">Explore Donation Opportunities</button>
         </section>
 
-        <ReferencesDropdown />
-      </main>
+        <section className="page5-content">
+          <h2>Page5 Main Content</h2>
+          <p>This is a sample text for Page5. Mobile friendly!</p>
+        </section>
+      </div>
     </>
   )
 }

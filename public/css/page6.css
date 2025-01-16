@@ -1,60 +1,47 @@
 /* public/css/page6.css */
-.page6-container {
-  width: 100%;
-  min-height: 100vh;
-  background: #000;
+
+.page6-wrapper {
   position: relative;
-  overflow: hidden;
+  min-height: calc(100vh - 60px);
+  background: #ffffff;
+  overflow-x: hidden;
 }
-.cosmic-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
-  z-index: 0;
-  animation: cosmicPulse 10s infinite alternate ease-in-out;
-}
-@keyframes cosmicPulse {
-  0% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0.8;
-    transform: scale(1.1);
-  }
-}
-.page6-content {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: 5rem auto;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(6px);
-  padding: 3rem;
-  border-radius: 12px;
+
+.page6-hero {
+  background: #ddd;
+  padding: 3rem 1rem;
   text-align: center;
-  color: #fff;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-.page6-content h2 {
-  font-size: 2.2rem;
+.page6-hero h1 {
+  font-size: 2rem;
   margin-bottom: 1rem;
+  color: #333;
 }
-.page6-content p {
+.page6-intro {
   font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
+  color: #444;
 }
-.final-links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+
+.page6-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  color: #333;
 }
-.final-links a {
-  color: #66ddff;
-  text-decoration: none;
-  font-weight: bold;
-}
-.final-links a:hover {
-  text-decoration: underline;
+
+/* レスポンシブ */
+@media screen and (max-width: 768px) {
+  .page6-hero {
+    padding: 2rem 0.5rem;
+  }
+  .page6-hero h1 {
+    font-size: 1.6rem;
+  }
+  .page6-intro {
+    font-size: 1rem;
+  }
+  .page6-content {
+    padding: 1rem 0.5rem;
+  }
 }

@@ -6,7 +6,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-/* グローバルCSS */
+/* グローバルCSS + 各ページの専用CSS */
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 import '../public/css/page1.css'
@@ -100,22 +100,23 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
         />
+        {/* レスポンシブ必須: viewport meta */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* ========== 3つのアニメscript ========== */}
+      {/* ====== 3つのアニメscript ====== */}
       <Script src="/js/quantum3D.js" strategy="afterInteractive" />
       <Script src="/js/starsAnim.js" strategy="afterInteractive" />
       <Script src="/js/waveAnim.js" strategy="afterInteractive" />
 
-      {/* ========== 背景Canvas (全ページ共通) ========== */}
+      {/* ====== 背景Canvas ====== */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ========== 全体ラップ ========== */}
+      {/* ====== 全体ラップ ====== */}
       <div id="app-wrapper">
         <NavBar />
         <AttentionPopup />
@@ -129,37 +130,30 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </footer>
       </div>
 
-      {/* 
+      {/*
         =========== ここから 2ページ目専用のスタイル上書き ===========
         router.pathname === '/page2' のときだけ適用し、
-        他ページでは読み込まない → 他ページには影響しない
+        他ページには影響しない
       */}
       {router.pathname === '/page2' && (
         <style jsx global>{`
-          /* ★★★ Tailwindが body { background:#fff } を適用しても
-             ここで !important を使い 2ページ目だけ強制透過にする ★★★ */
           body, html {
             background: transparent !important;
           }
-
           #app-wrapper {
             background: transparent !important;
           }
           #main-content {
             background: transparent !important;
             min-height: calc(100vh - 60px);
-            padding: 0; /* 余計な余白をなくす */
+            padding: 0;
           }
-
-          /* ---------- ヒーローセクションの黒っぽい背景を薄く ---------- */
           .hero-section {
             position: relative;
             width: 100%;
-            height: 500px; /* お好みで大きさ調整 */
+            height: 500px; 
             background: transparent !important;
           }
-
-          /* 極薄の黒 + 量子ライン */
           .hero-section .black-quantum-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -179,8 +173,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             50%  { transform: scale(1.05); opacity: 0.7; }
             100% { transform: scale(1.1);  opacity: 0.5; }
           }
-
-          /* ヒーローテキスト: 背景無し + 白文字 */
           .hero-section .hero-text {
             position: relative;
             z-index: 2;
@@ -202,8 +194,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             line-height: 1.5;
             margin: 0;
           }
-
-          /* ---------- 白背景セクション ---------- */
           .white-section {
             position: relative;
             background: #fff !important; 

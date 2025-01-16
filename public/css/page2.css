@@ -1,113 +1,116 @@
-/* -----------------------------------
-   public/css/page2.css
-   (2ページ目のみ適用)
------------------------------------ */
+/* public/css/page2.css */
 
-/*
-  全体のラッパ
-  - フッター固定を考慮し、最低限の高さを確保
-  - 下地は白
-*/
-.page2-wrapper {
+/* PCデフォルト */
+.page2-unified-wrapper {
   position: relative;
   min-height: calc(100vh - 60px);
-  background: #fff;     /* 全体の背景は白 */
-  overflow-x: hidden;   /* 横スクロール不要 */
+  overflow-x: hidden;
+  padding-bottom: 300px;
+  background: transparent;
 }
 
-/*
-  1) ナビバー下の透過エリア
-     → 背後の3つのCanvas(quantum3D.js / starsAnim.js / waveAnim.js)が透ける部分
-*/
-.top-animation-gap {
-  width: 100%;
-  height: 250px;          /* お好みで高さ調整OK */
-  background: transparent; /* 背景は透過 */
-  position: relative;
-  z-index: 1;             /* 下層に敷いたCanvasが見える */
-}
-
-/*
-  2) 黒い量子アニメ背景セクション
-     - ここを背景"黒"ではなく半透明にし、
-       背後のcanvasアニメーションをうっすら見せる
-*/
-.black-quantum-bg {
+/* ヒーロー */
+.hero-section {
   position: relative;
   width: 100%;
-  min-height: 80vh;           /* 量子アニメ空間を確保 */
-  background: transparent;    /* ここは透過にする */
-  overflow: hidden;
+  height: 600px; 
+  background: transparent;
   z-index: 1;
 }
-
-/* ::before で黒背景 + 量子ラインを薄めに重ねる */
-.black-quantum-bg::before {
-  content: "";
+.black-quantum-overlay {
+  pointer-events: none;
   position: absolute;
-  inset: 0;
-  /* 背景をやや半透明な黒+量子ライン画像にする */
-  background-color: rgba(0,0,0,0.7); 
-  background-image: url('/img/quantum-line1.png');
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.35);
+  background-image: url('data:image/png;base64, ...略...');
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
-  opacity: 0.3; /* 量子ラインの濃さを調整 */
   animation: quantumPulse 12s infinite alternate ease-in-out;
-  pointer-events: none;
-  z-index: 1;
 }
-
 @keyframes quantumPulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(1.1);
-    opacity: 0.3;
-  }
+  0%   { transform: scale(1);   opacity: 0.35; }
+  50%  { transform: scale(1.05);opacity: 0.7;  }
+  100% { transform: scale(1.1); opacity: 0.35; }
 }
-
-/*
-  白い前景ブロック
-  - 大見出し + Resumeリンク等をここに置く
-  - z-indexを上げて量子ラインや背景アニメより前面に
-*/
-.white-foreground-block {
+.hero-text {
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  max-width: 800px;
+  width: 90%;
   margin: 0 auto;
-  padding: 2rem;
-  background: #fff;
-  color: #000;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  padding: 3rem;
+  text-align: center;
+  color: #fff;
+  font-family: sans-serif;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
 }
-
-/* 見出し/テキスト */
-.white-foreground-block h1 {
+.hero-text h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #333;
 }
 .intro {
-  color: #444;
-  margin-bottom: 2rem;
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 
-/* Resumeリンク */
+/* 白背景セクション */
+.white-section {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  color: #000;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+  font-family: sans-serif;
+}
+.white-section h3 {
+  margin-bottom: 1.5rem;
+}
 .resume-section a {
-  color: #008060;
+  color: #006060;
   font-weight: bold;
-  text-decoration: none;
   margin: 0 0.5rem;
+  text-decoration: none;
 }
 .resume-section a:hover {
   text-decoration: underline;
+}
+
+/* ローカルチャット */
+.local-chat-section {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 2rem auto 0;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  padding: 1rem;
+}
+
+/* ============== レスポンシブ ============== */
+@media screen and (max-width: 768px) {
+  /* ヒーロー高さ */
+  .hero-section {
+    height: 400px; 
+  }
+  .hero-text h1 {
+    font-size: 1.6rem;
+  }
+  .intro {
+    font-size: 1rem;
+  }
+  .white-section {
+    padding: 2rem 0.5rem;
+  }
+  .dark-section {
+    padding: 2rem 1rem;
+  }
+  /* etc... */
 }
