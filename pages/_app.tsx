@@ -6,7 +6,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// ★ グローバルCSS一括 import
+/* グローバルCSS */
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
 import '../public/css/page1.css'
@@ -18,89 +18,49 @@ import '../public/css/page6.css'
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-/** 上部ナビバー: 固定高さ60px想定 */
+// ---------------------------------
+// ナビバー
+// ---------------------------------
 function NavBar() {
   return (
-    <header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '60px', // ヘッダー固定高さ
-        width: '100%',
-        zIndex: 9999,
-        background: '#222',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 1rem',
-        color: '#fff',
-      }}
-    >
-      {/* 左上に GPT-4 Model の明記 */}
-      <span style={{ fontWeight: 'bold', marginRight: '2rem' }}>GPT-4 Model</span>
-
-      <nav style={{ display: 'flex', gap: '1rem', fontSize: '1rem' }}>
+    <header className="global-nav-bar">
+      <span className="nav-bar-title">GPT-4 Model</span>
+      <nav className="nav-bar-links">
         <Link href="/">
-          <span style={{ cursor: 'pointer' }}>Page1</span>
+          <span className="nav-link">Page1</span>
         </Link>
         <Link href="/page2">
-          <span style={{ cursor: 'pointer' }}>Page2</span>
+          <span className="nav-link">Page2</span>
         </Link>
         <Link href="/page3">
-          <span style={{ cursor: 'pointer' }}>Page3</span>
+          <span className="nav-link">Page3</span>
         </Link>
         <Link href="/page4">
-          <span style={{ cursor: 'pointer' }}>Page4</span>
+          <span className="nav-link">Page4</span>
         </Link>
         <Link href="/page5">
-          <span style={{ cursor: 'pointer' }}>Page5</span>
+          <span className="nav-link">Page5</span>
         </Link>
         <Link href="/page6">
-          <span style={{ cursor: 'pointer' }}>Page6</span>
+          <span className="nav-link">Page6</span>
         </Link>
       </nav>
     </header>
   )
 }
 
-/** Attention可視化(オプション) */
+// ---------------------------------
+// Attention Popup
+// ---------------------------------
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: '60px',
-        right: '1rem',
-        zIndex: 9999,
-        fontSize: '0.9rem',
-      }}
-    >
-      <button
-        style={{
-          background: '#444',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-          padding: '0.4rem 0.8rem',
-          cursor: 'pointer',
-        }}
-        onClick={() => setOpen(!open)}
-      >
+    <div className="attention-popup-container">
+      <button className="attention-popup-btn" onClick={() => setOpen(!open)}>
         {open ? 'Hide Transformer' : 'Show Transformer'}
       </button>
       {open && (
-        <div
-          style={{
-            marginTop: '0.3rem',
-            background: 'rgba(0,0,0,0.85)',
-            color: '#fff',
-            padding: '1rem',
-            borderRadius: '8px',
-            width: '280px',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
-          }}
-        >
+        <div className="attention-popup-content">
           <h4 style={{ marginBottom: '0.3rem' }}>
             Attention Is All You Need (2017)
           </h4>
@@ -122,81 +82,157 @@ function AttentionPopup() {
   )
 }
 
+// ---------------------------------
+// メインアプリ
+// ---------------------------------
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    // もしクライアントサイドで動的インポートしたいJSがあればここ
+    console.log("MyApp mounted - client side.")
   }, [])
 
   return (
     <>
       <Head>
-        <title>0 - The Ultimate GPT-4 Quantum Clone</title>
+        <title>0 - GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="0: GPT-4 based ChatGPT-like site with quantum illusions, synergy, unstoppable expansions."
+          content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
         />
-        {/* PC/スマホ完全対応 */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* スクリプト: 幻想的量子線アニメ */}
-      <Script src="/js/quantum3D.js" strategy="beforeInteractive" />
-      <Script src="/js/starsAnim.js" strategy="beforeInteractive" />
-      <Script src="/js/waveAnim.js" strategy="beforeInteractive" />
+      {/* ========== 3つのアニメscript ========== */}
+      <Script src="/js/quantum3D.js" strategy="afterInteractive" />
+      <Script src="/js/starsAnim.js" strategy="afterInteractive" />
+      <Script src="/js/waveAnim.js" strategy="afterInteractive" />
 
-      {/* === 幻想的量子線 + 星 + 波 === */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
+      {/* ========== 背景Canvas (全ページ共通) ========== */}
+      <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* 
-        ページ本体:
-        ヘッダー(高さ60px) + フッター(80px)を除き、スクロール出来るように 
-        body(html)に overflow: auto; かつ ここでも min-height: 100vh
-      */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          // stickyヘッダー60px分だけ上を空ける (あるいはmarginTop:60pxでも可)
-          paddingTop: '60px',
-          // 下にフッター80pxを確保
-          paddingBottom: '80px',
-          minHeight: '100vh',
-          // overflowはbodyに任せるならOK。 
-          // ここで display:'block' or 'flex' でも可
-        }}
-      >
-        {/* ヘッダー(固定) */}
+      {/* ========== 全体ラップ ========== */}
+      <div id="app-wrapper">
         <NavBar />
         <AttentionPopup />
 
-        {/* メインコンテンツ */}
-        <Component {...pageProps} />
+        <main id="main-content">
+          <Component {...pageProps} />
+        </main>
+
+        <footer id="chat-footer">
+          <ChatGPTInterface isPage1Override={router.pathname === '/'} />
+        </footer>
       </div>
 
-      {/* === 固定フッター: ChatUI === */}
-      <footer
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          height: '80px',
-          width: '100%',
-          background: '#f0f0f0',
-          boxShadow: '0 -2px 6px rgba(0,0,0,0.2)',
-          zIndex: 10000,
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        {/* 1ページ目だけチャット欄を極端に大きく */}
-        <ChatGPTInterface isPage1Override={router.pathname === '/'} />
-      </footer>
+      {/* 
+        =========== ここから 2ページ目専用のスタイル上書き ===========
+        router.pathname === '/page2' のときだけ適用し、
+        他ページでは読み込まない → 他ページには影響しない
+      */}
+      {router.pathname === '/page2' && (
+        <style jsx global>{`
+          /* ★★★ Tailwindが body { background:#fff } を適用しても
+             ここで !important を使い 2ページ目だけ強制透過にする ★★★ */
+          body, html {
+            background: transparent !important;
+          }
+
+          #app-wrapper {
+            background: transparent !important;
+          }
+          #main-content {
+            background: transparent !important;
+            min-height: calc(100vh - 60px);
+            padding: 0; /* 余計な余白をなくす */
+          }
+
+          /* ---------- ヒーローセクションの黒っぽい背景を薄く ---------- */
+          .hero-section {
+            position: relative;
+            width: 100%;
+            height: 500px; /* お好みで大きさ調整 */
+            background: transparent !important;
+          }
+
+          /* 極薄の黒 + 量子ライン */
+          .hero-section .black-quantum-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.2) !important;
+            background-image: url('/img/quantum-line1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: repeat;
+            pointer-events: none;
+            animation: quantumPulse2 12s infinite alternate ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          @keyframes quantumPulse2 {
+            0%   { transform: scale(1);    opacity: 0.5; }
+            50%  { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1.1);  opacity: 0.5; }
+          }
+
+          /* ヒーローテキスト: 背景無し + 白文字 */
+          .hero-section .hero-text {
+            position: relative;
+            z-index: 2;
+            color: #fff !important;
+            text-align: center;
+            font-family: sans-serif;
+            max-width: 800px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 2rem;
+            background: none !important;
+          }
+          .hero-section .hero-text h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+          }
+          .hero-section .hero-text .intro {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin: 0;
+          }
+
+          /* ---------- 白背景セクション ---------- */
+          .white-section {
+            position: relative;
+            background: #fff !important; 
+            color: #000 !important;
+            font-family: sans-serif;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+          }
+          .white-section h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+          }
+          .white-section .resume-section p {
+            margin: 1rem 0;
+            text-align: center;
+          }
+          .white-section a {
+            color: #006060 !important;
+            font-weight: bold;
+            margin: 0 0.5rem;
+            text-decoration: none;
+          }
+          .white-section a:hover {
+            text-decoration: underline;
+          }
+        `}</style>
+      )}
     </>
   )
 }

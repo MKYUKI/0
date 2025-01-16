@@ -1,57 +1,60 @@
 // public/js/starsAnim.js
 (function(){
-  if(typeof window==='undefined') return;
+  console.log("starsAnim.js loaded (revised).");
 
-  window.addEventListener('load', ()=>{
-    const canvas = document.getElementById('stars-canvas');
-    if(!canvas) return;
+  let canvas, ctx;
+  let w, h;
+  let stars = [];
 
-    const ctx = canvas.getContext('2d');
-    let w,h;
-    const starCount = 150;
-    let stars = [];
-
-    function resize(){
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
+  function init() {
+    canvas = document.getElementById('stars-canvas');
+    if(!canvas) {
+      console.log("starsAnim: #stars-canvas not found. Skipping animation.");
+      return;
     }
-    window.addEventListener('resize', resize);
+    ctx = canvas.getContext('2d');
     resize();
+    createStars(100);
+    animate();
+  }
 
-    function createStars(){
-      stars = [];
-      for(let i=0; i<starCount; i++){
-        stars.push({
-          x: Math.random()*w,
-          y: Math.random()*h,
-          r: 1+Math.random()*2,
-          alpha: Math.random()*0.4+0.2,
-          vx: (Math.random()-0.5)*0.3,
-          vy: (Math.random()-0.5)*0.3
-        });
-      }
-    }
-    createStars();
+  function resize(){
+    if(!canvas) return;
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
 
-    function animate(){
-      requestAnimationFrame(animate);
-      ctx.clearRect(0,0,w,h);
-      stars.forEach(s=>{
-        s.x += s.vx;
-        s.y += s.vy;
-        if(s.x<0) s.x+=w;
-        if(s.x>w) s.x-=w;
-        if(s.y<0) s.y+=h;
-        if(s.y>h) s.y-=h;
-
-        ctx.beginPath();
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle=`rgba(0,0,0,${s.alpha})`;
-        ctx.fill();
+  function createStars(num){
+    stars = [];
+    for(let i=0; i<num; i++){
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        speed: Math.random() * 0.5 + 0.2,
+        r: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.5 + 0.5
       });
     }
-    animate();
-  });
+  }
+
+  function animate(){
+    if(!canvas) return;
+    ctx.clearRect(0,0,w,h);
+
+    // 星を描画
+    ctx.fillStyle = '#ffffff';
+    stars.forEach(star => {
+      ctx.globalAlpha = star.alpha;
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
+      ctx.fill();
+      // update
+      star.y -= star.speed;
+      if(star.y < 0) star.y = h;
+    });
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('load', init);    // ← load を使用
+  window.addEventListener('resize', resize);
 })();

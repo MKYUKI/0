@@ -8,42 +8,58 @@ export default function HomePage() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>0 - Page1 (ChatGPT.com Clone)</title>
+        <title>0 - Page1 (Supreme GPT-4 Portal)</title>
       </Head>
 
       <main className="page1-main-container">
-        {/* ヒーローセクション */}
+        {/**
+         * ヒーローセクション:
+         *  - 大見出し: お手伝いできることはありますか？
+         *  - 英語: What can I help you with?
+         *  - 「(Performance same as chatgpt.com)」等の文言で
+         *    “実用性・先進性”を強調
+         */}
         <section className="hero-section-clone">
           <div className="hero-content">
             <h1 className="hero-title">お手伝いできることはありますか？</h1>
-            <h2 className="hero-subtitle">
-              (Reference: <strong>chatgpt.com</strong>)
-            </h2>
+            <h2 className="hero-subtitle">What can I help you with?</h2>
+            
             <p className="hero-description">
-              このページは chatgpt.com を参考文献として実装されています。<br/>
-              入力内容は右上に、GPT応答は左下から表示。ファイル送信もOKです。
+              このページは <strong>chatgpt.com</strong> と同等の機能を目指し、<br/>
+              GPT-4 の性能を最大限に引き出すために設計されています。<br/>
+              ファイル送信を含むあらゆる質問に、右上の入力から応答可能です。<br/>
+              Let us pioneer a new era of unstoppable synergy and quantum illusions 
+              for all of civilization.
             </p>
           </div>
         </section>
 
-        {/* Public Info */}
+        {/**
+         * 情報セクション
+         *  - 世界最高峰を示す文言をさらに強化
+         */}
         <section className="public-section">
-          <h2>Universal GPT-4 Access</h2>
+          <h2>Civilization's Most Advanced GPT-4 Portal</h2>
           <p>
-            We bring unstoppable synergy of GPT-4 to all cosmic beings. Freed from illusions,
-            with advanced quantum lines.
+            We are dedicated to creating a universal platform 
+            that transcends boundaries and evolves with every interaction— 
+            a platform that future generations will remember as 
+            the apex of human technological synergy.
           </p>
         </section>
 
-        {/* Chat placeholder (実際にはフッター固定) */}
+        {/**
+         * Chat placeholder (実際のチャットはフッター固定)
+         */}
         <section className="chat-ui-section">
           <div className="chat-ui-wrapper">
             <p className="chat-ui-note">
-              (Real chat bar is pinned at the bottom. Enjoy!)
+              (Our real chat bar is pinned at the bottom, always ready to assist!)
             </p>
           </div>
         </section>
 
+        {/* Referencesなど */}
         <ReferencesDropdown />
       </main>
     </>

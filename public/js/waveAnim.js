@@ -1,38 +1,52 @@
 // public/js/waveAnim.js
 (function(){
-  if(typeof window==='undefined') return;
+  console.log("waveAnim.js loaded (revised).");
 
-  window.addEventListener('load', ()=>{
-    const canvas = document.getElementById('wave-canvas');
-    if(!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let w,h;
-    let waveOffset=0;
+  let canvas, ctx;
+  let w, h;
+  let waveOffset = 0;
 
-    function resize(){
-      w=window.innerWidth;
-      h=window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
+  function init() {
+    canvas = document.getElementById('wave-canvas');
+    if(!canvas) {
+      console.log("waveAnim: #wave-canvas not found. Skipping animation.");
+      return;
     }
-    window.addEventListener('resize', resize);
+    ctx = canvas.getContext('2d');
     resize();
-
-    function animate(){
-      requestAnimationFrame(animate);
-      ctx.clearRect(0,0,w,h);
-      ctx.beginPath();
-      const amplitude=40, wavelength=0.02, speed=0.04;
-      for(let x=0;x<w;x++){
-        const y = Math.sin(x*wavelength + waveOffset)*amplitude + h/2;
-        ctx.lineTo(x,y);
-      }
-      ctx.strokeStyle='rgba(0,0,0,0.15)';
-      ctx.lineWidth=2;
-      ctx.stroke();
-
-      waveOffset += speed;
-    }
     animate();
-  });
+  }
+
+  function resize(){
+    if(!canvas) return;
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  function animate(){
+    if(!canvas) return;
+    ctx.clearRect(0,0,w,h);
+
+    // 青い波
+    ctx.fillStyle = 'rgba(0,100,255,0.2)';
+    ctx.beginPath();
+    ctx.moveTo(0, h/2);
+
+    let waveHeight = 30;
+    let waveLength = w / 20;
+    for(let x=0; x<=w; x++){
+      let y = h/2 + Math.sin(x/waveLength + waveOffset) * waveHeight;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+    ctx.fill();
+
+    waveOffset += 0.02;
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('load', init);   // ← load を使用
+  window.addEventListener('resize', resize);
 })();

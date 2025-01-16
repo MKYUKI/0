@@ -1,44 +1,84 @@
-/* public/css/page2.css */
+/* -----------------------------------
+   public/css/page2.css
+   (2ページ目のみ適用)
+----------------------------------- */
 
-.page2-container {
-  /* ヘッダー60px + フッター80px の中でスクロールできるので
-     ここで min-height: calc(100vh - 60px - 80px); としても可
-  */
-  min-height: calc(100vh - 60px - 80px);
-  background: #fff; 
+/*
+  全体のラッパ
+  - フッター固定を考慮し、最低限の高さを確保
+  - 下地は白
+*/
+.page2-wrapper {
   position: relative;
-  overflow: hidden;
+  min-height: calc(100vh - 60px);
+  background: #fff;     /* 全体の背景は白 */
+  overflow-x: hidden;   /* 横スクロール不要 */
 }
 
+/*
+  1) ナビバー下の透過エリア
+     → 背後の3つのCanvas(quantum3D.js / starsAnim.js / waveAnim.js)が透ける部分
+*/
+.top-animation-gap {
+  width: 100%;
+  height: 250px;          /* お好みで高さ調整OK */
+  background: transparent; /* 背景は透過 */
+  position: relative;
+  z-index: 1;             /* 下層に敷いたCanvasが見える */
+}
+
+/*
+  2) 黒い量子アニメ背景セクション
+     - ここを背景"黒"ではなく半透明にし、
+       背後のcanvasアニメーションをうっすら見せる
+*/
 .black-quantum-bg {
   position: relative;
   width: 100%;
-  min-height: 80vh; /* 大きく確保 */
-  background-color: #000; /* fallback */
-  /* アニメ or BG(量子線)は ::before or canvasで表現 */
+  min-height: 80vh;           /* 量子アニメ空間を確保 */
+  background: transparent;    /* ここは透過にする */
+  overflow: hidden;
+  z-index: 1;
 }
 
+/* ::before で黒背景 + 量子ラインを薄めに重ねる */
 .black-quantum-bg::before {
   content: "";
   position: absolute;
   inset: 0;
+  /* 背景をやや半透明な黒+量子ライン画像にする */
+  background-color: rgba(0,0,0,0.7); 
   background-image: url('/img/quantum-line1.png');
-  background-size: cover;
-  background-position: center;
   background-repeat: repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.3; /* 量子ラインの濃さを調整 */
   animation: quantumPulse 12s infinite alternate ease-in-out;
-  opacity: 0.3;
   pointer-events: none;
   z-index: 1;
 }
 
 @keyframes quantumPulse {
-  0% { transform: scale(1); opacity: 0.3; }
-  50% { transform: scale(1.05); opacity: 0.6; }
-  100% { transform: scale(1.1); opacity: 0.3; }
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
 }
 
-.white-page-foreground {
+/*
+  白い前景ブロック
+  - 大見出し + Resumeリンク等をここに置く
+  - z-indexを上げて量子ラインや背景アニメより前面に
+*/
+.white-foreground-block {
   position: relative;
   z-index: 2;
   max-width: 900px;
@@ -48,5 +88,26 @@
   color: #000;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  top: 10%; /* アニメ領域が上に出るよう少し下げる */
+}
+
+/* 見出し/テキスト */
+.white-foreground-block h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+.intro {
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+/* Resumeリンク */
+.resume-section a {
+  color: #008060;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+.resume-section a:hover {
+  text-decoration: underline;
 }
