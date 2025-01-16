@@ -56,6 +56,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     setIsLoading(true)
 
     try {
+      // 例: /api/chat に投げる (APIは適宜実装)
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +76,10 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
           setMessages((prev) => {
             const last = prev[prev.length - 1]
             if (last && last.role === 'assistant') {
-              return [...prev.slice(0, -1), { role: 'assistant', content: buffer }]
+              return [
+                ...prev.slice(0, -1),
+                { role: 'assistant', content: buffer }
+              ]
             } else {
               return [...prev, { role: 'assistant', content: buffer }]
             }
@@ -91,7 +95,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     }
   }
 
-  // レイアウト
+  // layout
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -105,12 +109,12 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
   }
 
   if (isPage1Override) {
-    // Page1 だけ全画面使用
+    // 1ページ目だけ画面全体をチャットに
     containerStyle.width = '100%'
     containerStyle.maxWidth = '100%'
     containerStyle.height = 'calc(100vh - 60px)'
   } else {
-    // Page2～6: 指定された高さ
+    // 2~6ページ目
     containerStyle.width = '100%'
     containerStyle.maxWidth = '800px'
     containerStyle.height = '60vh'

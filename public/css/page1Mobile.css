@@ -1,0 +1,22 @@
+/* public/css/page1Mobile.css (任意ファイル名) */
+
+.page1-mobile-wrapper {
+    padding: 1rem;
+    background: #fff;
+  }
+  
+  .mobile-hero-section {
+    background: #f0f0f0;
+    padding: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .mobile-public-section {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+  

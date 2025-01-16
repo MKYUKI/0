@@ -1,49 +1,52 @@
-/* public/css/page2.css */
+/* -----------------------------------
+   public/css/page2.css (2ページ目)
+----------------------------------- */
 
-/* PCデフォルト */
-.page2-unified-wrapper {
+/* 全体ラッパ: ページ2だけの固有クラス */
+.page2-wrapper {
   position: relative;
+  /* ページ高さ: ヘッダー60pxぶん除いてスクロール */
   min-height: calc(100vh - 60px);
+  background: transparent; /* 背面Canvasが透ける */
   overflow-x: hidden;
-  padding-bottom: 300px;
-  background: transparent;
+  /* 以前の padding-bottom: 200px; は削除 */
+  padding-bottom: 0; 
 }
 
-/* ヒーロー */
-.hero-section {
+/* ヒーローセクション */
+.page2-hero {
   position: relative;
   width: 100%;
-  height: 600px; 
+  height: 500px;
   background: transparent;
-  z-index: 1;
 }
-.black-quantum-overlay {
+.hero-overlay {
   pointer-events: none;
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0,0,0,0.35);
-  background-image: url('data:image/png;base64, ...略...');
+  top:0; left:0; right:0; bottom:0;
+  background-color: rgba(0,0,0,0.3);
+  background-image: url('data:image/png;base64,....'); /* 量子ラインのBase64など */
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
   animation: quantumPulse 12s infinite alternate ease-in-out;
 }
 @keyframes quantumPulse {
-  0%   { transform: scale(1);   opacity: 0.35; }
-  50%  { transform: scale(1.05);opacity: 0.7;  }
-  100% { transform: scale(1.1); opacity: 0.35; }
+  0%   { transform: scale(1);   opacity: 0.3; }
+  50%  { transform: scale(1.05);opacity: 0.7; }
+  100% { transform: scale(1.1); opacity: 0.3; }
 }
 .hero-text {
   position: relative;
   z-index: 2;
   max-width: 800px;
-  width: 90%;
   margin: 0 auto;
+  width: 90%;
   padding: 3rem;
   text-align: center;
   color: #fff;
-  font-family: sans-serif;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  font-family: 'Helvetica', sans-serif;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 .hero-text h1 {
   font-size: 2rem;
@@ -52,65 +55,53 @@
 .intro {
   margin: 0;
   font-size: 1.1rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* 白背景セクション */
-.white-section {
+/* ダークセクション: Resumeなど */
+.dark-section {
   position: relative;
-  z-index: 2;
-  background: #fff;
-  color: #000;
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  margin-top: -60px; /* heroと重ねる演出: optional */
   padding: 3rem 1rem;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Helvetica', sans-serif;
 }
-.white-section h3 {
+.dark-section h3 {
+  font-size: 1.4rem;
   margin-bottom: 1.5rem;
+  color: #66ffc3;
 }
-.resume-section a {
-  color: #006060;
+.dark-section p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+.dark-section a {
+  color: #66ffc3;
   font-weight: bold;
-  margin: 0 0.5rem;
   text-decoration: none;
+  margin: 0 0.3rem;
 }
-.resume-section a:hover {
+.dark-section a:hover {
   text-decoration: underline;
 }
 
-/* ローカルチャット */
-.local-chat-section {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  margin: 2rem auto 0;
-  background: rgba(255,255,255,0.05);
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  padding: 1rem;
-}
-
-/* ============== レスポンシブ ============== */
-@media screen and (max-width: 768px) {
-  /* ヒーロー高さ */
-  .hero-section {
-    height: 400px; 
+/* レスポンシブ(スマホ) */
+@media screen and (max-width:768px) {
+  .page2-hero {
+    height: 350px;
   }
-  .hero-text h1 {
-    font-size: 1.6rem;
-  }
-  .intro {
-    font-size: 1rem;
-  }
-  .white-section {
-    padding: 2rem 0.5rem;
-  }
+  .hero-text { padding: 2rem; }
+  .hero-text h1 { font-size:1.6rem; }
+  .intro { font-size:1rem; line-height:1.4; }
   .dark-section {
-    padding: 2rem 1rem;
+    margin-top:-40px;
+    padding:2rem 1rem;
   }
-  /* etc... */
 }

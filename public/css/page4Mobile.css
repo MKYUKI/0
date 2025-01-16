@@ -1,0 +1,18 @@
+/* public/css/page4Mobile.css */
+.page4-mobile-wrapper {
+    padding: 1rem;
+    background: #fff;
+  }
+  .mobile-hero-4 {
+    background: #dfdfdf;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .mobile-content-4 {
+    margin-top: 1rem;
+    background: #fefefe;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  

@@ -1,28 +1,37 @@
 // pages/page4.tsx
 import React from 'react'
 import Head from 'next/head'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import MobileDetect from 'mobile-detect'
 
-export default function Page4() {
+import Page4Desktop from '../components/desktop/Page4Desktop'
+import Page4Mobile from '../components/mobile/Page4Mobile'
+
+interface Page4Props {
+  isMobile: boolean
+}
+
+export default function Page4({ isMobile }: Page4Props) {
   return (
     <>
       <Head>
-        <title>0 - Page4</title>
         <meta charSet="UTF-8" />
+        <title>Page4 SSR UA detection</title>
       </Head>
 
-      <div className="page4-wrapper">
-        <section className="page4-hero">
-          <h1>Page4 - Another Layout</h1>
-          <p className="page4-intro">
-            Showcasing a different style, still responsive.
-          </p>
-        </section>
-
-        <section className="page4-content">
-          <h2>Additional Info</h2>
-          <p>Lorem ipsum dolor sit amet, Page4 details here...</p>
-        </section>
-      </div>
+      {isMobile ? <Page4Mobile /> : <Page4Desktop />}
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps<Page4Props> = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const ua = ctx.req.headers['user-agent'] || ''
+  const md = new MobileDetect(Array.isArray(ua) ? ua[0] : ua)
+  const isMobile = !!md.phone() || !!md.tablet()
+
+  return {
+    props: { isMobile },
+  }
 }

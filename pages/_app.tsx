@@ -6,21 +6,14 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-/* グローバルCSS + 各ページの専用CSS */
+// ===== グローバルCSS =====
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
-import '../public/css/page1.css'
-import '../public/css/page2.css'
-import '../public/css/page3.css'
-import '../public/css/page4.css'
-import '../public/css/page5.css'
-import '../public/css/page6.css'
+// 追加でデスクトップ/モバイル向け共通のCSS等があればここで import
+// 例: import '../public/css/responsiveBase.css'
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-// ---------------------------------
-// ナビバー
-// ---------------------------------
 function NavBar() {
   return (
     <header className="global-nav-bar">
@@ -49,9 +42,6 @@ function NavBar() {
   )
 }
 
-// ---------------------------------
-// Attention Popup
-// ---------------------------------
 function AttentionPopup() {
   const [open, setOpen] = React.useState(false)
   return (
@@ -61,9 +51,7 @@ function AttentionPopup() {
       </button>
       {open && (
         <div className="attention-popup-content">
-          <h4 style={{ marginBottom: '0.3rem' }}>
-            Attention Is All You Need (2017)
-          </h4>
+          <h4 style={{ marginBottom: '0.3rem' }}>Attention Is All You Need (2017)</h4>
           <p style={{ fontSize: '0.88rem', lineHeight: '1.4' }}>
             Visualize multi-head attention or see how Q-K-V are computed in real-time.
             <br />
@@ -82,9 +70,6 @@ function AttentionPopup() {
   )
 }
 
-// ---------------------------------
-// メインアプリ
-// ---------------------------------
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
@@ -100,40 +85,40 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
         />
-        {/* レスポンシブ必須: viewport meta */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* ====== 3つのアニメscript ====== */}
+      {/* 3つのJS (quantum3D/starsAnim/waveAnim) afterInteractive */}
       <Script src="/js/quantum3D.js" strategy="afterInteractive" />
       <Script src="/js/starsAnim.js" strategy="afterInteractive" />
       <Script src="/js/waveAnim.js" strategy="afterInteractive" />
 
-      {/* ====== 背景Canvas ====== */}
+      {/* 背景Canvas (全ページ) */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ====== 全体ラップ ====== */}
+      {/* 全体ラップ */}
       <div id="app-wrapper">
         <NavBar />
         <AttentionPopup />
 
+        {/* メイン */}
         <main id="main-content">
           <Component {...pageProps} />
         </main>
 
+        {/* フッター(チャット欄)固定 */}
         <footer id="chat-footer">
           <ChatGPTInterface isPage1Override={router.pathname === '/'} />
         </footer>
       </div>
 
-      {/*
-        =========== ここから 2ページ目専用のスタイル上書き ===========
-        router.pathname === '/page2' のときだけ適用し、
-        他ページには影響しない
+      {/* 
+        例えば2ページ目だけ強制透過にしたい場合:
+        (下記はサンプル。必要に応じて各pageXで条件分岐)
       */}
       {router.pathname === '/page2' && (
         <style jsx global>{`
@@ -147,79 +132,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             background: transparent !important;
             min-height: calc(100vh - 60px);
             padding: 0;
-          }
-          .hero-section {
-            position: relative;
-            width: 100%;
-            height: 500px; 
-            background: transparent !important;
-          }
-          .hero-section .black-quantum-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0,0,0,0.2) !important;
-            background-image: url('/img/quantum-line1.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: repeat;
-            pointer-events: none;
-            animation: quantumPulse2 12s infinite alternate ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          @keyframes quantumPulse2 {
-            0%   { transform: scale(1);    opacity: 0.5; }
-            50%  { transform: scale(1.05); opacity: 0.7; }
-            100% { transform: scale(1.1);  opacity: 0.5; }
-          }
-          .hero-section .hero-text {
-            position: relative;
-            z-index: 2;
-            color: #fff !important;
-            text-align: center;
-            font-family: sans-serif;
-            max-width: 800px;
-            width: 90%;
-            margin: 0 auto;
-            padding: 2rem;
-            background: none !important;
-          }
-          .hero-section .hero-text h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-          }
-          .hero-section .hero-text .intro {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            margin: 0;
-          }
-          .white-section {
-            position: relative;
-            background: #fff !important; 
-            color: #000 !important;
-            font-family: sans-serif;
-            padding: 2rem 1rem;
-            max-width: 900px;
-            margin: 0 auto;
-          }
-          .white-section h3 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-          }
-          .white-section .resume-section p {
-            margin: 1rem 0;
-            text-align: center;
-          }
-          .white-section a {
-            color: #006060 !important;
-            font-weight: bold;
-            margin: 0 0.5rem;
-            text-decoration: none;
-          }
-          .white-section a:hover {
-            text-decoration: underline;
           }
         `}</style>
       )}

@@ -1,9 +1,11 @@
 // public/js/quantum3D.js
 (function(){
   console.log("quantum3D.js is running...");
+
   let canvas, ctx;
   let w, h;
   let angle = 0;
+  let lines = [];
 
   function init() {
     canvas = document.getElementById('bg-canvas');
@@ -13,34 +15,52 @@
     }
     ctx = canvas.getContext('2d');
     resize();
+
+    // 幾何学的黒線を多数生成
+    for(let i=0; i<50; i++){
+      lines.push({
+        x1: Math.random()*w, y1: Math.random()*h,
+        x2: Math.random()*w, y2: Math.random()*h,
+        speed: 0.3 + Math.random()*0.5
+      });
+    }
+
     animate();
   }
+
   function resize() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
   }
+
   function animate() {
     ctx.clearRect(0, 0, w, h);
 
-    ctx.fillStyle = '#003300';
+    // 背景白 or薄灰
+    ctx.fillStyle = '#fefefe';
     ctx.fillRect(0, 0, w, h);
 
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '40px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText("Quantum3D ANIMATION", w/2, h/2);
+    // 幾何学的 黒線
+    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+    ctx.lineWidth = 1.2;
 
-    let radius = 50;
-    let x = w/2 + Math.cos(angle)*100;
-    let y = h/2 + Math.sin(angle)*100;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(255, 255, 0, 0.7)';
-    ctx.fill();
+    lines.forEach(line => {
+      ctx.beginPath();
+      ctx.moveTo(line.x1, line.y1);
+      ctx.lineTo(line.x2, line.y2);
+      ctx.stroke();
 
-    angle += 0.02;
+      // ランダムに角度を変化(量子的)
+      line.x1 += Math.cos(angle) * line.speed;
+      line.y1 += Math.sin(angle*0.8) * line.speed;
+      line.x2 -= Math.sin(angle*0.9) * line.speed;
+      line.y2 += Math.cos(angle) * line.speed;
+    });
+
+    angle += 0.01;
     requestAnimationFrame(animate);
   }
+
   window.addEventListener('resize', resize);
   window.addEventListener('DOMContentLoaded', init);
 })();

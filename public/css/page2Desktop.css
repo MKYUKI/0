@@ -1,0 +1,21 @@
+/* public/css/page2Desktop.css (例) */
+.page2-desktop-wrapper {
+    padding: 2rem;
+    background: #fff;
+  }
+  
+  .desktop-hero-section {
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .desktop-dark-section {
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+  

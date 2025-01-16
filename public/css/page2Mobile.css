@@ -1,0 +1,22 @@
+/* public/css/page2Mobile.css (例) */
+.page2-mobile-wrapper {
+    padding: 1rem;
+    background: #fff;
+  }
+  
+  .mobile-hero-section {
+    background: #ededed;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .mobile-dark-section {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+  
