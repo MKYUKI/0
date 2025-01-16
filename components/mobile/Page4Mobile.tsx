@@ -15,16 +15,22 @@ export default function Page4Mobile() {
   return (
     <div className="page4-mobile-wrapper">
       <section className="mobile-hero-section">
-        <h1>[モバイル版] Page4</h1>
-        <p>4ページ目(モバイル)。</p>
+        <h1>[モバイル版] Page4 - Supreme GPT-4 Portal</h1>
+        <h2>Mobile Layout - Page4</h2>
+        <p>
+          4ページ目モバイル版。
+        </p>
       </section>
 
-      <section className="mobile-info-section">
-        <h3>Info (Mobile Page4)</h3>
+      <section className="mobile-public-section">
+        <h3>GPT-4 Mobile - Page4</h3>
+        <p>
+          Additional info for page4 (mobile).
+        </p>
         <ReferencesDropdown />
       </section>
 
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ marginTop: '1.5rem' }}>
         <ChatGPTInterface />
       </div>
     </div>

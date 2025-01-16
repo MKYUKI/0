@@ -5,44 +5,33 @@ import ChatGPTInterface from '../../components/ChatGPTInterface'
 
 export default function Page2Desktop() {
   useEffect(() => {
-    // グローバルfooterを非表示 → ページ内チャットを使う
+    // グローバルfooterを隠し、このページ専用のチャットUIを表示したい場合
     const globalFooter = document.getElementById('chat-footer')
     if (globalFooter) globalFooter.style.display = 'none'
     return () => {
-      if (globalFooter) {
-        globalFooter.style.display = ''
-      }
+      if (globalFooter) globalFooter.style.display = ''
     }
   }, [])
 
   return (
     <div className="page2-desktop-wrapper">
-      {/* ヒーローセクション */}
       <section className="desktop-hero-section">
-        <h1>[PC版] Page2 - Quantum synergy</h1>
-        <h2>Enough vertical space for the original animation (Desktop)</h2>
+        <h1>[PC版] Page2 - Supreme GPT-4 Portal</h1>
+        <h2>What can I help you with? (Desktop Layout - Page2)</h2>
         <p>
-          2ページ目(PC向け)。1ページ目同様、白地＋灰色枠チャット風の雰囲気を継承。
+          ここでは Page1 と同じUIで、2ページ目用のテキストを表示するだけ。
         </p>
       </section>
 
-      {/* 履歴書ダウンロード等 */}
-      <section className="desktop-resume-section">
-        <h3>Resume &amp; Career History (Desktop)</h3>
+      <section className="desktop-public-section">
+        <h2>Civilization's Most Advanced GPT-4 Portal (PC) - Page2</h2>
         <p>
-          <a href="/docs/MasakiKusaka_Resume.docx" download>Resume (Word)</a> |{' '}
-          <a href="/docs/MasakiKusaka_Resume.pdf" download>Resume (PDF)</a>
+          We unify unstoppable synergy of GPT-4 with quantum illusions (page2).
         </p>
-        <p>
-          <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Career (Word)</a> |{' '}
-          <a href="/docs/MasakiKusaka_CareerHistory.pdf" download>Career (PDF)</a>
-        </p>
-        <div style={{ marginTop: '1rem' }}>
-          <ReferencesDropdown />
-        </div>
+        <ReferencesDropdown />
       </section>
 
-      {/* ページ内チャット */}
+      {/* ページ内チャットUI (PC向け) */}
       <div style={{ marginTop: '2rem' }}>
         <ChatGPTInterface />
       </div>

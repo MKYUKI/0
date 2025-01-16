@@ -5,7 +5,6 @@ import ChatGPTInterface from '../../components/ChatGPTInterface'
 
 export default function Page3Desktop() {
   useEffect(() => {
-    // footer消し
     const globalFooter = document.getElementById('chat-footer')
     if (globalFooter) globalFooter.style.display = 'none'
     return () => {
@@ -16,22 +15,22 @@ export default function Page3Desktop() {
   return (
     <div className="page3-desktop-wrapper">
       <section className="desktop-hero-section">
-        <h1>[PC版] Page3</h1>
-        <h2>Similar to Page1 & Page2 Desktop Layout</h2>
+        <h1>[PC版] Page3 - Supreme GPT-4 Portal</h1>
+        <h2>Desktop Layout - Page3</h2>
         <p>
-          3ページ目(PC)、基本の構成は同じです。
+          3ページ目のコンテンツ。Page1と同様のデザインでOK。
         </p>
       </section>
 
-      <section className="desktop-info-section">
-        <h3>Some Info / Resume (Desktop Page3)</h3>
+      <section className="desktop-public-section">
+        <h2>GPT-4 Portal (PC) - Page3</h2>
         <p>
-          <a href="/docs/MasakiKusaka_Resume.docx" download>Resume</a> |{' '}
-          <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Career</a>
+          Additional text or references for page3...
         </p>
         <ReferencesDropdown />
       </section>
 
+      {/* ページ内チャットUI (PC) */}
       <div style={{ marginTop: '2rem' }}>
         <ChatGPTInterface />
       </div>

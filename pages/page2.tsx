@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import MobileDetect from 'mobile-detect'
 
-// デスクトップ/モバイル版
+// PC/モバイル版
 import Page2Desktop from '../components/desktop/Page2Desktop'
 import Page2Mobile from '../components/mobile/Page2Mobile'
 

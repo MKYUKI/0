@@ -1,110 +1,77 @@
 /* public/css/page1.css */
 
-/* PCデフォルト */
-.page1-main-container {
-  width: 100%;
-  min-height: 100vh;
-  background: #fff;
-  overflow: hidden;
-}
-
-.hero-section-clone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60vh;
-  background: linear-gradient(135deg, #fff, #f7f7f7 40%, #ededed);
-  position: relative;
-  overflow: hidden;
-}
-.hero-content {
-  text-align: center;
-  z-index: 1;
-  max-width: 700px;
-  margin: 0 2rem;
-}
-.hero-title {
-  font-size: 3.2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 0.3rem;
-}
-.hero-subtitle {
-  font-size: 1.8rem;
-  color: #444;
-  margin-bottom: 1.2rem;
-}
-.hero-description {
-  font-size: 1.1rem;
-  color: #555;
-  line-height: 1.6;
-  margin: 0 auto;
-}
-
-/* fadeIn量子ライン */
-@keyframes fadeParticles {
-  0%   { opacity: 0; transform: translateY(30px);}
-  100% { opacity: 1; transform: translateY(0);}
-}
-.hero-section-clone::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('/img/quantum-lines.png') center/cover no-repeat;
-  opacity: 0.15;
-  animation: fadeParticles 3s ease-in-out forwards;
-}
-
-.public-section {
-  padding: 2rem 1rem;
-  background: #fafafa;
-  text-align: center;
-}
-.public-section h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-.public-section p {
-  max-width: 700px;
-  margin: 0 auto;
-  color: #666;
-  line-height: 1.7;
-  font-size: 1rem;
-}
-
-.chat-ui-section {
-  padding: 2rem 1rem;
-  background: #fff;
-}
-.chat-ui-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-}
-.chat-ui-note {
-  color: #888;
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
-/* ============== レスポンシブ ============== */
-@media screen and (max-width: 768px) {
+/* =====================
+   PCデフォルトスタイル
+   ===================== */
+   .page1-main-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
+    overflow: hidden;
+  }
+  
+  /* 量子アニメをしっかり背面に見せるため透過 */
   .hero-section-clone {
-    height: 50vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    /* 従来あった linear-gradient の代わりに透明 */
+    background: rgba(255,255,255,0); 
+    position: relative;
+    overflow: hidden;
   }
+  
+  /* hero-section-clone::before で量子ラインを敷く代わりに
+     すでに quantum3D.js / starsAnim.js / waveAnim.js があるので
+     ここは消してもOK。必要なら 'transparent' */
+  
+  .hero-section-clone::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* もし追加オーバーレイしたいなら: 
+    background: rgba(0,0,0,0.05);
+    */
+    background: transparent !important;
+    opacity: 0; /* or 0.05 */
+  }
+  
+  .hero-content {
+    text-align: center;
+    z-index: 1; 
+    max-width: 700px;
+    margin: 0 2rem;
+    /* 軽く半透明の白背景で文字を読みやすく */
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  }
+  
+  /* 大きな見出しに “0へようこそ (Welcome to 0)” */
   .hero-title {
-    font-size: 2rem; 
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
   }
+  
   .hero-subtitle {
-    font-size: 1.4rem; 
+    font-size: 1.8rem;
+    color: #ffddaa;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
   }
+  
   .hero-description {
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 1.2rem;
+    color: #ffeecc;
+    line-height: 1.6;
+    margin: 0 auto;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
   }
-  .public-section h2 {
-    font-size: 1.5rem;
-  }
-  /* 必要に応じてさらに調整 */
-}
+  
+  /* その他… */
+  

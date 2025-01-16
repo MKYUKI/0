@@ -5,7 +5,7 @@ import ChatGPTInterface from '../../components/ChatGPTInterface'
 
 export default function Page1Mobile() {
   useEffect(() => {
-    // グローバルfooterを隠し、モバイル専用UIを表示
+    // footer隠す
     const globalFooter = document.getElementById('chat-footer')
     if (globalFooter) globalFooter.style.display = 'none'
     return () => {
@@ -17,24 +17,23 @@ export default function Page1Mobile() {
 
   return (
     <div className="page1-mobile-wrapper">
-      <section className="mobile-hero-section">
-        <h1>[モバイル版] Page1 - Supreme GPT-4 Portal</h1>
-        <h2>What can I help you with? (Mobile Layout)</h2>
-        <p>
-          小さな画面に最適化されたモバイルレイアウトです。<br/>
-          chatgpt.com と同等の機能を、スマホサイズでも快適に。
-        </p>
+      <section className="mobile-hero-section hero-section-clone">
+        <div className="hero-content">
+          <h1 className="hero-title">0へようこそ (Welcome to 0)</h1>
+          <h2 className="hero-subtitle">What can I help you with? (Mobile Layout)</h2>
+          <p className="hero-description">
+            背景に超大型量子アニメを敷き、<br/>
+            スマホでも chatgpt.com と同等の快適さを。
+          </p>
+        </div>
       </section>
 
       <section className="mobile-public-section">
         <h3>GPT-4 Mobile Synergy</h3>
-        <p>
-          Harness unstoppable synergy of GPT-4, now on a smaller screen. 
-        </p>
+        <p>Enjoy unstoppable synergy of GPT-4 on smaller screens.</p>
         <ReferencesDropdown />
       </section>
 
-      {/* ページ内ローカルチャット (モバイル向け) */}
       <div style={{ marginTop: '1.5rem' }}>
         <ChatGPTInterface />
       </div>

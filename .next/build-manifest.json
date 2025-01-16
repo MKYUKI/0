@@ -27,11 +27,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/page2.js"
     ],
-    "/page3": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/page3.js"
-    ],
     "/page4": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

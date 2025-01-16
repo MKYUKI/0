@@ -1,11 +1,11 @@
-// public/js/quantum3D.js
+// public/js/quantum3D.js (Enhanced - large scale)
 (function(){
-  console.log("quantum3D.js is running...");
+  console.log("quantum3D.js (Enhanced) is running...");
 
   let canvas, ctx;
   let w, h;
   let angle = 0;
-  let lines = [];
+  let circles = [];
 
   function init() {
     canvas = document.getElementById('bg-canvas');
@@ -16,12 +16,12 @@
     ctx = canvas.getContext('2d');
     resize();
 
-    // 幾何学的黒線を多数生成
-    for(let i=0; i<50; i++){
-      lines.push({
-        x1: Math.random()*w, y1: Math.random()*h,
-        x2: Math.random()*w, y2: Math.random()*h,
-        speed: 0.3 + Math.random()*0.5
+    // 複数の円
+    for (let i=0; i<5; i++){
+      circles.push({
+        radius: 30 + i*20,
+        offsetAngle: i* (Math.PI/2),
+        speed: 0.02 + i*0.01
       });
     }
 
@@ -36,28 +36,29 @@
   function animate() {
     ctx.clearRect(0, 0, w, h);
 
-    // 背景白 or薄灰
-    ctx.fillStyle = '#fefefe';
+    // 半透明の深い緑
+    ctx.fillStyle = 'rgba(0, 50, 0, 0.5)';
     ctx.fillRect(0, 0, w, h);
 
-    // 幾何学的 黒線
-    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-    ctx.lineWidth = 1.2;
+    // 中央にテキスト (大きく)
+    ctx.fillStyle = '#00ffcc';
+    ctx.font = '50px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText("Quantum Illusions++", w/2, h/2);
 
-    lines.forEach(line => {
+    // 複数円が回転
+    circles.forEach(c => {
+      let r = c.radius;
+      let x = w/2 + Math.cos(angle + c.offsetAngle)*120;
+      let y = h/2 + Math.sin(angle + c.offsetAngle)*120;
+
       ctx.beginPath();
-      ctx.moveTo(line.x1, line.y1);
-      ctx.lineTo(line.x2, line.y2);
-      ctx.stroke();
-
-      // ランダムに角度を変化(量子的)
-      line.x1 += Math.cos(angle) * line.speed;
-      line.y1 += Math.sin(angle*0.8) * line.speed;
-      line.x2 -= Math.sin(angle*0.9) * line.speed;
-      line.y2 += Math.cos(angle) * line.speed;
+      ctx.arc(x, y, r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255, 255, 0, 0.5)';
+      ctx.fill();
+      angle += c.speed * 0.0005; // 全体角度ゆっくり
     });
 
-    angle += 0.01;
     requestAnimationFrame(animate);
   }
 

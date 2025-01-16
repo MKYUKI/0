@@ -8,25 +8,29 @@ export default function Page5Mobile() {
     const globalFooter = document.getElementById('chat-footer')
     if (globalFooter) globalFooter.style.display = 'none'
     return () => {
-      if (globalFooter) {
-        globalFooter.style.display = ''
-      }
+      if (globalFooter) globalFooter.style.display = ''
     }
   }, [])
 
   return (
     <div className="page5-mobile-wrapper">
       <section className="mobile-hero-section">
-        <h1>[モバイル版] Page5</h1>
-        <p>5ページ目(モバイル)</p>
+        <h1>[モバイル版] Page5 - Supreme GPT-4 Portal</h1>
+        <h2>Mobile Layout - Page5</h2>
+        <p>
+          5ページ目モバイル版。
+        </p>
       </section>
 
-      <section className="mobile-info-section">
-        <h3>Resume / Info (Mobile Page5)</h3>
+      <section className="mobile-public-section">
+        <h3>GPT-4 Mobile - Page5</h3>
+        <p>
+          Additional info for page5 (mobile).
+        </p>
         <ReferencesDropdown />
       </section>
 
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ marginTop: '1.5rem' }}>
         <ChatGPTInterface />
       </div>
     </div>

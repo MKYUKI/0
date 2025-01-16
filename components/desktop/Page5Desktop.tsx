@@ -15,15 +15,22 @@ export default function Page5Desktop() {
   return (
     <div className="page5-desktop-wrapper">
       <section className="desktop-hero-section">
-        <h1>[PC版] Page5</h1>
-        <p>5ページ目(PC) 用ヒーローセクションやテキストなど。</p>
+        <h1>[PC版] Page5 - Supreme GPT-4 Portal</h1>
+        <h2>Desktop Layout - Page5</h2>
+        <p>
+          5ページ目。クローンで問題なし。
+        </p>
       </section>
 
-      <section className="desktop-info-section">
-        <h3>Resume / Info (Desktop Page5)</h3>
+      <section className="desktop-public-section">
+        <h2>GPT-4 Portal (PC) - Page5</h2>
+        <p>
+          Additional text or references for page5...
+        </p>
         <ReferencesDropdown />
       </section>
 
+      {/* ページ内チャットUI (PC) */}
       <div style={{ marginTop: '2rem' }}>
         <ChatGPTInterface />
       </div>

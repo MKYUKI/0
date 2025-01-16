@@ -15,22 +15,22 @@ export default function Page3Mobile() {
   return (
     <div className="page3-mobile-wrapper">
       <section className="mobile-hero-section">
-        <h1>[モバイル版] Page3</h1>
+        <h1>[モバイル版] Page3 - Supreme GPT-4 Portal</h1>
+        <h2>Mobile Layout - Page3</h2>
         <p>
-          3ページ目(モバイル)。Page1/2と同じ構成でOK。
+          3ページ目モバイル版。Page1のクローンUI。
         </p>
       </section>
 
-      <section className="mobile-info-section">
-        <h3>Resume / Info (Mobile Page3)</h3>
+      <section className="mobile-public-section">
+        <h3>GPT-4 Mobile - Page3</h3>
         <p>
-          <a href="/docs/MasakiKusaka_Resume.docx" download>Resume</a> |{' '}
-          <a href="/docs/MasakiKusaka_CareerHistory.docx" download>Career</a>
+          Additional info or references for page3 (mobile).
         </p>
         <ReferencesDropdown />
       </section>
 
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ marginTop: '1.5rem' }}>
         <ChatGPTInterface />
       </div>
     </div>

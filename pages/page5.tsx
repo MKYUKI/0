@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import MobileDetect from 'mobile-detect'
 
+// PC/モバイル版
 import Page5Desktop from '../components/desktop/Page5Desktop'
 import Page5Mobile from '../components/mobile/Page5Mobile'
 
@@ -31,5 +32,7 @@ export const getServerSideProps: GetServerSideProps<Page5Props> = async (
   const md = new MobileDetect(Array.isArray(ua) ? ua[0] : ua)
   const isMobile = !!md.phone() || !!md.tablet()
 
-  return { props: { isMobile } }
+  return {
+    props: { isMobile },
+  }
 }

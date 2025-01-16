@@ -6,37 +6,56 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-// ===== グローバルCSS =====
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
-// 追加でデスクトップ/モバイル向け共通のCSS等があればここで import
-// 例: import '../public/css/responsiveBase.css'
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 function NavBar() {
+  const router = useRouter()
+  const currentPath = router.pathname // 例: '/', '/page2', ...
+
   return (
     <header className="global-nav-bar">
       <span className="nav-bar-title">GPT-4 Model</span>
       <nav className="nav-bar-links">
-        <Link href="/">
-          <span className="nav-link">Page1</span>
-        </Link>
-        <Link href="/page2">
-          <span className="nav-link">Page2</span>
-        </Link>
-        <Link href="/page3">
-          <span className="nav-link">Page3</span>
-        </Link>
-        <Link href="/page4">
-          <span className="nav-link">Page4</span>
-        </Link>
-        <Link href="/page5">
-          <span className="nav-link">Page5</span>
-        </Link>
-        <Link href="/page6">
-          <span className="nav-link">Page6</span>
-        </Link>
+        {/* if we're on '/', don't show "Page1" link */}
+        {currentPath !== '/' && (
+          <Link href="/">
+            <span className="nav-link">Page1</span>
+          </Link>
+        )}
+
+        {/* if on '/page2', don't show Page2 link, etc... */}
+        {currentPath !== '/page2' && (
+          <Link href="/page2">
+            <span className="nav-link">Page2</span>
+          </Link>
+        )}
+
+        {currentPath !== '/page3' && (
+          <Link href="/page3">
+            <span className="nav-link">Page3</span>
+          </Link>
+        )}
+
+        {currentPath !== '/page4' && (
+          <Link href="/page4">
+            <span className="nav-link">Page4</span>
+          </Link>
+        )}
+
+        {currentPath !== '/page5' && (
+          <Link href="/page5">
+            <span className="nav-link">Page5</span>
+          </Link>
+        )}
+
+        {currentPath !== '/page6' && (
+          <Link href="/page6">
+            <span className="nav-link">Page6</span>
+          </Link>
+        )}
       </nav>
     </header>
   )
@@ -81,45 +100,37 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>0 - GPT-4 Quantum Clone</title>
-        <meta
-          name="description"
-          content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
-        />
+        <meta name="description" content="GPT-4 site with quantum illusions, synergy, unstoppable expansions." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* 3つのJS (quantum3D/starsAnim/waveAnim) afterInteractive */}
+      {/* ========== 3つのアニメ ========== */}
       <Script src="/js/quantum3D.js" strategy="afterInteractive" />
       <Script src="/js/starsAnim.js" strategy="afterInteractive" />
       <Script src="/js/waveAnim.js" strategy="afterInteractive" />
 
-      {/* 背景Canvas (全ページ) */}
+      {/* ========== 背景Canvas ========== */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* 全体ラップ */}
+      {/* ========== 全体ラップ ========== */}
       <div id="app-wrapper">
         <NavBar />
         <AttentionPopup />
 
-        {/* メイン */}
         <main id="main-content">
           <Component {...pageProps} />
         </main>
 
-        {/* フッター(チャット欄)固定 */}
         <footer id="chat-footer">
           <ChatGPTInterface isPage1Override={router.pathname === '/'} />
         </footer>
       </div>
 
-      {/* 
-        例えば2ページ目だけ強制透過にしたい場合:
-        (下記はサンプル。必要に応じて各pageXで条件分岐)
-      */}
+      {/* page2 だけ透過例 */}
       {router.pathname === '/page2' && (
         <style jsx global>{`
           body, html {

@@ -1,21 +1,20 @@
-/* public/css/page2Desktop.css (例) */
-.page2-desktop-wrapper {
-    padding: 2rem;
-    background: #fff;
-  }
-  
-  .desktop-hero-section {
-    background: #f0f0f0;
-    border-radius: 8px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-  .desktop-dark-section {
-    background: rgba(0, 0, 0, 0.75);
-    color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
+/* public/css/page1Desktop.css (任意ファイル名) */
+
+.page1-desktop-wrapper {
+  padding: 2rem;
+  background: #fff;
+}
+
+.desktop-hero-section {
+  padding: 3rem;
+  background: linear-gradient(135deg, #fff, #f7f7f7 40%, #ededed);
+  border-radius: 8px;
+  text-align: center;
+}
+.desktop-public-section {
+  margin-top: 2rem;
+  background: #fafafa;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}

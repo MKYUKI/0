@@ -15,17 +15,22 @@ export default function Page4Desktop() {
   return (
     <div className="page4-desktop-wrapper">
       <section className="desktop-hero-section">
-        <h1>[PC版] Page4</h1>
+        <h1>[PC版] Page4 - Supreme GPT-4 Portal</h1>
+        <h2>Desktop Layout - Page4</h2>
         <p>
-          4ページ目(PC)。1～3ページ目と同様に記載。
+          4ページ目のコンテンツ、Page1と全く同じレイアウトでOK。
         </p>
       </section>
 
-      <section className="desktop-info-section">
-        <h3>Some Info (Desktop Page4)</h3>
+      <section className="desktop-public-section">
+        <h2>GPT-4 Portal (PC) - Page4</h2>
+        <p>
+          Additional text or references for page4...
+        </p>
         <ReferencesDropdown />
       </section>
 
+      {/* ページ内チャットUI (PC) */}
       <div style={{ marginTop: '2rem' }}>
         <ChatGPTInterface />
       </div>
