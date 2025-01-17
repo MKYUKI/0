@@ -1,0 +1,66 @@
+// pages/index.tsx
+import Head from 'next/head';
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>ホーム画面</title>
+        <meta
+          name="description"
+          content="宇宙のシミュレーションで歴史に残るホーム画面"
+        />
+        <meta charSet="UTF-8" />
+      </Head>
+      
+      {/* 大規模な宇宙シミュレーション: Canvas */}
+      <section className="hero-section">
+        {/* cosmicSim.js 内で操作するcanvas */}
+        <canvas id="cosmic-canvas"></canvas>
+      </section>
+
+      {/* 履歴書・職務経歴書ダウンロードリンク */}
+      <div className="resume-links">
+        <h2>MasakiKusakaの履歴書・職務経歴書</h2>
+        <a href="/files/resume.docx" download>履歴書（Word）</a>
+        <a href="/files/resume.pdf" download>履歴書（PDF）</a>
+        <a href="/files/career.docx" download>職務経歴書（Word）</a>
+        <a href="/files/career.pdf" download>職務経歴書（PDF）</a>
+      </div>
+
+      {/* 本を3冊並べるセクション */}
+      <div className="books-container">
+        <div className="book-item">
+          <a
+            href="https://www.amazon.co.jp/dp/XXXXXXXX"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="book-placeholder">Book 1</div>
+          </a>
+          <p>Book Title 1</p>
+        </div>
+        <div className="book-item">
+          <a
+            href="https://www.amazon.co.jp/dp/XXXXXXXX"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="book-placeholder">Book 2</div>
+          </a>
+          <p>Book Title 2</p>
+        </div>
+        <div className="book-item">
+          <a
+            href="https://www.amazon.co.jp/dp/XXXXXXXX"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="book-placeholder">Book 3</div>
+          </a>
+          <p>Book Title 3</p>
+        </div>
+      </div>
+    </>
+  );
+}

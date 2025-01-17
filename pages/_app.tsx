@@ -1,138 +1,111 @@
 // pages/_app.tsx
-import type { AppProps } from "next/app";
-import React, { useEffect } from "react";
-import Head from "next/head";
-import Script from "next/script";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
-/** グローバルCSS */
-import "../public/css/globalQuantum.css";   // body { background:transparent } 等
-import "../public/css/kaleidoBase.css";     // カスタムスタイル(透過/レスポンシブなど)
+import type { AppProps } from 'next/app'
+import React, { useEffect } from 'react'
+import Head from 'next/head'
+import Script from 'next/script'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-/** (必要なら) TailwindCSS など */
-// import "../styles/globals.css";
+import '../styles/globals.css'
 
-import ChatGPTInterface from "../components/ChatGPTInterface";
+import ChatGPTInterface from '../components/ChatGPTInterface'
 
 function NavBar() {
   return (
-    <header className="global-nav-bar">
-      <span className="nav-bar-title">GPT-4 Model</span>
-      <nav className="nav-bar-links">
-        <Link href="/">
-          <span className="nav-link">Page1</span>
-        </Link>
-        <Link href="/page2">
-          <span className="nav-link">Page2</span>
-        </Link>
-        <Link href="/page3">
-          <span className="nav-link">Page3</span>
-        </Link>
-        <Link href="/page4">
-          <span className="nav-link">Page4</span>
-        </Link>
-        <Link href="/page5">
-          <span className="nav-link">Page5</span>
-        </Link>
-        <Link href="/page6">
-          <span className="nav-link">Page6</span>
-        </Link>
-      </nav>
-    </header>
-  );
-}
-
-function AttentionPopup() {
-  const [open, setOpen] = React.useState(false);
-  return (
-    <div className="attention-popup-container">
-      <button className="attention-popup-btn" onClick={() => setOpen(!open)}>
-        {open ? "Hide Transformer" : "Show Transformer"}
-      </button>
-      {open && (
-        <div className="attention-popup-content">
-          <h4 style={{ marginBottom: "0.3rem" }}>Attention Is All You Need (2017)</h4>
-          <p style={{ fontSize: "0.88rem", lineHeight: "1.4" }}>
-            Visualize multi-head attention or see how Q-K-V are computed in real-time.
-            <br />
-            <a
-              href="https://arxiv.org/abs/1706.03762"
-              target="_blank"
-              rel="noreferrer"
-              style={{ color: "#66ffcc", textDecoration: "underline" }}
-            >
-              [arXiv:1706.03762]
-            </a>
-          </p>
+    <header className="navbar">
+      <div className="nav-left">
+        <Link href="/" className="nav-link">Home</Link>
+        <Link href="/aichat" className="nav-link">AI Chat</Link>
+        <Link href="/art" className="nav-link">Art</Link>
+        <Link href="/contact" className="nav-link">Contact</Link>
+      </div>
+      <div className="nav-right">
+        <div className="search-container">
+          <input type="text" placeholder="チャットで質問を入力..." />
+          <div className="search-icon" />
         </div>
-      )}
-    </div>
-  );
+      </div>
+    </header>
+  )
 }
 
-export default function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props)
+    this.state = { hasError: false }
+  }
+
+  static getDerivedStateFromError(/*error*/) {
+    return { hasError: true }
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('ErrorBoundary caught an error:', error, info)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ color: 'red', textAlign: 'center', marginTop: '50px' }}>
+          <h1>Something went wrong.</h1>
+          <p>Please reload the page or contact support.</p>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
 
   useEffect(() => {
-    console.log("MyApp mounted - client side.");
-  }, []);
+    console.log('MyApp mounted - client side.')
+  }, [])
 
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>0 - GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
+          content="GPT-4 site with references to The British Museum and quantum illusions."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* (1) 3つのアニメscript (public/js/*.js), afterInteractive */}
+      {/* 背景アニメ等 */}
       <Script src="/js/quantum3D.js" strategy="afterInteractive" />
       <Script src="/js/starsAnim.js" strategy="afterInteractive" />
       <Script src="/js/waveAnim.js" strategy="afterInteractive" />
+      {/* 追加: cosmicSim.js */}
+      <Script src="/js/cosmicSim.js" strategy="afterInteractive" />
 
-      {/* (2) 背景Canvas (全ページ共通) */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* (3) 全体ラップ */}
       <div id="app-wrapper">
         <NavBar />
-        <AttentionPopup />
 
         <main id="main-content">
           <Component {...pageProps} />
         </main>
 
         <footer id="chat-footer">
-          {/* 1ページ目はフル画面チャット: isPage1Override */}
-          <ChatGPTInterface isPage1Override={router.pathname === "/"} />
+          {router.pathname !== '/' && router.pathname !== '/art' && (
+            <ChatGPTInterface isPage1Override={router.pathname === '/'} />
+          )}
         </footer>
       </div>
-
-      {/* (4) ページ別の追加スタイル例 */}
-      {router.pathname === "/page2" && (
-        <style jsx global>{`
-          body,
-          html {
-            background: transparent !important;
-          }
-          #app-wrapper {
-            background: transparent !important;
-          }
-          #main-content {
-            background: transparent !important;
-            min-height: calc(100vh - 60px);
-            padding: 0;
-          }
-        `}</style>
-      )}
-    </>
-  );
+    </ErrorBoundary>
+  )
 }
+
+export default MyApp

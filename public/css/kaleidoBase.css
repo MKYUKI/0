@@ -1,9 +1,9 @@
 /* public/css/kaleidoBase.css */
-/* もし余計な白背景指定があると、Canvasが隠れるかも => なるべく透明 or 薄い */
-
-/* 例: 何もしない or ほんの少しだけ書く */
-body {
-  /* background: transparent; (already forced in globalQuantum.css) */
-}
-
-/* 追加の細かいスタイル */
+.bg-canvas-layer {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    pointer-events:none;
+  }
+  /* ここに kaleido 風アニメを入れてもOK */
+  

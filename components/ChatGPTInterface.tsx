@@ -56,7 +56,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     setIsLoading(true)
 
     try {
-      // 例: /api/chat
+      // APIコール例
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -92,7 +92,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     }
   }
 
-  // レイアウト
+  // layout
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -106,12 +106,10 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
   }
 
   if (isPage1Override) {
-    // 1ページ目 → 全画面
     containerStyle.width = '100%'
     containerStyle.maxWidth = '100%'
     containerStyle.height = 'calc(100vh - 60px)'
   } else {
-    // 2~6ページ目
     containerStyle.width = '100%'
     containerStyle.maxWidth = '800px'
     containerStyle.height = '60vh'

@@ -1,38 +1,33 @@
 // pages/page4.tsx
 import React from 'react'
 import Head from 'next/head'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import MobileDetect from 'mobile-detect'
 
-// PC/モバイル版
-import Page4Desktop from '../components/desktop/Page4Desktop'
-import Page4Mobile from '../components/mobile/Page4Mobile'
-
-interface Page4Props {
-  isMobile: boolean
-}
-
-export default function Page4({ isMobile }: Page4Props) {
+export default function Page4Contact() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" />
-        <title>Page4 SSR UA detection</title>
+        <title>Contact Info - Page4</title>
       </Head>
 
-      {isMobile ? <Page4Mobile /> : <Page4Desktop />}
+      <section style={{ padding:'2rem', background:'#fafafa', textAlign:'center' }}>
+        <h1>Contact Information</h1>
+        <p style={{ margin:'1rem auto', maxWidth:'600px' }}>
+          If you have any inquiries, feel free to email me at:
+          <br/>
+          <strong>my-email-address@example.com</strong>
+        </p>
+        <p>
+          Or find me on social networks:
+          <br/>
+          <a href="https://twitter.com/myaccount" target="_blank" rel="noreferrer">
+            Twitter
+          </a>{' '}
+          |{' '}
+          <a href="https://linkedin.com/in/myprofile" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+        </p>
+      </section>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps<Page4Props> = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const ua = ctx.req.headers['user-agent'] || ''
-  const md = new MobileDetect(Array.isArray(ua) ? ua[0] : ua)
-  const isMobile = !!md.phone() || !!md.tablet()
-
-  return {
-    props: { isMobile },
-  }
 }

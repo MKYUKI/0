@@ -1,142 +1,18 @@
-/* public/css/globalQuantum.css */
+/* 例: globalQuantum.css (末尾付近) */
 
-/* まず、body を transparent にして、Canvasアニメを背面に見せる！ */
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
-  /* 重要: 白背景を消す */
-  background: transparent !important;
-
-  /* スクロール系 */
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-/* Canvas親 */
-.global-bg-canvas-container {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* 背面 */
-  overflow: hidden;
-}
-
-/* 各Canvasレイヤー */
-.bg-canvas-layer {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* app全体 */
-#app-wrapper {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-}
-
-/* NavBar */
-.global-nav-bar {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 60px;
-  background: #222;
+/* クリックできるようにする */
+.nav-bar-links a {
   color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  z-index: 9999;
-}
-.nav-bar-title {
-  font-weight: bold;
-  margin-right: 1.5rem;
-}
-.nav-bar-links {
-  display: flex;
-  gap: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  transition: background 0.15s;
 }
 
-/* main content */
-#main-content {
-  margin-top: 60px;
-  position: relative;
-  z-index: 1;
-  /* background: transparent;  ← heroセクションで白くしたいならそちらへ */
-}
-
-/* footer (Chat UI) */
-#chat-footer {
-  position: fixed;
-  bottom: 0; left: 0;
-  width: 100%;
-  background: #f3f3f3;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
-  z-index: 10000;
-}
-
-/* Attention Popup */
-.attention-popup-container {
-  position: fixed;
-  top: 60px;
-  right: 1rem;
-  z-index: 9999;
-}
-.attention-popup-btn {
+.nav-bar-links a:hover {
   background: #444;
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 0.4rem 0.8rem;
-  cursor: pointer;
-}
-.attention-popup-content {
-  margin-top: 0.4rem;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  padding: 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  max-width: 280px;
 }
 
-/* hero共通 */
-.hero-section-clone {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.0); /* 透過 */
-  position: relative;
-  overflow: hidden;
-}
-.hero-content {
-  text-align: center;
-  z-index: 1;
-  padding: 2rem;
-}
-.hero-title {
-  font-size: 2.4rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-.hero-subtitle {
-  font-size: 1.6rem;
-  color: #666;
-  margin-bottom: 1rem;
-}
-.hero-description {
-  font-size: 1.1rem;
-  color: #444;
-  line-height: 1.5;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* etc. */
+/* ほか従来のもの */
 
