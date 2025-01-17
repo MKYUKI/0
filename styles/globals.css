@@ -1,21 +1,19 @@
+/** globals.css **/
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* もしここで body { background: #fff !important; } と書いてたら白が強制される。 */
+body, html {
+  /* もしここで白を上書きしていたら問題 */
+  /* background: var(--background); */
+  /* あるいはあえて透明にしたいなら下記を試す: */
+  /* background: transparent !important; */
+  /* color: var(--foreground); */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* もし不要なら外す */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* ほか Tailwind の override など */

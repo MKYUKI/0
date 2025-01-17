@@ -1,11 +1,11 @@
-// public/js/starsAnim.js (Enhanced - large scale)
+// public/js/starsAnim.js
 (function(){
   console.log("starsAnim.js (Enhanced) is running...");
 
   let canvas, ctx;
   let w, h;
   let stars = [];
-  const STAR_COUNT = 400; // 星数増
+  const STAR_COUNT = 300;
 
   function init(){
     canvas = document.getElementById('stars-canvas');
@@ -16,7 +16,7 @@
     ctx = canvas.getContext('2d');
     resize();
     createStars(STAR_COUNT);
-    animate();
+    requestAnimationFrame(animate);
   }
 
   function resize(){
@@ -30,7 +30,7 @@
       stars.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        speed: Math.random() * 1.2 + 0.2,
+        speed: Math.random() * 1 + 0.3,
         r: Math.random() * 2.5 + 0.5,
         alpha: Math.random() * 0.5 + 0.5
       });
@@ -39,7 +39,6 @@
 
   function animate(){
     ctx.clearRect(0,0,w,h);
-
     ctx.fillStyle = '#ffffff';
     stars.forEach(star => {
       ctx.globalAlpha = star.alpha;
@@ -47,15 +46,13 @@
       ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
       ctx.fill();
 
-      // 上に移動
+      // update
       star.y -= star.speed;
-      // 画面上部に到達 -> 下へ再配置
       if(star.y < 0) {
         star.x = Math.random() * w;
         star.y = h;
       }
     });
-
     requestAnimationFrame(animate);
   }
 

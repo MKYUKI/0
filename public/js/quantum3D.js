@@ -1,4 +1,4 @@
-// public/js/quantum3D.js (Enhanced - large scale)
+// public/js/quantum3D.js
 (function(){
   console.log("quantum3D.js (Enhanced) is running...");
 
@@ -16,16 +16,16 @@
     ctx = canvas.getContext('2d');
     resize();
 
-    // 複数の円
+    // 複数円 (例)
     for (let i=0; i<5; i++){
       circles.push({
         radius: 30 + i*20,
-        offsetAngle: i* (Math.PI/2),
+        offsetAngle: i*(Math.PI/2),
         speed: 0.02 + i*0.01
       });
     }
 
-    animate();
+    requestAnimationFrame(animate);
   }
 
   function resize() {
@@ -36,17 +36,17 @@
   function animate() {
     ctx.clearRect(0, 0, w, h);
 
-    // 半透明の深い緑
-    ctx.fillStyle = 'rgba(0, 50, 0, 0.5)';
+    // 背景を少し透明な深緑にする
+    ctx.fillStyle = 'rgba(0, 80, 0, 0.4)';
     ctx.fillRect(0, 0, w, h);
 
-    // 中央にテキスト (大きく)
+    // 中央テキスト
     ctx.fillStyle = '#00ffcc';
     ctx.font = '50px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText("Quantum Illusions++", w/2, h/2);
 
-    // 複数円が回転
+    // 回転円
     circles.forEach(c => {
       let r = c.radius;
       let x = w/2 + Math.cos(angle + c.offsetAngle)*120;
@@ -56,9 +56,9 @@
       ctx.arc(x, y, r, 0, Math.PI*2);
       ctx.fillStyle = 'rgba(255, 255, 0, 0.5)';
       ctx.fill();
-      angle += c.speed * 0.0005; // 全体角度ゆっくり
     });
 
+    angle += 0.01;
     requestAnimationFrame(animate);
   }
 

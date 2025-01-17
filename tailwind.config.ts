@@ -1,10 +1,10 @@
-import type { Config } from "tailwindcss";
-
-export default {
+/** tailwind.config.js (例) **/
+module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // Next.jsの場合、pages, components, app ディレクトリなど
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -15,4 +15,4 @@ export default {
     },
   },
   plugins: [],
-} satisfies Config;
+};

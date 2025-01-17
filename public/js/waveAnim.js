@@ -1,4 +1,4 @@
-// public/js/waveAnim.js (Enhanced - large scale)
+// public/js/waveAnim.js
 (function(){
   console.log("waveAnim.js (Enhanced) is running...");
 
@@ -14,7 +14,7 @@
     }
     ctx = canvas.getContext('2d');
     resize();
-    animate();
+    requestAnimationFrame(animate);
   }
 
   function resize(){
@@ -25,15 +25,12 @@
   function animate(){
     ctx.clearRect(0,0,w,h);
 
-    // 波を3重に
-    ctx.fillStyle = 'rgba(0,100,255,0.2)';
+    ctx.fillStyle = 'rgba(0,100,255,0.3)';
     drawWave(waveOffset, 30);
-    ctx.fillStyle = 'rgba(0,180,255,0.2)';
-    drawWave(waveOffset + 2, 45);
-    ctx.fillStyle = 'rgba(0,220,255,0.2)';
-    drawWave(waveOffset + 4, 60);
+    ctx.fillStyle = 'rgba(0,150,255,0.2)';
+    drawWave(waveOffset + 2, 50);
 
-    waveOffset += 0.02;
+    waveOffset += 0.05;
     requestAnimationFrame(animate);
   }
 

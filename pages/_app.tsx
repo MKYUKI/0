@@ -6,56 +6,24 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+/** グローバルCSS */
 import '../public/css/globalQuantum.css'
 import '../public/css/kaleidoBase.css'
+/** 必要なら、さらに extraGlobal.css などでレスポンシブや追記 **/
 
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 function NavBar() {
-  const router = useRouter()
-  const currentPath = router.pathname // 例: '/', '/page2', ...
-
   return (
     <header className="global-nav-bar">
       <span className="nav-bar-title">GPT-4 Model</span>
       <nav className="nav-bar-links">
-        {/* if we're on '/', don't show "Page1" link */}
-        {currentPath !== '/' && (
-          <Link href="/">
-            <span className="nav-link">Page1</span>
-          </Link>
-        )}
-
-        {/* if on '/page2', don't show Page2 link, etc... */}
-        {currentPath !== '/page2' && (
-          <Link href="/page2">
-            <span className="nav-link">Page2</span>
-          </Link>
-        )}
-
-        {currentPath !== '/page3' && (
-          <Link href="/page3">
-            <span className="nav-link">Page3</span>
-          </Link>
-        )}
-
-        {currentPath !== '/page4' && (
-          <Link href="/page4">
-            <span className="nav-link">Page4</span>
-          </Link>
-        )}
-
-        {currentPath !== '/page5' && (
-          <Link href="/page5">
-            <span className="nav-link">Page5</span>
-          </Link>
-        )}
-
-        {currentPath !== '/page6' && (
-          <Link href="/page6">
-            <span className="nav-link">Page6</span>
-          </Link>
-        )}
+        <Link href="/"><span className="nav-link">Page1</span></Link>
+        <Link href="/page2"><span className="nav-link">Page2</span></Link>
+        <Link href="/page3"><span className="nav-link">Page3</span></Link>
+        <Link href="/page4"><span className="nav-link">Page4</span></Link>
+        <Link href="/page5"><span className="nav-link">Page5</span></Link>
+        <Link href="/page6"><span className="nav-link">Page6</span></Link>
       </nav>
     </header>
   )
@@ -72,8 +40,7 @@ function AttentionPopup() {
         <div className="attention-popup-content">
           <h4 style={{ marginBottom: '0.3rem' }}>Attention Is All You Need (2017)</h4>
           <p style={{ fontSize: '0.88rem', lineHeight: '1.4' }}>
-            Visualize multi-head attention or see how Q-K-V are computed in real-time.
-            <br />
+            Visualize multi-head attention or see how Q-K-V are computed in real-time.<br/>
             <a
               href="https://arxiv.org/abs/1706.03762"
               target="_blank"
@@ -104,19 +71,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* ========== 3つのアニメ ========== */}
+      {/* ↓ 3つのアニメscript (public/js/) */}
       <Script src="/js/quantum3D.js" strategy="afterInteractive" />
       <Script src="/js/starsAnim.js" strategy="afterInteractive" />
       <Script src="/js/waveAnim.js" strategy="afterInteractive" />
 
-      {/* ========== 背景Canvas ========== */}
+      {/* ↓ 背景Canvas (全ページ共通) */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ========== 全体ラップ ========== */}
+      {/* ↓ 全体ラップ */}
       <div id="app-wrapper">
         <NavBar />
         <AttentionPopup />
@@ -130,7 +97,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </footer>
       </div>
 
-      {/* page2 だけ透過例 */}
+      {/** ページごとに特定CSSをoverrideしたい場合の例: */}
       {router.pathname === '/page2' && (
         <style jsx global>{`
           body, html {

@@ -1,9 +1,9 @@
-// tailwind.config.js
+/** postcss.config.js **/
 module.exports = {
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-  ],
-  theme: { extend: {} },
-  plugins: [],
-}
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+    // ここに "content" フィールドを書かないこと。
+    // もし "content" があるなら削除。
+  },
+};

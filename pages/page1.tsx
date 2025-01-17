@@ -3,7 +3,6 @@ import React from 'react'
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import MobileDetect from 'mobile-detect'
-
 import Page1Desktop from '../components/desktop/Page1Desktop'
 import Page1Mobile from '../components/mobile/Page1Mobile'
 
@@ -18,8 +17,7 @@ export default function Page1({ isMobile }: Page1Props) {
         <meta charSet="UTF-8" />
         <title>Page1 SSR UA detection</title>
       </Head>
-
-      {isMobile ? <Page1Mobile /> : <Page1Desktop />}
+      { isMobile ? <Page1Mobile /> : <Page1Desktop /> }
     </>
   )
 }
@@ -30,6 +28,5 @@ export const getServerSideProps: GetServerSideProps<Page1Props> = async (
   const ua = ctx.req.headers['user-agent'] || ''
   const md = new MobileDetect(Array.isArray(ua) ? ua[0] : ua)
   const isMobile = !!md.phone() || !!md.tablet()
-
   return { props: { isMobile } }
 }
