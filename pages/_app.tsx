@@ -38,15 +38,12 @@ class ErrorBoundary extends React.Component<
     super(props)
     this.state = { hasError: false }
   }
-
   static getDerivedStateFromError(/*error*/) {
     return { hasError: true }
   }
-
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error('ErrorBoundary caught an error:', error, info)
   }
-
   render() {
     if (this.state.hasError) {
       return (
@@ -78,18 +75,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* 背景アニメ等 */}
-      <Script src="/js/quantum3D.js" strategy="afterInteractive" />
-      <Script src="/js/starsAnim.js" strategy="afterInteractive" />
-      <Script src="/js/waveAnim.js" strategy="afterInteractive" />
-      {/* 追加: cosmicSim.js */}
-      <Script src="/js/cosmicSim.js" strategy="afterInteractive" />
-
-      <div className="global-bg-canvas-container">
-        <canvas id="bg-canvas" className="bg-canvas-layer" />
-        <canvas id="stars-canvas" className="bg-canvas-layer" />
-        <canvas id="wave-canvas" className="bg-canvas-layer" />
-      </div>
+      {/* Three.js & cosmicSimThree.js */}
+      <Script src="/js/three.min.js" strategy="beforeInteractive" />
+      <Script src="/js/cosmicSimThree.js" strategy="afterInteractive" />
 
       <div id="app-wrapper">
         <NavBar />

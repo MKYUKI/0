@@ -55,22 +55,23 @@
    }
    
    /* ==============================
-      Hero Section for the Simulation
+      Hero Section (Three.js)
       ============================== */
    
    .hero-section {
      position: relative;
      width: 100%;
-     height: 700px; /* より大規模に */
+     height: 700px; /* 大規模表示 */
+     background: #000;
      overflow: hidden;
-     background: #000; /* 完全な漆黒 */
    }
    
-   /* hero-section 内の canvas を全画面に広げる */
-   .hero-section canvas {
-     display: block;
+   /* Three.js用Canvas/Rendererを全体に広げる */
+   .hero-canvas {
+     position: absolute;
      width: 100%;
      height: 100%;
+     outline: none;
    }
    
    /* ==============================
@@ -99,7 +100,9 @@
    .book-item {
      width: 200px;
      text-align: center;
+     margin-bottom: 20px;
    }
+   
    .book-placeholder {
      width: 100%;
      height: 260px;

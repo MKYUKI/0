@@ -1,7 +1,15 @@
 // pages/index.tsx
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    // cosmicSimThreeが読み込まれていればinit
+    if (window.cosmicSimThree) {
+      window.cosmicSimThree.init('cosmic-canvas');
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -13,12 +21,12 @@ export default function Home() {
         <meta charSet="UTF-8" />
       </Head>
 
-      {/* 大規模な宇宙シミュレーション: Canvas */}
+      {/* ヒーローセクション: Three.jsで巨大銀河を表示 */}
       <section className="hero-section">
-        <canvas id="cosmic-canvas"></canvas>
+        <canvas id="cosmic-canvas" className="hero-canvas"></canvas>
       </section>
 
-      {/* 履歴書・職務経歴書ダウンロードリンク */}
+      {/* 履歴書・職務経歴書ダウンロード */}
       <div className="resume-links">
         <h2>MasakiKusakaの履歴書・職務経歴書</h2>
         <a href="/files/resume.docx" download>履歴書（Word）</a>
@@ -61,5 +69,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  );
+  )
 }
