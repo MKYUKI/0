@@ -12,10 +12,9 @@ export default function Home() {
         />
         <meta charSet="UTF-8" />
       </Head>
-      
+
       {/* 大規模な宇宙シミュレーション: Canvas */}
       <section className="hero-section">
-        {/* cosmicSim.js 内で操作するcanvas */}
         <canvas id="cosmic-canvas"></canvas>
       </section>
 

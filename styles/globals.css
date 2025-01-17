@@ -61,11 +61,12 @@
    .hero-section {
      position: relative;
      width: 100%;
-     height: 600px; /* 大規模に表示する例 */
+     height: 700px; /* より大規模に */
      overflow: hidden;
-     background: #000; /* 漆黒 */
+     background: #000; /* 完全な漆黒 */
    }
    
+   /* hero-section 内の canvas を全画面に広げる */
    .hero-section canvas {
      display: block;
      width: 100%;
@@ -99,9 +100,7 @@
      width: 200px;
      text-align: center;
    }
-   
-   /* 純粋に色の四角やCSSだけでのボックスを使うなら: */
-   .book-item .book-placeholder {
+   .book-placeholder {
      width: 100%;
      height: 260px;
      background-color: #444;
