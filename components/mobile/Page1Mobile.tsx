@@ -5,32 +5,38 @@ import ChatGPTInterface from '../../components/ChatGPTInterface'
 
 export default function Page1Mobile() {
   useEffect(() => {
-    // グローバルfooterを隠してモバイル専用UI
-    const gf = document.getElementById('chat-footer')
-    if (gf) gf.style.display = 'none'
+    // グローバルfooter (固定チャット) を消す
+    const globalFooter = document.getElementById('chat-footer')
+    if (globalFooter) globalFooter.style.display = 'none'
     return () => {
-      if (gf) gf.style.display = ''
+      if (globalFooter) {
+        globalFooter.style.display = ''
+      }
     }
   }, [])
 
   return (
     <div className="page1-mobile-wrapper">
-      <section className="mobile-hero-section hero-section-clone" style={{ background: 'transparent' }}>
-        <div className="hero-content" style={{ background: 'rgba(0,0,0,0.35)', borderRadius: '12px', padding: '1.5rem' }}>
-          <h1 className="hero-title" style={{ color: '#fff' }}>0へようこそ (Welcome to 0)</h1>
-          <h2 className="hero-subtitle" style={{ color: '#ffddaa' }}>
+      <section className="mobile-hero-section hero-section-clone" style={{ position:'relative' }}>
+        <div className="hero-content" style={{ color:'#fff', textAlign:'center' }}>
+          <h1 className="hero-title" style={{ textShadow:'0 2px 5px rgba(0,0,0,0.6)' }}>
+            0へようこそ <br />(Welcome to 0)
+          </h1>
+          <h2 className="hero-subtitle" style={{ marginTop:'1rem', color:'#ffccaa' }}>
             What can I help you with? (Mobile Layout)
           </h2>
-          <p className="hero-description" style={{ color: '#ffeecc' }}>
-            スマホでも世界最大級の量子アニメが背後に広がります。<br/>
-            GPT-4の機能をどこでも利用可能です。
+          <p className="hero-description" style={{ color:'#ffeedd', marginTop:'1rem' }}>
+            スマホ画面でも量子アニメーションを楽しみつつ、<br/>
+            chatgpt.com 同様の機能を実装予定。
           </p>
         </div>
       </section>
 
-      <section className="mobile-public-section" style={{ marginTop: '1rem' }}>
+      <section className="mobile-public-section">
         <h3>GPT-4 Mobile Synergy</h3>
-        <p>Experience unstoppable synergy of GPT-4 on a smaller screen.</p>
+        <p>
+          Harness unstoppable synergy of GPT-4, now on a smaller screen.
+        </p>
         <ReferencesDropdown />
       </section>
 

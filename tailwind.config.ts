@@ -1,18 +1,8 @@
-/** tailwind.config.js (例) **/
+// tailwind.config.js
 module.exports = {
   content: [
-    // Next.jsの場合、pages, components, app ディレクトリなど
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./app/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    // "./public/css/**/*" ← こういうのは入れない
   ],
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
-  },
-  plugins: [],
-};
+  // ...
+}

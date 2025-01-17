@@ -1,51 +1,66 @@
 // pages/_app.tsx
-import type { AppProps } from 'next/app'
-import React, { useEffect } from 'react'
-import Head from 'next/head'
-import Script from 'next/script'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import type { AppProps } from "next/app";
+import React, { useEffect } from "react";
+import Head from "next/head";
+import Script from "next/script";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 /** グローバルCSS */
-import '../public/css/globalQuantum.css'
-import '../public/css/kaleidoBase.css'
-/** 必要なら、さらに extraGlobal.css などでレスポンシブや追記 **/
+import "../public/css/globalQuantum.css";   // body { background:transparent } 等
+import "../public/css/kaleidoBase.css";     // カスタムスタイル(透過/レスポンシブなど)
 
-import ChatGPTInterface from '../components/ChatGPTInterface'
+/** (必要なら) TailwindCSS など */
+// import "../styles/globals.css";
+
+import ChatGPTInterface from "../components/ChatGPTInterface";
 
 function NavBar() {
   return (
     <header className="global-nav-bar">
       <span className="nav-bar-title">GPT-4 Model</span>
       <nav className="nav-bar-links">
-        <Link href="/"><span className="nav-link">Page1</span></Link>
-        <Link href="/page2"><span className="nav-link">Page2</span></Link>
-        <Link href="/page3"><span className="nav-link">Page3</span></Link>
-        <Link href="/page4"><span className="nav-link">Page4</span></Link>
-        <Link href="/page5"><span className="nav-link">Page5</span></Link>
-        <Link href="/page6"><span className="nav-link">Page6</span></Link>
+        <Link href="/">
+          <span className="nav-link">Page1</span>
+        </Link>
+        <Link href="/page2">
+          <span className="nav-link">Page2</span>
+        </Link>
+        <Link href="/page3">
+          <span className="nav-link">Page3</span>
+        </Link>
+        <Link href="/page4">
+          <span className="nav-link">Page4</span>
+        </Link>
+        <Link href="/page5">
+          <span className="nav-link">Page5</span>
+        </Link>
+        <Link href="/page6">
+          <span className="nav-link">Page6</span>
+        </Link>
       </nav>
     </header>
-  )
+  );
 }
 
 function AttentionPopup() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
   return (
     <div className="attention-popup-container">
       <button className="attention-popup-btn" onClick={() => setOpen(!open)}>
-        {open ? 'Hide Transformer' : 'Show Transformer'}
+        {open ? "Hide Transformer" : "Show Transformer"}
       </button>
       {open && (
         <div className="attention-popup-content">
-          <h4 style={{ marginBottom: '0.3rem' }}>Attention Is All You Need (2017)</h4>
-          <p style={{ fontSize: '0.88rem', lineHeight: '1.4' }}>
-            Visualize multi-head attention or see how Q-K-V are computed in real-time.<br/>
+          <h4 style={{ marginBottom: "0.3rem" }}>Attention Is All You Need (2017)</h4>
+          <p style={{ fontSize: "0.88rem", lineHeight: "1.4" }}>
+            Visualize multi-head attention or see how Q-K-V are computed in real-time.
+            <br />
             <a
               href="https://arxiv.org/abs/1706.03762"
               target="_blank"
               rel="noreferrer"
-              style={{ color: '#66ffcc', textDecoration: 'underline' }}
+              style={{ color: "#66ffcc", textDecoration: "underline" }}
             >
               [arXiv:1706.03762]
             </a>
@@ -53,37 +68,40 @@ function AttentionPopup() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    console.log("MyApp mounted - client side.")
-  }, [])
+    console.log("MyApp mounted - client side.");
+  }, []);
 
   return (
     <>
       <Head>
         <title>0 - GPT-4 Quantum Clone</title>
-        <meta name="description" content="GPT-4 site with quantum illusions, synergy, unstoppable expansions." />
+        <meta
+          name="description"
+          content="GPT-4 site with quantum illusions, synergy, unstoppable expansions."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* ↓ 3つのアニメscript (public/js/) */}
+      {/* (1) 3つのアニメscript (public/js/*.js), afterInteractive */}
       <Script src="/js/quantum3D.js" strategy="afterInteractive" />
       <Script src="/js/starsAnim.js" strategy="afterInteractive" />
       <Script src="/js/waveAnim.js" strategy="afterInteractive" />
 
-      {/* ↓ 背景Canvas (全ページ共通) */}
+      {/* (2) 背景Canvas (全ページ共通) */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
         <canvas id="wave-canvas" className="bg-canvas-layer" />
       </div>
 
-      {/* ↓ 全体ラップ */}
+      {/* (3) 全体ラップ */}
       <div id="app-wrapper">
         <NavBar />
         <AttentionPopup />
@@ -93,14 +111,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </main>
 
         <footer id="chat-footer">
-          <ChatGPTInterface isPage1Override={router.pathname === '/'} />
+          {/* 1ページ目はフル画面チャット: isPage1Override */}
+          <ChatGPTInterface isPage1Override={router.pathname === "/"} />
         </footer>
       </div>
 
-      {/** ページごとに特定CSSをoverrideしたい場合の例: */}
-      {router.pathname === '/page2' && (
+      {/* (4) ページ別の追加スタイル例 */}
+      {router.pathname === "/page2" && (
         <style jsx global>{`
-          body, html {
+          body,
+          html {
             background: transparent !important;
           }
           #app-wrapper {
@@ -114,5 +134,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         `}</style>
       )}
     </>
-  )
+  );
 }
