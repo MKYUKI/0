@@ -1,45 +1,23 @@
 {
   "compilerOptions": {
-    // 使用するECMAScriptのターゲット
     "target": "ES2022",
-
-    // コンパイル対象ライブラリ
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-
-    "allowJs": true,
-    "skipLibCheck": true,            // ライブラリの型定義エラーを無視
-    "strict": true,                  // 厳格モード
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,                  // JSファイルを出力しない
-    "esModuleInterop": true,
-
-    // Next.js 13 では "module"="ESNext" & "moduleResolution"="NodeNext" が標準
-    "module": "ESNext",
-    "moduleResolution": "NodeNext",
-
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",               // Next.js推奨: JSX変換はbabelに委ねる
-
-    // 増分ビルド(キャッシュによるビルド高速化)
-    "incremental": true,
-
-    // Next.js用のプラグイン
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "jsx": "preserve",
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"
