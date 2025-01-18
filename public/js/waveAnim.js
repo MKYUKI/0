@@ -1,22 +1,24 @@
-/**
- * public/js/waveAnim.js
- * 
- * 元のシンプル波アニメを「白背景に黒波線」がうねる演出に変更。
- * 幻想的な量子波として、文明の誇りを感じさせる大規模曲線。
- */
-(function() {
-  let canvas, ctx;
+// public/js/waveAnim.js
+
+console.log('waveAnim.js is being parsed...');
+
+// 量子的な波線を白で描く(透明背景)
+function waveAnimInit() {
+  console.log('waveAnimInit() called!');
+
+  const canvas = document.getElementById('wave-canvas');
+  if (!canvas) {
+    console.warn('No #wave-canvas found for waveAnim.');
+    return;
+  }
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.warn('Could not get 2D context for #wave-canvas');
+    return;
+  }
+
   let width, height;
   let t = 0;
-
-  function init() {
-    canvas = document.getElementById('wave-canvas');
-    if (!canvas) return;
-    ctx = canvas.getContext('2d');
-    onResize();
-    animate();
-    window.addEventListener('resize', onResize);
-  }
 
   function onResize() {
     width = window.innerWidth;
@@ -26,41 +28,28 @@
   }
 
   function drawWave() {
-    // 完全透明で重ねるか、ここを白塗りするかは好み
-    ctx.clearRect(0, 0, width, height);
-    
-    // 白背景を塗りたければ:
-    // ctx.fillStyle = '#fff';
-    // ctx.fillRect(0,0,width,height);
+    ctx.clearRect(0,0,width,height);
 
-    // 黒い量子波
+    // 主波
     ctx.beginPath();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-    
-    let waveHeight = 80;   // 波の振幅
-    let waveFreq   = 0.02; // 波の周波数
-    for (let x = 0; x <= width; x += 10) {
-      let y = height/2 + Math.sin(x*waveFreq + t) * waveHeight;
-      if (x === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
+    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+    ctx.lineWidth = 2;
+    let freq = 0.02;
+    let amp = 50;
+    for (let x=0; x<=width; x+=10) {
+      let y = height/2 + Math.sin(x*freq + t)*amp;
+      if (x===0) ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
     }
     ctx.stroke();
 
-    // 量子的にもう1本オフセットした線
+    // 副波(位相ずれ)
     ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
-    for (let x = 0; x <= width; x += 10) {
-      let y = height/2 + Math.sin(x*waveFreq + t + Math.PI/2) * waveHeight/2;
-      if (x === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    for (let x=0; x<=width; x+=10) {
+      let y = height/2 + Math.cos(x*freq + t)*amp*0.5;
+      if (x===0) ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
     }
     ctx.stroke();
 
@@ -72,5 +61,14 @@
     drawWave();
   }
 
-  document.addEventListener('DOMContentLoaded', init);
-})();
+  function initAll() {
+    onResize();
+    animate();
+  }
+
+  window.addEventListener('resize', onResize);
+  initAll();
+  console.log('waveAnimInit() completed. Quantum wave layer active!');
+}
+
+window.startWaveAnim = waveAnimInit;

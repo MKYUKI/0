@@ -1,39 +1,62 @@
 // pages/contact.tsx
 import React from 'react'
-import Head from 'next/head'
 
-export default function Page4Contact() {
+export default function Contact() {
   return (
-    <>
-      <Head>
-        <title>Contact Info - Page4</title>
-      </Head>
-
-      <section
-        style={{ padding: '2rem', background: '#fafafa', textAlign: 'center' }}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        minHeight: '80vh',
+        // もし余白が大きすぎるなら marginTop 減らす
+        marginTop: '40px', 
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '600px',
+          width: '100%',
+          padding: '20px',
+          textAlign: 'center',
+        }}
       >
-        <h1>Contact Information</h1>
-        <p style={{ margin: '1rem auto', maxWidth: '600px' }}>
+        <h2>Contact Information</h2>
+        <p style={{ marginTop: '1rem' }}>
           If you have any inquiries, feel free to email me at:
-          <br />
-          <strong>my-email-address@example.com</strong>
         </p>
-        <p>
+        <p style={{ marginBottom: '1rem', fontWeight: 'bold' }}>
+          <a
+            href="mailto:masaki136928@gmail.com"
+            style={{ textDecoration: 'none', color: '#0066cc' }}
+          >
+            masaki136928@gmail.com
+          </a>
+        </p>
+        <p style={{ marginTop: '2rem' }}>
           Or find me on social networks:
-          <br />
-          <a href="https://twitter.com/myaccount" target="_blank" rel="noreferrer">
-            Twitter
+        </p>
+        <p style={{ marginBottom: '0.5rem' }}>
+          <a
+            href="https://x.com/MK_ASI1"
+            target="_blank"
+            rel="noreferrer"
+            style={{ textDecoration: 'underline', color: '#0066cc' }}
+          >
+            X
           </a>{' '}
           |{' '}
           <a
-            href="https://linkedin.com/in/myprofile"
+            href="https://github.com/MKYUKI"
             target="_blank"
             rel="noreferrer"
+            style={{ textDecoration: 'underline', color: '#0066cc', marginLeft: '0.5rem' }}
           >
-            LinkedIn
+            GitHub
           </a>
         </p>
-      </section>
-    </>
+      </div>
+    </div>
   )
 }

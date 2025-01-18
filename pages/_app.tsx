@@ -7,7 +7,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import '../styles/globals.css'  // TailwindやnavbarなどのCSSまとめて読む
+import '../styles/globals.css'
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 // ============== NavBarコンポーネント ==============
@@ -62,12 +62,25 @@ class ErrorBoundary extends React.Component<
 }
 
 // ============== メインの MyApp ==============
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
     console.log('MyApp mounted - client side.')
   }, [])
+
+  // フッターでチャット欄を出すかどうかの条件
+  const showFooterChat = (
+    router.pathname !== '/' && 
+    router.pathname !== '/art' && 
+    router.pathname !== '/aichat'
+  )
+
+  // Contactページのときだけ、チャット欄を“もう少し上に”配置する例
+  // marginTop: '-50px' などで上に引き上げる
+  const chatFooterStyle = router.pathname === '/contact'
+    ? { marginTop: '-50px' }
+    : {}
 
   return (
     <ErrorBoundary>
@@ -75,20 +88,54 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>0 - GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="GPT-4 site with references to quantum illusions."
+          content="GPT-4 site with references to cosmic illusions and more."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* 
-        従来: cosmicSim.js / quantum3D.js / starsAnim.js / waveAnim.js を読み込み
-        この下で書き換え版スクリプトを読み込む
-      */}
-      <Script src="/js/cosmicSim.js" strategy="afterInteractive" />
-      <Script src="/js/quantum3D.js" strategy="afterInteractive" />
-      <Script src="/js/starsAnim.js" strategy="afterInteractive" />
-      <Script src="/js/waveAnim.js"  strategy="afterInteractive" />
+      {/* cosmicSim, quantum3D, etc. */}
+      <Script
+        src="/js/cosmicSim.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (typeof window !== 'undefined' && 'startCosmicSim' in window) {
+            // @ts-ignore
+            window.startCosmicSim()
+          }
+        }}
+      />
+      <Script
+        src="/js/quantum3D.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (typeof window !== 'undefined' && 'startQuantum3D' in window) {
+            // @ts-ignore
+            window.startQuantum3D()
+          }
+        }}
+      />
+      <Script
+        src="/js/starsAnim.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (typeof window !== 'undefined' && 'startStarsAnim' in window) {
+            // @ts-ignore
+            window.startStarsAnim()
+          }
+        }}
+      />
+      <Script
+        src="/js/waveAnim.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (typeof window !== 'undefined' && 'startWaveAnim' in window) {
+            // @ts-ignore
+            window.startWaveAnim()
+          }
+        }}
+      />
 
+      {/* 背景キャンバス */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
@@ -102,14 +149,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        <footer id="chat-footer">
-          {router.pathname !== '/' && router.pathname !== '/art' && (
-            <ChatGPTInterface isPage1Override={router.pathname === '/'} />
+        <footer id="chat-footer" style={chatFooterStyle}>
+          {showFooterChat && (
+            <ChatGPTInterface />
           )}
         </footer>
       </div>
     </ErrorBoundary>
   )
 }
-
-export default MyApp
