@@ -179,3 +179,155 @@ footer#chat-footer {
   margin: 0 auto;
   padding: 20px;
 }
+/* styles/globals.css */
+
+/* ... 前回のリセットや .hero-section の設定等は既存のまま ... */
+
+/* ==== 新たに追加する・上書きするCSS ==== */
+
+/* ----- section-title 共通 ----- */
+.section-title {
+  font-size: 1.6rem;
+  text-align: center;
+  margin: 30px auto 20px auto;
+  font-weight: 700;
+  color: #333;
+  position: relative;
+}
+
+/* ----- 履歴書リンクコンテナ ----- */
+.resume-links-container {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  padding: 0 20px;
+}
+.resume-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.resume-links a {
+  font-size: 1.1rem;
+  padding: 8px 14px;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  text-decoration: none;
+  color: #0066cc;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.resume-links a:hover {
+  background-color: #e3f2fd;
+  transform: translateY(-2px);
+}
+
+/* ----- Kindle一覧セクション ----- */
+.kindle-section {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.kindle-list {
+  list-style: none;
+  margin-top: 16px;
+}
+.kindle-list li {
+  margin: 10px 0;
+  font-size: 1.05rem;
+}
+.kindle-list li a {
+  color: #0066cc;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+.kindle-list li a:hover {
+  color: #004999;
+}
+
+/* ----- 本3冊 .books-container は前回同様でOK -----
+   ... すでに .books-container, .book-item, etc. が存在 ...
+   必要に応じて微調整する: */
+.books-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 同じ高さで並ぶ */
+  gap: 30px;
+  margin: 40px auto;
+  padding: 0 20px;
+  max-width: 900px;
+}
+
+/* ----- ソーシャルボタンコンテナ ----- */
+.social-buttons-container {
+  max-width: 800px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* ----- 近未来的なボタン共通スタイル ----- */
+.futuristic-button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 20px;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: 0.4s;
+}
+
+/* 背景にグラデor半透明が流れるアニメ演出 */
+.futuristic-button::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -50%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent);
+  transform: skewX(-15deg);
+  transition: 0.5s;
+  pointer-events: none;
+}
+.futuristic-button:hover::before {
+  left: 150%;
+}
+.futuristic-button:hover {
+  background-color: rgba(0, 255, 255, 0.05);
+}
+
+/* Xボタンなら色違いとか, GitHubボタンとか細かく差別化可 */
+.x-button {
+  border-color: #1da1f2; /* X(Twitter)カラー */
+  color: #1da1f2;
+}
+.x-button:hover {
+  background-color: rgba(29, 161, 242, 0.07);
+}
+.x-button::before {
+  background: linear-gradient(120deg, transparent, rgba(29,161,242,0.3), transparent);
+}
+
+.github-button {
+  border-color: #ccc;
+  color: #ccc;
+}
+.github-button:hover {
+  background-color: rgba(200, 200, 200, 0.07);
+}
+.github-button::before {
+  background: linear-gradient(120deg, transparent, rgba(200,200,200,0.3), transparent);
+}
