@@ -7,7 +7,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import '../styles/globals.css'
+import '../styles/globals.css' // ← グローバルCSSを読み込む
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 // ============== NavBarコンポーネント ==============
@@ -30,7 +30,7 @@ function NavBar() {
   )
 }
 
-// ============== 簡易エラーバウンダリー ==============
+// ============== エラーバウンダリー ==============
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
@@ -61,7 +61,7 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// ============== メインの MyApp ==============
+// ============== MyApp ==============
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
@@ -69,31 +69,21 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     console.log('MyApp mounted - client side.')
   }, [])
 
-  // フッターでチャット欄を出すかどうかの条件
-  const showFooterChat = (
-    router.pathname !== '/' && 
-    router.pathname !== '/art' && 
-    router.pathname !== '/aichat'
-  )
-
-  // Contactページのときだけ、チャット欄を“もう少し上に”配置する例
-  // marginTop: '-50px' などで上に引き上げる
-  const chatFooterStyle = router.pathname === '/contact'
-    ? { marginTop: '-50px' }
-    : {}
-
   return (
     <ErrorBoundary>
       <Head>
-        <title>0 - GPT-4 Quantum Clone</title>
+        <title>0 - MegaCosmos Simulation</title>
         <meta
           name="description"
-          content="GPT-4 site with references to cosmic illusions and more."
+          content="World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/* cosmicSim, quantum3D, etc. */}
+      {/*
+        4種類のアニメ (cosmicSim, quantum3D, starsAnim, waveAnim) を
+        afterInteractive で読み込みし、onLoad で各init()関数を呼ぶ
+      */}
       <Script
         src="/js/cosmicSim.js"
         strategy="afterInteractive"
@@ -135,7 +125,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
 
-      {/* 背景キャンバス */}
+      {/* 背景キャンバス（ただしページ上部だけで終わる => hero-sectionに合わせる） */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
@@ -149,9 +139,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        <footer id="chat-footer" style={chatFooterStyle}>
-          {showFooterChat && (
-            <ChatGPTInterface />
+        {/* フッターでChatGPT UI (トップページやartページなど除外) */}
+        <footer id="chat-footer">
+          {router.pathname !== '/' &&
+           router.pathname !== '/art' &&
+           router.pathname !== '/aichat' && (
+             <ChatGPTInterface />
           )}
         </footer>
       </div>

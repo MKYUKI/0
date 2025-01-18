@@ -252,7 +252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // ← グローバルCSSを読み込む
 
 // ============== NavBarコンポーネント ==============
 function NavBar() {
@@ -302,7 +302,7 @@ function NavBar() {
         ]
     });
 }
-// ============== 簡易エラーバウンダリー ==============
+// ============== エラーバウンダリー ==============
 class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Component) {
     constructor(props){
         super(props);
@@ -339,29 +339,22 @@ class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Compon
         return this.props.children;
     }
 }
-// ============== メインの MyApp ==============
+// ============== MyApp ==============
 function MyApp({ Component, pageProps }) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_5__.useRouter)();
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         console.log("MyApp mounted - client side.");
     }, []);
-    // フッターでチャット欄を出すかどうかの条件
-    const showFooterChat = router.pathname !== "/" && router.pathname !== "/art" && router.pathname !== "/aichat";
-    // Contactページのときだけ、チャット欄を“もう少し上に”配置する例
-    // marginTop: '-50px' などで上に引き上げる
-    const chatFooterStyle = router.pathname === "/contact" ? {
-        marginTop: "-50px"
-    } : {};
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(ErrorBoundary, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "0 - GPT-4 Quantum Clone"
+                        children: "0 - MegaCosmos Simulation"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "description",
-                        content: "GPT-4 site with references to cosmic illusions and more."
+                        content: "World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "viewport",
@@ -426,8 +419,7 @@ function MyApp({ Component, pageProps }) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("footer", {
                         id: "chat-footer",
-                        style: chatFooterStyle,
-                        children: showFooterChat && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {})
+                        children: router.pathname !== "/" && router.pathname !== "/art" && router.pathname !== "/aichat" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {})
                     })
                 ]
             })

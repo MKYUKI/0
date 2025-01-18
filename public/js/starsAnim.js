@@ -1,72 +1,139 @@
 // public/js/starsAnim.js
+console.log('starsAnim => top hero supernova + slower meteors');
 
-console.log('starsAnim.js is being parsed...');
+function starsAnimInit(){
+  console.log('starsAnimInit() called.');
 
-// 流れ星や落ち星的アニメ (背景透過)
-function starsAnimInit() {
-  console.log('starsAnimInit() called!');
-
-  const canvas = document.getElementById('stars-canvas');
-  if (!canvas) {
-    console.warn('No #stars-canvas found for starsAnim.');
+  const canvas= document.getElementById('stars-canvas');
+  if(!canvas){
+    console.warn('No #stars-canvas found.');
     return;
   }
-  const ctx = canvas.getContext('2d');
-  if (!ctx) {
-    console.warn('Could not get 2D context for #stars-canvas');
+  const ctx= canvas.getContext('2d');
+  if(!ctx){
+    console.warn('No 2D ctx for #stars-canvas');
     return;
   }
 
   let width, height;
-  const STAR_COUNT = 200;
-  let stars = [];
+  const STAR_COUNT= 300;
+  const METEOR_COUNT= 30;
+  let stars=[];
+  let meteors=[];
 
-  function onResize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-  }
-
-  function createStars() {
-    stars = [];
-    for (let i=0; i<STAR_COUNT; i++){
-      stars.push({
-        x: Math.random()*width,
-        y: Math.random()*height,
-        vy: 1 + Math.random()*3,
-        size: 1 + Math.random()*2
-      });
+  class SuperStar {
+    constructor(){
+      this.reset();
+    }
+    reset(){
+      this.x= Math.random()* width;
+      this.y= Math.random()* height;
+      this.r= 1+ Math.random()*2;
+      this.phase= Math.random()* Math.PI*2;
+      this.amp= 1+ Math.random()*2;
+    }
+    update(){
+      this.phase+= 0.02; // flicker slower
+      let scale= (Math.sin(this.phase)+1)/2;
+      this.brightness= scale* this.amp;
     }
   }
 
-  function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0,0,width,height);
-
-    ctx.fillStyle = 'white';
-    for (let i=0; i<stars.length; i++){
-      let s = stars[i];
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, 2*Math.PI);
-      ctx.fill();
-      s.y += s.vy;
-      if (s.y > height) {
-        s.y = -10;
-        s.x = Math.random()*width;
+  class Meteor {
+    constructor(){
+      this.reset();
+    }
+    reset(){
+      if(Math.random()<0.5){
+        this.x= Math.random()* width;
+        this.y= -30;
+        this.vx= (Math.random()-0.5)*1;
+        this.vy= 0.5+ Math.random()*1;
+      } else {
+        this.x= width+30;
+        this.y= Math.random()*height;
+        this.vx= -(0.5+ Math.random()*1);
+        this.vy= (Math.random()-0.5)*0.7;
+      }
+      this.r= 1+ Math.random()*2;
+    }
+    update(){
+      this.x+= this.vx;
+      this.y+= this.vy;
+      if(this.x< -50 || this.y> height+50 || this.y< -50){
+        this.reset();
       }
     }
   }
 
-  function initAll() {
+  function onResize(){
+    const hero= document.querySelector('.hero-section');
+    if(hero){
+      width= hero.offsetWidth;
+      height= hero.offsetHeight;
+    } else {
+      width= window.innerWidth;
+      height= 600;
+    }
+    canvas.width= width;
+    canvas.height= height;
+  }
+
+  function createObjects(){
+    stars=[];
+    meteors=[];
+    for(let i=0;i< STAR_COUNT;i++){
+      let s= new SuperStar();
+      s.x= Math.random()*width;
+      s.y= Math.random()*height;
+      stars.push(s);
+    }
+    for(let j=0; j< METEOR_COUNT; j++){
+      meteors.push(new Meteor());
+    }
+  }
+
+  function animate(){
+    requestAnimationFrame(animate);
+    ctx.clearRect(0,0,width,height);
+
+    // stars
+    stars.forEach(s=>{
+      s.update();
+      let alpha= 0.2+ s.brightness*0.8;
+      ctx.beginPath();
+      ctx.fillStyle= `rgba(255,255,255,${alpha})`;
+      let rad= s.r + s.brightness*0.8;
+      ctx.arc(s.x, s.y, rad, 0,2*Math.PI);
+      ctx.fill();
+    });
+
+    // meteors
+    meteors.forEach(m=>{
+      m.update();
+      ctx.beginPath();
+      ctx.fillStyle='rgba(255,255,255,0.9)';
+      ctx.arc(m.x,m.y,m.r,0,2*Math.PI);
+      ctx.fill();
+      // tail
+      ctx.beginPath();
+      ctx.strokeStyle='rgba(255,255,255,0.4)';
+      ctx.lineWidth=2;
+      ctx.moveTo(m.x,m.y);
+      ctx.lineTo(m.x- m.vx*12, m.y- m.vy*12);
+      ctx.stroke();
+    });
+  }
+
+  function initAll(){
     onResize();
-    createStars();
+    createObjects();
     animate();
   }
 
   window.addEventListener('resize', onResize);
   initAll();
-  console.log('starsAnimInit() completed. Falling star layer active!');
+  console.log('starsAnim => top hero only + slower supernova + meteors');
 }
 
-window.startStarsAnim = starsAnimInit;
+window.startStarsAnim= starsAnimInit;

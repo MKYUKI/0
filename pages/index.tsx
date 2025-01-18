@@ -1,29 +1,30 @@
 // pages/index.tsx
-
 import Head from 'next/head'
+import React from 'react'
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>ホーム画面</title>
+        <title>ホーム画面 - 宇宙史上最大・最先端のシミュレーション</title>
         <meta
           name="description"
-          content="歴史に残るレベルの大規模宇宙シミュレーションを表示"
+          content="最初は無数の銀河で始まり、最後も終わらず巨大ブラックホールへ…超スローで上部だけに展開"
         />
         <meta charSet="UTF-8" />
       </Head>
 
       {/*
-        hero-section 内に cosmicSim.js が描画する #cosmic-canvas
-        黒い宇宙空間を星や惑星が飛び交う
+        .hero-section: height 600px (or 80vh).
+        cosmicSim.js / quantum3D.js / starsAnim.js / waveAnim.js
+        はこの上部領域内にだけ描画される想定
       */}
       <section className="hero-section">
         <canvas id="cosmic-canvas"></canvas>
       </section>
 
-      {/* 履歴書・職務経歴書ダウンロードリンク */}
-      <div className="resume-links">
+      {/* 履歴書など */}
+      <div className="resume-links" style={{ marginTop: '40px' }}>
         <p>
           <a href="/docs/MasakiKusaka_Resume.docx" target="_blank" rel="noreferrer">
             MasakiKusaka_Resume.docx
@@ -46,25 +47,27 @@ export default function Home() {
         </p>
       </div>
 
-      <div style={{ marginBottom: '30px' }}>
+      <div style={{ marginTop: '40px', textAlign: 'center' }}>
         <h3>▼ MKのAmazonKindle作品一覧</h3>
-        <ul>
-          <li>
+        <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+          <li style={{ margin: '10px 0' }}>
             [JP]{' '}
             <a
-              href="https://amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1"
+              href="https://amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
               target="_blank"
               rel="noreferrer"
+              style={{ color: '#0066cc', textDecoration: 'underline' }}
             >
               日下真旗の作品をAmazonで見る
             </a>
           </li>
-          <li>
+          <li style={{ margin: '10px 0' }}>
             [US]{' '}
             <a
-              href="https://amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1"
+              href="https://amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
               target="_blank"
               rel="noreferrer"
+              style={{ color: '#0066cc', textDecoration: 'underline' }}
             >
               Masaki Kusakaの作品をAmazonで見る
             </a>
@@ -72,8 +75,8 @@ export default function Home() {
         </ul>
       </div>
 
-      {/* 本を3冊並べるセクション */}
-      <div className="books-container">
+      {/* 本を3冊 - 横並び同じ高さ */}
+      <div className="books-container" style={{ marginTop: '40px' }}>
         <div className="book-item">
           <a
             href="https://www.amazon.co.jp/dp/B0DK1HV92G"
