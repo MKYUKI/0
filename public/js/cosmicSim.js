@@ -1,63 +1,97 @@
-// public/js/cosmicSim.js
+/**
+ * public/js/cosmicSim.js
+ * 
+ * “宇宙のシミュレーション”を「白背景」＋「黒の幾何学的量子線の大規模描画」に変更。
+ * 文明の誇り・歴史的芸術作品として幻想的に振る舞う。
+ */
 
-console.log('cosmicSim.js file parsed.');
+(function() {
+  let canvas, ctx;
+  let width, height;
 
-// ★ Next.jsのDOMContentLoaded問題を回避するため、
-//   DOM読み込みではなく window.startCosmicSim() で起動する仕組みに変更
-function cosmicInit() {
-  console.log('cosmicInit() called!');
+  // 線（またはパス）を複数管理
+  const LINE_COUNT = 150;         // 大規模：線の本数
+  const POINTS_PER_LINE = 20;     // 1本の線あたりの頂点数
+  let lines = [];
 
-  const canvas = document.getElementById('cosmic-canvas');
-  if (!canvas) {
-    console.error('No #cosmic-canvas in DOM!');
-    return;
+  // 線オブジェクト
+  class QuantumLine {
+    constructor() {
+      this.points = [];
+      for (let i = 0; i < POINTS_PER_LINE; i++) {
+        this.points.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 1.5,  // -0.75 ~ +0.75
+          vy: (Math.random() - 0.5) * 1.5
+        });
+      }
+    }
+
+    update() {
+      this.points.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        // 端に当たったら反転
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      });
+    }
+
+    draw(ctx) {
+      ctx.beginPath();
+      ctx.moveTo(this.points[0].x, this.points[0].y);
+      // 多角形風
+      for (let i = 1; i < this.points.length; i++) {
+        ctx.lineTo(this.points[i].x, this.points[i].y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
   }
-  const ctx = canvas.getContext('2d');
-  if (!ctx) {
-    console.error('Could not get 2D context from cosmic-canvas');
-    return;
+
+  function init() {
+    canvas = document.getElementById('cosmic-canvas');
+    if (!canvas) return;
+
+    ctx = canvas.getContext('2d');
+    onResize();
+    createLines();
+    animate();
+
+    window.addEventListener('resize', onResize);
   }
 
-  // サイズを親要素に合わせる(例: hero-section の大きさ)
-  function resizeCanvas() {
-    canvas.width = canvas.parentNode.offsetWidth;
-    canvas.height = canvas.parentNode.offsetHeight;
-    console.log('cosmic-canvas resized to', canvas.width, 'x', canvas.height);
+  function onResize() {
+    width = canvas.parentNode.offsetWidth;
+    height = canvas.parentNode.offsetHeight;
+    canvas.width = width;
+    canvas.height = height;
   }
-  resizeCanvas();
 
-  // 大規模な宇宙演算
-  // 例: 星を大量にランダムに描画
-  const STAR_COUNT = 1000;
-  let t = 0;
+  function createLines() {
+    lines = [];
+    for (let i = 0; i < LINE_COUNT; i++) {
+      lines.push(new QuantumLine());
+    }
+  }
 
   function animate() {
     requestAnimationFrame(animate);
 
-    // 背景を黒で塗りつぶし
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // 背景は白
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, width, height);
 
-    // 星を描画
-    for (let i = 0; i < STAR_COUNT; i++) {
-      const x = Math.random() * canvas.width;
-      const y = ((Math.random() * canvas.height) + t) % canvas.height;
-      ctx.beginPath();
-      ctx.arc(x, y, 1.5, 0, 2 * Math.PI);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-    }
+    // 線は黒
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+    ctx.lineWidth = 1;
 
-    t += 1; // 星の流れを作る
+    lines.forEach((ln) => {
+      ln.update();
+      ln.draw(ctx);
+    });
   }
 
-  animate();
-
-  // リサイズ対応
-  window.addEventListener('resize', resizeCanvas);
-
-  console.log('cosmicInit() completed. Animation started!');
-}
-
-// ★ グローバルに公開して _app.tsx の onLoad で呼べるようにする
-window.startCosmicSim = cosmicInit;
+  document.addEventListener('DOMContentLoaded', init);
+})();

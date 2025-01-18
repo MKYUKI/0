@@ -7,16 +7,14 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import '../styles/globals.css'  // ← 全体のCSSを読み込み
-import ChatGPTInterface from '../components/ChatGPTInterface' 
-// ↑ ChatGPTInterface が必要ない場合は削除してください
+import '../styles/globals.css'  // TailwindやnavbarなどのCSSまとめて読む
+import ChatGPTInterface from '../components/ChatGPTInterface'
 
 // ============== NavBarコンポーネント ==============
 function NavBar() {
   return (
     <header className="navbar">
       <div className="nav-left">
-        {/* Next.js の Link コンポーネント */}
         <Link href="/" className="nav-link">Home</Link>
         <Link href="/aichat" className="nav-link">AI Chat</Link>
         <Link href="/art" className="nav-link">Art</Link>
@@ -64,7 +62,7 @@ class ErrorBoundary extends React.Component<
 }
 
 // ============== メインの MyApp ==============
-export default function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
@@ -77,37 +75,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <title>0 - GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="GPT-4 site with references to cosmic illusions and more."
+          content="GPT-4 site with references to quantum illusions."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       {/* 
-        ★ cosmicSim.js を afterInteractive で読み込み。
-        ★ onLoad で "window.startCosmicSim()" を呼び出し、DOM 時間差問題を回避。
+        従来: cosmicSim.js / quantum3D.js / starsAnim.js / waveAnim.js を読み込み
+        この下で書き換え版スクリプトを読み込む
       */}
-      <Script
-        src="/js/cosmicSim.js"
-        strategy="afterInteractive"
-        onLoad={() => {
-          console.log('cosmicSim.js loaded; calling startCosmicSim()...')
-          if (typeof window !== 'undefined' && 'startCosmicSim' in window) {
-            // @ts-ignore
-            window.startCosmicSim()
-          } else {
-            console.warn('startCosmicSim is not defined on window!')
-          }
-        }}
-      />
+      <Script src="/js/cosmicSim.js" strategy="afterInteractive" />
+      <Script src="/js/quantum3D.js" strategy="afterInteractive" />
+      <Script src="/js/starsAnim.js" strategy="afterInteractive" />
+      <Script src="/js/waveAnim.js"  strategy="afterInteractive" />
 
-      {/*
-        その他のアニメ js ファイルも必要なら追加:
-        <Script src="/js/quantum3D.js" strategy="afterInteractive" />
-        <Script src="/js/starsAnim.js" strategy="afterInteractive" />
-        <Script src="/js/waveAnim.js"  strategy="afterInteractive" />
-      */}
-
-      {/* 背景キャンバス（不要なら消す） */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
@@ -121,16 +102,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/*
-          フッターで ChatGPTInterface を表示する例
-          router.pathname が '/' or '/art' の場合は非表示
-        */}
         <footer id="chat-footer">
           {router.pathname !== '/' && router.pathname !== '/art' && (
-            <ChatGPTInterface />
+            <ChatGPTInterface isPage1Override={router.pathname === '/'} />
           )}
         </footer>
       </div>
     </ErrorBoundary>
   )
 }
+
+export default MyApp
