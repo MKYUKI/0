@@ -1,42 +1,59 @@
+# -----------------------------------------------------------------------------
+# Dockerfile
+#   - node:18-alpine をベース
+#   - builderステージでビルドして、runnerステージで実行
+#   - openssl をインストールする箇所は apk update 付きで実行
+# -----------------------------------------------------------------------------
+
+# =========== ビルドステージ ===========
 FROM node:18-alpine AS builder
 
+# 作業ディレクトリ
 WORKDIR /app
 
-# 1) OpenSSL
-RUN apk add --no-cache openssl
+# openssl インストール（Prismaクライアント生成などTLSが必要な場合に備える）
+RUN apk update && apk add --no-cache openssl
 
-# 2) .envファイルをコピー(あるいは build-arg で設定)
+# .env や Prisma スキーマをコピー
 COPY .env .env
+COPY prisma ./prisma
 
-# 3) MONGODB_URI が必要なら Dockerfile内でENV指定 or docker-composeで設定
-# ENV MONGODB_URI="mongodb+srv://..."
-
-# 4) 依存関係インストール
+# package.json & lockファイルをコピーし、依存関係をインストール
 COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm
 RUN pnpm install
 
-# 5) 残りのソースコピー
+# ソースコードをすべてコピー
 COPY . .
 
-# 6) Prisma
+# Prisma データベース初期化 (MongoDB 接続URLが .env の MONGODB_URI にある想定)
 RUN pnpm prisma db push
 RUN pnpm prisma generate
 
-# 7) Next build
+# Next.js ビルド
 RUN pnpm build
 
-FROM node:18-alpine as runner
+
+# =========== 実行ステージ ===========
+FROM node:18-alpine AS runner
+
 WORKDIR /app
+# 必要なら runnerステージでも openssl インストール
+RUN apk update && apk add --no-cache openssl
 
-# repeat: install openssl if needed
-RUN apk add --no-cache openssl
+# runnerステージで pnpm を使う予定ならインストール
+RUN npm install -g pnpm
 
-# copy build artifacts
+# builderステージから成果物をコピー
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/package.json ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/.env .env
 
+# ポート公開
 EXPOSE 3000
+
+# コンテナ起動時のコマンド
 CMD ["pnpm", "start"]

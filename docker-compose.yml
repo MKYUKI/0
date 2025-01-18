@@ -1,30 +1,13 @@
-version: '3.9'
-
+# docker-compose.yml
+version: "3.9"
 services:
   app:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile
-    container_name: legendary-website
     ports:
       - "3000:3000"
     environment:
-      NODE_ENV: production
-      # MONGODB_URI: "mongodb://mongo:27017/myDatabase" など
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:6
-    container_name: my-mongo
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-    # volumes:
-    #   - mongo-data:/data/db
-
-# volumes:
-#   mongo-data:
+      # build時&実行時に .env を読み込ませる場合
+      MONGODB_URI: ${MONGODB_URI}
+    # もしdocker-compose起動時に .env の設定を読み込ませたくない場合は別方法
