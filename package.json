@@ -9,21 +9,27 @@
     "prisma:dbpush": "prisma db push"
   },
   "dependencies": {
+    "@prisma/client": "5.x",
+    "axios": "^1.7.9",
     "next": "13.x",
+    "next-auth": "^4.24.11",
+    "openai": "^4.79.1",
+    "prisma": "5.x",
     "react": "18.x",
     "react-dom": "18.x",
-    "typescript": "4.x",
-    "prisma": "5.x",
-    "@prisma/client": "5.x"
-   
+    "redis": "^4.7.0",
+    "swr": "^2.3.0",
+    "typescript": "4.x"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.4",
+    "@types/next-auth": "^3.15.0",
+    "@types/node": "18.x",
     "@types/react": "18.x",
     "@types/react-dom": "18.x",
-    "@types/node": "18.x",
-    "tailwindcss": "^3.x",
+    "@types/redis": "^4.0.11",
+    "autoprefixer": "^10.x",
     "postcss": "^8.x",
-    "autoprefixer": "^10.x"
-    
+    "tailwindcss": "^3.x"
   }
 }

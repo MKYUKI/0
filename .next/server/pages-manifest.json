@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/contact": "pages/contact.js",
-  "/": "pages/index.js",
+  "/aichat": "pages/aichat.js",
   "/art": "pages/art.js",
-  "/aichat": "pages/aichat.js"
+  "/": "pages/index.js",
+  "/contact": "pages/contact.js"
 }
