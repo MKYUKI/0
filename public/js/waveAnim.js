@@ -1,53 +1,48 @@
-// public/js/waveAnim.js
-(function(){
-  console.log("waveAnim.js (Enhanced) is running...");
-
+/**
+ * waveAnim.js
+ * Canvas上で波を描くシンプルサンプル
+ */
+(function() {
   let canvas, ctx;
-  let w, h;
-  let waveOffset = 0;
+  let width, height;
+  let t = 0;
 
   function init() {
     canvas = document.getElementById('wave-canvas');
-    if(!canvas) {
-      console.error("wave-canvas not found!");
-      return;
-    }
+    if (!canvas) return;
     ctx = canvas.getContext('2d');
-    resize();
-    requestAnimationFrame(animate);
+    onResize();
+    animate();
+    window.addEventListener('resize', onResize);
   }
 
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+  function onResize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
   }
 
-  function animate(){
-    ctx.clearRect(0,0,w,h);
+  function drawWave() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = 'rgba(0,100,255,0.3)';
-    drawWave(waveOffset, 30);
-    ctx.fillStyle = 'rgba(0,150,255,0.2)';
-    drawWave(waveOffset + 2, 50);
-
-    waveOffset += 0.05;
-    requestAnimationFrame(animate);
-  }
-
-  function drawWave(offset, waveHeight){
+    ctx.strokeStyle = 'rgba(0, 200, 255, 0.8)';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(0, h/2);
-    let waveLength = w / 20;
-    for(let x=0; x<=w; x++){
-      let y = h/2 + Math.sin(x/waveLength + offset) * waveHeight;
+    for (let x = 0; x < width; x += 10) {
+      let y = height/2 + Math.sin((x * 0.01) + t) * 50;
       ctx.lineTo(x, y);
     }
-    ctx.lineTo(w, h);
-    ctx.lineTo(0, h);
-    ctx.closePath();
-    ctx.fill();
+    ctx.stroke();
+    t += 0.05;
   }
 
-  window.addEventListener('resize', resize);
-  window.addEventListener('DOMContentLoaded', init);
+  function animate() {
+    drawWave();
+    requestAnimationFrame(animate);
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
 })();

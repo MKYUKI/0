@@ -1,53 +1,67 @@
-// public/js/quantum3D.js
+/**
+ * quantum3D.js
+ * 3D っぽいパーティクルアニメのサンプル
+ */
 (function(){
-  console.log("quantum3D.js is running...");
-
   let canvas, ctx;
-  let w, h;
-  let angle = 0;
+  let width, height;
+  let particles = [];
+  const NUM_PARTICLES = 60;
 
-  function init() {
+  function init(){
     canvas = document.getElementById('bg-canvas');
-    if(!canvas) {
-      console.error("bg-canvas not found!");
-      return;
-    }
+    if(!canvas) return;
     ctx = canvas.getContext('2d');
-    resize();
+    onResize();
+    createParticles();
     animate();
+    window.addEventListener('resize', onResize);
   }
 
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+  function onResize(){
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
   }
 
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
+  function createParticles(){
+    particles = [];
+    for(let i=0; i<NUM_PARTICLES; i++){
+      particles.push({
+        x: Math.random()*width,
+        y: Math.random()*height,
+        z: Math.random()*1000, 
+        size: 2+Math.random()*3,
+      });
+    }
+  }
 
-    // 背景をやや透けた深い緑
-    ctx.fillStyle = "rgba(0, 100, 0, 0.2)";
-    ctx.fillRect(0, 0, w, h);
+  function animate(){
+    ctx.clearRect(0,0,width,height);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0,0,width,height);
 
-    // 文字
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "32px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Quantum3D Enhanced", w/2, h/2);
+    for(let i=0; i<particles.length; i++){
+      let p = particles[i];
+      p.z -= 2; // カメラに向かって突っ込む
+      if(p.z < 1) {
+        p.z = 1000;
+        p.x = Math.random()*width;
+        p.y = Math.random()*height;
+      }
+      // パース変換
+      let scale = 300 / p.z;
+      let px = (p.x - width/2) * scale + width/2;
+      let py = (p.y - height/2) * scale + height/2;
+      ctx.beginPath();
+      ctx.arc(px, py, p.size * scale, 0, 2*Math.PI);
+      ctx.fillStyle = 'rgba(0, 255, 255, 0.7)';
+      ctx.fill();
+    }
 
-    // 円を回転
-    const rad = 50;
-    const x = w/2 + Math.cos(angle)*80;
-    const y = h/2 + Math.sin(angle)*80;
-    ctx.beginPath();
-    ctx.arc(x, y, rad, 0, Math.PI*2);
-    ctx.fillStyle = "rgba(255, 255, 0, 0.5)";
-    ctx.fill();
-
-    angle += 0.02;
     requestAnimationFrame(animate);
   }
 
-  window.addEventListener('resize', resize);
-  window.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', init);
 })();
