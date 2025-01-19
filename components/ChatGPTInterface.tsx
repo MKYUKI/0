@@ -1,4 +1,6 @@
-// components/ChatGPTInterface.tsx
+// ========================================
+// File: components/ChatGPTInterface.tsx
+// ========================================
 import React, { useState, useEffect, useRef } from 'react'
 
 function MessageBubble({
@@ -8,14 +10,22 @@ function MessageBubble({
   role: 'user' | 'assistant' | 'system'
   content: string
 }) {
-  return <div className={`message-bubble ${role}`}>{content}</div>
+  return (
+    <div className={`message-bubble ${role}`} style={{ margin: '0.4rem 0' }}>
+      <strong style={{ textTransform: 'capitalize' }}>{role}:</strong> {content}
+    </div>
+  )
 }
 
+/**
+ * ChatProps
+ * - isGlass?: boolean => true の場合、ガラス風 (background透過 + border枠 + ぼかし) を適用
+ */
 interface ChatProps {
-  isPage1Override?: boolean
+  isGlass?: boolean
 }
 
-export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
+export default function ChatGPTInterface({ isGlass }: ChatProps) {
   const [messages, setMessages] = useState<
     { role: 'user' | 'assistant' | 'system'; content: string }[]
   >([])
@@ -23,15 +33,12 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
   const [isLoading, setIsLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
-  // auto-scroll
-  const scrollToBottom = () => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+  // 自動スクロール
   useEffect(() => {
-    scrollToBottom()
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // File Upload
+  // ファイルアップロード
   const handleFileUpload = async (files: FileList | null) => {
     if (!files || !files[0]) return
     const file = files[0]
@@ -48,6 +55,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     reader.readAsDataURL(file)
   }
 
+  // 送信
   const handleSend = async () => {
     if (!userInput.trim()) return
     const userMsg = { role: 'user' as const, content: userInput.trim() }
@@ -56,7 +64,7 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     setIsLoading(true)
 
     try {
-      // APIコール例
+      // ダミーAPI例
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -92,59 +100,89 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     }
   }
 
-  // layout
-  const containerStyle: React.CSSProperties = {
+  /**
+   * ★ ガラス風スタイル (isGlass=true) の場合:
+   *   - background: 薄い透過(例: rgba(255,255,255,0.06)) 
+   *   - backdropFilter: blur(8px) など
+   *   - border: 薄い白枠
+   *   - boxShadow: 少し外側に発光
+   */
+  const glassContainer: React.CSSProperties = {
+    background: 'rgba(255,255,255,0.06)', // ほんの少し白み
+    // backdropFilter / WebKit系のprefix:
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+    border: '1px solid rgba(255,255,255,0.2)',
+    borderRadius: '8px',
+    boxShadow: '0 0 20px rgba(255,255,255,0.05)',
+    margin: '0 auto',
+    width: '90%',
+    maxWidth: '600px',
+    height: '70vh',
     display: 'flex',
     flexDirection: 'column',
-    background: '#fafafa',
-    borderTop: '1px solid #ddd',
-    borderLeft: '1px solid #ddd',
-    borderRight: '1px solid #ddd',
-    borderRadius: '8px 8px 0 0',
-    overflow: 'hidden',
+    color: '#fff',
+    position: 'relative',
+    zIndex: 10,
+    overflow: 'hidden', // コンテンツはみ出し防止
+  }
+
+  /**
+   * ★ 通常 (黒背景)
+   */
+  const normalContainer: React.CSSProperties = {
+    background: 'rgba(0,0,0,0.4)',
     margin: '0 auto',
+    width: '90%',
+    maxWidth: '600px',
+    height: '70vh',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '8px',
+    border: '1px solid rgba(255,255,255,0.3)',
+    color: '#fff',
+    boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+    position: 'relative',
+    zIndex: 10,
+    overflow: 'hidden',
   }
 
-  if (isPage1Override) {
-    containerStyle.width = '100%'
-    containerStyle.maxWidth = '100%'
-    containerStyle.height = 'calc(100vh - 60px)'
-  } else {
-    containerStyle.width = '100%'
-    containerStyle.maxWidth = '800px'
-    containerStyle.height = '60vh'
-  }
+  const containerStyle = isGlass ? glassContainer : normalContainer
 
+  // メッセージ表示領域
   const topAreaStyle: React.CSSProperties = {
     flex: 1,
     overflowY: 'auto',
     padding: '1rem',
   }
 
+  // 下部のファイル&入力欄
   const bottomAreaStyle: React.CSSProperties = {
     display: 'flex',
+    flexDirection: 'column' as const,
     gap: '0.5rem',
     padding: '0.75rem',
-    borderTop: '1px solid #ccc',
-    background: '#f3f3f3',
+    borderTop: '1px solid rgba(255,255,255,0.3)',
+    // isGlass の場合、背景はさらに透明でもOK
+    background: isGlass ? 'transparent' : 'rgba(0,0,0,0.6)',
   }
 
+  const fileRowStyle: React.CSSProperties = {
+    marginBottom: '0.5rem',
+  }
+
+  // テキストエリア
   const textAreaStyle: React.CSSProperties = {
-    flex: 1,
     resize: 'none',
-    border: '1px solid #ccc',
+    border: isGlass ? '1px solid rgba(255,255,255,0.4)' : '1px solid #444',
     borderRadius: '4px',
     padding: '0.75rem',
     fontSize: '0.95rem',
     fontFamily: 'sans-serif',
-  }
-
-  const fileButtonStyle: React.CSSProperties = {
-    background: '#fff',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    padding: '0.3rem',
+    background: isGlass ? 'transparent' : '#222',
+    color: '#fff',
+    width: '100%',
+    marginBottom: '0.5rem',
   }
 
   const sendButtonStyle: React.CSSProperties = {
@@ -152,13 +190,15 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
-    padding: '0 16px',
+    padding: '0.6rem 1.2rem',
     fontSize: '1rem',
     cursor: 'pointer',
+    alignSelf: 'flex-end',
   }
 
   return (
     <div style={containerStyle}>
+      {/* 上部メッセージ表示部分 */}
       <div style={topAreaStyle}>
         {messages.map((m, idx) => (
           <MessageBubble key={idx} role={m.role} content={m.content} />
@@ -166,19 +206,27 @@ export default function ChatGPTInterface({ isPage1Override }: ChatProps) {
         <div ref={bottomRef} />
       </div>
 
+      {/* 下部入力欄 */}
       <div style={bottomAreaStyle}>
-        <input
-          type="file"
-          style={fileButtonStyle}
-          onChange={(e) => handleFileUpload(e.target.files)}
-        />
+        {/* ファイル選択 */}
+        <div style={fileRowStyle}>
+          <input
+            type="file"
+            onChange={(e) => handleFileUpload(e.target.files)}
+            style={{ color: '#fff', background: 'transparent' }}
+          />
+        </div>
+
+        {/* テキスト入力 */}
         <textarea
           style={textAreaStyle}
-          placeholder="(Reference: chatgpt.com) Enter message or attach file..."
+          placeholder="メッセージを入力..."
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           disabled={isLoading}
         />
+
+        {/* 送信ボタン */}
         <button
           style={sendButtonStyle}
           onClick={handleSend}

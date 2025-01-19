@@ -8,30 +8,104 @@
    /* styles/globals.css */
    
    /* ======= リセット ======= */
-   html, body, div, span, applet, object, iframe,
-   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-   a, abbr, acronym, address, big, cite, code,
-   del, dfn, em, font, img, ins, kbd, q, s, samp,
-   small, strike, strong, sub, sup, tt, var,
-   b, u, i, center,
-   dl, dt, dd, ol, ul, li,
-   fieldset, form, label, legend,
-   table, caption, tbody, tfoot, thead, tr, th, td,
-   article, aside, figure, figcaption, footer,
-   header, hgroup, menu, nav, section,
-   time, mark, audio, video {
+   html,
+   body,
+   div,
+   span,
+   applet,
+   object,
+   iframe,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6,
+   p,
+   blockquote,
+   pre,
+   a,
+   abbr,
+   acronym,
+   address,
+   big,
+   cite,
+   code,
+   del,
+   dfn,
+   em,
+   font,
+   img,
+   ins,
+   kbd,
+   q,
+   s,
+   samp,
+   small,
+   strike,
+   strong,
+   sub,
+   sup,
+   tt,
+   var,
+   b,
+   u,
+   i,
+   center,
+   dl,
+   dt,
+   dd,
+   ol,
+   ul,
+   li,
+   fieldset,
+   form,
+   label,
+   legend,
+   table,
+   caption,
+   tbody,
+   tfoot,
+   thead,
+   tr,
+   th,
+   td,
+   article,
+   aside,
+   figure,
+   figcaption,
+   footer,
+   header,
+   hgroup,
+   menu,
+   nav,
+   section,
+   time,
+   mark,
+   audio,
+   video {
      margin: 0;
      padding: 0;
      border: 0;
      vertical-align: baseline;
    }
-   article, aside, details, figcaption, figure,
-   footer, header, hgroup, menu, nav, section {
+   article,
+   aside,
+   details,
+   figcaption,
+   figure,
+   footer,
+   header,
+   hgroup,
+   menu,
+   nav,
+   section {
      display: block;
    }
    
    /* ======= 全体背景白、文字黒 ======= */
-   html, body {
+   html,
+   body {
      background-color: #fff;
      color: #000;
      font-family: sans-serif;
@@ -65,7 +139,7 @@
      position: relative;
      margin-left: 20px;
    }
-   header.navbar .search-container input[type="text"] {
+   header.navbar .search-container input[type='text'] {
      padding: 6px 30px 6px 10px;
      border-radius: 4px;
      border: 1px solid #ccc;
@@ -82,14 +156,14 @@
      cursor: pointer;
    }
    
-   /* ======= 背景のCanvas => 上部だけで大きく見えるよう hero-sectionに依存 ======= */
+   /* ======= 背景のCanvas => 上部だけに描画 hero-section ======= */
    .global-bg-canvas-container {
      position: fixed;
      top: 0;
      left: 0;
      width: 100%;
      height: 100%;
-     z-index: -1; 
+     z-index: -1;
      pointer-events: none;
    }
    .bg-canvas-layer {
@@ -122,7 +196,7 @@
    .hero-section {
      position: relative;
      width: 100%;
-     height: 600px; /* 固定 600px or 80vh */
+     height: 600px; /* 600px or 80vh */
      overflow: hidden;
      margin: 0;
      padding: 0;
@@ -180,11 +254,9 @@
      padding: 20px;
    }
    
-   /* styles/globals.css */
-   
-   /* ... 前回のリセットや .hero-section の設定等は既存のまま ... */
-   
-   /* ==== 新たに追加する・上書きするCSS ==== */
+   /* -------------------------------------
+      追加/上書き ここから
+   -------------------------------------- */
    
    /* ----- section-title 共通 ----- */
    .section-title {
@@ -247,19 +319,6 @@
      color: #004999;
    }
    
-   /* ----- 本3冊 .books-container は前回同様でOK -----
-      ... すでに .books-container, .book-item, etc. が存在 ...
-      必要に応じて微調整する: */
-   .books-container {
-     display: flex;
-     justify-content: center;
-     align-items: flex-start; /* 同じ高さで並ぶ */
-     gap: 30px;
-     margin: 40px auto;
-     padding: 0 20px;
-     max-width: 900px;
-   }
-   
    /* ----- ソーシャルボタンコンテナ ----- */
    .social-buttons-container {
      max-width: 800px;
@@ -291,12 +350,13 @@
      transition: 0.4s;
    }
    .futuristic-button::before {
-     content: "";
+     content: '';
      position: absolute;
-     top: 0; left: -50%;
+     top: 0;
+     left: -50%;
      width: 100%;
      height: 100%;
-     background: linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent);
+     background: linear-gradient(120deg, transparent, rgba(0, 255, 255, 0.3), transparent);
      transform: skewX(-15deg);
      transition: 0.5s;
      pointer-events: none;
@@ -315,7 +375,7 @@
      background-color: rgba(29, 161, 242, 0.07);
    }
    .x-button::before {
-     background: linear-gradient(120deg, transparent, rgba(29,161,242,0.3), transparent);
+     background: linear-gradient(120deg, transparent, rgba(29, 161, 242, 0.3), transparent);
    }
    .github-button {
      border-color: #ccc;
@@ -325,27 +385,170 @@
      background-color: rgba(200, 200, 200, 0.07);
    }
    .github-button::before {
-     background: linear-gradient(120deg, transparent, rgba(200,200,200,0.3), transparent);
+     background: linear-gradient(120deg, transparent, rgba(200, 200, 200, 0.3), transparent);
    }
-/* =========================
-   Artページ全画面キャンバス
+   
+   /* =========================
+      Artページ全画面キャンバス
    ========================= */
    #art-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* 全画面 */
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* キャンバスを重ね合わせる */
-  #art-wrapper canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  
+     position: relative;
+     width: 100%;
+     height: 100vh; /* 全画面 */
+     overflow: hidden;
+     margin: 0;
+     padding: 0;
+   }
+   #art-wrapper canvas {
+     position: absolute;
+     top: 0;
+     left: 0;
+     display: block;
+     width: 100%;
+     height: 100%;
+   }
+   
+   /* =========================
+      AiChatページ
+   ========================= */
+   #aichat-bg-wrapper {
+     position: relative;
+     width: 100%;
+     min-height: 100vh;
+     overflow: hidden;
+     margin: 0;
+     padding: 0;
+   }
+   #aichat-bg-wrapper canvas {
+     position: absolute;
+     top: 0;
+     left: 0;
+     display: block;
+     width: 100%;
+     height: 100%;
+     z-index: 1;
+   }
+   .aichat-foreground {
+     position: relative;
+     z-index: 10;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 40px 20px;
+   }
+   
+   /* =========================
+      Contactページ
+   ========================= */
+   #contact-bg-wrapper {
+     position: relative;
+     width: 100%;
+     min-height: 100vh;
+     overflow: hidden;
+     margin: 0;
+     padding: 0;
+   }
+   #contact-bg-wrapper canvas {
+     position: absolute;
+     top: 0;
+     left: 0;
+     display: block;
+     width: 100%;
+     height: 100%;
+     z-index: 1;
+   }
+   .contact-foreground {
+     position: relative;
+     z-index: 10;
+     max-width: 900px;
+     margin: 0 auto;
+     padding: 40px 20px;
+     /* background: rgba(0,0,0,0.2); // 必要なら */
+   }
+   
+   /* =========================
+      Homeページ - 中部～下部
+   ========================= */
+   .home-mid-lower-animations {
+     position: relative;
+     /* 中部～下部の高さを稼ぐ:
+        十分に大きい値(1500px~2000px など)
+        ページ内容に合わせて
+     */
+     min-height: 1600px;
+     overflow: hidden;
+     margin: 0;
+     padding: 0;
+   }
+   
+   /* 4canvasを背景に重ねる */
+   .home-mid-lower-animations canvas {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 1;
+   }
+   
+   /* 前面に配置するコンテンツ (履歴書～Followなど) */
+   .home-mid-lower-content {
+     position: relative;
+     z-index: 2; /* 背景より前 */
+     padding: 40px 20px;
+     /* 背景を透過にしているので文字が見辛ければ
+        多少のrgba(...)を敷くのも可 */
+   }
+   
+   /* 
+     Navbarフレックス + nowrap
+     (再掲)
+   */
+   header.navbar {
+     background-color: #000;
+     color: #fff;
+     white-space: nowrap;
+     overflow-x: auto;
+     font-size: 14px;
+     display: flex;
+     align-items: center;
+     min-height: 48px;
+   }
+   .nav-content {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+   }
+   .nav-left {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+   }
+   .nav-left .nav-link {
+     padding: 0 10px;
+     text-decoration: none;
+     color: #fff;
+   }
+   .nav-right {
+     display: flex;
+     align-items: center;
+   }
+   .nav-right-input {
+     font-size: 0.85rem;
+     padding: 5px 8px;
+     border-radius: 4px;
+     border: 1px solid #ccc;
+     margin-left: 10px;
+     min-width: 160px;
+   }
+   /* スマホ対応 */
+   @media (max-width: 480px) {
+     header.navbar {
+       font-size: 12px;
+     }
+     .nav-right-input {
+       width: 100px;
+     }
+   }
+   

@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/pf_6fbq6w25kBziOJqCxS/_buildManifest.js",
-    "static/pf_6fbq6w25kBziOJqCxS/_ssgManifest.js"
+    "static/7XT-uDaZgapsek4FDwIxU/_buildManifest.js",
+    "static/7XT-uDaZgapsek4FDwIxU/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -14,14 +14,14 @@
       "static/chunks/webpack-ee7e63bc15b31913.js",
       "static/chunks/framework-63157d71ad419e09.js",
       "static/chunks/main-c6c319de9f7d0316.js",
-      "static/chunks/pages/index-3df10b22f07d171a.js"
+      "static/chunks/pages/index-3b9b80b8dddf6b01.js"
     ],
     "/_app": [
       "static/chunks/webpack-ee7e63bc15b31913.js",
       "static/chunks/framework-63157d71ad419e09.js",
       "static/chunks/main-c6c319de9f7d0316.js",
-      "static/css/eec27afb0586b681.css",
-      "static/chunks/pages/_app-3a0894d1e08e0c70.js"
+      "static/css/3c23c5308f3990cc.css",
+      "static/chunks/pages/_app-8d188cb8b5502d6b.js"
     ],
     "/_error": [
       "static/chunks/webpack-ee7e63bc15b31913.js",
@@ -33,7 +33,7 @@
       "static/chunks/webpack-ee7e63bc15b31913.js",
       "static/chunks/framework-63157d71ad419e09.js",
       "static/chunks/main-c6c319de9f7d0316.js",
-      "static/chunks/pages/aichat-61b79e8c3b303624.js"
+      "static/chunks/pages/aichat-dc611d51fba6cbbb.js"
     ],
     "/art": [
       "static/chunks/webpack-ee7e63bc15b31913.js",
@@ -58,7 +58,7 @@
       "static/chunks/webpack-ee7e63bc15b31913.js",
       "static/chunks/framework-63157d71ad419e09.js",
       "static/chunks/main-c6c319de9f7d0316.js",
-      "static/chunks/pages/contact-7d8d18614e509ffc.js"
+      "static/chunks/pages/contact-a5a78c01cfdbdb0d.js"
     ],
     "/dm/[roomId]": [
       "static/chunks/webpack-ee7e63bc15b31913.js",

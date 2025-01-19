@@ -12,32 +12,46 @@ exports.modules = {
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-// components/ChatGPTInterface.tsx
+// ========================================
+// File: components/ChatGPTInterface.tsx
+// ========================================
 
 
 function MessageBubble({ role, content }) {
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: `message-bubble ${role}`,
-        children: content
+        style: {
+            margin: "0.4rem 0"
+        },
+        children: [
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("strong", {
+                style: {
+                    textTransform: "capitalize"
+                },
+                children: [
+                    role,
+                    ":"
+                ]
+            }),
+            " ",
+            content
+        ]
     });
 }
-function ChatGPTInterface({ isPage1Override }) {
+function ChatGPTInterface({ isGlass }) {
     const [messages, setMessages] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const [userInput, setUserInput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const bottomRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    // auto-scroll
-    const scrollToBottom = ()=>{
+    // 自動スクロール
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         bottomRef.current?.scrollIntoView({
             behavior: "smooth"
         });
-    };
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        scrollToBottom();
     }, [
         messages
     ]);
-    // File Upload
+    // ファイルアップロード
     const handleFileUpload = async (files)=>{
         if (!files || !files[0]) return;
         const file = files[0];
@@ -56,6 +70,7 @@ function ChatGPTInterface({ isPage1Override }) {
         };
         reader.readAsDataURL(file);
     };
+    // 送信
     const handleSend = async ()=>{
         if (!userInput.trim()) return;
         const userMsg = {
@@ -69,7 +84,7 @@ function ChatGPTInterface({ isPage1Override }) {
         setUserInput("");
         setIsLoading(true);
         try {
-            // APIコール例
+            // ダミーAPI例
             const res = await fetch("/api/chat", {
                 method: "POST",
                 headers: {
@@ -120,63 +135,91 @@ function ChatGPTInterface({ isPage1Override }) {
             setIsLoading(false);
         }
     };
-    // layout
-    const containerStyle = {
+    /**
+   * ★ ガラス風スタイル (isGlass=true) の場合:
+   *   - background: 薄い透過(例: rgba(255,255,255,0.06)) 
+   *   - backdropFilter: blur(8px) など
+   *   - border: 薄い白枠
+   *   - boxShadow: 少し外側に発光
+   */ const glassContainer = {
+        background: "rgba(255,255,255,0.06)",
+        // backdropFilter / WebKit系のprefix:
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        border: "1px solid rgba(255,255,255,0.2)",
+        borderRadius: "8px",
+        boxShadow: "0 0 20px rgba(255,255,255,0.05)",
+        margin: "0 auto",
+        width: "90%",
+        maxWidth: "600px",
+        height: "70vh",
         display: "flex",
         flexDirection: "column",
-        background: "#fafafa",
-        borderTop: "1px solid #ddd",
-        borderLeft: "1px solid #ddd",
-        borderRight: "1px solid #ddd",
-        borderRadius: "8px 8px 0 0",
-        overflow: "hidden",
-        margin: "0 auto"
+        color: "#fff",
+        position: "relative",
+        zIndex: 10,
+        overflow: "hidden"
     };
-    if (isPage1Override) {
-        containerStyle.width = "100%";
-        containerStyle.maxWidth = "100%";
-        containerStyle.height = "calc(100vh - 60px)";
-    } else {
-        containerStyle.width = "100%";
-        containerStyle.maxWidth = "800px";
-        containerStyle.height = "60vh";
-    }
+    /**
+   * ★ 通常 (黒背景)
+   */ const normalContainer = {
+        background: "rgba(0,0,0,0.4)",
+        margin: "0 auto",
+        width: "90%",
+        maxWidth: "600px",
+        height: "70vh",
+        display: "flex",
+        flexDirection: "column",
+        borderRadius: "8px",
+        border: "1px solid rgba(255,255,255,0.3)",
+        color: "#fff",
+        boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+        position: "relative",
+        zIndex: 10,
+        overflow: "hidden"
+    };
+    const containerStyle = isGlass ? glassContainer : normalContainer;
+    // メッセージ表示領域
     const topAreaStyle = {
         flex: 1,
         overflowY: "auto",
         padding: "1rem"
     };
+    // 下部のファイル&入力欄
     const bottomAreaStyle = {
         display: "flex",
+        flexDirection: "column",
         gap: "0.5rem",
         padding: "0.75rem",
-        borderTop: "1px solid #ccc",
-        background: "#f3f3f3"
+        borderTop: "1px solid rgba(255,255,255,0.3)",
+        // isGlass の場合、背景はさらに透明でもOK
+        background: isGlass ? "transparent" : "rgba(0,0,0,0.6)"
     };
+    const fileRowStyle = {
+        marginBottom: "0.5rem"
+    };
+    // テキストエリア
     const textAreaStyle = {
-        flex: 1,
         resize: "none",
-        border: "1px solid #ccc",
+        border: isGlass ? "1px solid rgba(255,255,255,0.4)" : "1px solid #444",
         borderRadius: "4px",
         padding: "0.75rem",
         fontSize: "0.95rem",
-        fontFamily: "sans-serif"
-    };
-    const fileButtonStyle = {
-        background: "#fff",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-        cursor: "pointer",
-        padding: "0.3rem"
+        fontFamily: "sans-serif",
+        background: isGlass ? "transparent" : "#222",
+        color: "#fff",
+        width: "100%",
+        marginBottom: "0.5rem"
     };
     const sendButtonStyle = {
         background: "#31a37d",
         color: "#fff",
         border: "none",
         borderRadius: "4px",
-        padding: "0 16px",
+        padding: "0.6rem 1.2rem",
         fontSize: "1rem",
-        cursor: "pointer"
+        cursor: "pointer",
+        alignSelf: "flex-end"
     };
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         style: containerStyle,
@@ -196,14 +239,20 @@ function ChatGPTInterface({ isPage1Override }) {
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 style: bottomAreaStyle,
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
-                        type: "file",
-                        style: fileButtonStyle,
-                        onChange: (e)=>handleFileUpload(e.target.files)
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        style: fileRowStyle,
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                            type: "file",
+                            onChange: (e)=>handleFileUpload(e.target.files),
+                            style: {
+                                color: "#fff",
+                                background: "transparent"
+                            }
+                        })
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("textarea", {
                         style: textAreaStyle,
-                        placeholder: "(Reference: chatgpt.com) Enter message or attach file...",
+                        placeholder: "メッセージを入力...",
                         value: userInput,
                         onChange: (e)=>setUserInput(e.target.value),
                         disabled: isLoading
@@ -245,18 +294,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6764);
 /* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3754);
-// =============================================
-// File: pages/_app.tsx
-// =============================================
+// pages/_app.tsx
 
 
 
 
 
 
+ // 全体CSS
 
-
-// ============== NavBarコンポーネント ==============
 function NavBar() {
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("header", {
         className: "navbar",
@@ -304,7 +350,6 @@ function NavBar() {
         ]
     });
 }
-// ============== 簡易エラーバウンダリー ==============
 class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Component) {
     constructor(props){
         super(props);
@@ -341,22 +386,21 @@ class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Compon
         return this.props.children;
     }
 }
-// ============== MyApp ==============
 function MyApp({ Component, pageProps }) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_5__.useRouter)();
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        console.log("MyApp mounted - client side.");
+        console.log("_app mounted - client side");
     }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(ErrorBoundary, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "0 - GPT-4 Quantum Clone"
+                        children: "0 - GPT-4 MegaCosmos"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "description",
-                        content: "GPT-4 site with references to cosmic illusions and more."
+                        content: "World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "viewport",
@@ -421,7 +465,7 @@ function MyApp({ Component, pageProps }) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("footer", {
                         id: "chat-footer",
-                        children: router.pathname !== "/" && router.pathname !== "/art" && router.pathname !== "/aichat" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {})
+                        children: router.pathname !== "/" && router.pathname !== "/art" && router.pathname !== "/aichat" && router.pathname !== "/contact" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {})
                     })
                 ]
             })

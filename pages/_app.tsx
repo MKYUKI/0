@@ -1,6 +1,5 @@
-// =============================================
-// File: pages/_app.tsx
-// =============================================
+// pages/_app.tsx
+
 import type { AppProps } from 'next/app'
 import React, { useEffect } from 'react'
 import Head from 'next/head'
@@ -8,10 +7,9 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import '../styles/globals.css'
+import '../styles/globals.css' // 全体CSS
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
-// ============== NavBarコンポーネント ==============
 function NavBar() {
   return (
     <header className="navbar">
@@ -31,7 +29,6 @@ function NavBar() {
   )
 }
 
-// ============== 簡易エラーバウンダリー ==============
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
@@ -62,30 +59,25 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// ============== MyApp ==============
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    console.log('MyApp mounted - client side.')
+    console.log('_app mounted - client side')
   }, [])
 
   return (
     <ErrorBoundary>
       <Head>
-        <title>0 - GPT-4 Quantum Clone</title>
+        <title>0 - GPT-4 MegaCosmos</title>
         <meta
           name="description"
-          content="GPT-4 site with references to cosmic illusions and more."
+          content="World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
-      {/*
-        既存の4ファイル: cosmicSim.js, quantum3D.js, starsAnim.js, waveAnim.js
-        （ホーム画面などで使用）
-        Next.jsの推奨形式 (Script + strategy="afterInteractive" + onLoad) で読み込み
-      */}
+      {/* ▼ 既存アニメ (上部だけに表示したい cosmicSim + quantum3D + starsAnim + waveAnim) */}
       <Script
         src="/js/cosmicSim.js"
         strategy="afterInteractive"
@@ -127,7 +119,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
 
-      {/* 背景キャンバス (上部だけに描画される想定) */}
+      {/* 背景キャンバス (Home上部用) */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
@@ -141,11 +133,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/* フッターChatを一部ページでは非表示にする例 */}
+        {/* 
+          フッターのチャット => 
+          「Contactページは白背景チャットが重複する」のを防ぐため、Contactを除外 
+        */}
         <footer id="chat-footer">
           {router.pathname !== '/' &&
            router.pathname !== '/art' &&
-           router.pathname !== '/aichat' && (
+           router.pathname !== '/aichat' &&
+           router.pathname !== '/contact' && ( // ←Contactも除外
              <ChatGPTInterface />
           )}
         </footer>
