@@ -108,14 +108,14 @@ export default function Home() {
           <div className="books-container">
             <div className="book-item">
               <a
-                href="https://www.amazon.co.jp/dp/B0DK1HV92G"
+                href="https://www.amazon.com/-/es/Masaki-Kusaka-ebook/dp/B0DK1JZ2T7/ref=sr_1_19?dib=eyJ2IjoiMSJ9.6wiGivCzYJhqrNL3rIETlMOXhQeJiOIQhQPnqWQkpr60WJTf-7Z4_FcwGltxb0S_6zOmJ6GvPugw7ajvz-x08EfyyYgZ54YqjmyiEhxHlBYfIUJsXfs6Ca6Uu0Elo-FzU4zDNMY3dyKetEajNa7SZG73jIRtfL3zI-cWOMIWI79DwvYPVqftXz81d0O2tKoBsOQFUw4wi1RfLJ8btG4xLbvAZ6zoVnJ-6q6x8yt_lik.kurd0_HdR7C2OyL5dJJEOIUMrVYbLPtt2YCjKPGI71E&dib_tag=se&qid=1737330503&refinements=p_27%3AMasaki+Kusaka&s=digital-text&sr=1-19&xpid=W32gpt8Wbq1OW"
                 target="_blank"
                 rel="noreferrer"
               >
                 <img src="/images/book1.jpg" alt="無限への挑戦" />
               </a>
               <p>
-                「無限への挑戦：全存在の幸福と自己超越の旅路」
+                「The Challenge to Infinity: A Journey of Universal Happiness and Self-Transcendence」
               </p>
             </div>
             <div className="book-item">
