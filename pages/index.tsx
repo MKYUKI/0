@@ -1,5 +1,7 @@
-// pages/index.tsx
-
+// =============================================
+// File: pages/index.tsx
+// (現在のホームページ / 変更なし)
+// =============================================
 import Head from 'next/head'
 import React from 'react'
 

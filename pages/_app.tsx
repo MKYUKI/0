@@ -1,5 +1,6 @@
-// pages/_app.tsx
-
+// =============================================
+// File: pages/_app.tsx
+// =============================================
 import type { AppProps } from 'next/app'
 import React, { useEffect } from 'react'
 import Head from 'next/head'
@@ -7,7 +8,7 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import '../styles/globals.css' // ← グローバルCSSを読み込む
+import '../styles/globals.css'
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 // ============== NavBarコンポーネント ==============
@@ -30,7 +31,7 @@ function NavBar() {
   )
 }
 
-// ============== エラーバウンダリー ==============
+// ============== 簡易エラーバウンダリー ==============
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
@@ -72,17 +73,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <Head>
-        <title>0 - MegaCosmos Simulation</title>
+        <title>0 - GPT-4 Quantum Clone</title>
         <meta
           name="description"
-          content="World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
+          content="GPT-4 site with references to cosmic illusions and more."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
       {/*
-        4種類のアニメ (cosmicSim, quantum3D, starsAnim, waveAnim) を
-        afterInteractive で読み込みし、onLoad で各init()関数を呼ぶ
+        既存の4ファイル: cosmicSim.js, quantum3D.js, starsAnim.js, waveAnim.js
+        （ホーム画面などで使用）
+        Next.jsの推奨形式 (Script + strategy="afterInteractive" + onLoad) で読み込み
       */}
       <Script
         src="/js/cosmicSim.js"
@@ -125,7 +127,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
 
-      {/* 背景キャンバス（ただしページ上部だけで終わる => hero-sectionに合わせる） */}
+      {/* 背景キャンバス (上部だけに描画される想定) */}
       <div className="global-bg-canvas-container">
         <canvas id="bg-canvas" className="bg-canvas-layer" />
         <canvas id="stars-canvas" className="bg-canvas-layer" />
@@ -139,7 +141,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/* フッターでChatGPT UI (トップページやartページなど除外) */}
+        {/* フッターChatを一部ページでは非表示にする例 */}
         <footer id="chat-footer">
           {router.pathname !== '/' &&
            router.pathname !== '/art' &&

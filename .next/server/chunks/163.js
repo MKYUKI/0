@@ -245,14 +245,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6764);
 /* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3754);
-// pages/_app.tsx
+// =============================================
+// File: pages/_app.tsx
+// =============================================
 
 
 
 
 
 
- // ← グローバルCSSを読み込む
+
 
 // ============== NavBarコンポーネント ==============
 function NavBar() {
@@ -302,7 +304,7 @@ function NavBar() {
         ]
     });
 }
-// ============== エラーバウンダリー ==============
+// ============== 簡易エラーバウンダリー ==============
 class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Component) {
     constructor(props){
         super(props);
@@ -350,11 +352,11 @@ function MyApp({ Component, pageProps }) {
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "0 - MegaCosmos Simulation"
+                        children: "0 - GPT-4 Quantum Clone"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "description",
-                        content: "World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
+                        content: "GPT-4 site with references to cosmic illusions and more."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "viewport",
