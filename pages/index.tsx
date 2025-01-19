@@ -1,6 +1,6 @@
-// ===========================================
-// File: pages/index.tsx  (Homeページ)
-// ===========================================
+// =======================================
+// File: pages/index.tsx
+// =======================================
 import Head from 'next/head'
 import React from 'react'
 import Script from 'next/script'
@@ -9,47 +9,67 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ホーム画面 - 宇宙史上最大・最先端のシミュレーション</title>
+        <title>ホーム画面 - 上部 & 下部アニメ</title>
         <meta
           name="description"
-          content="上部は既存アニメ、下部は新アニメで壮大な銀河背景を実現。"
+          content="上部: cosmic-canvas, 下部: galaxyArtSimなど4つを画面最下部まで表示。"
         />
         <meta charSet="UTF-8" />
       </Head>
 
-      {/* ★ 上部ヒーローセクション(既存アニメ) ★ */}
+      {/*
+        ★ 上部ヒーロー: cosmicSim (cosmic-canvas)
+      */}
       <section className="hero-section">
         <canvas id="cosmic-canvas"></canvas>
       </section>
 
       {/*
-        ★ 中部～下部:
-          新アニメ4種を背景にする => .home-mid-lower-animations
-          内に 4つのcanvasを絶対配置 + 履歴書/Kindle/本/Followなどを前面に配置
+        ★ 下部(1ページ分以上) => 4つのアニメを背景 => 
+           .lower-animations-section { min-height: 100vh }
+           中に .animation-bg-wrapper(absolute) + foreground
       */}
-      <div className="home-mid-lower-animations">
-        {/* ========== 背景4つのcanvas ========== */}
-        <canvas id="galaxy-art-canvas"></canvas>
-        <canvas id="rotating-galaxies-canvas"></canvas>
-        <canvas id="art-stars-canvas"></canvas>
-        <canvas id="art-nebula-canvas"></canvas>
+      <section className="lower-animations-section">
+        {/* 背景4canvasを絶対配置 */}
+        <div className="animation-bg-wrapper">
+          <canvas id="galaxy-art-canvas"></canvas>
+          <canvas id="rotating-galaxies-canvas"></canvas>
+          <canvas id="art-stars-canvas"></canvas>
+          <canvas id="art-nebula-canvas"></canvas>
+        </div>
 
-        {/* ========== 前面コンテンツ ========== */}
-        <div className="home-mid-lower-content">
-          {/* 履歴書・職務経歴書ダウンロードリンク */}
+        {/* 前面コンテンツ */}
+        <div className="lower-content-foreground">
+          {/* 履歴書・職務経歴書 => 4つのリンクをアニメ付きボタン + download属性 */}
           <div className="resume-links-container">
             <h3 className="section-title">履歴書・職務経歴書</h3>
             <div className="resume-links">
-              <a href="/docs/MasakiKusaka_Resume.docx" target="_blank" rel="noreferrer">
+              <a
+                href="/docs/MasakiKusaka_Resume.docx"
+                download
+                className="futuristic-button resume-btn"
+              >
                 MasakiKusaka_Resume.docx
               </a>
-              <a href="/docs/MasakiKusaka_Resume.pdf" target="_blank" rel="noreferrer">
+              <a
+                href="/docs/MasakiKusaka_Resume.pdf"
+                download
+                className="futuristic-button resume-btn"
+              >
                 MasakiKusaka_Resume.pdf
               </a>
-              <a href="/docs/MasakiKusaka_CareerHistory.docx" target="_blank" rel="noreferrer">
+              <a
+                href="/docs/MasakiKusaka_CareerHistory.docx"
+                download
+                className="futuristic-button resume-btn"
+              >
                 MasakiKusaka_CareerHistory.docx
               </a>
-              <a href="/docs/MasakiKusaka_CareerHistory.pdf" target="_blank" rel="noreferrer">
+              <a
+                href="/docs/MasakiKusaka_CareerHistory.pdf"
+                download
+                className="futuristic-button resume-btn"
+              >
                 MasakiKusaka_CareerHistory.pdf
               </a>
             </div>
@@ -65,6 +85,7 @@ export default function Home() {
                   href="https://amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
                   target="_blank"
                   rel="noreferrer"
+                  style={{ color: '#fff', textDecoration: 'underline' }}
                 >
                   日下真旗の作品をAmazonで見る
                 </a>
@@ -75,6 +96,7 @@ export default function Home() {
                   href="https://amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
                   target="_blank"
                   rel="noreferrer"
+                  style={{ color: '#fff', textDecoration: 'underline' }}
                 >
                   Masaki Kusakaの作品をAmazonで見る
                 </a>
@@ -82,7 +104,7 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* 本を3冊並べるセクション */}
+          {/* 本3冊 */}
           <div className="books-container">
             <div className="book-item">
               <a
@@ -92,7 +114,9 @@ export default function Home() {
               >
                 <img src="/images/book1.jpg" alt="無限への挑戦" />
               </a>
-              <p>「無限への挑戦：全存在の幸福と自己超越の旅路」</p>
+              <p>
+                「無限への挑戦：全存在の幸福と自己超越の旅路」
+              </p>
             </div>
             <div className="book-item">
               <a
@@ -102,7 +126,9 @@ export default function Home() {
               >
                 <img src="/images/book2.jpg" alt="AI AGI LLM" />
               </a>
-              <p>「AI AGI LLM：数学・科学・人類知性の超克と宇宙的調和の実現」</p>
+              <p>
+                「AI AGI LLM：数学・科学・人類知性の超克と宇宙的調和の実現」
+              </p>
             </div>
             <div className="book-item">
               <a
@@ -112,7 +138,9 @@ export default function Home() {
               >
                 <img src="/images/book3.jpg" alt="2027年AGIに向けて" />
               </a>
-              <p>「2027年AGIに向けて：知能の限界と共通的目的の欠如からAGIの必要性」</p>
+              <p>
+                「2027年AGIに向けて：知能の限界と共通的目的の欠如からAGIの必要性」
+              </p>
             </div>
           </div>
 
@@ -138,10 +166,13 @@ export default function Home() {
               </a>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* ▼ 新アニメ4本のスクリプトをHomeページ限定で読み込み */}
+          {/* 余白 => 下端まで表示確認 */}
+          <div style={{ height: '300px' }} />
+        </div>
+      </section>
+
+      {/* ▼ 新アニメ4本読み込み => Home限定 */}
       <Script
         src="/js/galaxyArtSim.js"
         strategy="afterInteractive"
@@ -179,6 +210,20 @@ export default function Home() {
           if (typeof window !== 'undefined' && 'startArtNebula' in window) {
             // @ts-ignore
             window.startArtNebula()
+          }
+        }}
+      />
+      {/*
+        上部 cosmicSim.js etc. => pages/_app.tsx or
+        separate. If needed for cosmic-canvas
+      */}
+      <Script
+        src="/js/cosmicSim.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (typeof window !== 'undefined' && 'startCosmicSim' in window) {
+            // @ts-ignore
+            window.startCosmicSim()
           }
         }}
       />

@@ -1,6 +1,6 @@
-// ==================================
-// File: pages/contact.tsx (4ページ目)
-// ==================================
+// =======================================
+// File: pages/contact.tsx
+// =======================================
 import Head from 'next/head'
 import React, { useEffect } from 'react'
 import Script from 'next/script'
@@ -8,7 +8,7 @@ import ChatGPTInterface from '../components/ChatGPTInterface'
 
 export default function Contact() {
   useEffect(() => {
-    console.log('[Contact page] mounted on client side.')
+    console.log("[Contact page] mounted on client side.")
   }, [])
 
   return (
@@ -17,28 +17,31 @@ export default function Contact() {
         <title>Contact - 宇宙背景</title>
         <meta
           name="description"
-          content="3D銀河+星雲アニメ背景。チャット欄は完全ガラス透過。"
+          content="Contact page with glassy top box. 3D銀河+星雲背景."
         />
         <meta charSet="UTF-8" />
       </Head>
 
-      {/* 背景に4canvas */}
+      {/* 4枚のcanvas => 背景 */}
       <div id="contact-bg-wrapper">
         <canvas id="galaxy-art-canvas"></canvas>
         <canvas id="rotating-galaxies-canvas"></canvas>
         <canvas id="art-stars-canvas"></canvas>
         <canvas id="art-nebula-canvas"></canvas>
 
-        {/* 前景コンテンツ */}
+        {/* 前面コンテンツ */}
         <div className="contact-foreground">
-          <h1 style={{ color: '#fff', textAlign: 'center', margin: '20px 0' }}>
-            Contact Us
-          </h1>
-          <p style={{ color: '#ddd', textAlign: 'center', marginBottom: '1rem' }}>
-            お問い合わせは以下のフォームをご利用ください。
-          </p>
+          {/*
+            ★ 一度チャット欄をすべて削除し、
+            フォームとガラス風ボックスだけ残しました。
+          */}
+          <div className="glassy-contact-box">
+            <h1>Contact Us</h1>
+            <p style={{ marginBottom: '1rem' }}>
+              お問い合わせは以下のフォームをご利用ください。
+            </p>
+          </div>
 
-          {/* お問い合わせフォーム */}
           <form
             onSubmit={(e) => {
               e.preventDefault()
@@ -46,14 +49,17 @@ export default function Contact() {
             }}
             style={{
               maxWidth: '500px',
-              margin: '0 auto 40px auto',
+              margin: '30px auto 40px auto',
               background: 'rgba(0,0,0,0.3)',
               padding: '20px',
               borderRadius: '8px',
             }}
           >
             <div style={{ marginBottom: '1rem' }}>
-              <label htmlFor="name" style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}>
+              <label
+                htmlFor="name"
+                style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}
+              >
                 お名前
               </label>
               <input
@@ -64,8 +70,12 @@ export default function Contact() {
                 required
               />
             </div>
+
             <div style={{ marginBottom: '1rem' }}>
-              <label htmlFor="email" style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}>
+              <label
+                htmlFor="email"
+                style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}
+              >
                 メールアドレス
               </label>
               <input
@@ -76,8 +86,12 @@ export default function Contact() {
                 required
               />
             </div>
+
             <div style={{ marginBottom: '1rem' }}>
-              <label htmlFor="message" style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}>
+              <label
+                htmlFor="message"
+                style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}
+              >
                 内容
               </label>
               <textarea
@@ -88,6 +102,7 @@ export default function Contact() {
                 required
               />
             </div>
+
             <button
               type="submit"
               style={{
@@ -103,12 +118,15 @@ export default function Contact() {
             </button>
           </form>
 
-          {/* チャット欄 => 完全ガラス透過 */}
+          {/*
+            ★ ここで改めてチャット欄を1つだけ追加する ★
+            （isGlass => 背景をガラス風にするオプション）
+          */}
           <ChatGPTInterface isGlass />
         </div>
       </div>
 
-      {/* 4つのスクリプト */}
+      {/* 4スクリプト => 背景アニメ */}
       <Script
         src="/js/galaxyArtSim.js"
         strategy="afterInteractive"

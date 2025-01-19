@@ -252,13 +252,6 @@ module.exports = require("next/router");
 
 module.exports = require("react");
 
-/***/ }),
-
-/***/ 6405:
-/***/ ((module) => {
-
-module.exports = require("react-dom");
-
 /***/ })
 
 };
@@ -268,7 +261,7 @@ module.exports = require("react-dom");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [667,499,163], () => (__webpack_exec__(6968)));
+var __webpack_exports__ = __webpack_require__.X(0, [866,760,499,163], () => (__webpack_exec__(6968)));
 module.exports = __webpack_exports__;
 
 })();

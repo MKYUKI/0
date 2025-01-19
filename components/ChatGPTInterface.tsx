@@ -1,15 +1,18 @@
-// ========================================
+// =====================================================
 // File: components/ChatGPTInterface.tsx
-// ========================================
+// =====================================================
 import React, { useState, useEffect, useRef } from 'react'
 
-function MessageBubble({
-  role,
-  content,
-}: {
-  role: 'user' | 'assistant' | 'system'
+// チャットメッセージのロール型
+type ChatRole = 'user' | 'assistant' | 'system'
+
+// メッセージ構造
+interface ChatMessage {
+  role: ChatRole
   content: string
-}) {
+}
+
+function MessageBubble({ role, content }: ChatMessage) {
   return (
     <div className={`message-bubble ${role}`} style={{ margin: '0.4rem 0' }}>
       <strong style={{ textTransform: 'capitalize' }}>{role}:</strong> {content}
@@ -17,23 +20,18 @@ function MessageBubble({
   )
 }
 
-/**
- * ChatProps
- * - isGlass?: boolean => true の場合、ガラス風 (background透過 + border枠 + ぼかし) を適用
- */
+// コンポーネントのProps
 interface ChatProps {
+  /** 背景を透過にして背後のアニメを見せるフラグ */
   isGlass?: boolean
 }
 
 export default function ChatGPTInterface({ isGlass }: ChatProps) {
-  const [messages, setMessages] = useState<
-    { role: 'user' | 'assistant' | 'system'; content: string }[]
-  >([])
+  const [messages, setMessages] = useState<ChatMessage[]>([])
   const [userInput, setUserInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
-  // 自動スクロール
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
@@ -46,9 +44,9 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
     reader.onload = (e) => {
       const base64 = e.target?.result
       if (!base64 || typeof base64 !== 'string') return
-      const fileMsg = {
-        role: 'user' as const,
-        content: `File uploaded: ${file.name} (size=${file.size} bytes, base64Len=${base64.length})`,
+      const fileMsg: ChatMessage = {
+        role: 'user',
+        content: `File uploaded: ${file.name} (size=${file.size} bytes)`,
       }
       setMessages((prev) => [...prev, fileMsg])
     }
@@ -58,7 +56,12 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
   // 送信
   const handleSend = async () => {
     if (!userInput.trim()) return
-    const userMsg = { role: 'user' as const, content: userInput.trim() }
+
+    // ユーザー発言
+    const userMsg: ChatMessage = {
+      role: 'user',
+      content: userInput.trim(),
+    }
     setMessages((prev) => [...prev, userMsg])
     setUserInput('')
     setIsLoading(true)
@@ -76,21 +79,27 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
       const data = await res.json()
       const text = data?.choices?.[0]?.message?.content || ''
 
+      // テキストを1文字ずつ表示
       let buffer = ''
       let i = 0
-      const intervalID = setInterval(() => {
+      const intervalId = setInterval(() => {
         if (i < text.length) {
           buffer += text.charAt(i++)
           setMessages((prev) => {
             const last = prev[prev.length - 1]
             if (last && last.role === 'assistant') {
-              return [...prev.slice(0, -1), { role: 'assistant', content: buffer }]
+              // すでにアシスタントメッセージがあれば差し替え
+              return [
+                ...prev.slice(0, -1),
+                { role: 'assistant', content: buffer },
+              ]
             } else {
+              // 新規追加
               return [...prev, { role: 'assistant', content: buffer }]
             }
           })
         } else {
-          clearInterval(intervalID)
+          clearInterval(intervalId)
           setIsLoading(false)
         }
       }, 25)
@@ -100,38 +109,8 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
     }
   }
 
-  /**
-   * ★ ガラス風スタイル (isGlass=true) の場合:
-   *   - background: 薄い透過(例: rgba(255,255,255,0.06)) 
-   *   - backdropFilter: blur(8px) など
-   *   - border: 薄い白枠
-   *   - boxShadow: 少し外側に発光
-   */
-  const glassContainer: React.CSSProperties = {
-    background: 'rgba(255,255,255,0.06)', // ほんの少し白み
-    // backdropFilter / WebKit系のprefix:
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)',
-    border: '1px solid rgba(255,255,255,0.2)',
-    borderRadius: '8px',
-    boxShadow: '0 0 20px rgba(255,255,255,0.05)',
-    margin: '0 auto',
-    width: '90%',
-    maxWidth: '600px',
-    height: '70vh',
-    display: 'flex',
-    flexDirection: 'column',
-    color: '#fff',
-    position: 'relative',
-    zIndex: 10,
-    overflow: 'hidden', // コンテンツはみ出し防止
-  }
-
-  /**
-   * ★ 通常 (黒背景)
-   */
-  const normalContainer: React.CSSProperties = {
-    background: 'rgba(0,0,0,0.4)',
+  // コンテナスタイル
+  const baseContainer: React.CSSProperties = {
     margin: '0 auto',
     width: '90%',
     maxWidth: '600px',
@@ -140,30 +119,34 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
     flexDirection: 'column',
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.3)',
-    color: '#fff',
     boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+    color: '#fff',
     position: 'relative',
     zIndex: 10,
     overflow: 'hidden',
   }
 
-  const containerStyle = isGlass ? glassContainer : normalContainer
+  // 背景(黒半透明 or transparent)
+  const normalBg = { background: 'rgba(0,0,0,0.4)' }
+  const glassBg = { background: 'transparent' }
 
-  // メッセージ表示領域
+  const containerStyle = {
+    ...baseContainer,
+    ...(isGlass ? glassBg : normalBg),
+  }
+
   const topAreaStyle: React.CSSProperties = {
     flex: 1,
     overflowY: 'auto',
     padding: '1rem',
   }
 
-  // 下部のファイル&入力欄
   const bottomAreaStyle: React.CSSProperties = {
     display: 'flex',
-    flexDirection: 'column' as const,
+    flexDirection: 'column',
     gap: '0.5rem',
     padding: '0.75rem',
     borderTop: '1px solid rgba(255,255,255,0.3)',
-    // isGlass の場合、背景はさらに透明でもOK
     background: isGlass ? 'transparent' : 'rgba(0,0,0,0.6)',
   }
 
@@ -171,7 +154,6 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
     marginBottom: '0.5rem',
   }
 
-  // テキストエリア
   const textAreaStyle: React.CSSProperties = {
     resize: 'none',
     border: isGlass ? '1px solid rgba(255,255,255,0.4)' : '1px solid #444',
@@ -198,7 +180,7 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
 
   return (
     <div style={containerStyle}>
-      {/* 上部メッセージ表示部分 */}
+      {/* メッセージ表示領域 */}
       <div style={topAreaStyle}>
         {messages.map((m, idx) => (
           <MessageBubble key={idx} role={m.role} content={m.content} />
@@ -206,9 +188,8 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
         <div ref={bottomRef} />
       </div>
 
-      {/* 下部入力欄 */}
+      {/* 入力・送信領域 */}
       <div style={bottomAreaStyle}>
-        {/* ファイル選択 */}
         <div style={fileRowStyle}>
           <input
             type="file"
@@ -217,7 +198,6 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
           />
         </div>
 
-        {/* テキスト入力 */}
         <textarea
           style={textAreaStyle}
           placeholder="メッセージを入力..."
@@ -225,8 +205,6 @@ export default function ChatGPTInterface({ isGlass }: ChatProps) {
           onChange={(e) => setUserInput(e.target.value)}
           disabled={isLoading}
         />
-
-        {/* 送信ボタン */}
         <button
           style={sendButtonStyle}
           onClick={handleSend}

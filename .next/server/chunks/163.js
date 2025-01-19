@@ -12,9 +12,9 @@ exports.modules = {
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-// ========================================
+// =====================================================
 // File: components/ChatGPTInterface.tsx
-// ========================================
+// =====================================================
 
 
 function MessageBubble({ role, content }) {
@@ -43,7 +43,6 @@ function ChatGPTInterface({ isGlass }) {
     const [userInput, setUserInput] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const [isLoading, setIsLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const bottomRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    // 自動スクロール
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         bottomRef.current?.scrollIntoView({
             behavior: "smooth"
@@ -61,7 +60,7 @@ function ChatGPTInterface({ isGlass }) {
             if (!base64 || typeof base64 !== "string") return;
             const fileMsg = {
                 role: "user",
-                content: `File uploaded: ${file.name} (size=${file.size} bytes, base64Len=${base64.length})`
+                content: `File uploaded: ${file.name} (size=${file.size} bytes)`
             };
             setMessages((prev)=>[
                     ...prev,
@@ -73,6 +72,7 @@ function ChatGPTInterface({ isGlass }) {
     // 送信
     const handleSend = async ()=>{
         if (!userInput.trim()) return;
+        // ユーザー発言
         const userMsg = {
             role: "user",
             content: userInput.trim()
@@ -100,14 +100,16 @@ function ChatGPTInterface({ isGlass }) {
             });
             const data = await res.json();
             const text = data?.choices?.[0]?.message?.content || "";
+            // テキストを1文字ずつ表示
             let buffer = "";
             let i = 0;
-            const intervalID = setInterval(()=>{
+            const intervalId = setInterval(()=>{
                 if (i < text.length) {
                     buffer += text.charAt(i++);
                     setMessages((prev)=>{
                         const last = prev[prev.length - 1];
                         if (last && last.role === "assistant") {
+                            // すでにアシスタントメッセージがあれば差し替え
                             return [
                                 ...prev.slice(0, -1),
                                 {
@@ -116,6 +118,7 @@ function ChatGPTInterface({ isGlass }) {
                                 }
                             ];
                         } else {
+                            // 新規追加
                             return [
                                 ...prev,
                                 {
@@ -126,7 +129,7 @@ function ChatGPTInterface({ isGlass }) {
                         }
                     });
                 } else {
-                    clearInterval(intervalID);
+                    clearInterval(intervalId);
                     setIsLoading(false);
                 }
             }, 25);
@@ -135,35 +138,8 @@ function ChatGPTInterface({ isGlass }) {
             setIsLoading(false);
         }
     };
-    /**
-   * ★ ガラス風スタイル (isGlass=true) の場合:
-   *   - background: 薄い透過(例: rgba(255,255,255,0.06)) 
-   *   - backdropFilter: blur(8px) など
-   *   - border: 薄い白枠
-   *   - boxShadow: 少し外側に発光
-   */ const glassContainer = {
-        background: "rgba(255,255,255,0.06)",
-        // backdropFilter / WebKit系のprefix:
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
-        border: "1px solid rgba(255,255,255,0.2)",
-        borderRadius: "8px",
-        boxShadow: "0 0 20px rgba(255,255,255,0.05)",
-        margin: "0 auto",
-        width: "90%",
-        maxWidth: "600px",
-        height: "70vh",
-        display: "flex",
-        flexDirection: "column",
-        color: "#fff",
-        position: "relative",
-        zIndex: 10,
-        overflow: "hidden"
-    };
-    /**
-   * ★ 通常 (黒背景)
-   */ const normalContainer = {
-        background: "rgba(0,0,0,0.4)",
+    // コンテナスタイル
+    const baseContainer = {
         margin: "0 auto",
         width: "90%",
         maxWidth: "600px",
@@ -172,33 +148,39 @@ function ChatGPTInterface({ isGlass }) {
         flexDirection: "column",
         borderRadius: "8px",
         border: "1px solid rgba(255,255,255,0.3)",
-        color: "#fff",
         boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+        color: "#fff",
         position: "relative",
         zIndex: 10,
         overflow: "hidden"
     };
-    const containerStyle = isGlass ? glassContainer : normalContainer;
-    // メッセージ表示領域
+    // 背景(黒半透明 or transparent)
+    const normalBg = {
+        background: "rgba(0,0,0,0.4)"
+    };
+    const glassBg = {
+        background: "transparent"
+    };
+    const containerStyle = {
+        ...baseContainer,
+        ...isGlass ? glassBg : normalBg
+    };
     const topAreaStyle = {
         flex: 1,
         overflowY: "auto",
         padding: "1rem"
     };
-    // 下部のファイル&入力欄
     const bottomAreaStyle = {
         display: "flex",
         flexDirection: "column",
         gap: "0.5rem",
         padding: "0.75rem",
         borderTop: "1px solid rgba(255,255,255,0.3)",
-        // isGlass の場合、背景はさらに透明でもOK
         background: isGlass ? "transparent" : "rgba(0,0,0,0.6)"
     };
     const fileRowStyle = {
         marginBottom: "0.5rem"
     };
-    // テキストエリア
     const textAreaStyle = {
         resize: "none",
         border: isGlass ? "1px solid rgba(255,255,255,0.4)" : "1px solid #444",
@@ -285,24 +267,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(968);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var next_script__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4298);
-/* harmony import */ var next_script__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_script__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1664);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1853);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(6764);
-/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3754);
-// pages/_app.tsx
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1664);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1853);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6764);
+/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_styles_globals_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3754);
+// ===============================================
+// File: pages/_app.tsx
+// ===============================================
 
 
 
 
 
 
- // 全体CSS
 
+// NavBarコンポーネント
 function NavBar() {
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("header", {
         className: "navbar",
@@ -310,22 +292,22 @@ function NavBar() {
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: "nav-left",
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
                         href: "/",
                         className: "nav-link",
                         children: "Home"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
                         href: "/aichat",
                         className: "nav-link",
                         children: "AI Chat"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
                         href: "/art",
                         className: "nav-link",
                         children: "Art"
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_4___default()), {
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_3___default()), {
                         href: "/contact",
                         className: "nav-link",
                         children: "Contact"
@@ -350,6 +332,7 @@ function NavBar() {
         ]
     });
 }
+// 簡易エラーバウンダリー
 class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Component) {
     constructor(props){
         super(props);
@@ -378,7 +361,7 @@ class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Compon
                         children: "Something went wrong."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                        children: "Please reload the page or contact support."
+                        children: "Please reload or contact support."
                     })
                 ]
             });
@@ -387,69 +370,24 @@ class ErrorBoundary extends (react__WEBPACK_IMPORTED_MODULE_1___default().Compon
     }
 }
 function MyApp({ Component, pageProps }) {
-    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_5__.useRouter)();
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        console.log("_app mounted - client side");
+        console.log("MyApp mounted - client side.");
     }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(ErrorBoundary, {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "0 - GPT-4 MegaCosmos"
+                        children: "GPT-4 Universe"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "description",
-                        content: "World-class cosmic illusions, multi-galaxy slow orbits, quantum swirl, infinite meteors."
+                        content: "Cosmic illusions, multi-galaxy swirl, and more."
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "viewport",
                         content: "width=device-width, initial-scale=1.0"
-                    })
-                ]
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_script__WEBPACK_IMPORTED_MODULE_3___default()), {
-                src: "/js/cosmicSim.js",
-                strategy: "afterInteractive",
-                onLoad: ()=>{
-                    if (false) {}
-                }
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_script__WEBPACK_IMPORTED_MODULE_3___default()), {
-                src: "/js/quantum3D.js",
-                strategy: "afterInteractive",
-                onLoad: ()=>{
-                    if (false) {}
-                }
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_script__WEBPACK_IMPORTED_MODULE_3___default()), {
-                src: "/js/starsAnim.js",
-                strategy: "afterInteractive",
-                onLoad: ()=>{
-                    if (false) {}
-                }
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_script__WEBPACK_IMPORTED_MODULE_3___default()), {
-                src: "/js/waveAnim.js",
-                strategy: "afterInteractive",
-                onLoad: ()=>{
-                    if (false) {}
-                }
-            }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "global-bg-canvas-container",
-                children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("canvas", {
-                        id: "bg-canvas",
-                        className: "bg-canvas-layer"
-                    }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("canvas", {
-                        id: "stars-canvas",
-                        className: "bg-canvas-layer"
-                    }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("canvas", {
-                        id: "wave-canvas",
-                        className: "bg-canvas-layer"
                     })
                 ]
             }),
@@ -465,7 +403,7 @@ function MyApp({ Component, pageProps }) {
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("footer", {
                         id: "chat-footer",
-                        children: router.pathname !== "/" && router.pathname !== "/art" && router.pathname !== "/aichat" && router.pathname !== "/contact" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {})
+                        children: router.pathname !== "/" && router.pathname !== "/art" && router.pathname !== "/aichat" && router.pathname !== "/contact" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_ChatGPTInterface__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {})
                     })
                 ]
             })

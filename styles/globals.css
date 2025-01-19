@@ -5,7 +5,9 @@
    @tailwind components;
    @tailwind utilities;
    
-   /* styles/globals.css */
+   /* ==============================
+      styles/globals.css
+      ============================== */
    
    /* ======= リセット ======= */
    html,
@@ -103,11 +105,14 @@
      display: block;
    }
    
-   /* ======= 全体背景白、文字黒 ======= */
+   /* 
+     ======= 全体背景を黒にすることで
+     最下部が白くならない 
+   */
    html,
    body {
-     background-color: #fff;
-     color: #000;
+     background-color: #000;
+     color: #fff;
      font-family: sans-serif;
      overflow-x: hidden;
    }
@@ -156,7 +161,7 @@
      cursor: pointer;
    }
    
-   /* ======= 背景のCanvas => 上部だけに描画 hero-section ======= */
+   /* ======= 背景Canvas => 上部だけ hero-section ======= */
    .global-bg-canvas-container {
      position: fixed;
      top: 0;
@@ -189,14 +194,14 @@
      padding: 0;
      width: 100%;
      max-width: 100%;
-     color: #000;
+     color: #fff; /* 白文字 */
    }
    
-   /* ======= Hero Section (上部のみ) ======= */
+   /* ======= Hero Section (上部) ======= */
    .hero-section {
      position: relative;
      width: 100%;
-     height: 600px; /* 600px or 80vh */
+     height: 600px; /* or 80vh */
      overflow: hidden;
      margin: 0;
      padding: 0;
@@ -208,24 +213,20 @@
      height: 100%;
    }
    
-   /* ======= レジュメリンク ======= */
+   /* ======= レジュメリンク (後でボタン化) ======= */
    .resume-links {
      margin: 0 auto;
      text-align: center;
      padding: 0;
    }
-   .resume-links a {
-     display: inline-block;
-     margin: 0 20px;
-     color: #0066cc;
-     text-decoration: underline;
-   }
    
-   /* ======= 本3冊並べる ======= */
+   /* 
+      ======= 本3冊並べる =======
+   */
    .books-container {
      display: flex;
      justify-content: center;
-     align-items: flex-start; /* 同じ高さ */
+     align-items: flex-start;
      gap: 40px;
      margin: 0 auto;
      padding: 0;
@@ -234,8 +235,6 @@
    .book-item {
      width: 200px;
      text-align: center;
-     margin: 0;
-     padding: 0;
    }
    .book-item img {
      width: 100%;
@@ -244,7 +243,7 @@
      margin: 0 auto 10px;
    }
    
-   /* ======= フッターのチャット欄を中央寄せ ======= */
+   /* ======= フッターのチャット欄 ======= */
    footer#chat-footer {
      display: flex;
      justify-content: center;
@@ -255,47 +254,64 @@
    }
    
    /* -------------------------------------
-      追加/上書き ここから
+      追加 / 上書き
    -------------------------------------- */
-   
-   /* ----- section-title 共通 ----- */
    .section-title {
      font-size: 1.6rem;
      text-align: center;
      margin: 30px auto 20px auto;
      font-weight: 700;
-     color: #333;
+     color: #fff; /* 白文字 */
+   }
+   
+   /* 
+      4つの履歴書ボタンをアニメ付きに
+      => 拡張futuristic-button
+   */
+   .futuristic-button {
      position: relative;
-   }
-   
-   /* ----- 履歴書リンクコンテナ ----- */
-   .resume-links-container {
-     max-width: 800px;
-     margin: 0 auto 60px auto;
-     padding: 0 20px;
-   }
-   .resume-links {
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: center;
-     gap: 20px;
-     margin-top: 20px;
-   }
-   .resume-links a {
-     font-size: 1.1rem;
-     padding: 8px 14px;
-     border-radius: 4px;
-     background-color: #f8f8f8;
+     display: inline-block;
+     padding: 12px 18px;
+     border: 2px solid #00ffff;
+     color: #00ffff;
+     font-size: 1rem;
      text-decoration: none;
-     color: #0066cc;
-     transition: background-color 0.3s, transform 0.3s;
-   }
-   .resume-links a:hover {
-     background-color: #e3f2fd;
-     transform: translateY(-2px);
+     font-weight: 600;
+     letter-spacing: 0.5px;
+     border-radius: 6px;
+     overflow: hidden;
+     transition: 0.4s;
+     margin: 5px;
    }
    
-   /* ----- Kindle一覧セクション ----- */
+   .futuristic-button::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: -50%;
+     width: 100%;
+     height: 100%;
+     background: linear-gradient(
+       120deg,
+       transparent,
+       rgba(0, 255, 255, 0.3),
+       transparent
+     );
+     transform: skewX(-15deg);
+     transition: 0.5s;
+     pointer-events: none;
+   }
+   .futuristic-button:hover::before {
+     left: 150%;
+   }
+   .futuristic-button:hover {
+     background-color: rgba(0, 255, 255, 0.1);
+   }
+   .resume-btn {
+     margin: 0 8px;
+   }
+   
+   /* Kindleなどのリスト */
    .kindle-section {
      max-width: 800px;
      margin: 0 auto 40px auto;
@@ -310,16 +326,8 @@
      margin: 10px 0;
      font-size: 1.05rem;
    }
-   .kindle-list li a {
-     color: #0066cc;
-     text-decoration: underline;
-     transition: color 0.2s;
-   }
-   .kindle-list li a:hover {
-     color: #004999;
-   }
    
-   /* ----- ソーシャルボタンコンテナ ----- */
+   /* ソーシャルボタン */
    .social-buttons-container {
      max-width: 800px;
      margin: 60px auto;
@@ -334,48 +342,21 @@
      margin-top: 20px;
    }
    
-   /* ----- 近未来的なボタン共通スタイル ----- */
-   .futuristic-button {
-     position: relative;
-     display: inline-block;
-     padding: 12px 20px;
-     border: 2px solid #00ffff;
-     color: #00ffff;
-     font-size: 1.2rem;
-     text-decoration: none;
-     font-weight: 600;
-     letter-spacing: 1px;
-     border-radius: 6px;
-     overflow: hidden;
-     transition: 0.4s;
-   }
-   .futuristic-button::before {
-     content: '';
-     position: absolute;
-     top: 0;
-     left: -50%;
-     width: 100%;
-     height: 100%;
-     background: linear-gradient(120deg, transparent, rgba(0, 255, 255, 0.3), transparent);
-     transform: skewX(-15deg);
-     transition: 0.5s;
-     pointer-events: none;
-   }
-   .futuristic-button:hover::before {
-     left: 150%;
-   }
-   .futuristic-button:hover {
-     background-color: rgba(0, 255, 255, 0.05);
-   }
+   /* 近未来ボタン共通 => x-button, github-button も活用 */
    .x-button {
      border-color: #1da1f2;
      color: #1da1f2;
    }
    .x-button:hover {
-     background-color: rgba(29, 161, 242, 0.07);
+     background-color: rgba(29, 161, 242, 0.1);
    }
    .x-button::before {
-     background: linear-gradient(120deg, transparent, rgba(29, 161, 242, 0.3), transparent);
+     background: linear-gradient(
+       120deg,
+       transparent,
+       rgba(29, 161, 242, 0.3),
+       transparent
+     );
    }
    .github-button {
      border-color: #ccc;
@@ -385,16 +366,21 @@
      background-color: rgba(200, 200, 200, 0.07);
    }
    .github-button::before {
-     background: linear-gradient(120deg, transparent, rgba(200, 200, 200, 0.3), transparent);
+     background: linear-gradient(
+       120deg,
+       transparent,
+       rgba(200, 200, 200, 0.3),
+       transparent
+     );
    }
    
    /* =========================
-      Artページ全画面キャンバス
+      Artページ => #art-wrapper
    ========================= */
    #art-wrapper {
      position: relative;
      width: 100%;
-     height: 100vh; /* 全画面 */
+     height: 100vh;
      overflow: hidden;
      margin: 0;
      padding: 0;
@@ -462,46 +448,59 @@
      max-width: 900px;
      margin: 0 auto;
      padding: 40px 20px;
-     /* background: rgba(0,0,0,0.2); // 必要なら */
+   }
+   
+   /* 
+     上部をガラス風 => .glassy-contact-box
+     枠や形 => border + borderRadius
+     backdrop-filter: blur(...) で後ろのアニメがうっすら透ける
+   */
+   .glassy-contact-box {
+     border: 1px solid rgba(255,255,255,0.3);
+     border-radius: 8px;
+     padding: 20px;
+     margin-bottom: 20px;
+     /* 完全透明 + ぼかし => 背景アニメが見える */
+     background: rgba(255,255,255,0.1);
+     backdrop-filter: blur(8px);
+     -webkit-backdrop-filter: blur(8px);
+   
+     color: #fff; /* 文字は白 */
    }
    
    /* =========================
-      Homeページ - 中部～下部
+      Homeページ - 下部アニメ
    ========================= */
-   .home-mid-lower-animations {
+   .lower-animations-section {
      position: relative;
-     /* 中部～下部の高さを稼ぐ:
-        十分に大きい値(1500px~2000px など)
-        ページ内容に合わせて
-     */
-     min-height: 1600px;
+     min-height: 100vh; /* 1ページ分確保 */
      overflow: hidden;
      margin: 0;
      padding: 0;
    }
-   
-   /* 4canvasを背景に重ねる */
-   .home-mid-lower-animations canvas {
+   .animation-bg-wrapper {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 1;
+   }
+   .animation-bg-wrapper canvas {
      position: absolute;
      top: 0;
      left: 0;
      width: 100%;
      height: 100%;
-     z-index: 1;
    }
-   
-   /* 前面に配置するコンテンツ (履歴書～Followなど) */
-   .home-mid-lower-content {
+   .lower-content-foreground {
      position: relative;
-     z-index: 2; /* 背景より前 */
+     z-index: 2;
      padding: 40px 20px;
-     /* 背景を透過にしているので文字が見辛ければ
-        多少のrgba(...)を敷くのも可 */
    }
    
-   /* 
-     Navbarフレックス + nowrap
-     (再掲)
+   /*
+     NavBarフレックス + nowrap (再掲)
    */
    header.navbar {
      background-color: #000;
@@ -542,7 +541,6 @@
      margin-left: 10px;
      min-width: 160px;
    }
-   /* スマホ対応 */
    @media (max-width: 480px) {
      header.navbar {
        font-size: 12px;
