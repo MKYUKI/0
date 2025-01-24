@@ -1,7 +1,5 @@
-// ==============================
-// File: public/js/artNeula.js
-// ==============================
-console.log("artNeula.js => large scale cosmic nebulas, no BH.");
+// public/js/artNeula.js
+console.log("=== artNeula.js => More vivid cosmic nebulas, faster spawning & bigger. ===");
 
 function artNebulaInit(){
   console.log("artNebulaInit() invoked.");
@@ -20,26 +18,25 @@ function artNebulaInit(){
   let width, height;
   let nebulas=[];
 
-  const SPAWN_INTERVAL= 3500; // 3.5秒ごとに雲発生
+  const SPAWN_INTERVAL= 2500; // 3.5秒->2.5秒 (頻度UP)
 
   class Nebula{
     constructor(){
       this.x= Math.random()* width;
       this.y= Math.random()* height;
-      this.radius= 80 + Math.random()*150;
-      // 青/紫/ピンク系の色相(少し幅広)
-      let baseHue= 180 + Math.random()*180; // 180~360
+      this.radius= 150 + Math.random()*200; // 大きめ
+      // 彩度を高め、ピンクや紫,青を強めに
+      let baseHue= 200 + Math.random()*160; 
       if(baseHue>360) baseHue-=360;
       this.hue= baseHue;
-      this.alpha= 0.3+ Math.random()*0.4;
-      this.growth= 0.3+ Math.random()*0.4;
-      this.life= 500+ Math.random()*300;
+      this.alpha= 0.4+ Math.random()*0.4; // 0.4~0.8
+      this.growth= 0.6+ Math.random()*0.5;
+      this.life= 600+ Math.random()*300;
       this.age= 0;
     }
     update(){
       this.age++;
       this.radius+= this.growth;
-      // 寿命を超えたらフェードアウト
       if(this.age> this.life){
         this.alpha-=0.01;
         if(this.alpha<0) this.alpha=0;
@@ -51,8 +48,8 @@ function artNebulaInit(){
         this.x,this.y,0,
         this.x,this.y,this.radius
       );
-      grad.addColorStop(0, `hsla(${this.hue},80%,70%,${this.alpha})`);
-      grad.addColorStop(1, `hsla(${(this.hue+60)%360},80%,30%,0)`);
+      grad.addColorStop(0, `hsla(${this.hue},90%,70%,${this.alpha})`);
+      grad.addColorStop(1, `hsla(${(this.hue+40)%360},90%,30%,0)`);
       ctx.fillStyle= grad;
       ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
       ctx.fill();
@@ -81,7 +78,6 @@ function artNebulaInit(){
       nb.update();
       nb.draw(ctx);
     });
-    // 死んだ雲を除去
     nebulas= nebulas.filter(nb=> !nb.dead);
   }
 
@@ -93,7 +89,7 @@ function artNebulaInit(){
 
   window.addEventListener('resize', onResize);
   initAll();
-  console.log("startArtNebula => infinite cosmic clouds, no BH, bright & dreamy.");
+  console.log("startArtNebula => bigger, more frequent cosmic clouds, super vivid & dreamy.");
 }
 
 window.startArtNebula = artNebulaInit;
