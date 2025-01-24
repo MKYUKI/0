@@ -1,6 +1,3 @@
-// =======================================
-// File: pages/index.tsx
-// =======================================
 import Head from 'next/head'
 import React from 'react'
 import Script from 'next/script'
@@ -9,16 +6,17 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ホーム画面 - 上部 & 下部アニメ</title>
+        <title>ホーム画面 - 宇宙史上最大・最先端のシミュレーション</title>
         <meta
           name="description"
-          content="上部: cosmic-canvas, 下部: galaxyArtSimなど4つを画面最下部まで表示。"
+          content="壮大なマルチ銀河シミュレーションが上部ヒーローで回り続け、下部にも様々なアニメーションが展開します。"
         />
         <meta charSet="UTF-8" />
       </Head>
 
       {/*
         ★ 上部ヒーロー: cosmicSim (cosmic-canvas)
+           ここに斜め横から見た巨大銀河アニメを表示させる。
       */}
       <section className="hero-section">
         <canvas id="cosmic-canvas"></canvas>
@@ -30,7 +28,7 @@ export default function Home() {
            中に .animation-bg-wrapper(absolute) + foreground
       */}
       <section className="lower-animations-section">
-        {/* 背景4canvasを絶対配置 */}
+        {/* 背景4canvasを絶対配置 (galaxy-art-canvas など) */}
         <div className="animation-bg-wrapper">
           <canvas id="galaxy-art-canvas"></canvas>
           <canvas id="rotating-galaxies-canvas"></canvas>
@@ -40,7 +38,6 @@ export default function Home() {
 
         {/* 前面コンテンツ */}
         <div className="lower-content-foreground">
-          {/* 履歴書・職務経歴書 => 4つのリンクをアニメ付きボタン + download属性 */}
           <div className="resume-links-container">
             <h3 className="section-title">履歴書・職務経歴書</h3>
             <div className="resume-links">
@@ -108,15 +105,13 @@ export default function Home() {
           <div className="books-container">
             <div className="book-item">
               <a
-                href="https://www.amazon.com/-/es/Masaki-Kusaka-ebook/dp/B0DK1JZ2T7/ref=sr_1_19?dib=eyJ2IjoiMSJ9.6wiGivCzYJhqrNL3rIETlMOXhQeJiOIQhQPnqWQkpr60WJTf-7Z4_FcwGltxb0S_6zOmJ6GvPugw7ajvz-x08EfyyYgZ54YqjmyiEhxHlBYfIUJsXfs6Ca6Uu0Elo-FzU4zDNMY3dyKetEajNa7SZG73jIRtfL3zI-cWOMIWI79DwvYPVqftXz81d0O2tKoBsOQFUw4wi1RfLJ8btG4xLbvAZ6zoVnJ-6q6x8yt_lik.kurd0_HdR7C2OyL5dJJEOIUMrVYbLPtt2YCjKPGI71E&dib_tag=se&qid=1737330503&refinements=p_27%3AMasaki+Kusaka&s=digital-text&sr=1-19&xpid=W32gpt8Wbq1OW"
+                href="https://www.amazon.co.jp/dp/B0DK1HV92G"
                 target="_blank"
                 rel="noreferrer"
               >
                 <img src="/images/book1.jpg" alt="無限への挑戦" />
               </a>
-              <p>
-                「The Challenge to Infinity: A Journey of Universal Happiness and Self-Transcendence」
-              </p>
+              <p>「無限への挑戦：全存在の幸福と自己超越の旅路」</p>
             </div>
             <div className="book-item">
               <a
@@ -126,9 +121,7 @@ export default function Home() {
               >
                 <img src="/images/book2.jpg" alt="AI AGI LLM" />
               </a>
-              <p>
-                「AI AGI LLM：数学・科学・人類知性の超克と宇宙的調和の実現」
-              </p>
+              <p>「AI AGI LLM：数学・科学・人類知性の超克と宇宙的調和の実現」</p>
             </div>
             <div className="book-item">
               <a
@@ -138,9 +131,7 @@ export default function Home() {
               >
                 <img src="/images/book3.jpg" alt="2027年AGIに向けて" />
               </a>
-              <p>
-                「2027年AGIに向けて：知能の限界と共通的目的の欠如からAGIの必要性」
-              </p>
+              <p>「2027年AGIに向けて：知能の限界と共通的目的の欠如からAGIの必要性」</p>
             </div>
           </div>
 
@@ -172,7 +163,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ▼ 新アニメ4本読み込み => Home限定 */}
+      {/*
+        ▼ 下部アニメ4本の読み込み (あとで各js内で window.startXXXX() を呼ぶ)
+      */}
       <Script
         src="/js/galaxyArtSim.js"
         strategy="afterInteractive"
@@ -213,9 +206,12 @@ export default function Home() {
           }
         }}
       />
+
       {/*
-        上部 cosmicSim.js etc. => pages/_app.tsx or
-        separate. If needed for cosmic-canvas
+        ★ 上部の超壮大な銀河アニメ cosmicSim (必須)
+        使い方: 
+          1) public/js/cosmicSim.js に保存
+          2) 下記のようにScriptタグで読み込み
       */}
       <Script
         src="/js/cosmicSim.js"
