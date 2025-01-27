@@ -1,139 +1,111 @@
-// =======================================
 // File: pages/contact.tsx
-// =======================================
+
 import Head from 'next/head'
 import React, { useEffect } from 'react'
 import Script from 'next/script'
+
+// GPT-3.5用のチャットUI
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 export default function Contact() {
   useEffect(() => {
-    console.log("[Contact page] mounted on client side.")
+    console.log('[Contact page] mounted on client side.')
   }, [])
 
   return (
     <>
       <Head>
-        <title>Contact - 宇宙背景</title>
+        <title>Contact - GPT3.5 Test with Fallback</title>
         <meta
           name="description"
-          content="Contact page with glassy top box. 3D銀河+星雲背景."
+          content="Contact page with GPT-3.5 chat (fallback for insufficient_quota)."
         />
         <meta charSet="UTF-8" />
       </Head>
 
-      {/* 4枚のcanvas => 背景 */}
-      <div id="contact-bg-wrapper">
-        <canvas id="galaxy-art-canvas"></canvas>
-        <canvas id="rotating-galaxies-canvas"></canvas>
-        <canvas id="art-stars-canvas"></canvas>
-        <canvas id="art-nebula-canvas"></canvas>
+      <div id="contact-bg-wrapper" style={{ position: 'relative', minHeight: '100vh' }}>
+        {/* もし背景アニメcanvas等があるなら、ここに重ねる */}
+        <canvas id="galaxy-art-canvas" style={{ position: 'absolute' }} />
+        <canvas id="rotating-galaxies-canvas" style={{ position: 'absolute' }} />
+        <canvas id="art-stars-canvas" style={{ position: 'absolute' }} />
+        <canvas id="art-nebula-canvas" style={{ position: 'absolute' }} />
 
-        {/* 前面コンテンツ */}
-        <div className="contact-foreground">
-          {/*
-            ★ 一度チャット欄をすべて削除し、
-            フォームとガラス風ボックスだけ残しました。
-          */}
-          <div className="glassy-contact-box">
-            <h1>Contact Us</h1>
-            <p style={{ marginBottom: '1rem' }}>
-              お問い合わせは以下のフォームをご利用ください。
-            </p>
-          </div>
+        {/* 前面 */}
+        <div style={{ position: 'relative', zIndex: 2, padding: '40px 20px', maxWidth: '800px', margin: '0 auto' }}>
+          <h1>Contact Us</h1>
+          <p>お問い合わせ内容があれば以下フォームより送信してください。</p>
 
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              alert("サンプル送信しました。")
+              alert('送信（サンプル）')
             }}
             style={{
-              maxWidth: '500px',
-              margin: '30px auto 40px auto',
               background: 'rgba(0,0,0,0.3)',
               padding: '20px',
               borderRadius: '8px',
+              marginTop: '20px',
+              marginBottom: '40px'
             }}
           >
             <div style={{ marginBottom: '1rem' }}>
-              <label
-                htmlFor="name"
-                style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}
-              >
+              <label htmlFor="name" style={{ display: 'block', marginBottom: '0.3rem' }}>
                 お名前
               </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                style={{ width: '100%', padding: '0.5rem' }}
-                required
-              />
+              <input id="name" name="name" type="text" style={{ width: '100%', padding: '8px' }} required />
             </div>
 
             <div style={{ marginBottom: '1rem' }}>
-              <label
-                htmlFor="email"
-                style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}
-              >
+              <label htmlFor="email" style={{ display: 'block', marginBottom: '0.3rem' }}>
                 メールアドレス
               </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                style={{ width: '100%', padding: '0.5rem' }}
-                required
-              />
+              <input id="email" name="email" type="email" style={{ width: '100%', padding: '8px' }} required />
             </div>
 
             <div style={{ marginBottom: '1rem' }}>
-              <label
-                htmlFor="message"
-                style={{ display: 'block', marginBottom: '0.3rem', color: '#fff' }}
-              >
-                内容
+              <label htmlFor="message" style={{ display: 'block', marginBottom: '0.3rem' }}>
+                お問い合わせ内容
               </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                style={{ width: '100%', padding: '0.5rem' }}
-                required
-              />
+              <textarea id="message" name="message" rows={5} style={{ width: '100%', padding: '8px' }} required />
             </div>
 
             <button
               type="submit"
               style={{
                 padding: '0.6rem 1.2rem',
-                backgroundColor: '#0066cc',
+                background: '#0066cc',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '4px',
-                cursor: 'pointer',
+                cursor: 'pointer'
               }}
             >
               送信
             </button>
           </form>
 
-          {/*
-            ★ ここで改めてチャット欄を1つだけ追加する ★
-            （isGlass => 背景をガラス風にするオプション）
-          */}
-          <ChatGPTInterface isGlass />
+          <h2></h2>
+          <p></p>
+
+          {/* ChatGPTインターフェイスをそのまま配置 */}
+          <ChatGPTInterface
+            isGlass={true}
+            maxTokens={1600}
+            temperature={0.7}
+            presencePenalty={0}
+            frequencyPenalty={0}
+          />
         </div>
       </div>
 
-      {/* 4スクリプト => 背景アニメ */}
+      {/* 背景用のScript（任意） */}
       <Script
         src="/js/galaxyArtSim.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startGalaxyArtSim' in window) {
+          if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startGalaxyArtSim()
+            window.startGalaxyArtSim?.()
           }
         }}
       />
@@ -141,9 +113,9 @@ export default function Contact() {
         src="/js/rotatingGalaxies.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startRotatingGalaxies' in window) {
+          if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startRotatingGalaxies()
+            window.startRotatingGalaxies?.()
           }
         }}
       />
@@ -151,9 +123,9 @@ export default function Contact() {
         src="/js/artStars.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startArtStars' in window) {
+          if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startArtStars()
+            window.startArtStars?.()
           }
         }}
       />
@@ -161,9 +133,9 @@ export default function Contact() {
         src="/js/artNeula.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startArtNebula' in window) {
+          if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startArtNebula()
+            window.startArtNebula?.()
           }
         }}
       />

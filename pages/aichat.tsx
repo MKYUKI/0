@@ -1,51 +1,50 @@
-// =================================
-// File: pages/aichat.tsx (2ページ目)
-// =================================
-import Head from 'next/head'
+// File: pages/aichat.tsx
 import React, { useEffect } from 'react'
+import Head from 'next/head'
 import Script from 'next/script'
+
+// ★ Deepseek -> ChatGPT
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
 export default function AiChat() {
   useEffect(() => {
-    console.log("[AI Chat page] mounted on client side.")
+    console.log('[AI Chat page] mounted on client side.')
   }, [])
 
   return (
     <>
       <Head>
-        <title>AI Chat - 銀河アニメ背景</title>
+        <title>AI Chat - GPT-3.5</title>
         <meta
           name="description"
-          content="単一3D銀河・星雲の壮大アニメーションを背景にしたAIチャットページ"
+          content="A dedicated page that calls OpenAI GPT-3.5. Galaxy animations in the background."
         />
         <meta charSet="UTF-8" />
       </Head>
 
-      {/* 背景に4つのcanvasを重ねる (galaxyArtSim, rotatingGalaxies, artStars, artNeula) */}
+      {/* 4枚のcanvasを重ねる => galaxyArtSim, etc... */}
       <div id="aichat-bg-wrapper">
         <canvas id="galaxy-art-canvas"></canvas>
         <canvas id="rotating-galaxies-canvas"></canvas>
         <canvas id="art-stars-canvas"></canvas>
         <canvas id="art-nebula-canvas"></canvas>
 
-        {/* 前面コンテンツ */}
         <div className="aichat-foreground">
           <h1 style={{ textAlign: 'center', color: '#fff', marginBottom: '20px' }}>
-            AI Chat (Galaxy Background)
+            AI Chat (GPT-3.5)
           </h1>
 
-          {/* チャット欄 => 完全透過 */}
+          {/* ChatGPTチャット欄 */}
           <ChatGPTInterface isGlass />
         </div>
       </div>
 
-      {/* ▼ 新アニメ4つのスクリプトを読み込む */}
+      {/* スクリプト読み込み (任意) */}
       <Script
         src="/js/galaxyArtSim.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startGalaxyArtSim' in window) {
+          if ('startGalaxyArtSim' in window) {
             // @ts-ignore
             window.startGalaxyArtSim()
           }
@@ -55,7 +54,7 @@ export default function AiChat() {
         src="/js/rotatingGalaxies.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startRotatingGalaxies' in window) {
+          if ('startRotatingGalaxies' in window) {
             // @ts-ignore
             window.startRotatingGalaxies()
           }
@@ -65,7 +64,7 @@ export default function AiChat() {
         src="/js/artStars.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startArtStars' in window) {
+          if ('startArtStars' in window) {
             // @ts-ignore
             window.startArtStars()
           }
@@ -75,7 +74,7 @@ export default function AiChat() {
         src="/js/artNeula.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (typeof window !== 'undefined' && 'startArtNebula' in window) {
+          if ('startArtNebula' in window) {
             // @ts-ignore
             window.startArtNebula()
           }

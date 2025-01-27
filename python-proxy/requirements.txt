@@ -1,0 +1,5 @@
+Flask==2.3.3
+requests==2.31.0
+# If you are mixing local HF fallback, add torch/transformers here. 
+# If you only want DeepSeek, you can skip them.
+# numpy<2

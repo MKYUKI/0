@@ -1,0 +1,16 @@
+# File: Dockerfile.nextjs
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# package.json, package-lock.jsonをコピーして依存関係インストール
+COPY package*.json ./
+RUN npm install
+
+# ソースをすべてコピー
+COPY . .
+
+# 開発モードで起動 (ホットリロードを使いたい場合)
+EXPOSE 3000
+CMD ["npm", "run", "dev"]

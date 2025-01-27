@@ -1,552 +1,549 @@
 /* ==============================
-   Tailwind base/components/utilities
-   ============================== */
-   @tailwind base;
-   @tailwind components;
-   @tailwind utilities;
-   
-   /* ==============================
-      styles/globals.css
-      ============================== */
-   
-   /* ======= リセット ======= */
-   html,
-   body,
-   div,
-   span,
-   applet,
-   object,
-   iframe,
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6,
-   p,
-   blockquote,
-   pre,
-   a,
-   abbr,
-   acronym,
-   address,
-   big,
-   cite,
-   code,
-   del,
-   dfn,
-   em,
-   font,
-   img,
-   ins,
-   kbd,
-   q,
-   s,
-   samp,
-   small,
-   strike,
-   strong,
-   sub,
-   sup,
-   tt,
-   var,
-   b,
-   u,
-   i,
-   center,
-   dl,
-   dt,
-   dd,
-   ol,
-   ul,
-   li,
-   fieldset,
-   form,
-   label,
-   legend,
-   table,
-   caption,
-   tbody,
-   tfoot,
-   thead,
-   tr,
-   th,
-   td,
-   article,
-   aside,
-   figure,
-   figcaption,
-   footer,
-   header,
-   hgroup,
-   menu,
-   nav,
-   section,
-   time,
-   mark,
-   audio,
-   video {
-     margin: 0;
-     padding: 0;
-     border: 0;
-     vertical-align: baseline;
-   }
-   article,
-   aside,
-   details,
-   figcaption,
-   figure,
-   footer,
-   header,
-   hgroup,
-   menu,
-   nav,
-   section {
-     display: block;
-   }
-   
-   /* 
-     ======= 全体背景を黒にすることで
-     最下部が白くならない 
-   */
-   html,
-   body {
-     background-color: #000;
-     color: #fff;
-     font-family: sans-serif;
-     overflow-x: hidden;
-   }
-   
-   /* ======= NavBar ======= */
-   header.navbar {
-     background-color: #000;
-     color: #fff;
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     padding: 10px 20px;
-   }
-   header.navbar .nav-left a,
-   header.navbar .nav-link {
-     color: #fff;
-     text-decoration: none;
-     margin-right: 20px;
-   }
-   header.navbar .nav-left a:hover,
-   header.navbar .nav-link:hover {
-     text-decoration: underline;
-   }
-   header.navbar .nav-right {
-     display: flex;
-     align-items: center;
-   }
-   header.navbar .search-container {
-     position: relative;
-     margin-left: 20px;
-   }
-   header.navbar .search-container input[type='text'] {
-     padding: 6px 30px 6px 10px;
-     border-radius: 4px;
-     border: 1px solid #ccc;
-   }
-   header.navbar .search-icon {
-     position: absolute;
-     right: 5px;
-     top: 50%;
-     transform: translateY(-50%);
-     width: 16px;
-     height: 16px;
-     background-color: #666;
-     border-radius: 50%;
-     cursor: pointer;
-   }
-   
-   /* ======= 背景Canvas => 上部だけ hero-section ======= */
-   .global-bg-canvas-container {
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     z-index: -1;
-     pointer-events: none;
-   }
-   .bg-canvas-layer {
-     position: absolute;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-   }
-   
-   /* ======= 全体ラッパ ======= */
-   #app-wrapper {
-     position: relative;
-     min-height: 100vh;
-     overflow: hidden;
-     margin: 0;
-     padding: 0;
-   }
-   
-   /* ======= メインコンテンツ ======= */
-   #main-content {
-     margin: 0;
-     padding: 0;
-     width: 100%;
-     max-width: 100%;
-     color: #fff; /* 白文字 */
-   }
-   
-   /* ======= Hero Section (上部) ======= */
-   .hero-section {
-     position: relative;
-     width: 100%;
-     height: 600px; /* or 80vh */
-     overflow: hidden;
-     margin: 0;
-     padding: 0;
-     background: transparent;
-   }
-   .hero-section canvas {
-     display: block;
-     width: 100%;
-     height: 100%;
-   }
-   
-   /* ======= レジュメリンク (後でボタン化) ======= */
-   .resume-links {
-     margin: 0 auto;
-     text-align: center;
-     padding: 0;
-   }
-   
-   /* 
-      ======= 本3冊並べる =======
-   */
-   .books-container {
-     display: flex;
-     justify-content: center;
-     align-items: flex-start;
-     gap: 40px;
-     margin: 0 auto;
-     padding: 0;
-     width: 100%;
-   }
-   .book-item {
-     width: 200px;
-     text-align: center;
-   }
-   .book-item img {
-     width: 100%;
-     height: auto;
-     display: block;
-     margin: 0 auto 10px;
-   }
-   
-   /* ======= フッターのチャット欄 ======= */
-   footer#chat-footer {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     width: 100%;
-     margin: 0 auto;
-     padding: 20px;
-   }
-   
-   /* -------------------------------------
-      追加 / 上書き
-   -------------------------------------- */
-   .section-title {
-     font-size: 1.6rem;
-     text-align: center;
-     margin: 30px auto 20px auto;
-     font-weight: 700;
-     color: #fff; /* 白文字 */
-   }
-   
-   /* 
-      4つの履歴書ボタンをアニメ付きに
-      => 拡張futuristic-button
-   */
-   .futuristic-button {
-     position: relative;
-     display: inline-block;
-     padding: 12px 18px;
-     border: 2px solid #00ffff;
-     color: #00ffff;
-     font-size: 1rem;
-     text-decoration: none;
-     font-weight: 600;
-     letter-spacing: 0.5px;
-     border-radius: 6px;
-     overflow: hidden;
-     transition: 0.4s;
-     margin: 5px;
-   }
-   
-   .futuristic-button::before {
-     content: '';
-     position: absolute;
-     top: 0;
-     left: -50%;
-     width: 100%;
-     height: 100%;
-     background: linear-gradient(
-       120deg,
-       transparent,
-       rgba(0, 255, 255, 0.3),
-       transparent
-     );
-     transform: skewX(-15deg);
-     transition: 0.5s;
-     pointer-events: none;
-   }
-   .futuristic-button:hover::before {
-     left: 150%;
-   }
-   .futuristic-button:hover {
-     background-color: rgba(0, 255, 255, 0.1);
-   }
-   .resume-btn {
-     margin: 0 8px;
-   }
-   
-   /* Kindleなどのリスト */
-   .kindle-section {
-     max-width: 800px;
-     margin: 0 auto 40px auto;
-     padding: 0 20px;
-     text-align: center;
-   }
-   .kindle-list {
-     list-style: none;
-     margin-top: 16px;
-   }
-   .kindle-list li {
-     margin: 10px 0;
-     font-size: 1.05rem;
-   }
-   
-   /* ソーシャルボタン */
-   .social-buttons-container {
-     max-width: 800px;
-     margin: 60px auto;
-     text-align: center;
-     padding: 0 20px;
-   }
-   .social-buttons {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     gap: 30px;
-     margin-top: 20px;
-   }
-   
-   /* 近未来ボタン共通 => x-button, github-button も活用 */
-   .x-button {
-     border-color: #1da1f2;
-     color: #1da1f2;
-   }
-   .x-button:hover {
-     background-color: rgba(29, 161, 242, 0.1);
-   }
-   .x-button::before {
-     background: linear-gradient(
-       120deg,
-       transparent,
-       rgba(29, 161, 242, 0.3),
-       transparent
-     );
-   }
-   .github-button {
-     border-color: #ccc;
-     color: #ccc;
-   }
-   .github-button:hover {
-     background-color: rgba(200, 200, 200, 0.07);
-   }
-   .github-button::before {
-     background: linear-gradient(
-       120deg,
-       transparent,
-       rgba(200, 200, 200, 0.3),
-       transparent
-     );
-   }
-   
-   /* =========================
-      Artページ => #art-wrapper
-   ========================= */
-   #art-wrapper {
-     position: relative;
-     width: 100%;
-     height: 100vh;
-     overflow: hidden;
-     margin: 0;
-     padding: 0;
-   }
-   #art-wrapper canvas {
-     position: absolute;
-     top: 0;
-     left: 0;
-     display: block;
-     width: 100%;
-     height: 100%;
-   }
-   
-   /* =========================
-      AiChatページ
-   ========================= */
-   #aichat-bg-wrapper {
-     position: relative;
-     width: 100%;
-     min-height: 100vh;
-     overflow: hidden;
-     margin: 0;
-     padding: 0;
-   }
-   #aichat-bg-wrapper canvas {
-     position: absolute;
-     top: 0;
-     left: 0;
-     display: block;
-     width: 100%;
-     height: 100%;
-     z-index: 1;
-   }
-   .aichat-foreground {
-     position: relative;
-     z-index: 10;
-     max-width: 1200px;
-     margin: 0 auto;
-     padding: 40px 20px;
-   }
-   
-   /* =========================
-      Contactページ
-   ========================= */
-   #contact-bg-wrapper {
-     position: relative;
-     width: 100%;
-     min-height: 100vh;
-     overflow: hidden;
-     margin: 0;
-     padding: 0;
-   }
-   #contact-bg-wrapper canvas {
-     position: absolute;
-     top: 0;
-     left: 0;
-     display: block;
-     width: 100%;
-     height: 100%;
-     z-index: 1;
-   }
-   .contact-foreground {
-     position: relative;
-     z-index: 10;
-     max-width: 900px;
-     margin: 0 auto;
-     padding: 40px 20px;
-   }
-   
-   /* 
-     上部をガラス風 => .glassy-contact-box
-     枠や形 => border + borderRadius
-     backdrop-filter: blur(...) で後ろのアニメがうっすら透ける
-   */
-   .glassy-contact-box {
-     border: 1px solid rgba(255,255,255,0.3);
-     border-radius: 8px;
-     padding: 20px;
-     margin-bottom: 20px;
-     /* 完全透明 + ぼかし => 背景アニメが見える */
-     background: rgba(255,255,255,0.1);
-     backdrop-filter: blur(8px);
-     -webkit-backdrop-filter: blur(8px);
-   
-     color: #fff; /* 文字は白 */
-   }
-   
-   /* =========================
-      Homeページ - 下部アニメ
-   ========================= */
-   .lower-animations-section {
-     position: relative;
-     min-height: 100vh; /* 1ページ分確保 */
-     overflow: hidden;
-     margin: 0;
-     padding: 0;
-   }
-   .animation-bg-wrapper {
-     position: absolute;
-     top: 0;
-     left: 0;
-     right: 0;
-     bottom: 0;
-     z-index: 1;
-   }
-   .animation-bg-wrapper canvas {
-     position: absolute;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-   }
-   .lower-content-foreground {
-     position: relative;
-     z-index: 2;
-     padding: 40px 20px;
-   }
-   
-   /*
-     NavBarフレックス + nowrap (再掲)
-   */
-   header.navbar {
-     background-color: #000;
-     color: #fff;
-     white-space: nowrap;
-     overflow-x: auto;
-     font-size: 14px;
-     display: flex;
-     align-items: center;
-     min-height: 48px;
-   }
-   .nav-content {
-     display: flex;
-     flex-direction: row;
-     justify-content: space-between;
-     align-items: center;
-     width: 100%;
-   }
-   .nav-left {
-     display: flex;
-     flex-direction: row;
-     align-items: center;
-   }
-   .nav-left .nav-link {
-     padding: 0 10px;
-     text-decoration: none;
-     color: #fff;
-   }
-   .nav-right {
-     display: flex;
-     align-items: center;
-   }
-   .nav-right-input {
-     font-size: 0.85rem;
-     padding: 5px 8px;
-     border-radius: 4px;
-     border: 1px solid #ccc;
-     margin-left: 10px;
-     min-width: 160px;
-   }
-   @media (max-width: 480px) {
-     header.navbar {
-       font-size: 12px;
-     }
-     .nav-right-input {
-       width: 100px;
-     }
-   }
-   
+   styles/globals.css
+============================== */
+
+/* ======= Tailwind (Optional) ======= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======= リセット ======= */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+/*
+  ======= 全体背景を黒にすることで
+  最下部が白くならない
+*/
+html,
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* ======= NavBar ======= */
+header.navbar {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+header.navbar .nav-left a,
+header.navbar .nav-link {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+header.navbar .nav-left a:hover,
+header.navbar .nav-link:hover {
+  text-decoration: underline;
+}
+header.navbar .nav-right {
+  display: flex;
+  align-items: center;
+}
+header.navbar .search-container {
+  position: relative;
+  margin-left: 20px;
+}
+header.navbar .search-container input[type='text'] {
+  padding: 6px 30px 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+header.navbar .search-icon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: #666;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ======= 背景Canvas => 上部だけ hero-section ======= */
+.global-bg-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+.bg-canvas-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ======= 全体ラッパ ======= */
+#app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* ======= メインコンテンツ ======= */
+#main-content {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  color: #fff; /* 白文字 */
+}
+
+/* ======= Hero Section (上部) ======= */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 600px; /* or 80vh */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+.hero-section canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ======= レジュメリンク (後でボタン化) ======= */
+.resume-links {
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+}
+
+/*
+   ======= 本3冊並べる =======
+*/
+.books-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+.book-item {
+  width: 200px;
+  text-align: center;
+}
+.book-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+/* ======= フッターのチャット欄 ======= */
+footer#chat-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* -------------------------------------
+   追加 / 上書き
+-------------------------------------- */
+.section-title {
+  font-size: 1.6rem;
+  text-align: center;
+  margin: 30px auto 20px auto;
+  font-weight: 700;
+  color: #fff; /* 白文字 */
+}
+
+/*
+   4つの履歴書ボタンをアニメ付きに
+   => 拡張futuristic-button
+*/
+.futuristic-button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 18px;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: 0.4s;
+  margin: 5px;
+}
+
+.futuristic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(0, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-15deg);
+  transition: 0.5s;
+  pointer-events: none;
+}
+.futuristic-button:hover::before {
+  left: 150%;
+}
+.futuristic-button:hover {
+  background-color: rgba(0, 255, 255, 0.1);
+}
+.resume-btn {
+  margin: 0 8px;
+}
+
+/* Kindleなどのリスト */
+.kindle-section {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.kindle-list {
+  list-style: none;
+  margin-top: 16px;
+}
+.kindle-list li {
+  margin: 10px 0;
+  font-size: 1.05rem;
+}
+
+/* ソーシャルボタン */
+.social-buttons-container {
+  max-width: 800px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* 近未来ボタン共通 => x-button, github-button も活用 */
+.x-button {
+  border-color: #1da1f2;
+  color: #1da1f2;
+}
+.x-button:hover {
+  background-color: rgba(29, 161, 242, 0.1);
+}
+.x-button::before {
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(29, 161, 242, 0.3),
+    transparent
+  );
+}
+.github-button {
+  border-color: #ccc;
+  color: #ccc;
+}
+.github-button:hover {
+  background-color: rgba(200, 200, 200, 0.07);
+}
+.github-button::before {
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(200, 200, 200, 0.3),
+    transparent
+  );
+}
+
+/* =========================
+   Artページ => #art-wrapper
+========================= */
+#art-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+#art-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   AiChatページ
+========================= */
+#aichat-bg-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+#aichat-bg-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.aichat-foreground {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* =========================
+   Contactページ
+========================= */
+#contact-bg-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+#contact-bg-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.contact-foreground {
+  position: relative;
+  z-index: 10;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/*
+  上部をガラス風 => .glassy-contact-box
+  枠や形 => border + borderRadius
+  backdrop-filter: blur(...) で後ろのアニメがうっすら透ける
+*/
+.glassy-contact-box {
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  /* 完全透明 + ぼかし => 背景アニメが見える */
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #fff; /* 文字は白 */
+}
+
+/* =========================
+   Homeページ - 下部アニメ
+========================= */
+.lower-animations-section {
+  position: relative;
+  min-height: 100vh; /* 1ページ分確保 */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.animation-bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.animation-bg-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.lower-content-foreground {
+  position: relative;
+  z-index: 2;
+  padding: 40px 20px;
+}
+
+/*
+  NavBarフレックス + nowrap (再掲)
+*/
+header.navbar {
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+  overflow-x: auto;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+.nav-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.nav-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.nav-left .nav-link {
+  padding: 0 10px;
+  text-decoration: none;
+  color: #fff;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+.nav-right-input {
+  font-size: 0.85rem;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  min-width: 160px;
+}
+@media (max-width: 480px) {
+  header.navbar {
+    font-size: 12px;
+  }
+  .nav-right-input {
+    width: 100px;
+  }
+}

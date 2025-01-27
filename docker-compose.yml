@@ -1,13 +1,46 @@
-# docker-compose.yml
-version: "3.9"
+# File: docker-compose.yml
+
 services:
-  app:
-    build: 
+  # ===============================
+  # Next.js フロントエンド
+  # ===============================
+  nextjs:
+    build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.nextjs
+    container_name: nextjs_app
     ports:
       - "3000:3000"
+    depends_on:
+      - python-proxy
+
+    # Next.jsコンテナ内で python-proxyに向けて "DEEPSEEK_PYPROXY_HOST=python-proxy:8000"
     environment:
-      # build時&実行時に .env を読み込ませる場合
-      MONGODB_URI: ${MONGODB_URI}
-    # もしdocker-compose起動時に .env の設定を読み込ませたくない場合は別方法
+      - DEEPSEEK_PYPROXY_HOST=python-proxy:8000
+
+  # ===============================
+  # Pythonプロキシ (Flask)
+  # ===============================
+  python-proxy:
+    build:
+      context: ./python-proxy
+      dockerfile: Dockerfile
+    container_name: python_proxy_app
+    # ホスト 18000 => コンテナ 8000 (衝突回避)
+    ports:
+      - "18000:8000"
+
+    depends_on:
+      - deepseek-java
+
+  # ===============================
+  # Java(Spring Boot) [任意モック]
+  # ===============================
+  deepseek-java:
+    build:
+      context: ./deepseek-java
+      dockerfile: Dockerfile
+    container_name: deepseek_java_app
+    # ホスト 18088 => コンテナ 8088
+    ports:
+      - "18088:8088"

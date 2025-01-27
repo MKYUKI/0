@@ -1,3 +1,4 @@
+// File: tsconfig.json
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -17,12 +18,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    
+    "downlevelIteration": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "python/requirements.tst" 
   ],
   "exclude": [
     "node_modules"
