@@ -3,16 +3,17 @@
 import { DefaultSession } from "next-auth"
 
 declare module "next-auth" {
-  // Session の型拡張
   interface Session {
     user?: {
-      /** デフォルトの name, email, image などのプロパティを含めるなら… */
+      // デフォルトのプロパティ
       name?: string | null
       email?: string | null
       image?: string | null
 
-      /** ここに id を追加 */
+      // ここで "id" を定義
       id: string
     }
   }
+
+  // 必要に応じて "JWT" 型拡張や "User" 型にも id を定義可能
 }

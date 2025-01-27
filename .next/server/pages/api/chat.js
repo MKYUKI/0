@@ -1,85 +1,159 @@
 "use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (() => {
 var exports = {};
-exports.id = "pages/api/chat";
-exports.ids = ["pages/api/chat"];
+exports.id = 170;
+exports.ids = [170];
 exports.modules = {
 
-/***/ "../../../api-utils/node":
-/*!*****************************************************!*\
-  !*** external "next/dist/server/api-utils/node.js" ***!
-  \*****************************************************/
+/***/ 730:
 /***/ ((module) => {
 
 module.exports = require("next/dist/server/api-utils/node.js");
 
 /***/ }),
 
-/***/ "../route-module":
-/*!************************************************************************!*\
-  !*** external "next/dist/server/future/route-modules/route-module.js" ***!
-  \************************************************************************/
+/***/ 3076:
 /***/ ((module) => {
 
 module.exports = require("next/dist/server/future/route-modules/route-module.js");
 
 /***/ }),
 
-/***/ "(api)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js":
-/*!***********************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-eval("/**\n * Hoists a name from a module or promised module.\n *\n * @param module the module to hoist the name from\n * @param name the name to hoist\n * @returns the value on the module (or promised module)\n */ \nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nObject.defineProperty(exports, \"hoist\", ({\n    enumerable: true,\n    get: function() {\n        return hoist;\n    }\n}));\nfunction hoist(module, name) {\n    // If the name is available in the module, return it.\n    if (name in module) {\n        return module[name];\n    }\n    // If a property called `then` exists, assume it's a promise and\n    // return a promise that resolves to the name.\n    if (\"then\" in module && typeof module.then === \"function\") {\n        return module.then((mod)=>hoist(mod, name));\n    }\n    // If we're trying to hoise the default export, and the module is a function,\n    // return the module itself.\n    if (typeof module === \"function\" && name === \"default\") {\n        return module;\n    }\n    // Otherwise, return undefined.\n    return undefined;\n}\n\n//# sourceMappingURL=helpers.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LXJvdXRlLWxvYWRlci9oZWxwZXJzLmpzIiwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLElBQWlCO0FBQ2pCLDhDQUE2QztBQUM3QztBQUNBLENBQUMsRUFBQztBQUNGLHlDQUF3QztBQUN4QztBQUNBO0FBQ0E7QUFDQTtBQUNBLENBQUMsRUFBQztBQUNGO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFFQSIsInNvdXJjZXMiOlsid2VicGFjazovL215LWxlZ2VuZGFyeS13ZWJzaXRlLy4vbm9kZV9tb2R1bGVzL25leHQvZGlzdC9idWlsZC93ZWJwYWNrL2xvYWRlcnMvbmV4dC1yb3V0ZS1sb2FkZXIvaGVscGVycy5qcz8xOThiIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogSG9pc3RzIGEgbmFtZSBmcm9tIGEgbW9kdWxlIG9yIHByb21pc2VkIG1vZHVsZS5cbiAqXG4gKiBAcGFyYW0gbW9kdWxlIHRoZSBtb2R1bGUgdG8gaG9pc3QgdGhlIG5hbWUgZnJvbVxuICogQHBhcmFtIG5hbWUgdGhlIG5hbWUgdG8gaG9pc3RcbiAqIEByZXR1cm5zIHRoZSB2YWx1ZSBvbiB0aGUgbW9kdWxlIChvciBwcm9taXNlZCBtb2R1bGUpXG4gKi8gXCJ1c2Ugc3RyaWN0XCI7XG5PYmplY3QuZGVmaW5lUHJvcGVydHkoZXhwb3J0cywgXCJfX2VzTW9kdWxlXCIsIHtcbiAgICB2YWx1ZTogdHJ1ZVxufSk7XG5PYmplY3QuZGVmaW5lUHJvcGVydHkoZXhwb3J0cywgXCJob2lzdFwiLCB7XG4gICAgZW51bWVyYWJsZTogdHJ1ZSxcbiAgICBnZXQ6IGZ1bmN0aW9uKCkge1xuICAgICAgICByZXR1cm4gaG9pc3Q7XG4gICAgfVxufSk7XG5mdW5jdGlvbiBob2lzdChtb2R1bGUsIG5hbWUpIHtcbiAgICAvLyBJZiB0aGUgbmFtZSBpcyBhdmFpbGFibGUgaW4gdGhlIG1vZHVsZSwgcmV0dXJuIGl0LlxuICAgIGlmIChuYW1lIGluIG1vZHVsZSkge1xuICAgICAgICByZXR1cm4gbW9kdWxlW25hbWVdO1xuICAgIH1cbiAgICAvLyBJZiBhIHByb3BlcnR5IGNhbGxlZCBgdGhlbmAgZXhpc3RzLCBhc3N1bWUgaXQncyBhIHByb21pc2UgYW5kXG4gICAgLy8gcmV0dXJuIGEgcHJvbWlzZSB0aGF0IHJlc29sdmVzIHRvIHRoZSBuYW1lLlxuICAgIGlmIChcInRoZW5cIiBpbiBtb2R1bGUgJiYgdHlwZW9mIG1vZHVsZS50aGVuID09PSBcImZ1bmN0aW9uXCIpIHtcbiAgICAgICAgcmV0dXJuIG1vZHVsZS50aGVuKChtb2QpPT5ob2lzdChtb2QsIG5hbWUpKTtcbiAgICB9XG4gICAgLy8gSWYgd2UncmUgdHJ5aW5nIHRvIGhvaXNlIHRoZSBkZWZhdWx0IGV4cG9ydCwgYW5kIHRoZSBtb2R1bGUgaXMgYSBmdW5jdGlvbixcbiAgICAvLyByZXR1cm4gdGhlIG1vZHVsZSBpdHNlbGYuXG4gICAgaWYgKHR5cGVvZiBtb2R1bGUgPT09IFwiZnVuY3Rpb25cIiAmJiBuYW1lID09PSBcImRlZmF1bHRcIikge1xuICAgICAgICByZXR1cm4gbW9kdWxlO1xuICAgIH1cbiAgICAvLyBPdGhlcndpc2UsIHJldHVybiB1bmRlZmluZWQuXG4gICAgcmV0dXJuIHVuZGVmaW5lZDtcbn1cblxuLy8jIHNvdXJjZU1hcHBpbmdVUkw9aGVscGVycy5qcy5tYXAiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(api)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js\n");
-
-/***/ }),
-
-/***/ "(api)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Fchat&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Fchat.ts&middlewareConfigBase64=e30%3D!":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Fchat&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Fchat.ts&middlewareConfigBase64=e30%3D! ***!
-  \**************************************************************************************************************************************************************************************************************/
+/***/ 8163:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   config: () => (/* binding */ config),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   routeModule: () => (/* binding */ routeModule)\n/* harmony export */ });\n/* harmony import */ var next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/server/future/route-modules/pages-api/module */ \"(api)/./node_modules/next/dist/server/future/route-modules/pages-api/module.js\");\n/* harmony import */ var next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/dist/server/future/route-kind */ \"(api)/./node_modules/next/dist/server/future/route-kind.js\");\n/* harmony import */ var next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-route-loader/helpers */ \"(api)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js\");\n/* harmony import */ var _pages_api_chat_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/api/chat.ts */ \"(api)/./pages/api/chat.ts\");\n// @ts-ignore this need to be imported from next/dist to be external\n\n\n\nconst PagesAPIRouteModule = next_dist_server_future_route_modules_pages_api_module__WEBPACK_IMPORTED_MODULE_0__.PagesAPIRouteModule;\n// Import the userland code.\n// @ts-expect-error - replaced by webpack/turbopack loader\n\n// Re-export the handler (should be the default export).\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__.hoist)(_pages_api_chat_ts__WEBPACK_IMPORTED_MODULE_3__, \"default\"));\n// Re-export config.\nconst config = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__.hoist)(_pages_api_chat_ts__WEBPACK_IMPORTED_MODULE_3__, \"config\");\n// Create and export the route module that will be consumed.\nconst routeModule = new PagesAPIRouteModule({\n    definition: {\n        kind: next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__.RouteKind.PAGES_API,\n        page: \"/api/chat\",\n        pathname: \"/api/chat\",\n        // The following aren't used in production.\n        bundlePath: \"\",\n        filename: \"\"\n    },\n    userland: _pages_api_chat_ts__WEBPACK_IMPORTED_MODULE_3__\n});\n\n//# sourceMappingURL=pages-api.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LXJvdXRlLWxvYWRlci9pbmRleC5qcz9raW5kPVBBR0VTX0FQSSZwYWdlPSUyRmFwaSUyRmNoYXQmcHJlZmVycmVkUmVnaW9uPSZhYnNvbHV0ZVBhZ2VQYXRoPS4lMkZwYWdlcyUyRmFwaSUyRmNoYXQudHMmbWlkZGxld2FyZUNvbmZpZ0Jhc2U2ND1lMzAlM0QhIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUE7QUFDaUY7QUFDbEI7QUFDbUI7QUFDbEYsNEJBQTRCLHVHQUEwQjtBQUN0RDtBQUNBO0FBQ2dEO0FBQ2hEO0FBQ0EsaUVBQWUsZ0dBQUssQ0FBQywrQ0FBUSxZQUFZLEVBQUM7QUFDMUM7QUFDTyxlQUFlLGdHQUFLLENBQUMsK0NBQVE7QUFDcEM7QUFDTztBQUNQO0FBQ0EsY0FBYyx5RUFBUztBQUN2QjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsS0FBSztBQUNMLFlBQVk7QUFDWixDQUFDOztBQUVEIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbXktbGVnZW5kYXJ5LXdlYnNpdGUvP2U3M2QiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gQHRzLWlnbm9yZSB0aGlzIG5lZWQgdG8gYmUgaW1wb3J0ZWQgZnJvbSBuZXh0L2Rpc3QgdG8gYmUgZXh0ZXJuYWxcbmltcG9ydCAqIGFzIG1vZHVsZSBmcm9tIFwibmV4dC9kaXN0L3NlcnZlci9mdXR1cmUvcm91dGUtbW9kdWxlcy9wYWdlcy1hcGkvbW9kdWxlXCI7XG5pbXBvcnQgeyBSb3V0ZUtpbmQgfSBmcm9tIFwibmV4dC9kaXN0L3NlcnZlci9mdXR1cmUvcm91dGUta2luZFwiO1xuaW1wb3J0IHsgaG9pc3QgfSBmcm9tIFwibmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LXJvdXRlLWxvYWRlci9oZWxwZXJzXCI7XG5jb25zdCBQYWdlc0FQSVJvdXRlTW9kdWxlID0gbW9kdWxlLlBhZ2VzQVBJUm91dGVNb2R1bGU7XG4vLyBJbXBvcnQgdGhlIHVzZXJsYW5kIGNvZGUuXG4vLyBAdHMtZXhwZWN0LWVycm9yIC0gcmVwbGFjZWQgYnkgd2VicGFjay90dXJib3BhY2sgbG9hZGVyXG5pbXBvcnQgKiBhcyB1c2VybGFuZCBmcm9tIFwiLi9wYWdlcy9hcGkvY2hhdC50c1wiO1xuLy8gUmUtZXhwb3J0IHRoZSBoYW5kbGVyIChzaG91bGQgYmUgdGhlIGRlZmF1bHQgZXhwb3J0KS5cbmV4cG9ydCBkZWZhdWx0IGhvaXN0KHVzZXJsYW5kLCBcImRlZmF1bHRcIik7XG4vLyBSZS1leHBvcnQgY29uZmlnLlxuZXhwb3J0IGNvbnN0IGNvbmZpZyA9IGhvaXN0KHVzZXJsYW5kLCBcImNvbmZpZ1wiKTtcbi8vIENyZWF0ZSBhbmQgZXhwb3J0IHRoZSByb3V0ZSBtb2R1bGUgdGhhdCB3aWxsIGJlIGNvbnN1bWVkLlxuZXhwb3J0IGNvbnN0IHJvdXRlTW9kdWxlID0gbmV3IFBhZ2VzQVBJUm91dGVNb2R1bGUoe1xuICAgIGRlZmluaXRpb246IHtcbiAgICAgICAga2luZDogUm91dGVLaW5kLlBBR0VTX0FQSSxcbiAgICAgICAgcGFnZTogXCIvYXBpL2NoYXRcIixcbiAgICAgICAgcGF0aG5hbWU6IFwiL2FwaS9jaGF0XCIsXG4gICAgICAgIC8vIFRoZSBmb2xsb3dpbmcgYXJlbid0IHVzZWQgaW4gcHJvZHVjdGlvbi5cbiAgICAgICAgYnVuZGxlUGF0aDogXCJcIixcbiAgICAgICAgZmlsZW5hbWU6IFwiXCJcbiAgICB9LFxuICAgIHVzZXJsYW5kXG59KTtcblxuLy8jIHNvdXJjZU1hcHBpbmdVUkw9cGFnZXMtYXBpLmpzLm1hcCJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Fchat&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Fchat.ts&middlewareConfigBase64=e30%3D!\n");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
-/***/ }),
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  config: () => (/* binding */ config),
+  "default": () => (/* binding */ next_route_loaderkind_PAGES_API_page_2Fapi_2Fchat_preferredRegion_absolutePagePath_private_next_pages_2Fapi_2Fchat_ts_middlewareConfigBase64_e30_3D_),
+  routeModule: () => (/* binding */ routeModule)
+});
 
-/***/ "(api)/./pages/api/chat.ts":
-/*!***************************!*\
-  !*** ./pages/api/chat.ts ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+// NAMESPACE OBJECT: ./pages/api/chat.ts
+var chat_namespaceObject = {};
+__webpack_require__.r(chat_namespaceObject);
+__webpack_require__.d(chat_namespaceObject, {
+  "default": () => (handler)
+});
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ handler)\n/* harmony export */ });\n// File: pages/api/chat.ts\n// GPT-3.5 Turbo endpoint\nconst OPENAI_API_URL = \"https://api.openai.com/v1/chat/completions\";\n/**\n * このAPIは、OpenAI GPT-3.5へリクエストし、失敗時(特に insufficient_quota)にモック応答を返す。\n */ async function handler(req, res) {\n    try {\n        // リクエストBody: { model, messages, temperature, max_tokens, presence_penalty, frequency_penalty } など\n        const { model = \"gpt-3.5-turbo\", messages = [], temperature = 0.7, max_tokens = 2000, presence_penalty = 0, frequency_penalty = 0 } = req.body || {};\n        // 環境変数からOpenAI APIキーを取得\n        const apiKey = process.env.OPENAI_API_KEY;\n        if (!apiKey) {\n            return res.status(500).json({\n                error: \"OPENAI_API_KEY is not set in environment.\"\n            });\n        }\n        // バリデーション\n        if (!Array.isArray(messages)) {\n            return res.status(400).json({\n                error: '\"messages\" must be an array of {role, content}.'\n            });\n        }\n        // OpenAIへ送るペイロード\n        const payload = {\n            model,\n            messages,\n            temperature,\n            max_tokens,\n            presence_penalty,\n            frequency_penalty\n        };\n        // OpenAI API呼び出し\n        const response = await fetch(OPENAI_API_URL, {\n            method: \"POST\",\n            headers: {\n                \"Content-Type\": \"application/json\",\n                // 認証ヘッダ\n                Authorization: `Bearer ${apiKey}`\n            },\n            body: JSON.stringify(payload)\n        });\n        if (!response.ok) {\n            // 失敗 => エラー詳細を取得\n            const errData = await response.json();\n            console.error(\"[OpenAI API Error]\", errData);\n            // もし「insufficient_quota」ならモック応答で代替\n            const code = errData?.error?.code;\n            if (code === \"insufficient_quota\") {\n                console.warn(\"[Fallback to mock response due to insufficient_quota]\");\n                return res.status(200).json({\n                    id: \"mock-fallback\",\n                    object: \"chat.completion.mock\",\n                    created: Math.floor(Date.now() / 1000),\n                    choices: [\n                        {\n                            index: 0,\n                            finish_reason: \"mock_fallback\",\n                            message: {\n                                role: \"assistant\",\n                                content: \"(OpenAI quota切れ: これはモック応答です。AIの応答ではありません。)\"\n                            }\n                        }\n                    ]\n                });\n            }\n            // それ以外のエラー => そのまま転送\n            return res.status(response.status).json({\n                error: errData\n            });\n        }\n        // 正常時 => OpenAIからのJSONをそのまま返す\n        const data = await response.json();\n        return res.status(200).json(data);\n    } catch (err) {\n        console.error(\"[OpenAI Chat API Catch Error]\", err);\n        return res.status(500).json({\n            error: `Unexpected error in /api/chat: ${String(err)}`\n        });\n    }\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9wYWdlcy9hcGkvY2hhdC50cyIsIm1hcHBpbmdzIjoiOzs7O0FBQUEsMEJBQTBCO0FBSTFCLHlCQUF5QjtBQUN6QixNQUFNQSxpQkFBaUI7QUFFdkI7O0NBRUMsR0FDYyxlQUFlQyxRQUFRQyxHQUFtQixFQUFFQyxHQUFvQjtJQUM3RSxJQUFJO1FBQ0Ysa0dBQWtHO1FBQ2xHLE1BQU0sRUFDSkMsUUFBUSxlQUFlLEVBQ3ZCQyxXQUFXLEVBQUUsRUFDYkMsY0FBYyxHQUFHLEVBQ2pCQyxhQUFhLElBQUksRUFDakJDLG1CQUFtQixDQUFDLEVBQ3BCQyxvQkFBb0IsQ0FBQyxFQUN0QixHQUFHUCxJQUFJUSxJQUFJLElBQUksQ0FBQztRQUVqQix3QkFBd0I7UUFDeEIsTUFBTUMsU0FBU0MsUUFBUUMsR0FBRyxDQUFDQyxjQUFjO1FBQ3pDLElBQUksQ0FBQ0gsUUFBUTtZQUNYLE9BQU9SLElBQUlZLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7Z0JBQzFCQyxPQUFPO1lBQ1Q7UUFDRjtRQUVBLFVBQVU7UUFDVixJQUFJLENBQUNDLE1BQU1DLE9BQU8sQ0FBQ2QsV0FBVztZQUM1QixPQUFPRixJQUFJWSxNQUFNLENBQUMsS0FBS0MsSUFBSSxDQUFDO2dCQUMxQkMsT0FBTztZQUNUO1FBQ0Y7UUFFQSxpQkFBaUI7UUFDakIsTUFBTUcsVUFBVTtZQUNkaEI7WUFDQUM7WUFDQUM7WUFDQUM7WUFDQUM7WUFDQUM7UUFDRjtRQUVBLGlCQUFpQjtRQUNqQixNQUFNWSxXQUFXLE1BQU1DLE1BQU10QixnQkFBZ0I7WUFDM0N1QixRQUFRO1lBQ1JDLFNBQVM7Z0JBQ1AsZ0JBQWdCO2dCQUNoQixRQUFRO2dCQUNSQyxlQUFlLENBQUMsT0FBTyxFQUFFZCxPQUFPLENBQUM7WUFDbkM7WUFDQUQsTUFBTWdCLEtBQUtDLFNBQVMsQ0FBQ1A7UUFDdkI7UUFFQSxJQUFJLENBQUNDLFNBQVNPLEVBQUUsRUFBRTtZQUNoQixpQkFBaUI7WUFDakIsTUFBTUMsVUFBVSxNQUFNUixTQUFTTCxJQUFJO1lBQ25DYyxRQUFRYixLQUFLLENBQUMsc0JBQXNCWTtZQUVwQyxtQ0FBbUM7WUFDbkMsTUFBTUUsT0FBT0YsU0FBU1osT0FBT2M7WUFDN0IsSUFBSUEsU0FBUyxzQkFBc0I7Z0JBQ2pDRCxRQUFRRSxJQUFJLENBQUM7Z0JBQ2IsT0FBTzdCLElBQUlZLE1BQU0sQ0FBQyxLQUFLQyxJQUFJLENBQUM7b0JBQzFCaUIsSUFBSTtvQkFDSkMsUUFBUTtvQkFDUkMsU0FBU0MsS0FBS0MsS0FBSyxDQUFDQyxLQUFLQyxHQUFHLEtBQUs7b0JBQ2pDQyxTQUFTO3dCQUNQOzRCQUNFQyxPQUFPOzRCQUNQQyxlQUFlOzRCQUNmQyxTQUFTO2dDQUNQQyxNQUFNO2dDQUNOQyxTQUNFOzRCQUNKO3dCQUNGO3FCQUNEO2dCQUNIO1lBQ0Y7WUFFQSxxQkFBcUI7WUFDckIsT0FBTzFDLElBQUlZLE1BQU0sQ0FBQ00sU0FBU04sTUFBTSxFQUFFQyxJQUFJLENBQUM7Z0JBQUVDLE9BQU9ZO1lBQVE7UUFDM0Q7UUFFQSw4QkFBOEI7UUFDOUIsTUFBTWlCLE9BQU8sTUFBTXpCLFNBQVNMLElBQUk7UUFDaEMsT0FBT2IsSUFBSVksTUFBTSxDQUFDLEtBQUtDLElBQUksQ0FBQzhCO0lBQzlCLEVBQUUsT0FBT0MsS0FBSztRQUNaakIsUUFBUWIsS0FBSyxDQUFDLGlDQUFpQzhCO1FBQy9DLE9BQU81QyxJQUFJWSxNQUFNLENBQUMsS0FBS0MsSUFBSSxDQUFDO1lBQzFCQyxPQUFPLENBQUMsK0JBQStCLEVBQUUrQixPQUFPRCxLQUFLLENBQUM7UUFDeEQ7SUFDRjtBQUNGIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbXktbGVnZW5kYXJ5LXdlYnNpdGUvLi9wYWdlcy9hcGkvY2hhdC50cz9jNTc3Il0sInNvdXJjZXNDb250ZW50IjpbIi8vIEZpbGU6IHBhZ2VzL2FwaS9jaGF0LnRzXG5cbmltcG9ydCB0eXBlIHsgTmV4dEFwaVJlcXVlc3QsIE5leHRBcGlSZXNwb25zZSB9IGZyb20gJ25leHQnXG5cbi8vIEdQVC0zLjUgVHVyYm8gZW5kcG9pbnRcbmNvbnN0IE9QRU5BSV9BUElfVVJMID0gJ2h0dHBzOi8vYXBpLm9wZW5haS5jb20vdjEvY2hhdC9jb21wbGV0aW9ucydcblxuLyoqXG4gKiDjgZPjga5BUEnjga/jgIFPcGVuQUkgR1BULTMuNeOBuOODquOCr+OCqOOCueODiOOBl+OAgeWkseaVl+aZgijnibnjgasgaW5zdWZmaWNpZW50X3F1b3RhKeOBq+ODouODg+OCr+W/nOetlOOCkui/lOOBmeOAglxuICovXG5leHBvcnQgZGVmYXVsdCBhc3luYyBmdW5jdGlvbiBoYW5kbGVyKHJlcTogTmV4dEFwaVJlcXVlc3QsIHJlczogTmV4dEFwaVJlc3BvbnNlKSB7XG4gIHRyeSB7XG4gICAgLy8g44Oq44Kv44Ko44K544OIQm9keTogeyBtb2RlbCwgbWVzc2FnZXMsIHRlbXBlcmF0dXJlLCBtYXhfdG9rZW5zLCBwcmVzZW5jZV9wZW5hbHR5LCBmcmVxdWVuY3lfcGVuYWx0eSB9IOOBquOBqVxuICAgIGNvbnN0IHtcbiAgICAgIG1vZGVsID0gJ2dwdC0zLjUtdHVyYm8nLFxuICAgICAgbWVzc2FnZXMgPSBbXSxcbiAgICAgIHRlbXBlcmF0dXJlID0gMC43LFxuICAgICAgbWF4X3Rva2VucyA9IDIwMDAsXG4gICAgICBwcmVzZW5jZV9wZW5hbHR5ID0gMCxcbiAgICAgIGZyZXF1ZW5jeV9wZW5hbHR5ID0gMFxuICAgIH0gPSByZXEuYm9keSB8fCB7fVxuXG4gICAgLy8g55Kw5aKD5aSJ5pWw44GL44KJT3BlbkFJIEFQSeOCreODvOOCkuWPluW+l1xuICAgIGNvbnN0IGFwaUtleSA9IHByb2Nlc3MuZW52Lk9QRU5BSV9BUElfS0VZXG4gICAgaWYgKCFhcGlLZXkpIHtcbiAgICAgIHJldHVybiByZXMuc3RhdHVzKDUwMCkuanNvbih7XG4gICAgICAgIGVycm9yOiAnT1BFTkFJX0FQSV9LRVkgaXMgbm90IHNldCBpbiBlbnZpcm9ubWVudC4nXG4gICAgICB9KVxuICAgIH1cblxuICAgIC8vIOODkOODquODh+ODvOOCt+ODp+ODs1xuICAgIGlmICghQXJyYXkuaXNBcnJheShtZXNzYWdlcykpIHtcbiAgICAgIHJldHVybiByZXMuc3RhdHVzKDQwMCkuanNvbih7XG4gICAgICAgIGVycm9yOiAnXCJtZXNzYWdlc1wiIG11c3QgYmUgYW4gYXJyYXkgb2Yge3JvbGUsIGNvbnRlbnR9LidcbiAgICAgIH0pXG4gICAgfVxuXG4gICAgLy8gT3BlbkFJ44G46YCB44KL44Oa44Kk44Ot44O844OJXG4gICAgY29uc3QgcGF5bG9hZCA9IHtcbiAgICAgIG1vZGVsLFxuICAgICAgbWVzc2FnZXMsXG4gICAgICB0ZW1wZXJhdHVyZSxcbiAgICAgIG1heF90b2tlbnMsXG4gICAgICBwcmVzZW5jZV9wZW5hbHR5LFxuICAgICAgZnJlcXVlbmN5X3BlbmFsdHlcbiAgICB9XG5cbiAgICAvLyBPcGVuQUkgQVBJ5ZG844Gz5Ye644GXXG4gICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChPUEVOQUlfQVBJX1VSTCwge1xuICAgICAgbWV0aG9kOiAnUE9TVCcsXG4gICAgICBoZWFkZXJzOiB7XG4gICAgICAgICdDb250ZW50LVR5cGUnOiAnYXBwbGljYXRpb24vanNvbicsXG4gICAgICAgIC8vIOiqjeiovOODmOODg+ODgFxuICAgICAgICBBdXRob3JpemF0aW9uOiBgQmVhcmVyICR7YXBpS2V5fWBcbiAgICAgIH0sXG4gICAgICBib2R5OiBKU09OLnN0cmluZ2lmeShwYXlsb2FkKVxuICAgIH0pXG5cbiAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAvLyDlpLHmlZcgPT4g44Ko44Op44O86Kmz57Sw44KS5Y+W5b6XXG4gICAgICBjb25zdCBlcnJEYXRhID0gYXdhaXQgcmVzcG9uc2UuanNvbigpXG4gICAgICBjb25zb2xlLmVycm9yKCdbT3BlbkFJIEFQSSBFcnJvcl0nLCBlcnJEYXRhKVxuXG4gICAgICAvLyDjgoLjgZfjgIxpbnN1ZmZpY2llbnRfcXVvdGHjgI3jgarjgonjg6Ljg4Pjgq/lv5znrZTjgafku6Pmm79cbiAgICAgIGNvbnN0IGNvZGUgPSBlcnJEYXRhPy5lcnJvcj8uY29kZVxuICAgICAgaWYgKGNvZGUgPT09ICdpbnN1ZmZpY2llbnRfcXVvdGEnKSB7XG4gICAgICAgIGNvbnNvbGUud2FybignW0ZhbGxiYWNrIHRvIG1vY2sgcmVzcG9uc2UgZHVlIHRvIGluc3VmZmljaWVudF9xdW90YV0nKVxuICAgICAgICByZXR1cm4gcmVzLnN0YXR1cygyMDApLmpzb24oe1xuICAgICAgICAgIGlkOiAnbW9jay1mYWxsYmFjaycsXG4gICAgICAgICAgb2JqZWN0OiAnY2hhdC5jb21wbGV0aW9uLm1vY2snLFxuICAgICAgICAgIGNyZWF0ZWQ6IE1hdGguZmxvb3IoRGF0ZS5ub3coKSAvIDEwMDApLFxuICAgICAgICAgIGNob2ljZXM6IFtcbiAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgaW5kZXg6IDAsXG4gICAgICAgICAgICAgIGZpbmlzaF9yZWFzb246ICdtb2NrX2ZhbGxiYWNrJyxcbiAgICAgICAgICAgICAgbWVzc2FnZToge1xuICAgICAgICAgICAgICAgIHJvbGU6ICdhc3Npc3RhbnQnLFxuICAgICAgICAgICAgICAgIGNvbnRlbnQ6XG4gICAgICAgICAgICAgICAgICAnKE9wZW5BSSBxdW90YeWIh+OCjDog44GT44KM44Gv44Oi44OD44Kv5b+c562U44Gn44GZ44CCQUnjga7lv5znrZTjgafjga/jgYLjgorjgb7jgZvjgpPjgIIpJ1xuICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG4gICAgICAgICAgXVxuICAgICAgICB9KVxuICAgICAgfVxuXG4gICAgICAvLyDjgZ3jgozku6XlpJbjga7jgqjjg6njg7wgPT4g44Gd44Gu44G+44G+6Lui6YCBXG4gICAgICByZXR1cm4gcmVzLnN0YXR1cyhyZXNwb25zZS5zdGF0dXMpLmpzb24oeyBlcnJvcjogZXJyRGF0YSB9KVxuICAgIH1cblxuICAgIC8vIOato+W4uOaZgiA9PiBPcGVuQUnjgYvjgonjga5KU09O44KS44Gd44Gu44G+44G+6L+U44GZXG4gICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmpzb24oKVxuICAgIHJldHVybiByZXMuc3RhdHVzKDIwMCkuanNvbihkYXRhKVxuICB9IGNhdGNoIChlcnIpIHtcbiAgICBjb25zb2xlLmVycm9yKCdbT3BlbkFJIENoYXQgQVBJIENhdGNoIEVycm9yXScsIGVycilcbiAgICByZXR1cm4gcmVzLnN0YXR1cyg1MDApLmpzb24oe1xuICAgICAgZXJyb3I6IGBVbmV4cGVjdGVkIGVycm9yIGluIC9hcGkvY2hhdDogJHtTdHJpbmcoZXJyKX1gXG4gICAgfSlcbiAgfVxufVxuIl0sIm5hbWVzIjpbIk9QRU5BSV9BUElfVVJMIiwiaGFuZGxlciIsInJlcSIsInJlcyIsIm1vZGVsIiwibWVzc2FnZXMiLCJ0ZW1wZXJhdHVyZSIsIm1heF90b2tlbnMiLCJwcmVzZW5jZV9wZW5hbHR5IiwiZnJlcXVlbmN5X3BlbmFsdHkiLCJib2R5IiwiYXBpS2V5IiwicHJvY2VzcyIsImVudiIsIk9QRU5BSV9BUElfS0VZIiwic3RhdHVzIiwianNvbiIsImVycm9yIiwiQXJyYXkiLCJpc0FycmF5IiwicGF5bG9hZCIsInJlc3BvbnNlIiwiZmV0Y2giLCJtZXRob2QiLCJoZWFkZXJzIiwiQXV0aG9yaXphdGlvbiIsIkpTT04iLCJzdHJpbmdpZnkiLCJvayIsImVyckRhdGEiLCJjb25zb2xlIiwiY29kZSIsIndhcm4iLCJpZCIsIm9iamVjdCIsImNyZWF0ZWQiLCJNYXRoIiwiZmxvb3IiLCJEYXRlIiwibm93IiwiY2hvaWNlcyIsImluZGV4IiwiZmluaXNoX3JlYXNvbiIsIm1lc3NhZ2UiLCJyb2xlIiwiY29udGVudCIsImRhdGEiLCJlcnIiLCJTdHJpbmciXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(api)/./pages/api/chat.ts\n");
+// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/pages-api/module.js
+var pages_api_module = __webpack_require__(6429);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-kind.js
+var route_kind = __webpack_require__(7153);
+// EXTERNAL MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js
+var helpers = __webpack_require__(7305);
+;// CONCATENATED MODULE: ./pages/api/chat.ts
+// File: pages/api/chat.ts
+// GPT-3.5 Turbo endpoint
+const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+/**
+ * このAPIは、OpenAI GPT-3.5へリクエストし、失敗時(特に insufficient_quota)にモック応答を返す。
+ */ async function handler(req, res) {
+    try {
+        // リクエストBody: { model, messages, temperature, max_tokens, presence_penalty, frequency_penalty } など
+        const { model = "gpt-3.5-turbo", messages = [], temperature = 0.7, max_tokens = 2000, presence_penalty = 0, frequency_penalty = 0 } = req.body || {};
+        // 環境変数からOpenAI APIキーを取得
+        const apiKey = process.env.OPENAI_API_KEY;
+        if (!apiKey) {
+            return res.status(500).json({
+                error: "OPENAI_API_KEY is not set in environment."
+            });
+        }
+        // バリデーション
+        if (!Array.isArray(messages)) {
+            return res.status(400).json({
+                error: '"messages" must be an array of {role, content}.'
+            });
+        }
+        // OpenAIへ送るペイロード
+        const payload = {
+            model,
+            messages,
+            temperature,
+            max_tokens,
+            presence_penalty,
+            frequency_penalty
+        };
+        // OpenAI API呼び出し
+        const response = await fetch(OPENAI_API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // 認証ヘッダ
+                Authorization: `Bearer ${apiKey}`
+            },
+            body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+            // 失敗 => エラー詳細を取得
+            const errData = await response.json();
+            console.error("[OpenAI API Error]", errData);
+            // もし「insufficient_quota」ならモック応答で代替
+            const code = errData?.error?.code;
+            if (code === "insufficient_quota") {
+                console.warn("[Fallback to mock response due to insufficient_quota]");
+                return res.status(200).json({
+                    id: "mock-fallback",
+                    object: "chat.completion.mock",
+                    created: Math.floor(Date.now() / 1000),
+                    choices: [
+                        {
+                            index: 0,
+                            finish_reason: "mock_fallback",
+                            message: {
+                                role: "assistant",
+                                content: "(OpenAI quota切れ: これはモック応答です。AIの応答ではありません。)"
+                            }
+                        }
+                    ]
+                });
+            }
+            // それ以外のエラー => そのまま転送
+            return res.status(response.status).json({
+                error: errData
+            });
+        }
+        // 正常時 => OpenAIからのJSONをそのまま返す
+        const data = await response.json();
+        return res.status(200).json(data);
+    } catch (err) {
+        console.error("[OpenAI Chat API Catch Error]", err);
+        return res.status(500).json({
+            error: `Unexpected error in /api/chat: ${String(err)}`
+        });
+    }
+}
 
-/***/ }),
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Fchat&preferredRegion=&absolutePagePath=private-next-pages%2Fapi%2Fchat.ts&middlewareConfigBase64=e30%3D!
+// @ts-ignore this need to be imported from next/dist to be external
 
-/***/ "(api)/./node_modules/next/dist/server/future/route-kind.js":
-/*!************************************************************!*\
-  !*** ./node_modules/next/dist/server/future/route-kind.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\nObject.defineProperty(exports, \"RouteKind\", ({\n    enumerable: true,\n    get: function() {\n        return RouteKind;\n    }\n}));\nvar RouteKind;\n(function(RouteKind) {\n    RouteKind[/**\n   * `PAGES` represents all the React pages that are under `pages/`.\n   */ \"PAGES\"] = \"PAGES\";\n    RouteKind[/**\n   * `PAGES_API` represents all the API routes under `pages/api/`.\n   */ \"PAGES_API\"] = \"PAGES_API\";\n    RouteKind[/**\n   * `APP_PAGE` represents all the React pages that are under `app/` with the\n   * filename of `page.{j,t}s{,x}`.\n   */ \"APP_PAGE\"] = \"APP_PAGE\";\n    RouteKind[/**\n   * `APP_ROUTE` represents all the API routes and metadata routes that are under `app/` with the\n   * filename of `route.{j,t}s{,x}`.\n   */ \"APP_ROUTE\"] = \"APP_ROUTE\";\n})(RouteKind || (RouteKind = {}));\n\n//# sourceMappingURL=route-kind.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L3NlcnZlci9mdXR1cmUvcm91dGUta2luZC5qcyIsIm1hcHBpbmdzIjoiQUFBYTtBQUNiLDhDQUE2QztBQUM3QztBQUNBLENBQUMsRUFBQztBQUNGLDZDQUE0QztBQUM1QztBQUNBO0FBQ0E7QUFDQTtBQUNBLENBQUMsRUFBQztBQUNGO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esd0JBQXdCLElBQUksRUFBRSxHQUFHO0FBQ2pDO0FBQ0E7QUFDQTtBQUNBLHlCQUF5QixJQUFJLEVBQUUsR0FBRztBQUNsQztBQUNBLENBQUMsOEJBQThCOztBQUUvQiIsInNvdXJjZXMiOlsid2VicGFjazovL215LWxlZ2VuZGFyeS13ZWJzaXRlLy4vbm9kZV9tb2R1bGVzL25leHQvZGlzdC9zZXJ2ZXIvZnV0dXJlL3JvdXRlLWtpbmQuanM/MDI1YiJdLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBzdHJpY3RcIjtcbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIl9fZXNNb2R1bGVcIiwge1xuICAgIHZhbHVlOiB0cnVlXG59KTtcbk9iamVjdC5kZWZpbmVQcm9wZXJ0eShleHBvcnRzLCBcIlJvdXRlS2luZFwiLCB7XG4gICAgZW51bWVyYWJsZTogdHJ1ZSxcbiAgICBnZXQ6IGZ1bmN0aW9uKCkge1xuICAgICAgICByZXR1cm4gUm91dGVLaW5kO1xuICAgIH1cbn0pO1xudmFyIFJvdXRlS2luZDtcbihmdW5jdGlvbihSb3V0ZUtpbmQpIHtcbiAgICBSb3V0ZUtpbmRbLyoqXG4gICAqIGBQQUdFU2AgcmVwcmVzZW50cyBhbGwgdGhlIFJlYWN0IHBhZ2VzIHRoYXQgYXJlIHVuZGVyIGBwYWdlcy9gLlxuICAgKi8gXCJQQUdFU1wiXSA9IFwiUEFHRVNcIjtcbiAgICBSb3V0ZUtpbmRbLyoqXG4gICAqIGBQQUdFU19BUElgIHJlcHJlc2VudHMgYWxsIHRoZSBBUEkgcm91dGVzIHVuZGVyIGBwYWdlcy9hcGkvYC5cbiAgICovIFwiUEFHRVNfQVBJXCJdID0gXCJQQUdFU19BUElcIjtcbiAgICBSb3V0ZUtpbmRbLyoqXG4gICAqIGBBUFBfUEFHRWAgcmVwcmVzZW50cyBhbGwgdGhlIFJlYWN0IHBhZ2VzIHRoYXQgYXJlIHVuZGVyIGBhcHAvYCB3aXRoIHRoZVxuICAgKiBmaWxlbmFtZSBvZiBgcGFnZS57aix0fXN7LHh9YC5cbiAgICovIFwiQVBQX1BBR0VcIl0gPSBcIkFQUF9QQUdFXCI7XG4gICAgUm91dGVLaW5kWy8qKlxuICAgKiBgQVBQX1JPVVRFYCByZXByZXNlbnRzIGFsbCB0aGUgQVBJIHJvdXRlcyBhbmQgbWV0YWRhdGEgcm91dGVzIHRoYXQgYXJlIHVuZGVyIGBhcHAvYCB3aXRoIHRoZVxuICAgKiBmaWxlbmFtZSBvZiBgcm91dGUue2osdH1zeyx4fWAuXG4gICAqLyBcIkFQUF9ST1VURVwiXSA9IFwiQVBQX1JPVVRFXCI7XG59KShSb3V0ZUtpbmQgfHwgKFJvdXRlS2luZCA9IHt9KSk7XG5cbi8vIyBzb3VyY2VNYXBwaW5nVVJMPXJvdXRlLWtpbmQuanMubWFwIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(api)/./node_modules/next/dist/server/future/route-kind.js\n");
 
-/***/ }),
+const PagesAPIRouteModule = pages_api_module.PagesAPIRouteModule;
+// Import the userland code.
+// @ts-expect-error - replaced by webpack/turbopack loader
 
-/***/ "(api)/./node_modules/next/dist/server/future/route-modules/pages-api/module.js":
-/*!********************************************************************************!*\
-  !*** ./node_modules/next/dist/server/future/route-modules/pages-api/module.js ***!
-  \********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+// Re-export the handler (should be the default export).
+/* harmony default export */ const next_route_loaderkind_PAGES_API_page_2Fapi_2Fchat_preferredRegion_absolutePagePath_private_next_pages_2Fapi_2Fchat_ts_middlewareConfigBase64_e30_3D_ = ((0,helpers/* hoist */.l)(chat_namespaceObject, "default"));
+// Re-export config.
+const config = (0,helpers/* hoist */.l)(chat_namespaceObject, "config");
+// Create and export the route module that will be consumed.
+const routeModule = new PagesAPIRouteModule({
+    definition: {
+        kind: route_kind/* RouteKind */.x.PAGES_API,
+        page: "/api/chat",
+        pathname: "/api/chat",
+        // The following aren't used in production.
+        bundlePath: "",
+        filename: ""
+    },
+    userland: chat_namespaceObject
+});
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));\n0 && (0);\nfunction _export(target, all) {\n    for(var name in all)Object.defineProperty(target, name, {\n        enumerable: true,\n        get: all[name]\n    });\n}\n_export(exports, {\n    PagesAPIRouteModule: function() {\n        return PagesAPIRouteModule;\n    },\n    default: function() {\n        return _default;\n    }\n});\nconst _routemodule = __webpack_require__(/*! ../route-module */ \"../route-module\");\nconst _node = __webpack_require__(/*! ../../../api-utils/node */ \"../../../api-utils/node\");\nclass PagesAPIRouteModule extends _routemodule.RouteModule {\n    /**\n   *\n   * @param req the incoming server request\n   * @param res the outgoing server response\n   * @param context the context for the render\n   */ async render(req, res, context) {\n        await (0, _node.apiResolver)(req, res, context.query, this.userland, {\n            ...context.previewProps,\n            revalidate: context.revalidate,\n            trustHostHeader: context.trustHostHeader,\n            allowedRevalidateHeaderKeys: context.allowedRevalidateHeaderKeys,\n            hostname: context.hostname\n        }, context.minimalMode, context.dev, context.page);\n    }\n}\nconst _default = PagesAPIRouteModule;\n\n//# sourceMappingURL=module.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L3NlcnZlci9mdXR1cmUvcm91dGUtbW9kdWxlcy9wYWdlcy1hcGkvbW9kdWxlLmpzIiwibWFwcGluZ3MiOiJBQUFhO0FBQ2IsOENBQTZDO0FBQzdDO0FBQ0EsQ0FBQyxFQUFDO0FBQ0YsTUFBTSxDQUdMO0FBQ0Q7QUFDQTtBQUNBO0FBQ0E7QUFDQSxLQUFLO0FBQ0w7QUFDQTtBQUNBO0FBQ0E7QUFDQSxLQUFLO0FBQ0w7QUFDQTtBQUNBO0FBQ0EsQ0FBQztBQUNELHFCQUFxQixtQkFBTyxDQUFDLHdDQUFpQjtBQUM5QyxjQUFjLG1CQUFPLENBQUMsd0RBQXlCO0FBQy9DO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsU0FBUztBQUNUO0FBQ0E7QUFDQTs7QUFFQSIsInNvdXJjZXMiOlsid2VicGFjazovL215LWxlZ2VuZGFyeS13ZWJzaXRlLy4vbm9kZV9tb2R1bGVzL25leHQvZGlzdC9zZXJ2ZXIvZnV0dXJlL3JvdXRlLW1vZHVsZXMvcGFnZXMtYXBpL21vZHVsZS5qcz8xYjMwIl0sInNvdXJjZXNDb250ZW50IjpbIlwidXNlIHN0cmljdFwiO1xuT2JqZWN0LmRlZmluZVByb3BlcnR5KGV4cG9ydHMsIFwiX19lc01vZHVsZVwiLCB7XG4gICAgdmFsdWU6IHRydWVcbn0pO1xuMCAmJiAobW9kdWxlLmV4cG9ydHMgPSB7XG4gICAgUGFnZXNBUElSb3V0ZU1vZHVsZTogbnVsbCxcbiAgICBkZWZhdWx0OiBudWxsXG59KTtcbmZ1bmN0aW9uIF9leHBvcnQodGFyZ2V0LCBhbGwpIHtcbiAgICBmb3IodmFyIG5hbWUgaW4gYWxsKU9iamVjdC5kZWZpbmVQcm9wZXJ0eSh0YXJnZXQsIG5hbWUsIHtcbiAgICAgICAgZW51bWVyYWJsZTogdHJ1ZSxcbiAgICAgICAgZ2V0OiBhbGxbbmFtZV1cbiAgICB9KTtcbn1cbl9leHBvcnQoZXhwb3J0cywge1xuICAgIFBhZ2VzQVBJUm91dGVNb2R1bGU6IGZ1bmN0aW9uKCkge1xuICAgICAgICByZXR1cm4gUGFnZXNBUElSb3V0ZU1vZHVsZTtcbiAgICB9LFxuICAgIGRlZmF1bHQ6IGZ1bmN0aW9uKCkge1xuICAgICAgICByZXR1cm4gX2RlZmF1bHQ7XG4gICAgfVxufSk7XG5jb25zdCBfcm91dGVtb2R1bGUgPSByZXF1aXJlKFwiLi4vcm91dGUtbW9kdWxlXCIpO1xuY29uc3QgX25vZGUgPSByZXF1aXJlKFwiLi4vLi4vLi4vYXBpLXV0aWxzL25vZGVcIik7XG5jbGFzcyBQYWdlc0FQSVJvdXRlTW9kdWxlIGV4dGVuZHMgX3JvdXRlbW9kdWxlLlJvdXRlTW9kdWxlIHtcbiAgICAvKipcbiAgICpcbiAgICogQHBhcmFtIHJlcSB0aGUgaW5jb21pbmcgc2VydmVyIHJlcXVlc3RcbiAgICogQHBhcmFtIHJlcyB0aGUgb3V0Z29pbmcgc2VydmVyIHJlc3BvbnNlXG4gICAqIEBwYXJhbSBjb250ZXh0IHRoZSBjb250ZXh0IGZvciB0aGUgcmVuZGVyXG4gICAqLyBhc3luYyByZW5kZXIocmVxLCByZXMsIGNvbnRleHQpIHtcbiAgICAgICAgYXdhaXQgKDAsIF9ub2RlLmFwaVJlc29sdmVyKShyZXEsIHJlcywgY29udGV4dC5xdWVyeSwgdGhpcy51c2VybGFuZCwge1xuICAgICAgICAgICAgLi4uY29udGV4dC5wcmV2aWV3UHJvcHMsXG4gICAgICAgICAgICByZXZhbGlkYXRlOiBjb250ZXh0LnJldmFsaWRhdGUsXG4gICAgICAgICAgICB0cnVzdEhvc3RIZWFkZXI6IGNvbnRleHQudHJ1c3RIb3N0SGVhZGVyLFxuICAgICAgICAgICAgYWxsb3dlZFJldmFsaWRhdGVIZWFkZXJLZXlzOiBjb250ZXh0LmFsbG93ZWRSZXZhbGlkYXRlSGVhZGVyS2V5cyxcbiAgICAgICAgICAgIGhvc3RuYW1lOiBjb250ZXh0Lmhvc3RuYW1lXG4gICAgICAgIH0sIGNvbnRleHQubWluaW1hbE1vZGUsIGNvbnRleHQuZGV2LCBjb250ZXh0LnBhZ2UpO1xuICAgIH1cbn1cbmNvbnN0IF9kZWZhdWx0ID0gUGFnZXNBUElSb3V0ZU1vZHVsZTtcblxuLy8jIHNvdXJjZU1hcHBpbmdVUkw9bW9kdWxlLmpzLm1hcCJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(api)/./node_modules/next/dist/server/future/route-modules/pages-api/module.js\n");
+//# sourceMappingURL=pages-api.js.map
 
 /***/ })
 
@@ -90,7 +164,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__("(api)/./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES_API&page=%2Fapi%2Fchat&preferredRegion=&absolutePagePath=.%2Fpages%2Fapi%2Fchat.ts&middlewareConfigBase64=e30%3D!"));
+var __webpack_exports__ = __webpack_require__.X(0, [172], () => (__webpack_exec__(8163)));
 module.exports = __webpack_exports__;
 
 })();
