@@ -1,8 +1,8 @@
 // File: pages/api/auth/[...nextauth].ts
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -10,33 +10,16 @@ export const authOptions: NextAuthOptions = {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        // ... 認証ロジック ...
-        // 成功時 => userオブジェクト返却
-        return { id: "12345", name: "TestUser" }
+      async authorize(credentials) {
+        // 例: "test"/"pass"なら成功
+        if (credentials?.username === "test" && credentials?.password === "pass") {
+          return { id: "123", name: "TestUser" }
+        }
+        return null
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      // userが存在するなら tokenにidを保存
-      if (user?.id) {
-        token.id = user.id
-      }
-      return token
-    },
-    async session({ session, token }) {
-      // token.id を session.user.id にコピー
-      if (token?.id) {
-        session.user = session.user || {}
-        session.user.id = token.id as string
-      }
-      return session
-    },
-  },
-  session: {
-    strategy: "jwt",
-  },
+  // そのほか callbacks や session設定など
 }
 
 export default NextAuth(authOptions)

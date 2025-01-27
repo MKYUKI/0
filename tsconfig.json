@@ -2,11 +2,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -19,16 +15,15 @@
     "jsx": "preserve",
     "incremental": true,
     "esModuleInterop": true,
-
-    
     "downlevelIteration": true
   },
   "include": [
     "next-env.d.ts",
+    // 'types/' フォルダを含める
+    "types/**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "types/**/*.d.ts",
-    "python/requirements.tst" 
+    "python/requirements.tst"
   ],
   "exclude": [
     "node_modules"
