@@ -5,15 +5,13 @@ import { DefaultSession } from "next-auth"
 declare module "next-auth" {
   interface Session {
     user?: {
-      // デフォルトのプロパティ
+      // デフォルトの name/email/image
       name?: string | null
       email?: string | null
       image?: string | null
 
-      // ここで "id" を定義
+      // カスタム: id
       id: string
     }
   }
-
-  // 必要に応じて "JWT" 型拡張や "User" 型にも id を定義可能
 }
