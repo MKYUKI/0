@@ -1,38 +1,39 @@
-// pages/api/auth/[...nextauth].ts
-import NextAuth, { AuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
+// File: pages/auth/[...nextauth].ts (例)
 
-export const authOptions: AuthOptions = {
+import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+// あるいは GitHub, Google など
+
+export const authOptions: NextAuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        // ここでDB確認など
-        if (credentials?.email === "test@example.com" && credentials.password === "testpass") {
-          return { id: "1", name: "TestUser", email: "test@example.com" };
-        }
-        return null;
+      async authorize(credentials, req) {
+        // ...
+        // userオブジェクトを返すとログイン成功 => tokenに格納される
+        return { id: "12345", name: "test user" };
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
-  // pages: { signIn: "/auth/signin", ... },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.user = user;
+      // ログイン成功時に user.id があれば token に載せる
+      if (user?.id) {
+        token.id = user.id;
+      }
       return token;
     },
     async session({ session, token }) {
-      if (token.user) session.user = token.user as any;
+      // セッションに token.id をコピー
+      if (token?.id) {
+        session.user = session.user || {};
+        session.user.id = token.id as string;
+      }
       return session;
     },
   },
