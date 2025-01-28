@@ -26,7 +26,7 @@ function NavBar() {
         padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       }}
     >
       <div className="nav-left">
@@ -38,6 +38,10 @@ function NavBar() {
         </Link>
         <Link href="/art" className="nav-link" style={{ marginRight: '16px' }}>
           Art
+        </Link>
+        {/* ★★ 新しいページをここに追加 ★★ */}
+        <Link href="/excelvba" className="nav-link" style={{ marginRight: '16px' }}>
+          ExcelVBA
         </Link>
         <Link href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
           Contact
@@ -130,7 +134,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                   frequencyPenalty={0}
                 />
               </div>
-          )}
+            )}
         </footer>
       </div>
     </ErrorBoundary>
