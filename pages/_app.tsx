@@ -29,7 +29,7 @@ function NavBar() {
         justifyContent: 'space-between',
       }}
     >
-      <div className="nav-left">
+      <div className="nav-left" style={{ display: 'flex', alignItems: 'center' }}>
         <Link href="/" className="nav-link" style={{ marginRight: '16px' }}>
           Home
         </Link>
@@ -42,6 +42,9 @@ function NavBar() {
         {/* ★★ 新しいページをここに追加 ★★ */}
         <Link href="/excelvba" className="nav-link" style={{ marginRight: '16px' }}>
           ExcelVBA
+        </Link>
+        <Link href="/0tube" className="nav-link" style={{ marginRight: '16px' }}>
+          0Tube
         </Link>
         <Link href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
           Contact
@@ -116,14 +119,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
         {/**
          * フッターに GPTチャット欄を表示し、
-         * ただし '/' '/art' '/aichat' '/contact' では非表示という例。
-         * パスの条件は好みに応じて変えてOK
+         * ただし:
+         *   '/'        => ホーム
+         *   '/art'     => Art
+         *   '/aichat'  => AI Chat
+         *   '/contact' => Contact
+         *   '/0tube'   => 0Tube
+         * では非表示。
          */}
         <footer id="chat-footer" style={{ marginTop: '20px', padding: '10px' }}>
           {router.pathname !== '/' &&
             router.pathname !== '/art' &&
             router.pathname !== '/aichat' &&
-            router.pathname !== '/contact' && (
+            router.pathname !== '/contact' &&
+            router.pathname !== '/0tube' && (
               <div style={{ borderTop: '1px solid #666', paddingTop: '8px' }}>
                 <h3>Global GPT Chat</h3>
                 <ChatGPTInterface
