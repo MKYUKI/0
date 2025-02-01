@@ -1,5 +1,3 @@
-// File: pages/_app.tsx
-
 import type { AppProps } from 'next/app'
 import React, { useEffect } from 'react'
 import Head from 'next/head'
@@ -14,7 +12,6 @@ import ChatGPTInterface from '../components/ChatGPTInterface'
 
 /**
  * シンプルなナビゲーションバー
- * 右側に検索アイコンなどを入れる場合は適宜実装
  */
 function NavBar() {
   return (
@@ -26,10 +23,10 @@ function NavBar() {
         padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
       }}
     >
-      <div className="nav-left" style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="nav-left">
         <Link href="/" className="nav-link" style={{ marginRight: '16px' }}>
           Home
         </Link>
@@ -39,12 +36,8 @@ function NavBar() {
         <Link href="/art" className="nav-link" style={{ marginRight: '16px' }}>
           Art
         </Link>
-        {/* ★★ 新しいページをここに追加 ★★ */}
         <Link href="/excelvba" className="nav-link" style={{ marginRight: '16px' }}>
           ExcelVBA
-        </Link>
-        <Link href="/0tube" className="nav-link" style={{ marginRight: '16px' }}>
-          0Tube
         </Link>
         <Link href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
           Contact
@@ -59,8 +52,6 @@ function NavBar() {
 
 /**
  * 簡易エラーバウンダリー
- * Next.jsはサーバサイドレンダリング時には標準的なエラー画面がでるが
- * クライアントサイドのコンポーネント内エラーを捕捉したい場合に使用
  */
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
@@ -117,16 +108,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/**
-         * フッターに GPTチャット欄を表示し、
-         * ただし:
-         *   '/'        => ホーム
-         *   '/art'     => Art
-         *   '/aichat'  => AI Chat
-         *   '/contact' => Contact
-         *   '/0tube'   => 0Tube
-         * では非表示。
-         */}
+        {/* Global GPT Chatの表示条件に '/0tube' を追加して、0tubeページでは表示しない */}
         <footer id="chat-footer" style={{ marginTop: '20px', padding: '10px' }}>
           {router.pathname !== '/' &&
             router.pathname !== '/art' &&
