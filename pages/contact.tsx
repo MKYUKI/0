@@ -1,5 +1,3 @@
-// File: pages/contact.tsx
-
 import Head from 'next/head'
 import React, { useEffect } from 'react'
 import Script from 'next/script'
@@ -24,7 +22,7 @@ export default function Contact() {
       </Head>
 
       <div id="contact-bg-wrapper" style={{ position: 'relative', minHeight: '100vh' }}>
-        {/* もし背景アニメcanvas等があるなら、ここに重ねる */}
+        {/* 背景アニメcanvas */}
         <canvas id="galaxy-art-canvas" style={{ position: 'absolute' }} />
         <canvas id="rotating-galaxies-canvas" style={{ position: 'absolute' }} />
         <canvas id="art-stars-canvas" style={{ position: 'absolute' }} />
@@ -37,8 +35,8 @@ export default function Contact() {
 
           <form
             onSubmit={(e) => {
-              e.preventDefault()
-              alert('送信（サンプル）')
+              e.preventDefault();
+              alert('送信（サンプル）');
             }}
             style={{
               background: 'rgba(0,0,0,0.3)',
@@ -84,10 +82,9 @@ export default function Contact() {
             </button>
           </form>
 
-          <h2></h2>
-          <p></p>
+          {/* 以前はここに「Kindle作品一覧」セクションがありましたが、不要なため削除 */}
 
-          {/* ChatGPTインターフェイスをそのまま配置 */}
+          {/* ChatGPTインターフェイス */}
           <ChatGPTInterface
             isGlass={true}
             maxTokens={1600}
@@ -98,14 +95,14 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* 背景用のScript（任意） */}
+      {/* 背景用Script（任意） */}
       <Script
         src="/js/galaxyArtSim.js"
         strategy="afterInteractive"
         onLoad={() => {
           if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startGalaxyArtSim?.()
+            window.startGalaxyArtSim?.();
           }
         }}
       />
@@ -115,7 +112,7 @@ export default function Contact() {
         onLoad={() => {
           if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startRotatingGalaxies?.()
+            window.startRotatingGalaxies?.();
           }
         }}
       />
@@ -125,7 +122,7 @@ export default function Contact() {
         onLoad={() => {
           if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startArtStars?.()
+            window.startArtStars?.();
           }
         }}
       />
@@ -135,7 +132,7 @@ export default function Contact() {
         onLoad={() => {
           if (typeof window !== 'undefined') {
             // @ts-ignore
-            window.startArtNebula?.()
+            window.startArtNebula?.();
           }
         }}
       />

@@ -6,12 +6,16 @@ import Script from 'next/script';
 import Link from 'next/link';
 
 export default function Home() {
-  // ダミーデータ：1から30までユニークなコンテンツ（重複なし）
-  const thumbnails = Array.from({ length: 30 }, (_, i) => ({
+  // ダミーデータ：1から50までのコンテンツ（5列×10行用）
+  const thumbnails = Array.from({ length: 50 }, (_, i) => ({
     id: i + 1,
     title: `コンテンツ ${i + 1}`,
-    imageUrl: '/images/placeholder.jpg', // ※実際の画像URLに置き換えてください
-    link: `/content/${i + 1}` // 各コンテンツの詳細ページ（例）
+    // ★ ここでコンテンツ2の場合は完成済みのサムネイル画像を使用するように条件分岐
+    imageUrl: (i + 1 === 2)
+      ? '/images/content2-thumbnail.jpg'  // 完成済みのサムネイル画像のパス
+      : '/images/placeholder.jpg',
+    // 例: コンテンツ3のみ /free-book にリンクする場合
+    link: (i + 1 === 3) ? '/free-book' : `/content/${i + 1}`
   }));
 
   return (
@@ -20,28 +24,22 @@ export default function Home() {
         <title>ホーム画面 - 宇宙史上最大・最先端のシミュレーション</title>
         <meta
           name="description"
-          content="最上部に宇宙アニメーション（ヒーローセクション：400pxの高さ）を表示し、その下に背景アニメーション、続いて履歴書・職務経歴書のダウンロードボタンおよび、公式YouTube Subscriptionsページと同等のレイアウトでコンテンツサムネイルグリッド（横3列×縦10行＝30個）を配置しています。参考文献：公式 YouTube (https://www.youtube.com/feed/subscriptions)"
+          content="最上部にアニメーション、履歴書ダウンロード、コンテンツ一覧。最下層にNASA風フッターを配置し、日下真旗(Masaki Kusaka)の情報を掲載。"
         />
         <meta charSet="UTF-8" />
       </Head>
 
       {/*
-        ★ ヒーローセクション (cosmicSim)
-           → 高さを600pxから400pxに変更（横幅は画面端から端まで）
+        ★ ヒーローセクション
       */}
       <section className="hero-section">
         <canvas id="cosmic-canvas"></canvas>
       </section>
 
       {/*
-        ★ 下部セクション
-          ・背景アニメーション（galaxyArtSim / rotatingGalaxies / artStars / artNeula）
-          ・前面コンテンツ：
-              ① 履歴書・職務経歴書のダウンロードボタン（横3列×縦1段）
-              ② その下に公式 YouTube Subscriptions に似たサムネイルグリッド（横3列×縦10行＝30個）
+        ★ 下部アニメーションセクション
       */}
       <section className="lower-animations-section">
-        {/* 背景アニメーション */}
         <div className="animation-bg-wrapper">
           <canvas id="galaxy-art-canvas"></canvas>
           <canvas id="rotating-galaxies-canvas"></canvas>
@@ -49,79 +47,143 @@ export default function Home() {
           <canvas id="art-nebula-canvas"></canvas>
         </div>
 
-        {/* 前面コンテンツ */}
+        {/*
+          前面コンテンツ
+          履歴書・職務経歴書ダウンロードセクション＋コンテンツ一覧
+        */}
         <div className="lower-content-foreground">
-          {/* 履歴書・職務経歴書セクション */}
-          <h2 className="section-title" style={{ marginTop: '40px' }}>
-            履歴書・職務経歴書
-          </h2>
-          <div className="resume-thumbnail-grid">
-            <div className="resume-thumb-card">
-              <button
-                className="blue-dynamic-button"
-                onClick={() => {
-                  window.location.href = '/docs/MasakiKusaka_Resume.docx';
-                }}
-              >
-                MasakiKusaka_Resume.docx
-              </button>
+          {/*
+            ★ 履歴書・職務経歴書ダウンロード
+          */}
+          <section className="documents-section">
+            <h2 className="section-title">履歴書・職務経歴書ダウンロード</h2>
+            <div className="resume-thumbnail-grid">
+              <div className="resume-thumb-card">
+                <button
+                  className="blue-dynamic-button"
+                  onClick={() => window.location.href = '/docs/MasakiKusaka_Resume.docx'}
+                >
+                  MasakiKusaka_Resume.docx
+                </button>
+              </div>
+              <div className="resume-thumb-card">
+                <button
+                  className="blue-dynamic-button"
+                  onClick={() => window.location.href = '/docs/MasakiKusaka_Resume.pdf'}
+                >
+                  MasakiKusaka_Resume.pdf
+                </button>
+              </div>
+              <div className="resume-thumb-card">
+                <button
+                  className="blue-dynamic-button"
+                  onClick={() => window.location.href = '/docs/MasakiKusaka_CareerHistory.docx'}
+                >
+                  MasakiKusaka_CareerHistory.docx
+                </button>
+              </div>
+              <div className="resume-thumb-card">
+                <button
+                  className="blue-dynamic-button"
+                  onClick={() => window.location.href = '/docs/MasakiKusaka_CareerHistory.pdf'}
+                >
+                  MasakiKusaka_CareerHistory.pdf
+                </button>
+              </div>
             </div>
-            <div className="resume-thumb-card">
-              <button
-                className="blue-dynamic-button"
-                onClick={() => {
-                  window.location.href = '/docs/MasakiKusaka_Resume.pdf';
-                }}
-              >
-                MasakiKusaka_Resume.pdf
-              </button>
-            </div>
-            <div className="resume-thumb-card">
-              <button
-                className="blue-dynamic-button"
-                onClick={() => {
-                  window.location.href = '/docs/MasakiKusaka_CareerHistory.docx';
-                }}
-              >
-                MasakiKusaka_CareerHistory.docx
-              </button>
-            </div>
-          </div>
-          <div className="resume-thumbnail-grid" style={{ marginTop: '10px' }}>
-            <div className="resume-thumb-card">
-              <button
-                className="blue-dynamic-button"
-                onClick={() => {
-                  window.location.href = '/docs/MasakiKusaka_CareerHistory.pdf';
-                }}
-              >
-                MasakiKusaka_CareerHistory.pdf
-              </button>
-            </div>
-          </div>
+          </section>
 
-          {/* 新規追加：コンテンツ一覧（YouTube公式 Subscriptions ページ風グリッド） */}
-          <h2 className="section-title" style={{ marginTop: '40px' }}>
-            コンテンツ一覧
-          </h2>
-          <div className="thumbnail-grid">
-            {thumbnails.map((thumb) => (
-              <Link key={thumb.id} href={thumb.link}>
-                <div className="thumbnail-card">
-                  <img src={thumb.imageUrl} alt={thumb.title} />
-                  <div className="thumbnail-title">{thumb.title}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* 調整用スペース */}
-          <div style={{ height: '100px' }} />
+          {/*
+            ★ コンテンツ一覧
+          */}
+          <section className="contents-section">
+            <h2 className="section-title" style={{ marginTop: '40px' }}>
+              コンテンツ一覧
+            </h2>
+            <div className="thumbnail-grid">
+              {thumbnails.map(thumb => (
+                <Link key={thumb.id} href={thumb.link}>
+                  <div className="thumbnail-card">
+                    <img src={thumb.imageUrl} alt={thumb.title} />
+                    <div className="thumbnail-title">{thumb.title}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div style={{ height: '80px' }} />
+          </section>
         </div>
       </section>
 
       {/*
-        各種背景アニメーション用のScript読み込み
+        ★ NASA風フッター
+        ここに日下真旗 (Masaki Kusaka) 様の個人情報や著作権等を明記
+      */}
+      <footer className="kusaka-nasa-style-footer">
+        <div className="footer-inner">
+          <h3 className="footer-title">Masaki Kusaka (日下 真旗)</h3>
+          <p className="footer-subtitle">National Exploration of AI &amp; Space Simulations</p>
+          <p className="footer-description">
+            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、<br/>
+            その後、接客やコールセンターなど様々な業種で経験を積みました。<br/>
+            現在はIT業界への転身を目指し、Python等のプログラミング言語を学習中です。
+          </p>
+
+          <div className="footer-links-section">
+            <ul className="footer-links-col">
+              <li><strong>Career / Works</strong></li>
+              <li><a href="https://oo-5qvtc.ondigitalocean.app/" target="_blank" rel="noreferrer">Portfolio Site 1</a></li>
+              <li><a href="http://0xxxxxxxxxxxxx.com/" target="_blank" rel="noreferrer">Portfolio Site 2</a></li>
+              <li><a href="https://youtube-newgit-mutrgtf3vd2jrsmc7urasv.streamlit.app/" target="_blank" rel="noreferrer">Streamlit App</a></li>
+              <li><a href="https://www.dropbox.com/scl/fo/pc5302dj9fd9ktl3zkz6o/AOPeSS-FS11b7HNV-ynHvQA?rlkey=2l0eiwbeaqmty46o5cut8ss8n&st=7iegyr44&dl=0" target="_blank" rel="noreferrer">Dropbox</a></li>
+            </ul>
+            <ul className="footer-links-col">
+              <li><strong>Tech &amp; Social</strong></li>
+              <li><a href="https://huggingface.co/pricing" target="_blank" rel="noreferrer">HuggingFace</a></li>
+              <li><a href="https://github.com/MKYUKI" target="_blank" rel="noreferrer">GitHub</a></li>
+              <li><a href="https://www.youtube.com/@MK_AGI" target="_blank" rel="noreferrer">YouTube</a></li>
+              <li><a href="https://x.com/MK_ASI0" target="_blank" rel="noreferrer">X (旧Twitter)</a></li>
+              <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></li>
+            </ul>
+            <ul className="footer-links-col">
+              <li><strong>Payments &amp; Shop</strong></li>
+              <li><a href="https://www.paypal.com/paypalme/MasakiKusaka" target="_blank" rel="noreferrer">PayPal</a></li>
+              <li><a href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka" target="_blank" rel="noreferrer">Amazon JP</a></li>
+              <li><a href="https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka" target="_blank" rel="noreferrer">Amazon US</a></li>
+            </ul>
+            <ul className="footer-links-col">
+              <li><strong>Open Music / BGM</strong></li>
+              <li><a href="https://www.youtube.com/watch?v=jY1bGUaxv2Q&list=PLjbFG4Jyrt2-3ZVKb2Y31ud4iLXcVKE9B" target="_blank" rel="noreferrer">AI LLM BGM EDM</a></li>
+              <li><a href="https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO" target="_blank" rel="noreferrer">Open Music</a></li>
+            </ul>
+          </div>
+
+          <hr className="footer-divider" />
+
+          <div className="footer-links-bottom">
+            <a href="#">For Media</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">No FEAR Act</a>
+            <a href="#">Budget &amp; Annual Reports</a>
+            <a href="#">Contact</a>
+            <a href="#">Accessibility</a>
+          </div>
+
+          <p className="footer-update">
+            Page Last Updated: Jan 31, 2025 &emsp;|&emsp; Page Editor: 日下真旗 (Masaki Kusaka) &emsp;|&emsp; Responsible Official: MKYUKI
+          </p>
+          <p className="footer-personal">
+            146-0085 東京都大田区久が原2-28-25 シェアハウス203号室 &emsp;|&emsp; E-mail: <a href="mailto:masaki136928@gmail.com">masaki136928@gmail.com</a>
+          </p>
+          <p className="footer-disclaimer">
+            本サイトの内容は「クリエイティブ・コモンズ1.0（CC0）」で完全公開しています。<br/>
+            誰でも自由に利用・改変・再配布が可能です。詳細は利用規約をご確認ください。
+          </p>
+        </div>
+      </footer>
+
+      {/*
+        ★ 背景アニメーションJSを読み込む
       */}
       <Script
         src="/js/cosmicSim.js"
@@ -147,10 +209,7 @@ export default function Home() {
         src="/js/rotatingGalaxies.js"
         strategy="afterInteractive"
         onLoad={() => {
-          if (
-            typeof window !== 'undefined' &&
-            'startRotatingGalaxies' in window
-          ) {
+          if (typeof window !== 'undefined' && 'startRotatingGalaxies' in window) {
             // @ts-ignore
             window.startRotatingGalaxies();
           }
@@ -178,7 +237,7 @@ export default function Home() {
       />
 
       <style jsx>{`
-        /* ヒーローセクション：高さを400pxに変更 */
+        /* ヒーローセクション */
         .hero-section {
           position: relative;
           width: 100%;
@@ -193,12 +252,13 @@ export default function Home() {
           height: 100%;
         }
 
-        /* 下部背景アニメーション */
+        /* 下部アニメーション */
         .lower-animations-section {
           position: relative;
           width: 100%;
           min-height: 100vh;
           overflow: hidden;
+          background: #000;
         }
         .animation-bg-wrapper {
           position: absolute;
@@ -213,8 +273,6 @@ export default function Home() {
           width: 100%;
           height: 100%;
         }
-
-        /* 前面コンテンツ */
         .lower-content-foreground {
           position: relative;
           z-index: 2;
@@ -224,17 +282,18 @@ export default function Home() {
           text-align: center;
           color: #fff;
         }
-        .section-title {
-          font-size: 1.8rem;
-          margin-bottom: 20px;
-        }
 
-        /* 履歴書・職務経歴書グリッド（変更なし） */
+        .documents-section {
+          padding: 40px 20px;
+          text-align: center;
+          background: transparent;
+        }
         .resume-thumbnail-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
           justify-items: center;
+          margin-top: 20px;
         }
         .resume-thumb-card {
           background: rgba(0, 0, 0, 0.3);
@@ -243,8 +302,6 @@ export default function Home() {
           width: 100%;
           max-width: 300px;
         }
-
-        /* 青系動的ボタン */
         .blue-dynamic-button {
           position: relative;
           display: inline-block;
@@ -279,10 +336,16 @@ export default function Home() {
           left: 130%;
         }
 
-        /* コンテンツサムネイルグリッド：公式 YouTube Subscriptions ページ風 */
+        .section-title {
+          font-size: 1.8rem;
+          margin-bottom: 20px;
+        }
+        .contents-section {
+          margin-top: 40px;
+        }
         .thumbnail-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(5, 1fr);
           gap: 8px;
           margin-top: 30px;
           width: 100%;
@@ -298,7 +361,6 @@ export default function Home() {
         .thumbnail-card:hover {
           transform: scale(1.03);
         }
-        /* 16:9 アスペクト比を維持するためのトリック */
         .thumbnail-card::before {
           content: "";
           display: block;
@@ -324,12 +386,6 @@ export default function Home() {
           box-sizing: border-box;
         }
 
-        /* レスポンシブ設定 */
-        @media (min-width: 1024px) {
-          .thumbnail-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
         @media (max-width: 1024px) {
           .thumbnail-grid {
             grid-template-columns: repeat(3, 1fr);
@@ -344,6 +400,93 @@ export default function Home() {
           .thumbnail-grid {
             grid-template-columns: 1fr;
           }
+        }
+
+        /* NASA風フッター */
+        .kusaka-nasa-style-footer {
+          background-color: #000;
+          color: #fff;
+          padding: 40px 20px;
+          text-align: left;
+        }
+        .footer-inner {
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+        .footer-title {
+          font-size: 1.6rem;
+          margin-bottom: 0.5rem;
+        }
+        .footer-subtitle {
+          font-size: 1rem;
+          color: #ccc;
+          margin-bottom: 1rem;
+        }
+        .footer-description {
+          font-size: 0.9rem;
+          color: #ccc;
+          margin-bottom: 1.5rem;
+          line-height: 1.5;
+        }
+        .footer-links-section {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 40px;
+          margin-bottom: 1.5rem;
+        }
+        .footer-links-col {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .footer-links-col li {
+          margin-bottom: 0.5rem;
+        }
+        .footer-links-col a {
+          color: #aaa;
+          text-decoration: none;
+          font-size: 0.9rem;
+        }
+        .footer-links-col a:hover {
+          text-decoration: underline;
+        }
+        .footer-divider {
+          border: none;
+          border-top: 1px solid #444;
+          margin: 1.5rem 0;
+        }
+        .footer-links-bottom {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          font-size: 0.85rem;
+          margin-bottom: 1rem;
+        }
+        .footer-links-bottom a {
+          color: #999;
+          text-decoration: none;
+        }
+        .footer-links-bottom a:hover {
+          text-decoration: underline;
+        }
+        .footer-update {
+          font-size: 0.8rem;
+          color: #999;
+          margin-bottom: 0.5rem;
+        }
+        .footer-personal {
+          font-size: 0.9rem;
+          color: #aaa;
+          margin-bottom: 1rem;
+        }
+        .footer-personal a {
+          text-decoration: underline;
+          color: #bbb;
+        }
+        .footer-disclaimer {
+          font-size: 0.8rem;
+          color: #888;
+          line-height: 1.4;
         }
       `}</style>
     </>

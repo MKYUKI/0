@@ -12,6 +12,7 @@ import ChatGPTInterface from '../components/ChatGPTInterface'
 
 /**
  * シンプルなナビゲーションバー
+ * ※「Books」リンクおよびJP/USボタンは削除済み
  */
 function NavBar() {
   return (
@@ -23,7 +24,7 @@ function NavBar() {
         padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       }}
     >
       <div className="nav-left">
@@ -42,9 +43,10 @@ function NavBar() {
         <Link href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
           Contact
         </Link>
+        {/* Booksリンクは削除 */}
       </div>
       <div className="nav-right">
-        {/* 検索欄などを追加したい場合ここに */}
+        {/* 検索欄などを追加する場合はここに */}
       </div>
     </header>
   )
@@ -53,7 +55,10 @@ function NavBar() {
 /**
  * 簡易エラーバウンダリー
  */
-class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
   constructor(props: { children: React.ReactNode }) {
     super(props)
     this.state = { hasError: false }
@@ -108,13 +113,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/* Global GPT Chatの表示条件に '/0tube' を追加して、0tubeページでは表示しない */}
+        {/**
+         * フッターに GPTチャット欄を表示
+         * ※表示しないページ： '/', '/art', '/aichat', '/contact', '/books', '/excelvba'
+         */}
         <footer id="chat-footer" style={{ marginTop: '20px', padding: '10px' }}>
           {router.pathname !== '/' &&
             router.pathname !== '/art' &&
             router.pathname !== '/aichat' &&
             router.pathname !== '/contact' &&
-            router.pathname !== '/0tube' && (
+            router.pathname !== '/books' &&
+            router.pathname !== '/excelvba' && (
               <div style={{ borderTop: '1px solid #666', paddingTop: '8px' }}>
                 <h3>Global GPT Chat</h3>
                 <ChatGPTInterface
