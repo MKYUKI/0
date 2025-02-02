@@ -7,16 +7,29 @@ import Link from 'next/link';
 
 export default function Home() {
   // ダミーデータ：1から50までのコンテンツ（5列×10行用）
-  const thumbnails = Array.from({ length: 50 }, (_, i) => ({
-    id: i + 1,
-    title: `コンテンツ ${i + 1}`,
-    // ★ ここでコンテンツ2の場合は完成済みのサムネイル画像を使用するように条件分岐
-    imageUrl: (i + 1 === 2)
-      ? '/images/content2-thumbnail.jpg'  // 完成済みのサムネイル画像のパス
-      : '/images/placeholder.jpg',
-    // 例: コンテンツ3のみ /free-book にリンクする場合
-    link: (i + 1 === 3) ? '/free-book' : `/content/${i + 1}`
-  }));
+  // ※今回、以下の特別な設定を行います：
+  //   - コンテンツ2：画像は完成済みのサムネイル（'/images/content2-thumbnail.jpg'）を使用し、リンク先は '/book-market'
+  //   - コンテンツ3：タイトルを「AmazonKindle books 本」に変更し、
+  //                サムネイル画像は作成済みの新しい画像（例：'/images/amazonkindle-thumbnail.jpg'）を使用し、リンク先は '/free-book'
+  //   - それ以外はプレースホルダー画像（'/images/placeholder.jpg'）と通常のリンク(`/content/○`)を使用
+  const thumbnails = Array.from({ length: 50 }, (_, i) => {
+    const contentNumber = i + 1;
+    let title = `コンテンツ ${contentNumber}`;
+    let imageUrl = '/images/placeholder.jpg';
+    let link = `/content/${contentNumber}`;
+
+    if (contentNumber === 2) {
+      // コンテンツ2：完成済みサムネイル、リンク先は本が36冊並ぶページ（例：/book-market）
+      imageUrl = '/images/content2-thumbnail.jpg';
+      link = '/book-market';
+    } else if (contentNumber === 3) {
+      // コンテンツ3：タイトル変更およびサムネイル画像を更新
+      title = 'AmazonKindle books 本';
+      imageUrl = '/images/amazonkindle-thumbnail.jpg';
+      link = '/free-book';
+    }
+    return { id: contentNumber, title, imageUrl, link };
+  });
 
   return (
     <>
@@ -61,7 +74,9 @@ export default function Home() {
               <div className="resume-thumb-card">
                 <button
                   className="blue-dynamic-button"
-                  onClick={() => window.location.href = '/docs/MasakiKusaka_Resume.docx'}
+                  onClick={() =>
+                    (window.location.href = '/docs/MasakiKusaka_Resume.docx')
+                  }
                 >
                   MasakiKusaka_Resume.docx
                 </button>
@@ -69,7 +84,9 @@ export default function Home() {
               <div className="resume-thumb-card">
                 <button
                   className="blue-dynamic-button"
-                  onClick={() => window.location.href = '/docs/MasakiKusaka_Resume.pdf'}
+                  onClick={() =>
+                    (window.location.href = '/docs/MasakiKusaka_Resume.pdf')
+                  }
                 >
                   MasakiKusaka_Resume.pdf
                 </button>
@@ -77,7 +94,10 @@ export default function Home() {
               <div className="resume-thumb-card">
                 <button
                   className="blue-dynamic-button"
-                  onClick={() => window.location.href = '/docs/MasakiKusaka_CareerHistory.docx'}
+                  onClick={() =>
+                    (window.location.href =
+                      '/docs/MasakiKusaka_CareerHistory.docx')
+                  }
                 >
                   MasakiKusaka_CareerHistory.docx
                 </button>
@@ -85,7 +105,10 @@ export default function Home() {
               <div className="resume-thumb-card">
                 <button
                   className="blue-dynamic-button"
-                  onClick={() => window.location.href = '/docs/MasakiKusaka_CareerHistory.pdf'}
+                  onClick={() =>
+                    (window.location.href =
+                      '/docs/MasakiKusaka_CareerHistory.pdf')
+                  }
                 >
                   MasakiKusaka_CareerHistory.pdf
                 </button>
@@ -97,11 +120,14 @@ export default function Home() {
             ★ コンテンツ一覧
           */}
           <section className="contents-section">
-            <h2 className="section-title" style={{ marginTop: '40px' }}>
+            <h2
+              className="section-title"
+              style={{ marginTop: '40px' }}
+            >
               コンテンツ一覧
             </h2>
             <div className="thumbnail-grid">
-              {thumbnails.map(thumb => (
+              {thumbnails.map((thumb) => (
                 <Link key={thumb.id} href={thumb.link}>
                   <div className="thumbnail-card">
                     <img src={thumb.imageUrl} alt={thumb.title} />
@@ -122,39 +148,161 @@ export default function Home() {
       <footer className="kusaka-nasa-style-footer">
         <div className="footer-inner">
           <h3 className="footer-title">Masaki Kusaka (日下 真旗)</h3>
-          <p className="footer-subtitle">National Exploration of AI &amp; Space Simulations</p>
+          <p className="footer-subtitle">
+            National Exploration of AI &amp; Space Simulations
+          </p>
           <p className="footer-description">
-            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、<br/>
-            その後、接客やコールセンターなど様々な業種で経験を積みました。<br/>
+            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、<br />
+            その後、接客やコールセンターなど様々な業種で経験を積みました。<br />
             現在はIT業界への転身を目指し、Python等のプログラミング言語を学習中です。
           </p>
 
           <div className="footer-links-section">
             <ul className="footer-links-col">
-              <li><strong>Career / Works</strong></li>
-              <li><a href="https://oo-5qvtc.ondigitalocean.app/" target="_blank" rel="noreferrer">Portfolio Site 1</a></li>
-              <li><a href="http://0xxxxxxxxxxxxx.com/" target="_blank" rel="noreferrer">Portfolio Site 2</a></li>
-              <li><a href="https://youtube-newgit-mutrgtf3vd2jrsmc7urasv.streamlit.app/" target="_blank" rel="noreferrer">Streamlit App</a></li>
-              <li><a href="https://www.dropbox.com/scl/fo/pc5302dj9fd9ktl3zkz6o/AOPeSS-FS11b7HNV-ynHvQA?rlkey=2l0eiwbeaqmty46o5cut8ss8n&st=7iegyr44&dl=0" target="_blank" rel="noreferrer">Dropbox</a></li>
+              <li>
+                <strong>Career / Works</strong>
+              </li>
+              <li>
+                <a
+                  href="https://oo-5qvtc.ondigitalocean.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Portfolio Site 1
+                </a>
+              </li>
+              <li>
+                <a
+                  href="http://0xxxxxxxxxxxxx.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Portfolio Site 2
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://youtube-newgit-mutrgtf3vd2jrsmc7urasv.streamlit.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Streamlit App
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.dropbox.com/scl/fo/pc5302dj9fd9ktl3zkz6o/AOPeSS-FS11b7HNV-ynHvQA?rlkey=2l0eiwbeaqmty46o5cut8ss8n&st=7iegyr44&dl=0"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Dropbox
+                </a>
+              </li>
             </ul>
             <ul className="footer-links-col">
-              <li><strong>Tech &amp; Social</strong></li>
-              <li><a href="https://huggingface.co/pricing" target="_blank" rel="noreferrer">HuggingFace</a></li>
-              <li><a href="https://github.com/MKYUKI" target="_blank" rel="noreferrer">GitHub</a></li>
-              <li><a href="https://www.youtube.com/@MK_AGI" target="_blank" rel="noreferrer">YouTube</a></li>
-              <li><a href="https://x.com/MK_ASI0" target="_blank" rel="noreferrer">X (旧Twitter)</a></li>
-              <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></li>
+              <li>
+                <strong>Tech &amp; Social</strong>
+              </li>
+              <li>
+                <a
+                  href="https://huggingface.co/pricing"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  HuggingFace
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/MKYUKI"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/@MK_AGI"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/MK_ASI0"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  X (旧Twitter)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Facebook
+                </a>
+              </li>
             </ul>
             <ul className="footer-links-col">
-              <li><strong>Payments &amp; Shop</strong></li>
-              <li><a href="https://www.paypal.com/paypalme/MasakiKusaka" target="_blank" rel="noreferrer">PayPal</a></li>
-              <li><a href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka" target="_blank" rel="noreferrer">Amazon JP</a></li>
-              <li><a href="https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka" target="_blank" rel="noreferrer">Amazon US</a></li>
+              <li>
+                <strong>Payments &amp; Shop</strong>
+              </li>
+              <li>
+                <a
+                  href="https://www.paypal.com/paypalme/MasakiKusaka"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  PayPal
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Amazon JP
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Amazon US
+                </a>
+              </li>
             </ul>
             <ul className="footer-links-col">
-              <li><strong>Open Music / BGM</strong></li>
-              <li><a href="https://www.youtube.com/watch?v=jY1bGUaxv2Q&list=PLjbFG4Jyrt2-3ZVKb2Y31ud4iLXcVKE9B" target="_blank" rel="noreferrer">AI LLM BGM EDM</a></li>
-              <li><a href="https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO" target="_blank" rel="noreferrer">Open Music</a></li>
+              <li>
+                <strong>Open Music / BGM</strong>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=jY1bGUaxv2Q&list=PLjbFG4Jyrt2-3ZVKb2Y31ud4iLXcVKE9B"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  AI LLM BGM EDM
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open Music
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -176,7 +324,7 @@ export default function Home() {
             146-0085 東京都大田区久が原2-28-25 シェアハウス203号室 &emsp;|&emsp; E-mail: <a href="mailto:masaki136928@gmail.com">masaki136928@gmail.com</a>
           </p>
           <p className="footer-disclaimer">
-            本サイトの内容は「クリエイティブ・コモンズ1.0（CC0）」で完全公開しています。<br/>
+            本サイトの内容は「クリエイティブ・コモンズ1.0（CC0）」で完全公開しています。<br />
             誰でも自由に利用・改変・再配布が可能です。詳細は利用規約をご確認ください。
           </p>
         </div>
