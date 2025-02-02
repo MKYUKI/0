@@ -7,25 +7,30 @@ import Link from 'next/link';
 
 export default function Home() {
   // ダミーデータ：1から50までのコンテンツ（5列×10行用）
-  // ※今回、以下の特別な設定を行います：
-  //   - コンテンツ2：画像は完成済みのサムネイル（'/images/content2-thumbnail.jpg'）を使用し、リンク先は '/book-market'
-  //   - コンテンツ3：タイトルを「AmazonKindle books 本」に変更し、
-  //                サムネイル画像は作成済みの新しい画像（例：'/images/amazonkindle-thumbnail.jpg'）を使用し、リンク先は '/free-book'
-  //   - それ以外はプレースホルダー画像（'/images/placeholder.jpg'）と通常のリンク(`/content/○`)を使用
+  // 各コンテンツの設定は以下の通り：
+  // - コンテンツ1: タイトル「GitHub」、画像は '/images/github-thumbnail.jpg'、リンク先は外部の GitHub (https://github.com/MKYUKI/0)
+  // - コンテンツ2: 画像は '/images/content2-thumbnail.jpg'、リンク先は '/book-market'
+  // - コンテンツ3: タイトル「AmazonKindle books 本」、画像は '/images/amazonkindle-thumbnail.jpg'、リンク先は '/free-book'
+  // - その他はプレースホルダー画像 ('/images/placeholder.jpg') と内部リンク (/content/○)
   const thumbnails = Array.from({ length: 50 }, (_, i) => {
     const contentNumber = i + 1;
     let title = `コンテンツ ${contentNumber}`;
     let imageUrl = '/images/placeholder.jpg';
     let link = `/content/${contentNumber}`;
 
-    if (contentNumber === 2) {
-      // コンテンツ2：完成済みサムネイル、リンク先は本が36冊並ぶページ（例：/book-market）
-      imageUrl = '/images/content2-thumbnail.jpg';
+    if (contentNumber === 1) {
+      // コンテンツ1: GitHubへの外部リンク
+      title = 'GitHub';
+      imageUrl = '/images/github-thumbnail.jpg'; // public/images に配置
+      link = 'https://github.com/MKYUKI/0';
+    } else if (contentNumber === 2) {
+      // コンテンツ2: 完成済みのサムネイル画像を使用し、リンク先は /book-market
+      imageUrl = '/images/content2-thumbnail.jpg'; // public/images に配置
       link = '/book-market';
     } else if (contentNumber === 3) {
-      // コンテンツ3：タイトル変更およびサムネイル画像を更新
+      // コンテンツ3: タイトルと画像を変更
       title = 'AmazonKindle books 本';
-      imageUrl = '/images/amazonkindle-thumbnail.jpg';
+      imageUrl = '/images/amazonkindle-thumbnail.jpg'; // public/images に配置
       link = '/free-book';
     }
     return { id: contentNumber, title, imageUrl, link };
@@ -120,21 +125,37 @@ export default function Home() {
             ★ コンテンツ一覧
           */}
           <section className="contents-section">
-            <h2
-              className="section-title"
-              style={{ marginTop: '40px' }}
-            >
+            <h2 className="section-title" style={{ marginTop: '40px' }}>
               コンテンツ一覧
             </h2>
             <div className="thumbnail-grid">
-              {thumbnails.map((thumb) => (
-                <Link key={thumb.id} href={thumb.link}>
-                  <div className="thumbnail-card">
-                    <img src={thumb.imageUrl} alt={thumb.title} />
-                    <div className="thumbnail-title">{thumb.title}</div>
-                  </div>
-                </Link>
-              ))}
+              {thumbnails.map((thumb) => {
+                // 外部リンク（httpで始まる）の場合は <a> タグで target="_blank" を指定
+                if (thumb.link.startsWith('http')) {
+                  return (
+                    <a
+                      key={thumb.id}
+                      href={thumb.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div className="thumbnail-card">
+                        <img src={thumb.imageUrl} alt={thumb.title} />
+                        <div className="thumbnail-title">{thumb.title}</div>
+                      </div>
+                    </a>
+                  );
+                } else {
+                  return (
+                    <Link key={thumb.id} href={thumb.link}>
+                      <div className="thumbnail-card">
+                        <img src={thumb.imageUrl} alt={thumb.title} />
+                        <div className="thumbnail-title">{thumb.title}</div>
+                      </div>
+                    </Link>
+                  );
+                }
+              })}
             </div>
             <div style={{ height: '80px' }} />
           </section>
@@ -156,7 +177,6 @@ export default function Home() {
             その後、接客やコールセンターなど様々な業種で経験を積みました。<br />
             現在はIT業界への転身を目指し、Python等のプログラミング言語を学習中です。
           </p>
-
           <div className="footer-links-section">
             <ul className="footer-links-col">
               <li>
@@ -305,9 +325,7 @@ export default function Home() {
               </li>
             </ul>
           </div>
-
           <hr className="footer-divider" />
-
           <div className="footer-links-bottom">
             <a href="#">For Media</a>
             <a href="#">Privacy Policy</a>
@@ -316,7 +334,6 @@ export default function Home() {
             <a href="#">Contact</a>
             <a href="#">Accessibility</a>
           </div>
-
           <p className="footer-update">
             Page Last Updated: Jan 31, 2025 &emsp;|&emsp; Page Editor: 日下真旗 (Masaki Kusaka) &emsp;|&emsp; Responsible Official: MKYUKI
           </p>
@@ -330,9 +347,6 @@ export default function Home() {
         </div>
       </footer>
 
-      {/*
-        ★ 背景アニメーションJSを読み込む
-      */}
       <Script
         src="/js/cosmicSim.js"
         strategy="afterInteractive"
@@ -399,7 +413,6 @@ export default function Home() {
           width: 100%;
           height: 100%;
         }
-
         /* 下部アニメーション */
         .lower-animations-section {
           position: relative;
@@ -430,7 +443,6 @@ export default function Home() {
           text-align: center;
           color: #fff;
         }
-
         .documents-section {
           padding: 40px 20px;
           text-align: center;
@@ -483,7 +495,6 @@ export default function Home() {
         .blue-dynamic-button:hover::before {
           left: 130%;
         }
-
         .section-title {
           font-size: 1.8rem;
           margin-bottom: 20px;
@@ -533,7 +544,6 @@ export default function Home() {
           font-size: 0.9rem;
           box-sizing: border-box;
         }
-
         @media (max-width: 1024px) {
           .thumbnail-grid {
             grid-template-columns: repeat(3, 1fr);
@@ -549,8 +559,6 @@ export default function Home() {
             grid-template-columns: 1fr;
           }
         }
-
-        /* NASA風フッター */
         .kusaka-nasa-style-footer {
           background-color: #000;
           color: #fff;
