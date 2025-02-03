@@ -1,19 +1,41 @@
-// components/NavBar.tsx
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
+import SearchBar from './SearchBar';
 
-export default function NavBar(): JSX.Element {
+export default function NavBar() {
   return (
-    <header className="global-nav-bar">
-      <span className="nav-bar-title">GPT-4 Model</span>
-      <nav className="nav-bar-links">
-        <Link href="/"><span className="nav-link">Page1</span></Link>
-        <Link href="/page2"><span className="nav-link">Page2</span></Link>
-        <Link href="/page3"><span className="nav-link">Page3</span></Link>
-        <Link href="/page4"><span className="nav-link">Page4</span></Link>
-        <Link href="/page5"><span className="nav-link">Page5</span></Link>
-        <Link href="/page6"><span className="nav-link">Page6</span></Link>
-      </nav>
+    <header
+      className="navbar"
+      style={{
+        backgroundColor: '#000',
+        color: '#fff',
+        padding: '10px 20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
+      <div className="nav-left" style={{ display: 'flex', alignItems: 'center' }}>
+        <Link href="/">
+          <a className="nav-link" style={{ marginRight: '16px' }}>Home</a>
+        </Link>
+        <Link href="/aichat">
+          <a className="nav-link" style={{ marginRight: '16px' }}>AI Chat</a>
+        </Link>
+        <Link href="/art">
+          <a className="nav-link" style={{ marginRight: '16px' }}>Art</a>
+        </Link>
+        <Link href="/excelvba">
+          <a className="nav-link" style={{ marginRight: '16px' }}>ExcelVBA</a>
+        </Link>
+        <Link href="/contact">
+          <a className="nav-link" style={{ marginRight: '16px' }}>Contact</a>
+        </Link>
+        {/* Booksリンクは削除 */}
+      </div>
+      <div className="nav-right">
+        <SearchBar />
+      </div>
     </header>
-  )
+  );
 }

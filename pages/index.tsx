@@ -1,5 +1,3 @@
-// File: pages/index.tsx
-
 import Head from 'next/head';
 import React from 'react';
 import Script from 'next/script';
@@ -9,7 +7,7 @@ export default function Home() {
   // ダミーデータ：1から50までのコンテンツ（5列×10行用）
   // 各コンテンツの設定は以下の通り：
   // - コンテンツ1: タイトル「GitHub」、画像は '/images/github-thumbnail.jpg'、リンク先は外部の GitHub (https://github.com/MKYUKI/0)
-  // - コンテンツ2: 画像は '/images/content2-thumbnail.jpg'、リンク先は '/book-market'
+  // - コンテンツ2: 画像は '/images/content2-thumbnail.jpg'、リンク先は「X の私のホームページ」に変更
   // - コンテンツ3: タイトル「AmazonKindle books 本」、画像は '/images/amazonkindle-thumbnail.jpg'、リンク先は '/free-book'
   // - その他はプレースホルダー画像 ('/images/placeholder.jpg') と内部リンク (/content/○)
   const thumbnails = Array.from({ length: 50 }, (_, i) => {
@@ -24,9 +22,10 @@ export default function Home() {
       imageUrl = '/images/github-thumbnail.jpg'; // public/images に配置
       link = 'https://github.com/MKYUKI/0';
     } else if (contentNumber === 2) {
-      // コンテンツ2: 完成済みのサムネイル画像を使用し、リンク先は /book-market
+      // コンテンツ2: サムネイル画像はそのまま、リンク先を「X の私のホームページ」に変更
+      title = 'X';
       imageUrl = '/images/content2-thumbnail.jpg'; // public/images に配置
-      link = '/book-market';
+      link = 'https://x.com/MK_ASI0';
     } else if (contentNumber === 3) {
       // コンテンツ3: タイトルと画像を変更
       title = 'AmazonKindle books 本';
@@ -66,63 +65,53 @@ export default function Home() {
         </div>
 
         {/*
-          前面コンテンツ
-          履歴書・職務経歴書ダウンロードセクション＋コンテンツ一覧
+          前面コンテンツ：履歴書・職務経歴書ダウンロード＋コンテンツ一覧
         */}
         <div className="lower-content-foreground">
           {/*
-            ★ 履歴書・職務経歴書ダウンロード
+            ★ 履歴書・職務経歴書ダウンロードセクション
+               下記4つのボタンは、深い青色を基調としたダイナミックなアニメーション付きボタンです。
           */}
           <section className="documents-section">
             <h2 className="section-title">履歴書・職務経歴書ダウンロード</h2>
             <div className="resume-thumbnail-grid">
-              <div className="resume-thumb-card">
-                <button
-                  className="blue-dynamic-button"
-                  onClick={() =>
-                    (window.location.href = '/docs/MasakiKusaka_Resume.docx')
-                  }
-                >
-                  MasakiKusaka_Resume.docx
-                </button>
-              </div>
-              <div className="resume-thumb-card">
-                <button
-                  className="blue-dynamic-button"
-                  onClick={() =>
-                    (window.location.href = '/docs/MasakiKusaka_Resume.pdf')
-                  }
-                >
-                  MasakiKusaka_Resume.pdf
-                </button>
-              </div>
-              <div className="resume-thumb-card">
-                <button
-                  className="blue-dynamic-button"
-                  onClick={() =>
-                    (window.location.href =
-                      '/docs/MasakiKusaka_CareerHistory.docx')
-                  }
-                >
-                  MasakiKusaka_CareerHistory.docx
-                </button>
-              </div>
-              <div className="resume-thumb-card">
-                <button
-                  className="blue-dynamic-button"
-                  onClick={() =>
-                    (window.location.href =
-                      '/docs/MasakiKusaka_CareerHistory.pdf')
-                  }
-                >
-                  MasakiKusaka_CareerHistory.pdf
-                </button>
-              </div>
+              <button
+                className="dynamic-blue-button"
+                onClick={() =>
+                  (window.location.href = '/docs/MasakiKusaka_Resume.docx')
+                }
+              >
+                MasakiKusaka_Resume.docx
+              </button>
+              <button
+                className="dynamic-blue-button"
+                onClick={() =>
+                  (window.location.href = '/docs/MasakiKusaka_Resume.pdf')
+                }
+              >
+                MasakiKusaka_Resume.pdf
+              </button>
+              <button
+                className="dynamic-blue-button"
+                onClick={() =>
+                  (window.location.href = '/docs/MasakiKusaka_CareerHistory.docx')
+                }
+              >
+                MasakiKusaka_CareerHistory.docx
+              </button>
+              <button
+                className="dynamic-blue-button"
+                onClick={() =>
+                  (window.location.href = '/docs/MasakiKusaka_CareerHistory.pdf')
+                }
+              >
+                MasakiKusaka_CareerHistory.pdf
+              </button>
             </div>
           </section>
 
           {/*
-            ★ コンテンツ一覧
+            ★ コンテンツ一覧セクション
           */}
           <section className="contents-section">
             <h2 className="section-title" style={{ marginTop: '40px' }}>
@@ -130,7 +119,6 @@ export default function Home() {
             </h2>
             <div className="thumbnail-grid">
               {thumbnails.map((thumb) => {
-                // 外部リンク（httpで始まる）の場合は <a> タグで target="_blank" を指定
                 if (thumb.link.startsWith('http')) {
                   return (
                     <a
@@ -164,7 +152,8 @@ export default function Home() {
 
       {/*
         ★ NASA風フッター
-        ここに日下真旗 (Masaki Kusaka) 様の個人情報や著作権等を明記
+           以下は、クリック可能なリンクがすべて含まれた、世界最高峰の動的フッターです。
+           ※フッターの各セクションは、縦幅が均一かつコンパクトに表示されるように調整済みです。
       */}
       <footer className="kusaka-nasa-style-footer">
         <div className="footer-inner">
@@ -173,40 +162,199 @@ export default function Home() {
             National Exploration of AI &amp; Space Simulations
           </p>
           <p className="footer-description">
-            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、<br />
-            その後、接客やコールセンターなど様々な業種で経験を積みました。<br />
+            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、
+            その後、接客やコールセンターなど様々な業種で経験を積みました。
             現在はIT業界への転身を目指し、Python等のプログラミング言語を学習中です。
           </p>
+
           <div className="footer-links-section">
-            <ul className="footer-links-col">
+            <div className="footer-column">
+              <h4>Career / Works</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://oo-5qvtc.ondigitalocean.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Portfolio Site 1
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="http://0xxxxxxxxxxxxx.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Portfolio Site 2
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://youtube-newgit-mutrgtf3vd2jrsmc7urasv.streamlit.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Streamlit App
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.dropbox.com/scl/fo/pc5302dj9fd9ktl3zkz6o/AOPeSS-FS11b7HNV-ynHvQA?rlkey=2l0eiwbeaqmty46o5cut8ss8n&st=7iegyr44&dl=0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Dropbox
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h4>Tech &amp; Social</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://huggingface.co/pricing"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    HuggingFace
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/MKYUKI"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/@MK_AGI"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    YouTube
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://x.com/MK_ASI0"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    X (旧Twitter)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Facebook
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h4>Payments &amp; Shop</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://www.paypal.com/paypalme/MasakiKusaka"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    PayPal
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Amazon JP
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Amazon US
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="footer-column">
+              <h4>Open Music / BGM</h4>
+              <ul>
+                <li>
+                  <a
+                    href="https://www.youtube.com/watch?v=jY1bGUaxv2Q&list=PLjbFG4Jyrt2-3ZVKb2Y31ud4iLXcVKE9B"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    AI LLM BGM EDM
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open Music
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="footer-extra-links">
+            <a href="#">For Media</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">No FEAR Act</a>
+            <a href="#">Budget &amp; Annual Reports</a>
+            <a href="#">Contact</a>
+            <a href="#">Accessibility</a>
+          </div>
+
+          <p className="footer-update">
+            Page Last Updated: Jan 31, 2025 | Page Editor: 日下真旗 (Masaki Kusaka) | Responsible Official: MKYUKI
+          </p>
+          <p className="footer-personal">
+            146-0085 東京都大田区久が原2-28-25 シェアハウス203号室 | E-mail: <a href="mailto:masaki136928@gmail.com">masaki136928@gmail.com</a>
+          </p>
+          <p className="footer-disclaimer">
+            本サイトの内容は「クリエイティブ・コモンズ1.0（CC0）」で完全公開しています。<br />
+            誰でも自由に利用・改変・再配布が可能です。詳細は利用規約をご確認ください.
+          </p>
+          <div className="footer-portfolio-links">
+            <p>ポートフォリオ、世界でも屈指のwebサイト:</p>
+            <ul>
               <li>
-                <strong>Career / Works</strong>
+                <a href="https://oo-5qvtc.ondigitalocean.app/" target="_blank" rel="noreferrer">
+                  https://oo-5qvtc.ondigitalocean.app/
+                </a>
               </li>
               <li>
-                <a
-                  href="https://oo-5qvtc.ondigitalocean.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Portfolio Site 1
+                <a href="http://0xxxxxxxxxxxxx.com/" target="_blank" rel="noreferrer">
+                  http://0xxxxxxxxxxxxx.com/
                 </a>
               </li>
               <li>
                 <a
-                  href="http://0xxxxxxxxxxxxx.com/"
+                  href="https://www.youtube.com/watch?v=jY1bGUaxv2Q&list=PLjbFG4Jyrt2-3ZVKb2Y31ud4iLXcVKE9B"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Portfolio Site 2
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://youtube-newgit-mutrgtf3vd2jrsmc7urasv.streamlit.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Streamlit App
+                  YouTube (AI LLM BGM EDM)
                 </a>
               </li>
               <li>
@@ -218,73 +366,39 @@ export default function Home() {
                   Dropbox
                 </a>
               </li>
-            </ul>
-            <ul className="footer-links-col">
               <li>
-                <strong>Tech &amp; Social</strong>
-              </li>
-              <li>
-                <a
-                  href="https://huggingface.co/pricing"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://huggingface.co/pricing" target="_blank" rel="noreferrer">
                   HuggingFace
                 </a>
               </li>
               <li>
-                <a
-                  href="https://github.com/MKYUKI"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://github.com/MKYUKI" target="_blank" rel="noreferrer">
                   GitHub
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.youtube.com/@MK_AGI"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  YouTube
+                <a href="https://www.youtube.com/@MK_AGI" target="_blank" rel="noreferrer">
+                  YouTube (@MK_AGI)
                 </a>
               </li>
               <li>
-                <a
-                  href="https://x.com/MK_ASI0"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://x.com/MK_ASI0" target="_blank" rel="noreferrer">
                   X (旧Twitter)
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
                   Facebook
                 </a>
               </li>
-            </ul>
-            <ul className="footer-links-col">
               <li>
-                <strong>Payments &amp; Shop</strong>
-              </li>
-              <li>
-                <a
-                  href="https://www.paypal.com/paypalme/MasakiKusaka"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href="https://www.paypal.com/paypalme/MasakiKusaka" target="_blank" rel="noreferrer">
                   PayPal
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
+                  href="https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -293,7 +407,7 @@ export default function Home() {
               </li>
               <li>
                 <a
-                  href="https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka"
+                  href="https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -301,49 +415,7 @@ export default function Home() {
                 </a>
               </li>
             </ul>
-            <ul className="footer-links-col">
-              <li>
-                <strong>Open Music / BGM</strong>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/watch?v=jY1bGUaxv2Q&list=PLjbFG4Jyrt2-3ZVKb2Y31ud4iLXcVKE9B"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  AI LLM BGM EDM
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open Music
-                </a>
-              </li>
-            </ul>
           </div>
-          <hr className="footer-divider" />
-          <div className="footer-links-bottom">
-            <a href="#">For Media</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">No FEAR Act</a>
-            <a href="#">Budget &amp; Annual Reports</a>
-            <a href="#">Contact</a>
-            <a href="#">Accessibility</a>
-          </div>
-          <p className="footer-update">
-            Page Last Updated: Jan 31, 2025 &emsp;|&emsp; Page Editor: 日下真旗 (Masaki Kusaka) &emsp;|&emsp; Responsible Official: MKYUKI
-          </p>
-          <p className="footer-personal">
-            146-0085 東京都大田区久が原2-28-25 シェアハウス203号室 &emsp;|&emsp; E-mail: <a href="mailto:masaki136928@gmail.com">masaki136928@gmail.com</a>
-          </p>
-          <p className="footer-disclaimer">
-            本サイトの内容は「クリエイティブ・コモンズ1.0（CC0）」で完全公開しています。<br />
-            誰でも自由に利用・改変・再配布が可能です。詳細は利用規約をご確認ください。
-          </p>
         </div>
       </footer>
 
@@ -413,7 +485,7 @@ export default function Home() {
           width: 100%;
           height: 100%;
         }
-        /* 下部アニメーション */
+        /* 下部背景アニメーション */
         .lower-animations-section {
           position: relative;
           width: 100%;
@@ -434,74 +506,21 @@ export default function Home() {
           width: 100%;
           height: 100%;
         }
+        /* 前面コンテンツ */
         .lower-content-foreground {
           position: relative;
           z-index: 2;
-          padding: 20px;
+          padding: 40px 20px;
           max-width: 1200px;
           margin: 0 auto;
           text-align: center;
           color: #fff;
         }
-        .documents-section {
-          padding: 40px 20px;
-          text-align: center;
-          background: transparent;
-        }
-        .resume-thumbnail-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          justify-items: center;
-          margin-top: 20px;
-        }
-        .resume-thumb-card {
-          background: rgba(0, 0, 0, 0.3);
-          border-radius: 8px;
-          padding: 20px;
-          width: 100%;
-          max-width: 300px;
-        }
-        .blue-dynamic-button {
-          position: relative;
-          display: inline-block;
-          padding: 12px 16px;
-          color: #e0f4ff;
-          font-size: 1rem;
-          font-weight: 600;
-          border: 2px solid #2187ff;
-          border-radius: 6px;
-          background: transparent;
-          overflow: hidden;
-          cursor: pointer;
-          transition: 0.3s;
-          width: 100%;
-          max-width: 250px;
-        }
-        .blue-dynamic-button:hover {
-          background: rgba(33, 135, 255, 0.15);
-        }
-        .blue-dynamic-button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -30%;
-          width: 30%;
-          height: 100%;
-          background: rgba(33, 135, 255, 0.4);
-          transform: skewX(-45deg);
-          transition: 0.5s;
-        }
-        .blue-dynamic-button:hover::before {
-          left: 130%;
-        }
         .section-title {
           font-size: 1.8rem;
           margin-bottom: 20px;
         }
-        .contents-section {
-          margin-top: 40px;
-        }
+        /* コンテンツサムネイルグリッド：横5×縦10 */
         .thumbnail-grid {
           display: grid;
           grid-template-columns: repeat(5, 1fr);
@@ -559,81 +578,138 @@ export default function Home() {
             grid-template-columns: 1fr;
           }
         }
+        /* Dynamic Blue Button for Documents Download */
+        .dynamic-blue-button {
+          background: linear-gradient(45deg, #0033cc, #3366ff);
+          border: 2px solid #0033cc;
+          color: #fff;
+          padding: 12px 16px;
+          font-size: 1rem;
+          font-weight: bold;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          margin: 10px;
+          width: 100%;
+          max-width: 250px;
+        }
+        .dynamic-blue-button:hover {
+          transform: scale(1.05);
+        }
+        .dynamic-blue-button::before {
+          content: "";
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(0,69,255,0.4) 0%, rgba(0,69,255,0) 70%);
+          animation: pulseBlue 2s infinite;
+        }
+        @keyframes pulseBlue {
+          0% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.2);
+            opacity: 0.5;
+          }
+          100% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+        }
+        /* Footer Styles */
         .kusaka-nasa-style-footer {
           background-color: #000;
           color: #fff;
-          padding: 40px 20px;
+          padding: 20px 20px; /* reduced vertical padding for a compact look */
           text-align: left;
         }
         .footer-inner {
           max-width: 1200px;
           margin: 0 auto;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          align-items: flex-start;
+          justify-content: space-between;
         }
         .footer-title {
-          font-size: 1.6rem;
-          margin-bottom: 0.5rem;
+          font-size: 1.4rem;
+          margin: 0 0 5px 0;
         }
         .footer-subtitle {
-          font-size: 1rem;
+          font-size: 0.95rem;
           color: #ccc;
-          margin-bottom: 1rem;
+          margin: 0 0 10px 0;
+          line-height: 1.2;
         }
         .footer-description {
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           color: #ccc;
-          margin-bottom: 1.5rem;
-          line-height: 1.5;
+          margin: 0 0 10px 0;
+          line-height: 1.2;
         }
         .footer-links-section {
           display: flex;
           flex-wrap: wrap;
-          gap: 40px;
-          margin-bottom: 1.5rem;
+          gap: 20px;
+          margin: 10px 0;
+          flex: 1;
+          min-width: 200px;
         }
-        .footer-links-col {
+        .footer-column {
+          flex: 1;
+          min-width: 150px;
+        }
+        .footer-column h4 {
+          margin: 0 0 5px 0;
+          font-size: 1rem;
+          color: #fff;
+        }
+        .footer-column ul {
           list-style: none;
           padding: 0;
           margin: 0;
         }
-        .footer-links-col li {
-          margin-bottom: 0.5rem;
+        .footer-column li {
+          margin-bottom: 3px;
         }
-        .footer-links-col a {
+        .footer-column a {
           color: #aaa;
           text-decoration: none;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
         }
-        .footer-links-col a:hover {
+        .footer-column a:hover {
           text-decoration: underline;
         }
-        .footer-divider {
-          border: none;
-          border-top: 1px solid #444;
-          margin: 1.5rem 0;
-        }
-        .footer-links-bottom {
+        .footer-extra-links {
+          margin: 10px 0;
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem;
-          font-size: 0.85rem;
-          margin-bottom: 1rem;
+          gap: 10px;
         }
-        .footer-links-bottom a {
-          color: #999;
+        .footer-extra-links a {
+          color: #aaa;
           text-decoration: none;
+          font-size: 0.8rem;
         }
-        .footer-links-bottom a:hover {
+        .footer-extra-links a:hover {
           text-decoration: underline;
         }
         .footer-update {
           font-size: 0.8rem;
           color: #999;
-          margin-bottom: 0.5rem;
+          margin: 5px 0;
         }
         .footer-personal {
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           color: #aaa;
-          margin-bottom: 1rem;
+          margin: 5px 0;
         }
         .footer-personal a {
           text-decoration: underline;
@@ -642,7 +718,46 @@ export default function Home() {
         .footer-disclaimer {
           font-size: 0.8rem;
           color: #888;
-          line-height: 1.4;
+          line-height: 1.2;
+          margin: 5px 0;
+        }
+        .footer-portfolio-links {
+          margin-top: 10px;
+        }
+        .footer-portfolio-links p {
+          margin: 0 0 5px 0;
+          font-size: 0.85rem;
+        }
+        .footer-portfolio-links ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+        .footer-portfolio-links li {
+          margin-bottom: 0;
+        }
+        .footer-portfolio-links a {
+          color: #aaa;
+          font-size: 0.8rem;
+          text-decoration: none;
+        }
+        .footer-portfolio-links a:hover {
+          text-decoration: underline;
+        }
+        /* Responsive adjustments for the footer */
+        @media (max-width: 768px) {
+          .footer-inner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+          }
+          .footer-links-section {
+            flex-direction: column;
+            gap: 10px;
+          }
         }
       `}</style>
     </>

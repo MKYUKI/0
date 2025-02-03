@@ -10,6 +10,9 @@ import '../styles/globals.css'
 // ChatGPTInterfaceをフッターに表示
 import ChatGPTInterface from '../components/ChatGPTInterface'
 
+// SearchBar コンポーネントをインポート（検索エンジン／ChatGPT連携機能用）
+import SearchBar from '../components/SearchBar'
+
 /**
  * シンプルなナビゲーションバー
  * ※「Books」リンクおよびJP/USボタンは削除済み
@@ -46,7 +49,8 @@ function NavBar() {
         {/* Booksリンクは削除 */}
       </div>
       <div className="nav-right">
-        {/* 検索欄などを追加する場合はここに */}
+        {/* 右端に検索エンジン／ChatGPT連携機能を追加 */}
+        <SearchBar />
       </div>
     </header>
   )
