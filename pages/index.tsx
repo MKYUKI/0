@@ -9,6 +9,15 @@ export default function Home() {
   // - コンテンツ1: タイトル「GitHub」、画像は '/images/github-thumbnail.jpg'、リンク先は外部の GitHub (https://github.com/MKYUKI/0)
   // - コンテンツ2: 画像は '/images/content2-thumbnail.jpg'、リンク先は「X の私のホームページ」に変更
   // - コンテンツ3: タイトル「AmazonKindle books 本」、画像は '/images/amazonkindle-thumbnail.jpg'、リンク先は '/free-book'
+  // - コンテンツ4: タイトル「ChatGPTo3」、画像は '/images/chatgpt-thumbnail.jpg'、リンク先は https://chatgpt.com/
+  // - コンテンツ5: タイトル「寄付Paypal」、画像は '/images/paypal-thumbnail.jpg'、リンク先は https://www.paypal.com/paypalme/MasakiKusaka
+  // - コンテンツ6: タイトル「HuggingFace」、画像は '/images/huggingface-thumbnail.jpg'、リンク先は https://huggingface.co/MasakiYUKI
+  // - コンテンツ7: タイトル「Facebook」、画像は '/images/facebook-thumbnail.jpg'、リンク先は https://www.facebook.com/
+  // - コンテンツ8: タイトル「本販売JP」、画像は '/images/amazonjp-thumbnail.jpg'、リンク先は https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1
+  // - コンテンツ11: タイトル「Dropbox」、画像は '/images/dropbox-thumbnail.jpg'、リンク先は Dropbox の指定URL
+  // - コンテンツ12: タイトル「YouTube Home」、画像は '/images/youtube-thumbnail.jpg'、リンク先は https://www.youtube.com/@MK_ASI0
+  // - コンテンツ13: タイトル「Book Sales US」、画像は '/images/amazonus-thumbnail.jpg'、リンク先は https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1
+  // - コンテンツ17: タイトル「YouTube Open」、画像は '/images/youtube-thumbnail.jpg'、リンク先は https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO
   // - その他はプレースホルダー画像 ('/images/placeholder.jpg') と内部リンク (/content/○)
   const thumbnails = Array.from({ length: 50 }, (_, i) => {
     const contentNumber = i + 1;
@@ -19,18 +28,67 @@ export default function Home() {
     if (contentNumber === 1) {
       // コンテンツ1: GitHubへの外部リンク
       title = 'GitHub';
-      imageUrl = '/images/github-thumbnail.jpg'; // public/images に配置
+      imageUrl = '/images/github-thumbnail.jpg';
       link = 'https://github.com/MKYUKI/0';
     } else if (contentNumber === 2) {
-      // コンテンツ2: サムネイル画像はそのまま、リンク先を「X の私のホームページ」に変更
+      // コンテンツ2: X のホームページへリンク
       title = 'X';
-      imageUrl = '/images/content2-thumbnail.jpg'; // public/images に配置
+      imageUrl = '/images/content2-thumbnail.jpg';
       link = 'https://x.com/MK_ASI0';
     } else if (contentNumber === 3) {
-      // コンテンツ3: タイトルと画像を変更
+      // コンテンツ3: AmazonKindle books 本
       title = 'AmazonKindle books 本';
-      imageUrl = '/images/amazonkindle-thumbnail.jpg'; // public/images に配置
+      imageUrl = '/images/amazonkindle-thumbnail.jpg';
       link = '/free-book';
+    } else if (contentNumber === 4) {
+      // コンテンツ4: ChatGPTo3
+      title = 'ChatGPTo3';
+      imageUrl = '/images/chatgpt-thumbnail.jpg';
+      link = 'https://chatgpt.com/';
+    } else if (contentNumber === 5) {
+      // コンテンツ5: 寄付Paypal
+      title = '寄付Paypal';
+      imageUrl = '/images/paypal-thumbnail.jpg';
+      link = 'https://www.paypal.com/paypalme/MasakiKusaka';
+    } else if (contentNumber === 6) {
+      // コンテンツ6: HuggingFace
+      title = 'HuggingFace';
+      imageUrl = '/images/huggingface-thumbnail.jpg';
+      link = 'https://huggingface.co/MasakiYUKI';
+    } else if (contentNumber === 7) {
+      // コンテンツ7: Facebook
+      title = 'Facebook';
+      imageUrl = '/images/facebook-thumbnail.jpg';
+      link = 'https://www.facebook.com/';
+    } else if (contentNumber === 8) {
+      // コンテンツ8: 本販売JP
+      title = '本販売JP';
+      imageUrl = '/images/amazonjp-thumbnail.jpg';
+      link =
+        'https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1';
+    } else if (contentNumber === 11) {
+      // コンテンツ11: Dropbox
+      title = 'Dropbox';
+      imageUrl = '/images/dropbox-thumbnail.jpg';
+      link =
+        'https://www.dropbox.com/scl/fo/pc5302dj9fd9ktl3zkz6o/AOPeSS-FS11b7HNV-ynHvQA?rlkey=2l0eiwbeaqmty46o5cut8ss8n&st=7iegyr44&dl=0';
+    } else if (contentNumber === 12) {
+      // コンテンツ12: YouTube Home
+      title = 'YouTube Home';
+      imageUrl = '/images/youtube-thumbnail0.jpg';
+      link = 'https://www.youtube.com/@MK_ASI0';
+    } else if (contentNumber === 13) {
+      // コンテンツ13: Book Sales US
+      title = 'Book Sales US';
+      imageUrl = '/images/amazonus-thumbnail.jpg';
+      link =
+        'https://www.amazon.com/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1';
+    } else if (contentNumber === 17) {
+      // コンテンツ17: YouTube Open
+      title = 'YouTube Open';
+      imageUrl = '/images/youtube-thumbnail.jpg';
+      link =
+        'https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO';
     }
     return { id: contentNumber, title, imageUrl, link };
   });
@@ -162,8 +220,8 @@ export default function Home() {
             National Exploration of AI &amp; Space Simulations
           </p>
           <p className="footer-description">
-            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、
-            その後、接客やコールセンターなど様々な業種で経験を積みました。
+            広島国際大学保健医療学部救急救命学科で人命救助の知識を学び、<br />
+            その後、接客やコールセンターなど様々な業種で経験を積みました。<br />
             現在はIT業界への転身を目指し、Python等のプログラミング言語を学習中です。
           </p>
 
