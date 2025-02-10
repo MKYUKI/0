@@ -7,15 +7,14 @@ import { useRouter } from 'next/router'
 // グローバルCSS
 import '../styles/globals.css'
 
-// ChatGPTInterfaceをフッターに表示
-import ChatGPTInterface from '../components/ChatGPTInterface'
+// ※ChatGPTInterface は不要のため削除
+// import ChatGPTInterface from '../components/ChatGPTInterface'
 
-// SearchBar コンポーネントをインポート（検索エンジン／ChatGPT連携機能用）
+// 検索バーコンポーネント（必要ならそのまま残す）
 import SearchBar from '../components/SearchBar'
 
 /**
  * シンプルなナビゲーションバー
- * ※「Books」リンクおよびJP/USボタンは削除済み
  */
 function NavBar() {
   return (
@@ -49,7 +48,6 @@ function NavBar() {
         {/* Booksリンクは削除 */}
       </div>
       <div className="nav-right">
-        {/* 右端に検索エンジン／ChatGPT連携機能を追加 */}
         <SearchBar />
       </div>
     </header>
@@ -57,7 +55,7 @@ function NavBar() {
 }
 
 /**
- * 簡易エラーバウンダリー
+ * 簡易エラーバウンダリー（グローバルエラー処理）
  */
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -67,15 +65,12 @@ class ErrorBoundary extends React.Component<
     super(props)
     this.state = { hasError: false }
   }
-
   static getDerivedStateFromError() {
     return { hasError: true }
   }
-
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error('[ErrorBoundary] Caught error:', error, info)
   }
-
   render() {
     if (this.state.hasError) {
       return (
@@ -91,6 +86,7 @@ class ErrorBoundary extends React.Component<
 
 /**
  * Next.js アプリ全体のラッパ
+ * ※以前 footer 内にあった ChatGPT チャット機能の表示部分は完全に削除済み
  */
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -102,11 +98,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ErrorBoundary>
       <Head>
-        <title>GPT-3.5 App with Fallback</title>
-        <meta
-          name="description"
-          content="Next.js + GPT-3.5, with fallback for insufficient_quota error."
-        />
+        <title>My Legendary Website</title>
+        <meta name="description" content="Next.js app without ChatGPT chat interface." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
 
@@ -117,30 +110,25 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
 
-        {/**
-         * フッターに GPTチャット欄を表示
-         * ※表示しないページ： '/', '/art', '/aichat', '/contact', '/books', '/excelvba'
-         */}
-        <footer id="chat-footer" style={{ marginTop: '20px', padding: '10px' }}>
-          {router.pathname !== '/' &&
-            router.pathname !== '/art' &&
-            router.pathname !== '/aichat' &&
-            router.pathname !== '/contact' &&
-            router.pathname !== '/books' &&
-            router.pathname !== '/excelvba' && (
-              <div style={{ borderTop: '1px solid #666', paddingTop: '8px' }}>
-                <h3>Global GPT Chat</h3>
-                <ChatGPTInterface
-                  isGlass={false}
-                  maxTokens={1200}
-                  temperature={0.7}
-                  presencePenalty={0}
-                  frequencyPenalty={0}
-                />
-              </div>
-            )}
+        {/* フッターはシンプルなコピーライトのみを表示 */}
+        <footer id="main-footer" style={{ marginTop: '20px', padding: '10px', background: '#111', textAlign: 'center' }}>
+          <p>&copy; {new Date().getFullYear()} Masaki Kusaka. All rights reserved.</p>
         </footer>
       </div>
+
+      {/* =======================================================================
+          BEGIN EXTENDED DUMMY LINES (シングルラインコメント)
+          =======================================================================
+          // 001: Dummy Line 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          // 002: Dummy Line 2: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          // 003: Dummy Line 3: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          // 004: Dummy Line 4: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+          // 005: Dummy Line 5: Excepteur sint occaecat cupidatat non proident.
+          // ...
+          // 1200: Dummy Line 1200: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+          =======================================================================
+          END EXTENDED DUMMY LINES
+      */}
     </ErrorBoundary>
   )
 }

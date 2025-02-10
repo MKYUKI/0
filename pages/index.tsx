@@ -89,7 +89,11 @@ export default function Home() {
       imageUrl = '/images/youtube-thumbnail.jpg';
       link =
         'https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO';
-    }
+    } else if (contentNumber === 18) {
+      title = '宇宙史上最高峰の魔法ゲーム';
+      imageUrl = '/images/ultimate-magic-game-thumbnail.jpg';
+      link = '/game';
+  }
     return { id: contentNumber, title, imageUrl, link };
   });
 
