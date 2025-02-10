@@ -46,10 +46,10 @@ export default function Home() {
       imageUrl = '/images/chatgpt-thumbnail.jpg';
       link = 'https://chatgpt.com/';
     } else if (contentNumber === 5) {
-      // コンテンツ5: 寄付Paypal
-      title = '寄付Paypal';
-      imageUrl = '/images/paypal-thumbnail.jpg';
-      link = 'https://www.paypal.com/paypalme/MasakiKusaka';
+      // 【修正後】コンテンツ5：本来は魔法ゲームの画像・リンク（元はコンテンツ18の機能）
+      title = '宇宙史上最高峰の魔法ゲーム';
+      imageUrl = '/images/ultimate-magic-game-thumbnail.jpg';
+      link = '/game';
     } else if (contentNumber === 6) {
       // コンテンツ6: HuggingFace
       title = 'HuggingFace';
@@ -66,7 +66,12 @@ export default function Home() {
       imageUrl = '/images/amazonjp-thumbnail.jpg';
       link =
         'https://www.amazon.co.jp/s?i=digital-text&rh=p_27%3AMasaki+Kusaka&s=relevancerank&text=Masaki+Kusaka&ref=dp_byline_sr_ebooks_1';
-    } else if (contentNumber === 11) {
+      } else if (contentNumber === 10) {
+        // ここでコンテンツ10のみ、新たなゲームページへ遷移するよう設定
+        title = 'Ultimate Cosmic Sandbox';
+        imageUrl = '/images/cosmic-game-thumbnail.jpg'; // 新たなゲーム専用のサムネイル
+        link = '/cosmicGameV3';
+      } else if (contentNumber === 11) {
       // コンテンツ11: Dropbox
       title = 'Dropbox';
       imageUrl = '/images/dropbox-thumbnail.jpg';
@@ -89,11 +94,12 @@ export default function Home() {
       imageUrl = '/images/youtube-thumbnail.jpg';
       link =
         'https://www.youtube.com/watch?v=dh01eSOn9_E&list=PLjbFG4Jyrt2_R6RyHsEet-kuwhZtKhJTO';
-    } else if (contentNumber === 18) {
-      title = '宇宙史上最高峰の魔法ゲーム';
-      imageUrl = '/images/ultimate-magic-game-thumbnail.jpg';
-      link = '/game';
-  }
+      } else if (contentNumber === 18) {
+        // 【修正後】コンテンツ18：本来は寄付Paypalの画像・リンク（元はコンテンツ5の機能）
+        title = '寄付Paypal';
+        imageUrl = '/images/paypal-thumbnail.jpg';
+        link = 'https://www.paypal.com/paypalme/MasakiKusaka';
+      }
     return { id: contentNumber, title, imageUrl, link };
   });
 
