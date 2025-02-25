@@ -99,6 +99,11 @@ export default function Home() {
         title = '寄付Paypal';
         imageUrl = '/images/paypal-thumbnail.jpg';
         link = 'https://www.paypal.com/paypalme/MasakiKusaka';
+      } else if (contentNumber === 23) {
+        // 追加: コンテンツ23用のサムネイル画像とリンク
+        title = '普遍物理法則に基づく自己超越治癒理論';
+        imageUrl = '/images/content23-thumbnail.jpg';
+        link = '/content/23';
       }
     return { id: contentNumber, title, imageUrl, link };
   });

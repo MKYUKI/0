@@ -1,3 +1,4 @@
+//_app.tsx
 import type { AppProps } from 'next/app'
 import React, { useEffect } from 'react'
 import Head from 'next/head'

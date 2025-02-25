@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/Gdrm5xkYTpp_CaVOMzTJ5/_buildManifest.js",
-    "static/Gdrm5xkYTpp_CaVOMzTJ5/_ssgManifest.js"
+    "static/P68ox-0N7PCgMJC8sHLFk/_buildManifest.js",
+    "static/P68ox-0N7PCgMJC8sHLFk/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -15,7 +15,7 @@
       "static/chunks/framework-fae63b21a27d6472.js",
       "static/chunks/main-eaeda76b22a29db9.js",
       "static/chunks/379-fe625be685375b3a.js",
-      "static/chunks/pages/index-d7ec96e94713e640.js"
+      "static/chunks/pages/index-285431351f904efb.js"
     ],
     "/0tube": [
       "static/chunks/webpack-fa99431b15635937.js",
@@ -100,6 +100,12 @@
       "static/chunks/framework-fae63b21a27d6472.js",
       "static/chunks/main-eaeda76b22a29db9.js",
       "static/chunks/pages/contact-c8ded9b89746f4e9.js"
+    ],
+    "/content/23": [
+      "static/chunks/webpack-fa99431b15635937.js",
+      "static/chunks/framework-fae63b21a27d6472.js",
+      "static/chunks/main-eaeda76b22a29db9.js",
+      "static/chunks/pages/content/23-a566f25cfd3e2946.js"
     ],
     "/cosmicGameV3": [
       "static/chunks/webpack-fa99431b15635937.js",
