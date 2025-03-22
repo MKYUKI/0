@@ -9,6 +9,7 @@ import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 import SearchBar from '../components/SearchBar';
 
+// 共通ナビゲーションバー
 function NavBar() {
   return (
     <header
@@ -41,12 +42,12 @@ function NavBar() {
       </div>
       <div className="nav-right">
         <SearchBar />
-        {/* 必要に応じて認証ボタン等を追加 */}
       </div>
     </header>
   );
 }
 
+// エラーバウンダリ（エラー発生時の表示）
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
@@ -76,15 +77,14 @@ class ErrorBoundary extends React.Component<
 
 export default function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const router = useRouter();
-
   useEffect(() => {
     console.log('[MyApp] mounted on client side.');
   }, []);
 
-  // router.asPath を使用して、パスが "/login" で始まる場合にログイン専用レイアウトを適用する
-  const isAuthPage = router.asPath.startsWith('/login');
+  // ログイン専用ページの判定：URL が "/login" で始まる場合は共通レイアウトを除く
+  const isLoginPage = router.asPath.startsWith('/login');
 
-  if (isAuthPage) {
+  if (isLoginPage) {
     return (
       <SessionProvider session={session}>
         <ErrorBoundary>
@@ -93,13 +93,13 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
             <meta name="description" content="Log in with Google to enter the Cosmic Portal." />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
-          {/* ログイン専用ページは共通のNavBarやfooterを表示しない */}
           <Component {...pageProps} />
         </ErrorBoundary>
       </SessionProvider>
     );
   }
 
+  // 共通レイアウトを使用するページ
   return (
     <SessionProvider session={session}>
       <ErrorBoundary>
@@ -113,10 +113,7 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
           <main id="main-content" style={{ padding: '20px' }}>
             <Component {...pageProps} />
           </main>
-          <footer
-            id="main-footer"
-            style={{ marginTop: '20px', padding: '10px', background: '#111', textAlign: 'center' }}
-          >
+          <footer id="main-footer" style={{ marginTop: '20px', padding: '10px', background: '#111', textAlign: 'center' }}>
             <p>&copy; {new Date().getFullYear()} Masaki Kusaka. All rights reserved.</p>
           </footer>
         </div>
