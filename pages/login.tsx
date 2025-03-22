@@ -1,4 +1,5 @@
 // pages/login.tsx
+
 import { NextPage } from "next";
 import React, { useEffect } from "react";
 import Head from "next/head";
@@ -6,7 +7,7 @@ import Script from "next/script";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-// 背景アニメーション用のグローバル型宣言
+// グローバル型宣言：背景アニメーション用の関数
 declare global {
   interface Window {
     startGalaxyArtSim?: () => void;
@@ -16,7 +17,7 @@ declare global {
   }
 }
 
-// 「getLayout」を含む NextPage の拡張型
+// NextPage に getLayout プロパティを追加した型
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
 };
@@ -25,14 +26,14 @@ const LoginPage: NextPageWithLayout = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // 認証済みならホームへリダイレクト
+  // 既に認証済みならホームにリダイレクト
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/");
     }
   }, [status, router]);
 
-  // 背景アニメーションの初期化
+  // 背景アニメーション用関数を呼び出す
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.startGalaxyArtSim?.();
@@ -46,10 +47,7 @@ const LoginPage: NextPageWithLayout = () => {
     <>
       <Head>
         <title>Login - Cosmic Portal</title>
-        <meta
-          name="description"
-          content="Log in with Google to enter the Cosmic Portal."
-        />
+        <meta name="description" content="Log in with Google to enter the Cosmic Portal." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div
@@ -65,44 +63,21 @@ const LoginPage: NextPageWithLayout = () => {
         {/* 背景キャンバス */}
         <canvas
           id="galaxy-art-canvas"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
         />
         <canvas
           id="rotating-galaxies-canvas"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
         />
         <canvas
           id="art-stars-canvas"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
         />
         <canvas
           id="art-nebula-canvas"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          }}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
         />
+
         {/* ログインボタン */}
         <div
           style={{
@@ -136,33 +111,18 @@ const LoginPage: NextPageWithLayout = () => {
             Sign in with Google
           </button>
         </div>
-        {/* アニメーション用スクリプトの読み込み */}
-        <Script
-          src="/js/galaxyArtSim.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startGalaxyArtSim?.()}
-        />
-        <Script
-          src="/js/rotatingGalaxies.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startRotatingGalaxies?.()}
-        />
-        <Script
-          src="/js/artStars.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startArtStars?.()}
-        />
-        <Script
-          src="/js/artNebula.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startArtNebula?.()}
-        />
+
+        {/* アニメーションスクリプトの読み込み */}
+        <Script src="/js/galaxyArtSim.js" strategy="afterInteractive" onLoad={() => window.startGalaxyArtSim?.()} />
+        <Script src="/js/rotatingGalaxies.js" strategy="afterInteractive" onLoad={() => window.startRotatingGalaxies?.()} />
+        <Script src="/js/artStars.js" strategy="afterInteractive" onLoad={() => window.startArtStars?.()} />
+        <Script src="/js/artNebula.js" strategy="afterInteractive" onLoad={() => window.startArtNebula?.()} />
       </div>
     </>
   );
 };
 
-// このページ専用のレイアウト設定（共通レイアウトを付与しない）
+// このページ専用レイアウト（共通レイアウトを適用しない）
 LoginPage.getLayout = function getLayout(page: React.ReactElement) {
   return page;
 };

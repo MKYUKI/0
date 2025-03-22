@@ -12,6 +12,7 @@ datasource db {
 // ----------------------------
 // NextAuth 用のモデル
 // ----------------------------
+
 model Account {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   type               String
@@ -52,15 +53,16 @@ model VerificationToken {
 // ----------------------------
 // アプリケーション独自のモデル
 // ----------------------------
+
 model User {
-  // MongoDBなので ObjectId
+  // MongoDB では ObjectId を使用
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
   email          String   @unique
   image          String?
   hashedPassword String?
   // 追加: emailVerified は日付または null
-  emailVerified  DateTime?  
+  emailVerified  DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -90,8 +92,8 @@ model Tweet {
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id])
 
-  likes   Like[]
-  replies Reply[]
+  likes         Like[]
+  replies       Reply[]
   retweets      Retweet[]      @relation("TweetRetweets")
   quoteRetweets QuoteRetweet[] @relation("TweetQuotes")
 }
@@ -170,14 +172,14 @@ model Retweet {
 }
 
 model QuoteRetweet {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  content   String?
-  createdAt DateTime @default(now())
-  originalId String? @db.ObjectId
-  userId  String @db.ObjectId
-  user    User   @relation("UserQuotes", fields: [userId], references: [id])
-  tweetId String? @db.ObjectId
-  tweet   Tweet?  @relation("TweetQuotes", fields: [tweetId], references: [id])
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content    String?
+  createdAt  DateTime @default(now())
+  originalId String?  @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation("UserQuotes", fields: [userId], references: [id])
+  tweetId    String?  @db.ObjectId
+  tweet      Tweet?   @relation("TweetQuotes", fields: [tweetId], references: [id])
 }
 
 model Notification {
