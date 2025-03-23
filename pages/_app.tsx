@@ -1,4 +1,5 @@
 // pages/_app.tsx
+
 import type { AppProps } from 'next/app';
 import React, { useEffect } from 'react';
 import Head from 'next/head';
@@ -81,7 +82,7 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
     console.log('[MyApp] mounted on client side.');
   }, []);
 
-  // ログイン専用ページの判定：URL が "/login" で始まる場合は共通レイアウトを除く
+  // ログイン専用ページは、URL が "/login" で始まる場合は共通レイアウトを除く
   const isLoginPage = router.asPath.startsWith('/login');
 
   if (isLoginPage) {

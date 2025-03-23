@@ -12,6 +12,7 @@ datasource db {
 // ----------------------------
 // NextAuth 用のモデル
 // ----------------------------
+
 model Account {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   type               String
@@ -52,20 +53,20 @@ model VerificationToken {
 // ----------------------------
 // アプリケーション独自のモデル
 // ----------------------------
+
 model User {
+  // MongoDB では ObjectId を使用
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
   email          String   @unique
-  emailVerified  DateTime?      // NextAuth 用。認証済みの場合は日時が入ります
   image          String?
   hashedPassword String?
+  // emailVerified: NextAuth で使用される検証済みメールの日時。未検証の場合は null
+  emailVerified  DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  username       String?  @unique
 
-  // NextAuth 関連
-  accounts       Account[]
-  sessions       Session[]
+  username       String?  @unique
 
   tweets         Tweet[]
   likes          Like[]
@@ -77,6 +78,8 @@ model User {
   quoteRetweets  QuoteRetweet[]  @relation("UserQuotes")
   notifications  Notification[]  @relation("UserNotifications")
   roomParticipants RoomParticipant[] @relation("UserRoomParticipants")
+  accounts       Account[]
+  sessions       Session[]
 }
 
 model Tweet {
@@ -89,8 +92,8 @@ model Tweet {
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id])
 
-  likes   Like[]
-  replies Reply[]
+  likes         Like[]
+  replies       Reply[]
   retweets      Retweet[]      @relation("TweetRetweets")
   quoteRetweets QuoteRetweet[] @relation("TweetQuotes")
 }
@@ -169,14 +172,14 @@ model Retweet {
 }
 
 model QuoteRetweet {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  content   String?
-  createdAt DateTime @default(now())
-  originalId String? @db.ObjectId
-  userId  String @db.ObjectId
-  user    User   @relation("UserQuotes", fields: [userId], references: [id])
-  tweetId String? @db.ObjectId
-  tweet   Tweet?  @relation("TweetQuotes", fields: [tweetId], references: [id])
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content    String?
+  createdAt  DateTime @default(now())
+  originalId String?  @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation("UserQuotes", fields: [userId], references: [id])
+  tweetId    String?  @db.ObjectId
+  tweet      Tweet?   @relation("TweetQuotes", fields: [tweetId], references: [id])
 }
 
 model Notification {
