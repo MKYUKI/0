@@ -96,26 +96,10 @@ const LoginPage = () => {
           </button>
         </div>
         {/* 各アニメーションスクリプトの読み込み */}
-        <Script
-          src="/js/galaxyArtSim.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startGalaxyArtSim?.()}
-        />
-        <Script
-          src="/js/rotatingGalaxies.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startRotatingGalaxies?.()}
-        />
-        <Script
-          src="/js/artStars.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startArtStars?.()}
-        />
-        <Script
-          src="/js/artNebula.js"
-          strategy="afterInteractive"
-          onLoad={() => window.startArtNebula?.()}
-        />
+        <Script src="/js/galaxyArtSim.js" strategy="afterInteractive" onLoad={() => window.startGalaxyArtSim?.()} />
+        <Script src="/js/rotatingGalaxies.js" strategy="afterInteractive" onLoad={() => window.startRotatingGalaxies?.()} />
+        <Script src="/js/artStars.js" strategy="afterInteractive" onLoad={() => window.startArtStars?.()} />
+        <Script src="/js/artNebula.js" strategy="afterInteractive" onLoad={() => window.startArtNebula?.()} />
       </div>
     </>
   );

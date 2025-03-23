@@ -38,7 +38,7 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ account, profile, email, user, credentials }: SignInCallbackParams): Promise<boolean> {
-      // 必要に応じて初回ログイン時の追加処理を実装
+      // 初回ログイン時の追加処理が必要な場合はここに記述
       return true;
     },
     async session({ session, user, token }: SessionCallbackParams): Promise<Session> {

@@ -12,6 +12,7 @@ datasource db {
 // ----------------------------
 // NextAuth 用のモデル
 // ----------------------------
+
 model Account {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
   type               String
@@ -52,6 +53,7 @@ model VerificationToken {
 // ----------------------------
 // アプリケーション独自のモデル
 // ----------------------------
+
 model User {
   // MongoDB では ObjectId を使用
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -59,7 +61,7 @@ model User {
   email          String   @unique
   image          String?
   hashedPassword String?
-  // NextAuth 用：メール検証日時。未検証なら null
+  // NextAuth で使用される検証済みメールの日時。未検証の場合は null
   emailVerified  DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
