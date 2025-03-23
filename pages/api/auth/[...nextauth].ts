@@ -34,12 +34,25 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      // Google 認証時に必ずアカウント選択画面を表示する設定
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
   ],
   callbacks: {
     async signIn({ account, profile, email, user, credentials }: SignInCallbackParams): Promise<boolean> {
-      // 初回ログイン時の追加処理が必要な場合はここに記述
-      return true;
+      try {
+        // 必要ならここでユーザー情報を検証・加工する
+        return true;
+      } catch (error) {
+        console.error("SignIn callback error:", error);
+        return false;
+      }
     },
     async session({ session, user, token }: SessionCallbackParams): Promise<Session> {
       // セッションにユーザーIDを追加
