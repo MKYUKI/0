@@ -16,8 +16,6 @@ declare global {
 }
 
 const LoginPage = () => {
-  const sessionStatus = ""; // useSession()で認証状態を管理する場合、ここで取得
-
   // ページ読み込み後、背景アニメーションの start 関数を呼び出す
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -98,10 +96,26 @@ const LoginPage = () => {
           </button>
         </div>
         {/* 各アニメーションスクリプトの読み込み */}
-        <Script src="/js/galaxyArtSim.js" strategy="afterInteractive" onLoad={() => window.startGalaxyArtSim?.()} />
-        <Script src="/js/rotatingGalaxies.js" strategy="afterInteractive" onLoad={() => window.startRotatingGalaxies?.()} />
-        <Script src="/js/artStars.js" strategy="afterInteractive" onLoad={() => window.startArtStars?.()} />
-        <Script src="/js/artNebula.js" strategy="afterInteractive" onLoad={() => window.startArtNebula?.()} />
+        <Script
+          src="/js/galaxyArtSim.js"
+          strategy="afterInteractive"
+          onLoad={() => window.startGalaxyArtSim?.()}
+        />
+        <Script
+          src="/js/rotatingGalaxies.js"
+          strategy="afterInteractive"
+          onLoad={() => window.startRotatingGalaxies?.()}
+        />
+        <Script
+          src="/js/artStars.js"
+          strategy="afterInteractive"
+          onLoad={() => window.startArtStars?.()}
+        />
+        <Script
+          src="/js/artNebula.js"
+          strategy="afterInteractive"
+          onLoad={() => window.startArtNebula?.()}
+        />
       </div>
     </>
   );
