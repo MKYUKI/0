@@ -5,7 +5,7 @@ import Script from "next/script";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-// グローバル型宣言：背景アニメーション用の関数
+// Declare the global functions (to be provided by your external JS files)
 declare global {
   interface Window {
     startGalaxyArtSim?: () => void;
@@ -19,14 +19,14 @@ const LoginPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // 既に認証済みならホームへリダイレクト
+  // If already authenticated, redirect to home
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/");
     }
   }, [status, router]);
 
-  // 背景アニメーション用関数を呼び出す
+  // Call background animation functions when the page loads
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.startGalaxyArtSim?.();
@@ -52,12 +52,25 @@ const LoginPage = () => {
           backgroundColor: "#000",
         }}
       >
-        {/* 背景キャンバス（各アニメーションスクリプトで描画） */}
-        <canvas id="galaxy-art-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
-        <canvas id="rotating-galaxies-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
-        <canvas id="art-stars-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
-        <canvas id="art-nebula-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
-        {/* ログインボタン（中央に配置） */}
+        {/* Background canvases for your animations */}
+        <canvas
+          id="galaxy-art-canvas"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+        />
+        <canvas
+          id="rotating-galaxies-canvas"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+        />
+        <canvas
+          id="art-stars-canvas"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+        />
+        <canvas
+          id="art-nebula-canvas"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+        />
+
+        {/* Centered login button */}
         <div
           style={{
             position: "absolute",
@@ -88,7 +101,8 @@ const LoginPage = () => {
             Sign in with Google
           </button>
         </div>
-        {/* 各アニメーションスクリプトの読み込み */}
+
+        {/* Load external animation scripts */}
         <Script src="/js/galaxyArtSim.js" strategy="afterInteractive" onLoad={() => window.startGalaxyArtSim?.()} />
         <Script src="/js/rotatingGalaxies.js" strategy="afterInteractive" onLoad={() => window.startRotatingGalaxies?.()} />
         <Script src="/js/artStars.js" strategy="afterInteractive" onLoad={() => window.startArtStars?.()} />
@@ -98,7 +112,7 @@ const LoginPage = () => {
   );
 };
 
-// ログインページ専用レイアウト（共通レイアウトを付与しない）
+// This page does not use the common layout.
 LoginPage.getLayout = function getLayout(page: React.ReactElement) {
   return page;
 };

@@ -2,11 +2,14 @@
 import type { AppProps } from 'next/app';
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
-import '../styles/globals.css';
 
-// 共通ナビゲーションバー
+import '../styles/globals.css';
+import SearchBar from '../components/SearchBar';
+
+// A simple NavBar used for non-auth pages.
 function NavBar() {
   return (
     <header
@@ -21,34 +24,31 @@ function NavBar() {
       }}
     >
       <div className="nav-left">
-        <a href="/" className="nav-link" style={{ marginRight: '16px' }}>
+        <Link href="/" className="nav-link" style={{ marginRight: '16px' }}>
           Home
-        </a>
-        <a href="/aichat" className="nav-link" style={{ marginRight: '16px' }}>
+        </Link>
+        <Link href="/aichat" className="nav-link" style={{ marginRight: '16px' }}>
           AI Chat
-        </a>
-        <a href="/art" className="nav-link" style={{ marginRight: '16px' }}>
+        </Link>
+        <Link href="/art" className="nav-link" style={{ marginRight: '16px' }}>
           Art
-        </a>
-        <a href="/excelvba" className="nav-link" style={{ marginRight: '16px' }}>
+        </Link>
+        <Link href="/excelvba" className="nav-link" style={{ marginRight: '16px' }}>
           ExcelVBA
-        </a>
-        <a href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
+        </Link>
+        <Link href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
           Contact
-        </a>
+        </Link>
       </div>
       <div className="nav-right">
-        {/* 必要に応じて SearchBar など追加 */}
+        <SearchBar />
       </div>
     </header>
   );
 }
 
-// エラーバウンダリ
-class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  { hasError: boolean }
-> {
+// Basic ErrorBoundary component.
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
@@ -78,8 +78,10 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
     console.log('[MyApp] mounted on client side.');
   }, []);
 
-  // ログインページはパスが '/login' の場合（厳密には router.pathname === '/login'）
-  if (router.pathname === '/login') {
+  // Determine if the current route is the login page.
+  const isLoginPage = router.asPath.startsWith('/login');
+
+  if (isLoginPage) {
     return (
       <SessionProvider session={session}>
         <ErrorBoundary>
@@ -88,14 +90,14 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
             <meta name="description" content="Log in with Google to enter the Cosmic Portal." />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
-          {/* ログイン専用ページは共通レイアウトを除く */}
+          {/* Login page uses its own layout */}
           <Component {...pageProps} />
         </ErrorBoundary>
       </SessionProvider>
     );
   }
 
-  // その他のページは共通レイアウト付き
+  // For all other pages, use the common layout.
   return (
     <SessionProvider session={session}>
       <ErrorBoundary>
