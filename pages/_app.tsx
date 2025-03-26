@@ -9,7 +9,7 @@ import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 import SearchBar from '../components/SearchBar';
 
-// A simple NavBar used for non-auth pages.
+// 共通ナビゲーションバー
 function NavBar() {
   return (
     <header
@@ -47,8 +47,11 @@ function NavBar() {
   );
 }
 
-// Basic ErrorBoundary component.
-class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+// エラーバウンダリ（エラー発生時の表示）
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
@@ -76,9 +79,9 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
   const router = useRouter();
   useEffect(() => {
     console.log('[MyApp] mounted on client side.');
-  }, []);
+  },);
 
-  // Determine if the current route is the login page.
+  // ログイン専用ページは、URL が "/login" で始まる場合は共通レイアウトを除く
   const isLoginPage = router.asPath.startsWith('/login');
 
   if (isLoginPage) {
@@ -90,14 +93,13 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
             <meta name="description" content="Log in with Google to enter the Cosmic Portal." />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
-          {/* Login page uses its own layout */}
           <Component {...pageProps} />
         </ErrorBoundary>
       </SessionProvider>
     );
   }
 
-  // For all other pages, use the common layout.
+  // 共通レイアウトを使用するページ
   return (
     <SessionProvider session={session}>
       <ErrorBoundary>

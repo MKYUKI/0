@@ -2,10 +2,10 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import Script from "next/script";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
+import { useRouter } from 'next/router';
 
-// Declare the global functions (to be provided by your external JS files)
+// グローバル型宣言：背景アニメーション用の関数
 declare global {
   interface Window {
     startGalaxyArtSim?: () => void;
@@ -16,17 +16,9 @@ declare global {
 }
 
 const LoginPage = () => {
-  const { data: session, status } = useSession();
   const router = useRouter();
 
-  // If already authenticated, redirect to home
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/");
-    }
-  }, [status, router]);
-
-  // Call background animation functions when the page loads
+  // ページ読み込み後、背景アニメーションの start 関数を呼び出す
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.startGalaxyArtSim?.();
@@ -34,13 +26,16 @@ const LoginPage = () => {
       window.startArtStars?.();
       window.startArtNebula?.();
     }
-  }, []);
+  },);
 
   return (
     <>
       <Head>
         <title>Login - Cosmic Portal</title>
-        <meta name="description" content="Log in with Google to enter the cosmic portal." />
+        <meta
+          name="description"
+          content="Log in with Google to enter the cosmic portal."
+        />
       </Head>
       <div
         id="login-wrapper"
@@ -52,7 +47,7 @@ const LoginPage = () => {
           backgroundColor: "#000",
         }}
       >
-        {/* Background canvases for your animations */}
+        {/* 背景キャンバス */}
         <canvas
           id="galaxy-art-canvas"
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
@@ -69,8 +64,7 @@ const LoginPage = () => {
           id="art-nebula-canvas"
           style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
         />
-
-        {/* Centered login button */}
+        {/* ログインボタン（中央に配置） */}
         <div
           style={{
             position: "absolute",
@@ -84,7 +78,9 @@ const LoginPage = () => {
             borderRadius: "8px",
           }}
         >
-          <h1 style={{ color: "#fff", marginBottom: "20px" }}>Welcome to Cosmic Portal</h1>
+          <h1 style={{ color: "#fff", marginBottom: "20px" }}>
+            Welcome to Cosmic Portal
+          </h1>
           <button
             onClick={() => signIn("google")}
             style={{
@@ -101,8 +97,7 @@ const LoginPage = () => {
             Sign in with Google
           </button>
         </div>
-
-        {/* Load external animation scripts */}
+        {/* 各アニメーションスクリプトの読み込み */}
         <Script src="/js/galaxyArtSim.js" strategy="afterInteractive" onLoad={() => window.startGalaxyArtSim?.()} />
         <Script src="/js/rotatingGalaxies.js" strategy="afterInteractive" onLoad={() => window.startRotatingGalaxies?.()} />
         <Script src="/js/artStars.js" strategy="afterInteractive" onLoad={() => window.startArtStars?.()} />
@@ -110,11 +105,6 @@ const LoginPage = () => {
       </div>
     </>
   );
-};
-
-// This page does not use the common layout.
-LoginPage.getLayout = function getLayout(page: React.ReactElement) {
-  return page;
 };
 
 export default LoginPage;

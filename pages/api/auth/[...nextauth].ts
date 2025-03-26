@@ -1,5 +1,4 @@
 // pages/api/auth/[...nextauth].ts
-
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -47,6 +46,11 @@ export const authOptions = {
       return session;
     },
   },
+  // NextAuth v4.24.0 以降では、pages の設定は不要です。
+  // pages: {
+  //   signIn: '/login',
+  // },
+  debug: true, // デバッグログを有効にする (問題解決に役立つ場合があります)
 };
 
 export default NextAuth(authOptions);
