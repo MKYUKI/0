@@ -7,50 +7,46 @@ import type { Session } from "next-auth";
 
 // ホットリロード対策：グローバルに PrismaClient インスタンスを保持
 declare global {
-  var prisma: PrismaClient | undefined;
+    var prisma: PrismaClient | undefined;
 }
 const prisma = global.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
 // コールバックパラメータの最低限の型定義
 interface SignInCallbackParams {
-  user: any;
-  account: any;
-  profile?: any;
-  email?: string;
-  credentials?: any;
+    user: any;
+    account: any;
+    profile?: any;
+    email?: string;
+    credentials?: any;
 }
 
 interface SessionCallbackParams {
-  session: Session;
-  user: any;
-  token: any;
+    session: Session;
+    user: any;
+    token: any;
 }
 
 export const authOptions = {
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
-  ],
-  callbacks: {
-    async signIn({ account, profile, email, user, credentials }: SignInCallbackParams): Promise<boolean> {
-      // 初回ログイン時の追加処理が必要な場合はここに記述
-      return true;
+    adapter: PrismaAdapter(prisma),
+    providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+        }),
+    ],
+    callbacks: {
+        async signIn({ account, profile, email, user, credentials }: SignInCallbackParams): Promise<boolean> {
+            // 初回ログイン時の追加処理が必要な場合はここに記述
+            return true;
+        },
+        async session({ session, user, token }: SessionCallbackParams): Promise<Session> {
+            // セッションにユーザーIDを追加
+            (session.user as any).id = user.id;
+            return session;
+        },
     },
-    async session({ session, user, token }: SessionCallbackParams): Promise<Session> {
-      // セッションにユーザーIDを追加
-      (session.user as any).id = user.id;
-      return session;
-    },
-  },
-  // NextAuth v4.24.0 以降では、pages の設定は不要です。
-  // pages: {
-  //   signIn: '/login',
-  // },
-  debug: true, // デバッグログを有効にする (問題解決に役立つ場合があります)
+    debug: true, // デバッグログを有効にする (問題解決に役立つ場合があります)
 };
 
 export default NextAuth(authOptions);
