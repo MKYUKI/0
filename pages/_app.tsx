@@ -23,31 +23,29 @@ function NavBar() {
       }}
     >
       <div className="nav-left">
-        <Link href="/">
-          <a className="nav-link" style={{ marginRight: '16px' }}>Home</a>
+        <Link href="/" className="nav-link" style={{ marginRight: '16px' }}>
+          Home
         </Link>
-        <Link href="/aichat">
-          <a className="nav-link" style={{ marginRight: '16px' }}>AI Chat</a>
+        <Link href="/aichat" className="nav-link" style={{ marginRight: '16px' }}>
+          AI Chat
         </Link>
-        <Link href="/art">
-          <a className="nav-link" style={{ marginRight: '16px' }}>Art</a>
+        <Link href="/art" className="nav-link" style={{ marginRight: '16px' }}>
+          Art
         </Link>
-        <Link href="/excelvba">
-          <a className="nav-link" style={{ marginRight: '16px' }}>ExcelVBA</a>
+        <Link href="/excelvba" className="nav-link" style={{ marginRight: '16px' }}>
+          ExcelVBA
         </Link>
-        <Link href="/contact">
-          <a className="nav-link" style={{ marginRight: '16px' }}>Contact</a>
+        <Link href="/contact" className="nav-link" style={{ marginRight: '16px' }}>
+          Contact
         </Link>
       </div>
       <div className="nav-right">
         <SearchBar />
-        {/* 必要に応じて認証ボタンなど追加 */}
       </div>
     </header>
   );
 }
 
-// エラーバウンダリ（エラー発生時にフォールバック表示）
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
@@ -64,7 +62,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
       return (
         <div style={{ color: 'red', textAlign: 'center', marginTop: '50px' }}>
           <h1>Something went wrong.</h1>
-          <p>Please reload the page or contact support.</p>
+          <p>Reload or contact support if the issue persists.</p>
         </div>
       );
     }
@@ -78,8 +76,8 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
     console.log('[MyApp] mounted on client side.');
   }, []);
 
-  // /login ページの場合は共通レイアウトを除外
-  const isLoginPage = router.asPath.startsWith('/login');
+  // ログインページはルートパスが"/login"の場合とする
+  const isLoginPage = router.pathname === '/login';
 
   if (isLoginPage) {
     return (
@@ -90,13 +88,13 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
             <meta name="description" content="Log in with Google to enter the Cosmic Portal." />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
+          {/* ログイン専用ページは共通レイアウトを除外 */}
           <Component {...pageProps} />
         </ErrorBoundary>
       </SessionProvider>
     );
   }
 
-  // 共通レイアウトを使用する場合
   return (
     <SessionProvider session={session}>
       <ErrorBoundary>
