@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
-
 import '../styles/globals.css';
 import SearchBar from '../components/SearchBar';
 
@@ -19,7 +18,7 @@ function NavBar() {
         padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
       }}
     >
       <div className="nav-left">
@@ -46,7 +45,10 @@ function NavBar() {
   );
 }
 
-class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
@@ -62,7 +64,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
       return (
         <div style={{ color: 'red', textAlign: 'center', marginTop: '50px' }}>
           <h1>Something went wrong.</h1>
-          <p>Reload or contact support if the issue persists.</p>
+          <p>Please reload or contact support.</p>
         </div>
       );
     }
@@ -76,8 +78,8 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
     console.log('[MyApp] mounted on client side.');
   }, []);
 
-  // ログインページはルートパスが"/login"の場合とする
-  const isLoginPage = router.pathname === '/login';
+  // ログインページの場合は共通レイアウト（NavBar 等）を除く
+  const isLoginPage = router.pathname.startsWith('/login');
 
   if (isLoginPage) {
     return (
@@ -88,13 +90,13 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
             <meta name="description" content="Log in with Google to enter the Cosmic Portal." />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           </Head>
-          {/* ログイン専用ページは共通レイアウトを除外 */}
           <Component {...pageProps} />
         </ErrorBoundary>
       </SessionProvider>
     );
   }
 
+  // 通常ページは共通レイアウトを使用
   return (
     <SessionProvider session={session}>
       <ErrorBoundary>
