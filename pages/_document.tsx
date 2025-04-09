@@ -11,15 +11,15 @@ class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
-          {/* <meta>タグなどの追加はここで行う */}
+          {/* 必要に応じて<meta>タグ等を追加 */}
           <meta charSet="UTF-8" />
-          <meta name="description" content="宇宙のシミュレーションで歴史に残るホーム画面" />
+          <meta name="description" content="Cosmic Portal - A journey through the cosmos" />
           <link rel="icon" href="/favicon.ico" />
-          {/* ここに <title> を書かずに、index.tsx で <Head> 使う方法もOK */}
+          {/* タイトルは各ページ側で指定 */}
         </Head>
         <body>
-          <Main />     {/* Next.jsのページコンポーネントがここに注入される */}
-          <NextScript /> 
+          <Main />{/* 各ページコンポーネントが挿入される */}
+          <NextScript />{/* Next.jsのスクリプト挿入 */}
         </body>
       </Html>
     );
