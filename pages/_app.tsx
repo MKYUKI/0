@@ -1,13 +1,21 @@
 // pages/_app.tsx
+
 import type { AppProps } from 'next/app';
+
 import React from 'react'; // （React18では必須ではありませんが明示的にimportしています）
+
 import Head from 'next/head';
+
 import Link from 'next/link';
+
 import { SessionProvider, useSession, signOut } from 'next-auth/react';
+
 import '../styles/globals.css';
+
 import SearchBar from '../components/SearchBar';
 
 // ナビゲーションバー（NavBar）コンポーネント
+
 function NavBar() {
   const { data: session, status } = useSession(); // セッション状態を取得
   const loading = status === "loading";
@@ -78,17 +86,21 @@ function NavBar() {
 }
 
 // クライアント側エラーバウンダリ（ErrorBoundary）コンポーネント
+
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }
+
   static getDerivedStateFromError() {
     return { hasError: true };
   }
+
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error('[ErrorBoundary] Caught client-side error:', error, info);
   }
+
   render() {
     if (this.state.hasError) {
       return (
@@ -103,14 +115,17 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
 }
 
 // 型定義：ページコンポーネントが独自に `getLayout` を持つ場合に対応
+
 type NextPageWithLayout = React.FC & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
 };
+
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
 // カスタムAppコンポーネント（全ページのラッパー）
+
 export default function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
   // 各ページがレイアウト関数を定義していれば適用し、なければデフォルトレイアウトを適用
   const getLayout = Component.getLayout ?? ((page) => (

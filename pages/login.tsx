@@ -1,11 +1,17 @@
 // pages/login.tsx
+
 import React, { useEffect } from "react";
+
 import Head from "next/head";
+
 import Script from "next/script";
+
 import { signIn, useSession } from "next-auth/react";
+
 import { useRouter } from "next/router";
 
 // グローバルに定義するWindowインターフェース（背景アニメーションの開始関数）
+
 declare global {
   interface Window {
     startGalaxyArtSim?: () => void;
@@ -42,7 +48,6 @@ export default function Login() {
         <title>Login - Cosmic Portal</title>
         <meta name="description" content="Log in with Google to enter the cosmic portal." />
       </Head>
-
       <div
         id="login-wrapper"
         style={{
@@ -58,7 +63,6 @@ export default function Login() {
         <canvas id="rotating-galaxies-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
         <canvas id="art-stars-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
         <canvas id="art-nebula-canvas" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} />
-
         {/* ログインボタン（中央配置） */}
         <div
           style={{
@@ -90,7 +94,6 @@ export default function Login() {
             Sign in with Google
           </button>
         </div>
-
         {/* 背景アニメーションスクリプトの読み込み */}
         <Script src="/js/galaxyArtSim.js" strategy="afterInteractive" onLoad={() => window.startGalaxyArtSim?.()} />
         <Script src="/js/rotatingGalaxies.js" strategy="afterInteractive" onLoad={() => window.startRotatingGalaxies?.()} />

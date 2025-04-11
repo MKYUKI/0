@@ -1,4 +1,5 @@
 // pages/_document.tsx
+
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
 class MyDocument extends Document {
